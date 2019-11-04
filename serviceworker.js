@@ -11,7 +11,9 @@ const CACHE_NAME = 'HSEScheduleAppCache';
 
 const FILES_TO_CACHE = [
   '/offline.html',
-  '/main.css'
+  '/main.css',
+  '/images/HSEScheduleAppLogo192',
+  '/images/HSEScheduleAppLogo512'
 ];
 
 self.addEventListener('install', (evt) => {
