@@ -1,1 +1,3 @@
-# hse-schedule-app
+## HSE Schedule App
+
+Developed By: 
