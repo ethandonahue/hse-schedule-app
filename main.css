@@ -1,0 +1,45 @@
+html{box-sizing:border-box;
+  background-color:#FFFFFF;
+  overflow:hidden;
+  height:100%;
+  position:relative;
+}
+*, *:before, *:after{
+  box-sizing:inherit;
+}
+*{
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+.content{
+  width:100%;
+  height:100%;
+}
+
+.content .navbar{
+  overflow:hidden;
+  background-color:#0843B0;
+  position:fixed;
+  bottom:0;
+  width:100%;
+}
+
+.content .navbar .navcontent .navbuttons{
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  background-color:#0843B0;
+}
+
+.content .navbar .navcontent .navbuttons li a{
+  float:left;
+  display:inline;
+  color:#FFFFFF;
+  text-align:center;
+  padding:14px 16px;
+  text-decoration:none;
+  font-size:17px;
+}
