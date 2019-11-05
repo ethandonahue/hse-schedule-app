@@ -14,10 +14,11 @@ html{box-sizing:border-box;
 }
 
 .content{
-
+  width:100%;
+  height:100%;
 }
 
-.navbar{
+.content .navbar{
   overflow:hidden;
   background-color:#0843B0;
   position:fixed;
@@ -25,7 +26,7 @@ html{box-sizing:border-box;
   width:100%;
 }
 
-.navbar .navcontent .navbuttons{
+.content .navbar .navcontent .navbuttons{
   list-style-type:none;
   margin:0;
   padding:0;
@@ -33,7 +34,7 @@ html{box-sizing:border-box;
   background-color:#0843B0;
 }
 
-.navbar .navcontent .navbuttons li a{
+.content .navbar .navcontent .navbuttons li a{
   float:left;
   display:inline;
   color:#FFFFFF;
