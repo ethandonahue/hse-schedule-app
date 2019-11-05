@@ -1,10 +1,14 @@
-if ('serviceWorker' in navigator) {
+if('serviceWorker' in navigator){
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/serviceworker.js')
         .then((reg) => {
           //console.log('Service worker registered.', reg);
+        }).catch(function(err){
+            //console.error("Service worker registration failed with error "+err);
         });
   });
+} else {
+  //console.error("Service worker registration failed.");
 }
 
 const CACHE_NAME = 'HSEScheduleAppCache';
@@ -12,8 +16,10 @@ const CACHE_NAME = 'HSEScheduleAppCache';
 const FILES_TO_CACHE = [
   '/offline.html',
   '/main.css',
-  '/images/HSEScheduleAppLogo192',
-  '/images/HSEScheduleAppLogo512'
+  '/manifest.json',
+  '/serviceworker.js',
+  '/images/HSEScheduleAppLogo192.png',
+  '/images/HSEScheduleAppLogo512.png'
 ];
 
 self.addEventListener('install', (evt) => {
@@ -52,7 +58,7 @@ self.addEventListener('fetch', (evt) => {
           .catch(() => {
             return caches.open(CACHE_NAME)
                 .then((cache) => {
-                  return cache.match('offline.html');
+                  return cache.match('/offline.html');
                 });
           })
   );
