@@ -22,26 +22,10 @@ nav{
   position:fixed;
   bottom:0;
 }
-ul{
-  margin:0;
-  padding:0;
-  height:inherit;
-}
-li{
-  list-style-type:none;
-  margin:0;
-  font-size:3vh;
-  float:left;
-  text-align:center;
-  vertical-align:middle;
-  height:inherit;
-}
 a{
   text-decoration:none;
-  display:inline-block;
-  height:100%;
-  width:100%;
-  vertical-align:middle;
+  height:inherit;
+  width:inherit;
 }
 
 .content{
@@ -51,19 +35,23 @@ a{
 
 .navbuttons{
   height:100%;
-  text-align:center;
-  white-space:nowrap;
 }
 
 .navbutton{
   width:20%;
   height:100%;
+  margin:0;
+  white-space:nowrap;
+  float:left;
+  text-align:center;
+}
+
+.centerHelper{
   display:inline-block;
+  height:100%;
   vertical-align:middle;
 }
 
-.centerImage{
-  display:inline-block;
-  margin:auto;
+.center{
   vertical-align:middle;
 }
