@@ -3,6 +3,11 @@
 
 Developed By: [Ethan Donahue](https://github.com/donaheth000), [Isaac Robbins](https://github.com/MeAwesome), and [Carson Gamble](https://github.com/Carson-Gamble)
 
+# Table Of Contents
+- [Installation](#installation)
+  - [iOS](#ios)
+  - [Android](#android)
+
 ## Installation
 
 ### iOS

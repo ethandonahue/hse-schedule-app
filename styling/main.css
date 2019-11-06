@@ -15,7 +15,12 @@ html{box-sizing:border-box;
 
 .content{
   width:100%;
-  height:100%;
+  height:100vh;
+}
+
+.content .screenContent{
+  width:100%;
+  height:90vh;
 }
 
 .content .navbar{
@@ -24,6 +29,13 @@ html{box-sizing:border-box;
   position:fixed;
   bottom:0;
   width:100%;
+  height:10vh;
+  display:flex;
+}
+
+.content .navbar .navcontent{
+  width:100%;
+  height:100%;
 }
 
 .content .navbar .navcontent .navbuttons{
@@ -32,14 +44,23 @@ html{box-sizing:border-box;
   padding:0;
   overflow:hidden;
   background-color:#0843B0;
+  height:100%;
+}
+
+.content .navbar .navcontent .navbuttons li{
+  height:100%;
+  width:20%;
+  line-height:100%;
+  display:inline;
+  text-align:center;
+  vertical-align:middle;
 }
 
 .content .navbar .navcontent .navbuttons li a{
   float:left;
-  display:inline;
-  color:#FFFFFF;
-  text-align:center;
-  padding:14px 16px;
   text-decoration:none;
-  font-size:17px;
+  color:#FFFFFF;
+  font-size:3vw;
+  height:100%;
+  width:20%;
 }
