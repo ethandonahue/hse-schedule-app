@@ -12,55 +12,39 @@ html{box-sizing:border-box;
   padding:0;
   border:0;
 }
+body{
+  margin:0;
+}
+nav{
+  width:100vw;
+  height:10vh;
+  background-color:#0843B0;
+  position:fixed;
+  bottom:0;
+}
+ul{
+  margin:0;
+  padding:0;
+  height:inherit;
+}
+li{
+  list-style-type:none;
+  margin:0;
+  font-size:3vh;
+  float:left;
+}
+a{
+  text-decoration:none;
+  display:block;
+  height:inherit;
+}
 
 .content{
   width:100%;
   height:100vh;
 }
 
-.content .screenContent{
-  width:100%;
-  height:90vh;
-}
-
-.content .navbar{
-  overflow:hidden;
-  background-color:#0843B0;
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:10vh;
-  display:flex;
-}
-
-.content .navbar .navcontent{
-  width:100%;
-  height:100%;
-}
-
-.content .navbar .navcontent .navbuttons{
-  list-style-type:none;
-  margin:0;
-  padding:0;
-  overflow:hidden;
-  background-color:#0843B0;
-  height:100%;
-}
-
-.content .navbar .navcontent .navbuttons li{
-  height:100%;
+.navbutton{
   width:20%;
-  line-height:100%;
-  display:inline;
-  text-align:center;
-  vertical-align:middle;
-}
-
-.content .navbar .navcontent .navbuttons li a{
-  float:left;
-  text-decoration:none;
-  color:#FFFFFF;
-  font-size:3vw;
-  height:100%;
-  width:20%;
+  height:inherit;
 }
