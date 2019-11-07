@@ -20,7 +20,7 @@ const FILES_TO_CACHE = [
   '/styling/home.css',
   '/manifest.json',
   '/serviceworker.js',
-  '/js/storageChecker',
+  '/js/storageChecker.js',
   '/images/HSEScheduleAppLogo192.png',
   '/images/HSEScheduleAppLogo512.png',
   '/images/notifications-unselected-white.png',
