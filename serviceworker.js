@@ -88,10 +88,11 @@ function checkNotificationSubscription(){
   registration.pushManager.getSubscription()
   .then((subscription) => {
     isSubscribed = !(subscription == null);
+    subscribeToggle = document.getElementById("notificationSubscription");
     if(isSubscribed){
-      console.log('User IS subscribed.');
+      //console.log('User IS subscribed.');
     } else {
-      console.log('User is NOT subscribed.');
+      //console.log('User is NOT subscribed.');
     }
   });
 }
