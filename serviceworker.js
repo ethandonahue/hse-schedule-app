@@ -17,8 +17,8 @@ const FILES_TO_CACHE = [
   '/images/HSEScheduleAppLogo512.png',
   '/images/notifications-unselected-white.png',
   '/images/notifications-selected-white.png',
-  'images/schedule-unselected-white.png',
-  'images/schedule-selected-white.png',
+  '/images/schedule-unselected-white.png',
+  '/images/schedule-selected-white.png',
   '/images/home-unselected-white.png',
   '/images/home-selected-white.png',
   '/images/calendar-unselected-white.png',
@@ -27,10 +27,12 @@ const FILES_TO_CACHE = [
   '/images/settings-selected-white.png'
 ];
 
-if('serviceWorker' in navigator){
+if('serviceWorker' in navigator && 'PushManager' in window){
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/serviceworker.js')
       .then((reg) => {
+        registration = reg;
+        checkNotificationSubscription();
         //console.log('Service worker registered.', reg);
       }).catch(function(err){
         //console.error("Service worker registration failed with error "+err);
@@ -81,3 +83,15 @@ self.addEventListener('fetch', (evt) => {
           })
   );
 });
+
+function checkNotificationSubscription(){
+  registration.pushManager.getSubscription()
+  .then((subscription) => {
+    isSubscribed = !(subscription == null);
+    if(isSubscribed){
+      console.log('User IS subscribed.');
+    } else {
+      console.log('User is NOT subscribed.');
+    }
+  });
+}
