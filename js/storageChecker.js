@@ -14,9 +14,9 @@ if(typeof(Storage) != "undefined"){
 }
 
 function setLunch(lunch){
-  //if(lunch != "A" || lunch != "B" || lunch !="C" || lunch != "NONE"){
-    //console.error("Incorrect Lunch Type Entered");
-    //return;
-  //}
+  if(lunch != "A" && lunch != "B" && lunch !="C" && lunch != "NONE"){
+    console.error("Incorrect Lunch Type Entered");
+    return;
+  }
   localStorage.selectedLunch = lunch;
 }
