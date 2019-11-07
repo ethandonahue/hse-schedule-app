@@ -55,3 +55,7 @@ a{
 .center{
   vertical-align:middle;
 }
+
+#selectedNavButton{
+  background-color:lightblue;
+}
