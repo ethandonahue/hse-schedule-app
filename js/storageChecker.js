@@ -1,6 +1,6 @@
 if(typeof(Storage) != "undefined"){
   if(localStorage.selectedLunch){
-    if(window.location.pathname != "/screens/online/home.html"){
+    if(window.location.pathname == "/index.html"){
       window.location.replace("/screens/online/home.html");
     }
   } else {

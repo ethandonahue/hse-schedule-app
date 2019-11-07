@@ -77,5 +77,10 @@ a{
 }
 
 #selectedNavButton{
-  background-color:lightblue;
+  background-color:#1158A5;
+}
+
+#selectedNavButton img{
+  width:40px;
+  height:40px;
 }

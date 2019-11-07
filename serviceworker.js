@@ -23,10 +23,16 @@ const FILES_TO_CACHE = [
   '/js/storageChecker',
   '/images/HSEScheduleAppLogo192.png',
   '/images/HSEScheduleAppLogo512.png',
+  '/images/notifications-unselected-white.png',
+  '/images/notifications-selected-white.png',
+  'images/schedule-unselected-white.png',
+  'images/schedule-selected-white.png',
   '/images/home-unselected-white.png',
   '/images/home-selected-white.png',
   '/images/calendar-unselected-white.png',
-  '/images/calendar-selected-white.png'
+  '/images/calendar-selected-white.png',
+  '/images/settings-unselected-white.png',
+  '/images/settings-selected.png'
 ];
 
 self.addEventListener('install', (evt) => {
