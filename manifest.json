@@ -1,8 +1,8 @@
 {
     "name":"HSE Schedule App",
     "short_name":"HSE Schedule",
-    "theme_color":"#0843B0",
-    "background_color":"#ffffff",
+    "theme_color":"#004794",
+    "background_color":"#FFFFFF",
     "display":"standalone",
     "scope":"/",
     "start_url":"/index.html",
