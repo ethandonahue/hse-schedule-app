@@ -90,13 +90,13 @@ function checkNotificationSubscription(){
     isSubscribed = !(subscription == null);
     subscribeToggle = document.getElementById("notificationSubscription");
     if(isSubscribed){
-      if(subscriptionToggle != null){
-        subscriptionToggle.textContent = "Disable Push Notifications";
+      if(subscribeToggle != null){
+        subscribeToggle.textContent = "Disable Push Notifications";
       }
       //console.log('User IS subscribed.');
     } else {
-      if(subscriptionToggle != null){
-        subscriptionToggle.textContent = "Enable Push Notifications";
+      if(subscribeToggle != null){
+        subscribeToggle.textContent = "Enable Push Notifications";
       }
       //console.log('User is NOT subscribed.');
     }
