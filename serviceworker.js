@@ -14,10 +14,13 @@ if('serviceWorker' in navigator){
 const CACHE_NAME = 'HSEScheduleAppCache';
 
 const FILES_TO_CACHE = [
+  '/index.html',
   '/screens/offline/offline.html',
-  '/styling/main.css',
+  '/styling/index.css',
+  '/styling/home.css',
   '/manifest.json',
   '/serviceworker.js',
+  '/js/storageChecker',
   '/images/HSEScheduleAppLogo192.png',
   '/images/HSEScheduleAppLogo512.png'
 ];
