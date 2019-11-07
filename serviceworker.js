@@ -32,7 +32,7 @@ const FILES_TO_CACHE = [
   '/images/calendar-unselected-white.png',
   '/images/calendar-selected-white.png',
   '/images/settings-unselected-white.png',
-  '/images/settings-selected.png'
+  '/images/settings-selected-white.png'
 ];
 
 self.addEventListener('install', (evt) => {
