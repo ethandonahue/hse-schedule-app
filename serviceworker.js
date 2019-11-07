@@ -22,7 +22,11 @@ const FILES_TO_CACHE = [
   '/serviceworker.js',
   '/js/storageChecker',
   '/images/HSEScheduleAppLogo192.png',
-  '/images/HSEScheduleAppLogo512.png'
+  '/images/HSEScheduleAppLogo512.png',
+  '/images/home-unselected-white.png',
+  '/images/home-selected-white.png',
+  '/images/calendar-unselected-white.png',
+  '/images/calendar-selected-white.png'
 ];
 
 self.addEventListener('install', (evt) => {
