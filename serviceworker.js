@@ -1,16 +1,3 @@
-if('serviceWorker' in navigator){
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/serviceworker.js')
-      .then((reg) => {
-        //console.log('Service worker registered.', reg);
-      }).catch(function(err){
-        //console.error("Service worker registration failed with error "+err);
-      });
-  });
-} else {
-  //console.error("Service worker registration failed.");
-}
-
 const CACHE_NAME = 'HSEScheduleAppCache';
 
 const FILES_TO_CACHE = [
@@ -39,6 +26,19 @@ const FILES_TO_CACHE = [
   '/images/settings-unselected-white.png',
   '/images/settings-selected-white.png'
 ];
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/serviceworker.js')
+      .then((reg) => {
+        //console.log('Service worker registered.', reg);
+      }).catch(function(err){
+        //console.error("Service worker registration failed with error "+err);
+      });
+  });
+} else {
+  //console.error("Service worker registration failed.");
+}
 
 self.addEventListener('install', (evt) => {
   //console.log('[ServiceWorker] Install');
