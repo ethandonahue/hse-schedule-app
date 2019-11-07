@@ -10,6 +10,7 @@
   <link rel="manifest" href="/manifest.json">
   <script src="/serviceworker.js"></script>
   <script src="/js/storageChecker.js"></script>
+  <script src="/js/ScriptPlus.js"></script>
 </head>
 <body>
 <div class="content">
@@ -25,38 +26,38 @@
 <nav>
   <div class="navbuttons">
 
-    <a href="#notificationScreen">
+    <a href="/screens/online/notifications.html">
       <div class="navbutton">
         <span class="centerHelper"></span>
-        <img alt="Notifications" class="center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAsElEQVRIie2TMQ6CQBBFHzaYeARLOIwegFso97H1MsZKDwAN0ltwAGzGSDYgOwObkOhPfrUz/81sduGXlAKFOPVtWikAGZCIM9VoI4qBHKiBVlwDRzmbpC1w7wS7vkmNSfFIeBdi2iT3CH/7YAFcFYCLBdAoAM1QSPQF0CoH6s3S/AOT/oBlAtbAyZB1BjY+hSX+79914Yb1bfBUzz5Pb3g9+FxFFQKwl+AK2IUALFMvzwpVRm4CTREAAAAASUVORK5CYII=">
+        <img alt="Notifications" class="center" src="/images/notifications-unselected-white.png">
       </div>
     </a>
 
-    <a href="#bellScheduleScreen">
+    <a href="/screens/online/bellSchedule.html">
       <div class="navbutton">
         <span class="centerHelper"></span>
-        <img alt="Schedule" class="center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAVklEQVRIiWNgGAUDDRihNBMDA0MUlL2UgYHhP7UtioEa+p+BgSEaSfwwkjgp+DDMACZquxQdMCLRUVDblzPQIIiGLhhNRQTBaCoiCEZTEUEwmopGAAAAw2pCl6uS+cUAAAAASUVORK5CYII=">
+        <img alt="Schedule" class="center" src="/images/schedule-unselected-white.png">
       </div>
     </a>
 
-    <a href="#homeScreen">
-      <div class="navbutton">
+    <a>
+      <div class="navbutton" id="selectedNavButton">
         <span class="centerHelper"></span>
-        <img alt="Home" class="center" id="selectedNavButton" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAyNCAyNCIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij4gICAgPHBhdGggZD0iTSAxMiAyIEEgMSAxIDAgMCAwIDExLjI4OTA2MiAyLjI5Njg3NSBMIDEuMjAzMTI1IDExLjA5NzY1NiBBIDAuNSAwLjUgMCAwIDAgMSAxMS41IEEgMC41IDAuNSAwIDAgMCAxLjUgMTIgTCA0IDEyIEwgNCAyMCBDIDQgMjAuNTUyIDQuNDQ4IDIxIDUgMjEgTCA5IDIxIEMgOS41NTIgMjEgMTAgMjAuNTUyIDEwIDIwIEwgMTAgMTQgTCAxNCAxNCBMIDE0IDIwIEMgMTQgMjAuNTUyIDE0LjQ0OCAyMSAxNSAyMSBMIDE5IDIxIEMgMTkuNTUyIDIxIDIwIDIwLjU1MiAyMCAyMCBMIDIwIDEyIEwgMjIuNSAxMiBBIDAuNSAwLjUgMCAwIDAgMjMgMTEuNSBBIDAuNSAwLjUgMCAwIDAgMjIuNzk2ODc1IDExLjA5NzY1NiBMIDEyLjcxNjc5NyAyLjMwMjczNDQgQSAxIDEgMCAwIDAgMTIuNzEwOTM4IDIuMjk2ODc1IEEgMSAxIDAgMCAwIDEyIDIgeiI+PC9wYXRoPjwvc3ZnPg==">
+        <img alt="Home" class="center" src="/images/home-selected-white.png">
       </div>
     </a>
 
-    <a href="#calendarScreen">
+    <a href="/screens/online/calendar.html">
       <div class="navbutton">
         <span class="centerHelper"></span>
-        <img alt="Calendar" class="center" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAyNCAyNCIKc3R5bGU9IiBmaWxsOiMwMDAwMDA7Ij4gICAgPHBhdGggZD0iTSA3IDEgQyA2LjQ0OCAxIDYgMS40NDggNiAyIEwgNiAzIEwgNSAzIEMgMy45IDMgMyAzLjkgMyA1IEwgMyAxOSBDIDMgMjAuMSAzLjkgMjEgNSAyMSBMIDE5IDIxIEMgMjAuMSAyMSAyMSAyMC4xIDIxIDE5IEwgMjEgNSBDIDIxIDMuOSAyMC4xIDMgMTkgMyBMIDE4IDMgTCAxOCAyIEMgMTggMS40NDggMTcuNTUyIDEgMTcgMSBDIDE2LjQ0OCAxIDE2IDEuNDQ4IDE2IDIgTCAxNiAzIEwgOCAzIEwgOCAyIEMgOCAxLjQ0OCA3LjU1MiAxIDcgMSB6IE0gNSA4IEwgMTkgOCBMIDE5IDE4IEMgMTkgMTguNTUyIDE4LjU1MiAxOSAxOCAxOSBMIDYgMTkgQyA1LjQ0OCAxOSA1IDE4LjU1MiA1IDE4IEwgNSA4IHoiPjwvcGF0aD48L3N2Zz4=">
+        <img alt="Calendar" class="center" src="/images/calendar-unselected-white.png">
       </div>
     </a>
 
-    <a href="#settingsScreen">
+    <a href="/screens/online/settings.html">
       <div class="navbutton">
         <span class="centerHelper"></span>
-        <img alt="Settings" class="center" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAABQElEQVRIieXVvS5EURQF4A/dYBI/pV4yWj9RKRSiE2J0aBXmJVQKlYSON/AO8wZEo5uESESUY0qjuGdiXOdcMxkKsZKd3HPu2mvtnH33ufwXrKOJdohm2PsWwz0a7GC0az2Kah8FFmIODR/Vd6KBynfJQ5H1KaZxhRUcRHgdtHGOOjbxgsOwH8V+pNJ+Yy8lPobHHzB4QjlmUCtIuscWxkNs4K6AX4sZLOM1IT4Z4U+Ed3n+a9CKYgmtXMJWioztHLcVNArRPVBt2ZGkUM5xm3lCr4OWQurzTRosRvZWC/LXInrJI0o1+U7W0Dym8BDhf2pyd7ULKEWEZnEja2g5RBXXmInwS0HrC3590MjGfFCD3W7BkZzBreyia+AIz5iX/lrecIaT8FzHsYLLLoaKAa7rXnEZMbj4KXEG+GX+fbwDgcesw85xda0AAAAASUVORK5CYII=">
+        <img alt="Settings" class="center" src="/images/settings-unselected-white.png">
       </div>
     </a>
 
