@@ -26,6 +26,11 @@ h3{
 	padding-top: 10px;
 }
 
+a{
+  text-decoration:none;
+  color:#004794;
+}
+
 .content{
   width:100%;
   height:100vh;
