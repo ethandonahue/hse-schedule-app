@@ -1,5 +1,5 @@
 html{box-sizing:border-box;
-  background-color:#FFFFFF;
+  background-color:#004794;
   overflow:hidden;
   height:100%;
   position:relative;
@@ -11,6 +11,7 @@ html{box-sizing:border-box;
   margin:0;
   padding:0;
   border:0;
+  font-family: 'Muli', sans-serif;
 }
 body{
   margin:0;
@@ -27,9 +28,14 @@ body{
 }
 
 .topText h1{
-  color:#0000FF;
+  color:#FFF;
 }
 
 .lunchButtons ul li{
   padding:14px, 16px;
+  border: 15px solid white;
+}
+
+.lunchButton{
+	
 }
