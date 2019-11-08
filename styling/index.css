@@ -18,6 +18,10 @@ body{
   padding:0;
 }
 
+h3{
+	padding-top: 10px;
+}
+
 .content{
   width:100%;
   height:100vh;
@@ -31,10 +35,9 @@ body{
   color:#FFF;
 }
 
-.lunchButtons{
-  padding:14px, 16px;
-}
 
+
+@media screen and (orientation: landscape){
 .lunchButton{
 	background-color: #FFF;
 	border: 15px solid white;
@@ -42,4 +45,14 @@ body{
 	margin-left: 40vw;
 	margin-right: 40vw;
 }
+}
 
+@media screen and (orientation: portrait){
+.lunchButton{
+	background-color: #FFF;
+	border: 15px solid white;
+	margin-top: 20px;
+	margin-left: 20vw;
+	margin-right: 20vw;
+}
+}
