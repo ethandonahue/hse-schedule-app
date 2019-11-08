@@ -13,7 +13,6 @@ var useMilitaryTime = false;
 readFileOnline("/json/schedules.json", (data) =>{
   schedules = JSON.parse(data);
   currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
-  console.log(currentSchedule);
   timeMonitor = setInterval(refresh, 100);
 });
 
@@ -66,7 +65,6 @@ function getCurrentPeriod(hour, minute){
 
 function timeFormatting(hour, minute, second){
   var formatted = "";
-  console.log(second);
   if(hour != 0 && hour != false){
     if(!useMilitaryTime){
       hour -= 12;
