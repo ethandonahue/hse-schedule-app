@@ -20,7 +20,7 @@ function refresh(){
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
-  if(time.hour >= currentSchedule.info.schoolStartTime.hour || (time.hour >= currentSchedule.info.schoolStartTime.hour && time.minute > currentSchedule.info.schoolStartTime.minute)){
+  if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
     var timeUntil = TimePlus.timeUntil({
       hour:currentSchedule.info.schoolStartTime.hour,
       minute:currentSchedule.info.schoolStartTime.minute,
