@@ -1,106 +1,103 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>HSE Schedule App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="stylesheet" type="text/css" href="/styling/home.css">
-  <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="manifest" href="/manifest.json">
-  <script src="/serviceworker.js"></script>
-  <script src="/js/storageChecker.js"></script>
-  <script src="/js/ScriptPlus.js"></script>
-  <script src="/js/timeMonitor.js"></script>
+    <title>HSE Schedule App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="/styling/home.css">
+    <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
+    <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
+    <link rel="manifest" href="/manifest.json">
+    <script src="/serviceworker.js"></script>
+    <script src="/js/storageChecker.js"></script>
+    <script src="/js/ScriptPlus.js"></script>
+    <script src="/js/timeMonitor.js"></script>
 </head>
+
 <body>
-<div class="content">
+    <div class="content">
+
+        <div class="screenContent">
+
+            <div id="dayAndTime">
+
+                <div id="currentDay">
+                    <h1>Thursday</h1>
+                </div>
+
+                <div id="currentTime">
+                    <h1>11:00</h1>
+                </div>
+
+            </div>
+
+
+            <div id="currentWeek">
+                <h1>October 24, 2019</h1>
+            </div>
+
+            <div id="timeComponent">
+
+                <div id="timeRemaining">
+
+                    <h3>Time Remaining</h3>
+                </div>
 
 
 
-<div class="screenContent">
+                <div id="time">
 
-<div id="dayAndTime">
+                    <h1>20:00</h1>
+                </div>
+            </div>
 
-<div id="currentDay">
-<h1>Thursday</h1>
-</div>
+        </div>
 
-<div id="currentTime">
-<h1>11:00</h1>
-</div>
+        <nav>
+            <div class="navbuttons">
 
-</div>
+                <a href="/screens/online/notifications.html">
+                    <div class="navbutton">
+                        <span class="centerHelper"></span>
+                        <img alt="Notifications" class="center" src="/images/notifications-unselected-white.png">
+                    </div>
+                </a>
 
+                <a href="/screens/online/bellSchedule.html">
+                    <div class="navbutton">
+                        <span class="centerHelper"></span>
+                        <img alt="Schedule" class="center" src="/images/schedule-unselected-white.png">
+                    </div>
+                </a>
 
-<div id="currentWeek">
-<h1>October 24, 2019</h1>
-</div>
+                <a>
+                    <div class="navbutton" id="selectedNavButton">
+                        <span class="centerHelper"></span>
+                        <img alt="Home" class="center" src="/images/home-selected-white.png">
+                    </div>
+                </a>
 
-<div id="timeComponent">
+                <a href="/screens/online/calendar.html">
+                    <div class="navbutton">
+                        <span class="centerHelper"></span>
+                        <img alt="Calendar" class="center" src="/images/calendar-unselected-white.png">
+                    </div>
+                </a>
 
-<div id="timeRemaining">
+                <a href="/screens/online/settings.html">
+                    <div class="navbutton">
+                        <span class="centerHelper"></span>
+                        <img alt="Settings" class="center" src="/images/settings-unselected-white.png">
+                    </div>
+                </a>
 
-<h3>Time Remaining</h3>
-</div>
-
-
-
-<div id="time">
-
-<h1>20:00</h1>
-</div>
-</div>
-
-</div>
-
-
-
-
-
-<nav>
-  <div class="navbuttons">
-
-    <a href="/screens/online/notifications.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Notifications" class="center" src="/images/notifications-unselected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/bellSchedule.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Schedule" class="center" src="/images/schedule-unselected-white.png">
-      </div>
-    </a>
-
-    <a>
-      <div class="navbutton" id="selectedNavButton">
-        <span class="centerHelper"></span>
-        <img alt="Home" class="center" src="/images/home-selected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/calendar.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Calendar" class="center" src="/images/calendar-unselected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/settings.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Settings" class="center" src="/images/settings-unselected-white.png">
-      </div>
-    </a>
-
-  </div>
-</nav>
+            </div>
+        </nav>
 
 
 
-</div>
+    </div>
 </body>
+
 </html>

@@ -1,54 +1,49 @@
-html{box-sizing:border-box;
-  background-color:#004794;
-  overflow:hidden;
-  height:100%;
-  position:relative;
+html{
+    box-sizing:border-box;
+     background-color:#004794;
+     overflow:hidden;
+     height:100%;
+     position:relative;
 }
-*, *:before, *:after{
-  box-sizing:inherit;
+ *, *:before, *:after{
+     box-sizing:inherit;
 }
-*{
-  margin:0;
-  padding:0;
-  border:0;
-  font-family: 'Muli', sans-serif;
+ *{
+     margin:0;
+     padding:0;
+     border:0;
+     font-family: 'Muli', sans-serif;
 }
-body{
-  margin:0;
-  padding:0;
+ body{
+     margin:0;
+     padding:0;
 }
-
-h1{
-	padding-top: 10px;
+ h1{
+     padding-top: 10px;
 }
-
-h3{
-	padding-top: 10px;
-  padding-bottom: 10px;
+ h3{
+     padding-top: 10px;
+     padding-bottom: 10px;
 }
-
-a{
-background-color: #DCDCDC;
-color: #004794;
-padding: 14px 25px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
+ a{
+     background-color: #DCDCDC;
+     color: #004794;
+     padding: 14px 25px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
 }
-
-a:hover, a:active {
-  background-color: white;
+ a:hover, a:active {
+     background-color: white;
 }
-
-.content{
-  width:100%;
-  height:100vh;
+ .content{
+     width:100%;
+     height:100vh;
 }
-
-.topText, .lunchButtons{
-  text-align:center;
+ .topText, .lunchButtons{
+     text-align:center;
 }
-
-.topText h1{
-  color:#FFF;
+ .topText h1{
+     color:#FFF;
 }
+ 

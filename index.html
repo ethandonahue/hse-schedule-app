@@ -1,48 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>HSE Schedule App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="stylesheet" type="text/css" href="/styling/index.css">
-  <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="manifest" href="/manifest.json">
-  <script src="/serviceworker.js"></script>
-  <script src="/js/storageChecker.js"></script>
+    <title>HSE Schedule App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="/styling/index.css">
+    <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
+    <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
+    <link rel="manifest" href="/manifest.json">
+    <script src="/serviceworker.js"></script>
+    <script src="/js/storageChecker.js"></script>
 </head>
+
 <body>
-<div class="content">
+    <div class="content">
 
+        <div class="screenContent">
 
+            <div class="topText">
+                <h1>What's your lunch period?</h1>
+                <h3>This can be changed in settings later</h3>
+            </div>
 
-<div class="screenContent">
+            <div class="lunchButtons">
 
-  <div class="topText">
-    <h1>What's your lunch period?</h1>
-    <h3>This can be changed in settings later</h3>
-  </div>
+                <a href="/screens/online/home.html" onclick="setLunch('A')">
+					A Lunch
+				</a>
 
-  <div class="lunchButtons">
+                <a href="/screens/online/home.html" onclick="setLunch('B')">
+					B Lunch
+				</a>
 
-    <a href="/screens/online/home.html" onclick="setLunch('A')">
-        A Lunch
-    </a>
+                <a href="/screens/online/home.html" onclick="setLunch('C')">
+					C Lunch
+				</a>
 
-    <a href="/screens/online/home.html" onclick="setLunch('B')">
-        B Lunch
-    </a>
-
-    <a href="/screens/online/home.html" onclick="setLunch('C')">
-        C Lunch
-    </a>
-
-  </div>
-
-</div>
-
-
-
-</div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
