@@ -20,7 +20,7 @@ function refresh(){
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
-  if(time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute){
+  if(time.hour >= currentSchedule.info.schoolStartTime.hour || (time.hour >= currentSchedule.info.schoolStartTime.hour && time.minute > currentSchedule.info.schoolStartTime.minute)){
     var timeUntil = TimePlus.timeUntil({
       hour:currentSchedule.info.schoolStartTime.hour,
       minute:currentSchedule.info.schoolStartTime.minute,
@@ -28,7 +28,7 @@ function refresh(){
     });
     updateHeader = "School Starts In";
     updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
-  } else if(time.hour >= currentSchedule.info.schoolEndTime.hour && time.minute > currentSchedule.info.schoolEndTime.minute){
+  } else if(time.hour >= currentSchedule.info.schoolEndTime.hour || (time.hour >= currentSchedule.info.schoolEndTime.hour && time.minute > currentSchedule.info.schoolEndTime.minute)){
     updateHeader = "School Has Ended";
     updateText = "No Time Available";
   } else {
