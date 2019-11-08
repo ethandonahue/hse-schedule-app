@@ -1,0 +1,49 @@
+html{box-sizing:border-box;
+  background-color:#004794;
+  overflow:hidden;
+  height:100%;
+  position:relative;
+}
+*, *:before, *:after{
+  box-sizing:inherit;
+}
+*{
+  margin:0;
+  padding:0;
+  border:0;
+  font-family: 'Muli', sans-serif;
+}
+
+
+body{
+  margin:0;
+  padding:0;
+}
+
+
+.content{
+  width:100%;
+  height:100vh;
+}
+
+.topText, .lunchButtons{
+  text-align:center;
+}
+
+.topText h1{
+  color:#FFF;
+}
+
+.lunchButtons{
+	
+}
+
+.lunchButton{
+	background-color: #FFF;
+
+	border: 15px solid white;
+	margin-top: 20px;
+	margin-left: 40vw;
+	margin-right: 40vw;
+	
+}
