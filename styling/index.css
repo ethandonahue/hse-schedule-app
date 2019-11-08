@@ -31,7 +31,15 @@ body{
   color:#FFF;
 }
 
-.lunchButtons ul li{
+.lunchButtons{
   padding:14px, 16px;
+}
+
+.lunchButton{
+	background-color: #FFF;
+	border: 15px solid white;
+	margin-top: 20px;
+	margin-left: 40vw;
+	margin-right: 40vw;
 }
 
