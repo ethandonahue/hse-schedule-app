@@ -278,6 +278,18 @@ function randomNumber(min, max){
 	return rand;
 }
 
+function readFileOnline(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function(){
+			if (rawFile.readyState == 4 && rawFile.status == "200"){
+				scriptPlusDebugLogging("Read Online File (" + file + ")");
+				callback(rawFile.responseText);
+			}
+    }
+    rawFile.send(null);
+}
+
 Array.prototype.pickValue = function(){
 	var randomValue = Math.floor(Math.random()*this.length);
 	scriptPlusDebugLogging("Picked Random Value (" + randomValue + ") From Range (0 - " + (this.length - 1) + ")");
