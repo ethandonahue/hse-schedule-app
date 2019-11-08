@@ -11,6 +11,7 @@ html{box-sizing:border-box;
   margin:0;
   padding:0;
   border:0;
+  font-family: 'Muli', sans-serif;
 }
 body{
   margin:0;
@@ -26,7 +27,7 @@ nav{
 }
 
 
-@media screen and (orientation: landscape){
+/*@media screen and (orientation: landscape){
   nav{
     width:10vw;
     height:100vh;
@@ -34,7 +35,7 @@ nav{
     position:fixed;
     bottom:0;
   }
-}
+}*/
 
 a{
   text-decoration:none;
@@ -51,11 +52,11 @@ a{
   height:100%;
 }
 
-@media screen and (orientation: landscape){
+/*@media screen and (orientation: landscape){
   .navbuttons{
     display: none;
   }
-}
+}*/
 
 .navbutton{
   width:20%;
@@ -83,4 +84,26 @@ a{
 #selectedNavButton img{
   width:40px;
   height:40px;
+}
+
+
+
+#currentTime{
+float: right;
+}
+
+
+#currentDay, #currentTime{
+	display: inline-block;
+	
+}
+
+#timeComponent{
+	text-align: center;
+	padding-top: 30px;
+}
+
+#time{
+	border-style: solid;
+  border-width: 2px;
 }
