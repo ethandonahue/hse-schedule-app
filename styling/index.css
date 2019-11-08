@@ -28,12 +28,16 @@ h3{
 }
 
 a{
-background-color: white;
-color: 004794;
+background-color: #DCDCDC;
+color: #004794;
 padding: 14px 25px;
 text-align: center;
 text-decoration: none;
 display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: white;
 }
 
 .content{
