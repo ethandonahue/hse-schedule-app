@@ -24,11 +24,16 @@ h1{
 
 h3{
 	padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 a{
-  text-decoration:none;
-  color:#004794;
+background-color: white;
+color: 004794;
+padding: 14px 25px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
 }
 
 .content{
@@ -42,26 +47,4 @@ a{
 
 .topText h1{
   color:#FFF;
-}
-
-
-
-@media screen and (orientation: landscape){
-.lunchButton{
-	background-color: #FFF;
-	border: 15px solid white;
-	margin-top: 20px;
-	margin-left: 40vw;
-	margin-right: 40vw;
-}
-}
-
-@media screen and (orientation: portrait){
-.lunchButton{
-	background-color: #FFF;
-	border: 15px solid white;
-	margin-top: 20px;
-	margin-left: 20vw;
-	margin-right: 20vw;
-}
 }
