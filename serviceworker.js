@@ -27,6 +27,8 @@ const FILES_TO_CACHE = [
   '/images/settings-selected-white.png'
 ];
 
+const publicKey = "BHV9vDKgZXPZH3S--ZPlDH4R4LQ636jvztTtYQppjrpVfJY3btRPzFhuvGY_xFrvpvCeAvMnJ7p3Vh2rykeaV54";
+
 if('serviceWorker' in navigator && 'PushManager' in window){
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/serviceworker.js')
@@ -95,7 +97,31 @@ self.addEventListener('push', (event) => {
     badge: '/images/notifications-selected-white.png'
   };
 
-  event.waitUntil(self.registration.showNotification(title, options));
+  const notificationPromise = self.registration.showNotification(title, options);
+  event.waitUntil(notificationPromise);
+});
+
+self.addEventListener('notificationclick', (event) => {
+  console.log('[Service Worker] Notification click Received.');
+
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('/screens/online/notifications.html')
+  );
+});
+
+self.addEventListener('pushsubscriptionchange', (event) => {
+  console.log('[Service Worker]: \'pushsubscriptionchange\' event fired.');
+  event.waitUntil(
+    self.registration.pushManager.subscribe({
+      userVisibleOnly:true,
+      applicationServerKey:baseToArray(publicKey)
+    })
+    .then((newSubscription) => {
+      console.log('[Service Worker] New subscription: ', newSubscription);
+    })
+  );
 });
 
 function checkNotificationSubscription(){
@@ -112,7 +138,7 @@ function checkNotificationSubscription(){
       subscribeToggle.addEventListener('click', () => {
         subscribeToggle.disabled = true;
         if (isSubscribed) {
-          //unsubscribe
+          unsubscribeFromNotifications();
         } else {
           subscribeToNotifications();
         }
@@ -140,7 +166,7 @@ function updateSubscribeButton(){
 function subscribeToNotifications(){
   registration.pushManager.subscribe({
     userVisibleOnly:true,
-    applicationServerKey:"BHizapnyZZR5GsGUHeTUQhwRIr5TzBBAc0PpBAAhiaJGA9Rbac3_ndncISr-be0T4EjnXqHSIa3fSkqBiCVB59I"
+    applicationServerKey:baseToArray(publicKey)
   })
   .then((subscription) => {
     console.log('User is subscribed.');
@@ -151,4 +177,37 @@ function subscribeToNotifications(){
     console.log('Failed to subscribe the user: ', err);
     updateSubscribeButton();
   });
+}
+
+function unsubscribeFromNotifications() {
+  registration.pushManager.getSubscription()
+  .then((subscription) => {
+    if(subscription){
+      return subscription.unsubscribe();
+    }
+  })
+  .catch((error) => {
+    console.log('Error unsubscribing', error);
+  })
+  .then(() => {
+    console.log('User is unsubscribed.');
+    isSubscribed = false;
+    updateSubscribeButton();
+  });
+}
+
+
+function baseToArray(string){
+  const padding = '='.repeat((4 - string.length % 4) % 4);
+  const base64 = (string + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
 }
