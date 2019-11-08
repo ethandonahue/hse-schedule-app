@@ -84,21 +84,71 @@ self.addEventListener('fetch', (evt) => {
   );
 });
 
+self.addEventListener('push', (event) => {
+  console.log('[Service Worker] Push Received.');
+  console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+  const title = 'Test';
+  const options = {
+    body: 'Yay it works.',
+    icon: '/images/HSEScheduleAppLogo192.png',
+    badge: '/images/notifications-selected-white.png'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
 function checkNotificationSubscription(){
   registration.pushManager.getSubscription()
   .then((subscription) => {
     isSubscribed = !(subscription == null);
     subscribeToggle = document.getElementById("notificationSubscription");
     if(isSubscribed){
-      if(subscribeToggle != null){
-        subscribeToggle.textContent = "Disable Push Notifications";
-      }
-      //console.log('User IS subscribed.');
+      //console.log('User is subscribed to notifications');
     } else {
-      if(subscribeToggle != null){
-        subscribeToggle.textContent = "Enable Push Notifications";
-      }
-      //console.log('User is NOT subscribed.');
+      //console.log('User is NOT subscribed to notifications');
     }
+    if(subscribeToggle != null){
+      subscribeToggle.addEventListener('click', () => {
+        subscribeToggle.disabled = true;
+        if (isSubscribed) {
+          //unsubscribe
+        } else {
+          subscribeToNotifications();
+        }
+      });
+      updateSubscribeButton();
+    }
+  });
+}
+
+function updateSubscribeButton(){
+  if(Notification.permission == 'denied'){
+    subscribeToggle.textContent = 'Push Notifications Disabled';
+    subscribeToggle.disabled = true;
+    return;
+  }
+  if(isSubscribed){
+    subscribeToggle.textContent = "Disable Push Notifications";
+    subscribeToggle.disabled = false;
+  } else {
+    subscribeToggle.textContent = "Enable Push Notifications";
+    subscribeToggle.disabled = false;
+  }
+}
+
+function subscribeToNotifications(){
+  registration.pushManager.subscribe({
+    userVisibleOnly:true,
+    applicationServerKey:"BHizapnyZZR5GsGUHeTUQhwRIr5TzBBAc0PpBAAhiaJGA9Rbac3_ndncISr-be0T4EjnXqHSIa3fSkqBiCVB59I"
+  })
+  .then((subscription) => {
+    console.log('User is subscribed.');
+    isSubscribed = true;
+    updateSubscribeButton();
+  })
+  .catch(function(err) {
+    console.log('Failed to subscribe the user: ', err);
+    updateSubscribeButton();
   });
 }
