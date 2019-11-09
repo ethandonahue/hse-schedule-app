@@ -16,7 +16,11 @@ readFileOnline("/json/schedules.json", (data) =>{
 });
 
 function refresh(){
-  currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
+  if(schedulesPerWeek[TimePlus.getCurrentDate().dayName] != false){
+    currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
+  } else {
+    currentSchedule = false;
+  }
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
