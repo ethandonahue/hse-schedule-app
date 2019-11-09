@@ -12,15 +12,18 @@ var useMilitaryTime = false;
 
 readFileOnline("/json/schedules.json", (data) =>{
   schedules = JSON.parse(data);
-  currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
   timeMonitor = setInterval(refresh, 100);
 });
 
 function refresh(){
+  currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
-  if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
+  if(currentSchedule == false){
+    updateHeader = "It's The Weekend";
+    updateText = "No School";
+  } else if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
     var timeUntil = TimePlus.timeUntil({
       hour:currentSchedule.info.schoolStartTime.hour,
       minute:currentSchedule.info.schoolStartTime.minute,
