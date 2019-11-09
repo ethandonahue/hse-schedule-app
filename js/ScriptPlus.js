@@ -1,5 +1,5 @@
 //Developed By: Isaac Robbins
-//Last Update: 11/7/2019
+//Last Update: 11/9/2019
 //For Use With: HSE Schedule App
 
 var ScriptPlus = {
