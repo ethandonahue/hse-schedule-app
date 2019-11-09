@@ -16,15 +16,11 @@ readFileOnline("/json/schedules.json", (data) =>{
 });
 
 function refresh(){
-  if(schedulesPerWeek[TimePlus.getCurrentDate().dayName] != false){
-    currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
-  } else {
-    currentSchedule = false;
-  }
+  currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
-  if(currentSchedule == false){
+  if(currentSchedule == undefined){
     updateHeader = "It's The Weekend";
     updateText = "No School";
   } else if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
