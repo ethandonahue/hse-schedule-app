@@ -310,7 +310,7 @@ function scriptPlusDebugLogging(message){
 }
 
 function scriptPlusGiveErrorMessage(message){
-	if(CanTools.config.debug){
-		console.error("%c\n[ScriptPlus - Version " + CanTools.config.version + "] " + message + "\n", "color:#ffffff;font-style:italic;font-weight:bold");
+	if(ScriptPlus.config.debug){
+		console.error("%c\n[ScriptPlus - Version " + ScriptPlus.config.version + "] " + message + "\n", "color:#ffffff;font-style:italic;font-weight:bold");
 	}
 }
