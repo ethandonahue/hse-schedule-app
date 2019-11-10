@@ -29,7 +29,7 @@ var TimePlus = {
 				month:d.getMonth(),
 				weekOfYear:d.getWeek(),
 				dayOfWeek:d.getDay(),
-				dayOfMonth:d.getUTCDate(),
+				dayOfMonth:d.getDate(),
 				monthName:TimePlus.months[d.getMonth()],
 				dayName:TimePlus.days[d.getDay()]
 			};
