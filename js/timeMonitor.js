@@ -69,7 +69,7 @@ function getCurrentPeriod(hour, minute){
 function timeFormatting(hour, minute, second){
   var formatted = "";
   if(hour != 0 && hour != false){
-    if(!useMilitaryTime){
+    if(!useMilitaryTime && hour > 12){
       hour -= 12;
     } else if(hour < 10){
       hour = "0" + hour;
