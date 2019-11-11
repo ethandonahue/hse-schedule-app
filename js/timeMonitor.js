@@ -63,7 +63,7 @@ function getCurrentPeriod(hour, minute){
   for(var i = 0; i<sched.length; i++){
     var start = new Date(date.year, date.month, date.dayOfMonth, sched[i].startTime.hour, sched[i].startTime.minute, 0, 0);
     var end = new Date(date.year, date.month, date.dayOfMonth, sched[i].endTime.hour, sched[i].endTime.minute, 0, 0);
-    if(TimePlus.getFullDate() >= start && TimePlus.getFullDate() <= end){
+    if(TimePlus.getFullDate() >= start && TimePlus.getFullDate() < end){
       return sched[i];
     }
   }
