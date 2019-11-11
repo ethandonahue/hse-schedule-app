@@ -26,7 +26,16 @@ function refresh(){
   } else {
     currentSchedule = schedules[currentSchedule];
   }
-  if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
+  period = getCurrentPeriod(time.hour, time.minute);
+  if(period != undefined){
+    var timeUntil = TimePlus.timeUntil({
+      hour:period.endTime.hour,
+      minute:period.endTime.minute,
+      second:0
+    });
+    updateHeader = period.periodName;
+    updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
+  } else if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
     var timeUntil = TimePlus.timeUntil({
       hour:currentSchedule.info.schoolStartTime.hour,
       minute:currentSchedule.info.schoolStartTime.minute,
@@ -37,15 +46,6 @@ function refresh(){
   } else if(time.hour >= currentSchedule.info.schoolEndTime.hour || (time.hour >= currentSchedule.info.schoolEndTime.hour && time.minute > currentSchedule.info.schoolEndTime.minute)){
     updateHeader = "School Has Ended";
     updateText = "No Time Available";
-  } else {
-    var period = getCurrentPeriod(time.hour, time.minute);
-    var timeUntil = TimePlus.timeUntil({
-      hour:period.endTime.hour,
-      minute:period.endTime.minute,
-      second:0
-    });
-    updateHeader = period.periodName;
-    updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
   }
   updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, false), updateHeader, updateText);
 }
@@ -61,17 +61,17 @@ function updateDivs(day, date, curTime, header, text){
 function getCurrentPeriod(hour, minute){
   var sched = currentSchedule.schedule;
   for(var i = 0; i<sched.length; i++){
-    if(time.hour >= sched[i].startTime.hour && time.hour <= sched[i].endTime.hour){
-      if(time.minute >= sched[i].startTime.minute && time.minute < sched[i].endTime.minute){
-        return sched[i];
-      }
+    var start = new Date(date.year, date.month, date.dayOfMonth, sched[i].startTime.hour, sched[i].startTime.minute, 0, 0);
+    var end = new Date(date.year, date.month, date.dayOfMonth, sched[i].endTime.hour, sched[i].endTime.minute, 0, 0);
+    if(TimePlus.getFullDate() >= start && TimePlus.getFullDate() <= end){
+      return sched[i];
     }
   }
 }
 
 function timeFormatting(hour, minute, second){
   var formatted = "";
-  if(hour != 0 && hour != false){
+  if(hour != false){
     if(!useMilitaryTime && hour > 12){
       hour -= 12;
     } else if(hour < 10){

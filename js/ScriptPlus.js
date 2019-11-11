@@ -34,6 +34,10 @@ var TimePlus = {
 				dayName:TimePlus.days[d.getDay()]
 			};
 		},
+	getFullDate:function(){
+			var d = new Date();
+			return d;
+	 },
 	addMilliseconds:function(t1, t2){
 			if(typeof(t1) == "string"){
 				t1 = parseInt(t1);
