@@ -92,7 +92,7 @@ function timeFormatting(hour, minute, second){
     }
   }
   if(minute != "hide"){
-    if(minute < 10){
+    if(minute < 10 && hour != "hide"){
       minute = "0" + minute;
     }
     if(hour != "hide"){
