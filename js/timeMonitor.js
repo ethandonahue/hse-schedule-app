@@ -12,7 +12,7 @@ var useMilitaryTime = false;
 
 readFileOnline("/json/schedules.json", (data) => {
   schedules = JSON.parse(data);
-  timeMonitor = setInterval(refresh, 100);
+  window.requestAnimationFrame(refresh);
 });
 
 function refresh(){
@@ -56,6 +56,7 @@ function updateDivs(day, date, curTime, header, text){
   document.getElementById("currentTimeText").textContent = curTime;
   document.getElementById("timeHeader").textContent = header;
   document.getElementById("timeText").textContent = text;
+  window.requestAnimationFrame(refresh);
 }
 
 function getCurrentPeriod(hour, minute){
@@ -74,10 +75,13 @@ function timeFormatting(hour, minute, second){
   if(hour != false){
     if(!useMilitaryTime && hour > 12){
       hour -= 12;
-    } else if(hour < 10){
+    }
+    if(hour < 10){
       hour = "0" + hour;
     }
-    formatted = hour;
+    if(hour != "00"){
+      formatted += hour;
+    }
   }
   if(minute != false){
     if(minute < 10){
