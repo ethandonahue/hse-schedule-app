@@ -101,7 +101,7 @@ function timeFormatting(hour, minute, second){
     formatted += minute;
   }
   if(second != "hide"){
-    if(second < 10){
+    if(second < 10 && minute != "hide"){
       second = "0" + second;
     }
     if(minute != "hide"){
