@@ -1,29 +1,32 @@
 const schedulesPerWeek = {
-  "Sunday":false,
+  "Sunday":{header:"It's The Weekend", text:"No School"},
   "Monday":"mondaySmartPeriodDay",
   "Tuesday":"regularSchoolDay",
   "Wednesday":"regularSchoolDay",
   "Thursday":"regularSchoolDay",
   "Friday":"regularSchoolDay",
-  "Saturday":false
+  "Saturday":{header:"It's The Weekend", text:"No School"}
 };
 
 var useMilitaryTime = false;
 
-readFileOnline("/json/schedules.json", (data) =>{
+readFileOnline("/json/schedules.json", (data) => {
   schedules = JSON.parse(data);
   timeMonitor = setInterval(refresh, 100);
 });
 
 function refresh(){
-  currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayName]];
+  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayName];
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
-  if(currentSchedule == undefined){
-    updateHeader = "It's The Weekend";
-    updateText = "No School";
-  } else if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
+  if(typeof(currentSchedule) == "object"){
+    updateHeader = currentSchedule.header;
+    updateText = currentSchedule.text;
+  } else {
+    currentSchedule = schedules[currentSchedule];
+  }
+  if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
     var timeUntil = TimePlus.timeUntil({
       hour:currentSchedule.info.schoolStartTime.hour,
       minute:currentSchedule.info.schoolStartTime.minute,
