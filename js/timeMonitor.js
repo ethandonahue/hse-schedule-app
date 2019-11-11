@@ -47,7 +47,7 @@ function refresh(){
     updateHeader = "School Has Ended";
     updateText = "No Time Available";
   }
-  updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, false), updateHeader, updateText);
+  updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, "CLOCK"), updateHeader, updateText);
 }
 
 function updateDivs(day, date, curTime, header, text){
@@ -72,31 +72,39 @@ function getCurrentPeriod(hour, minute){
 
 function timeFormatting(hour, minute, second){
   var formatted = "";
-  if(hour != false){
+  if(hour != "hide"){
     if(!useMilitaryTime && hour > 12){
       hour -= 12;
     }
-    if(hour < 10){
+    if(useMilitaryTime && hour < 10){
       hour = "0" + hour;
     }
-    if(hour != "00"){
+    if(second == "CLOCK"){
+      second = "hide";
+      if(hour == 0){
+        hour = 12;
+      }
+    }
+    if(hour != 0){
       formatted += hour;
+    } else {
+      hour = "hide";
     }
   }
-  if(minute != false){
+  if(minute != "hide"){
     if(minute < 10){
       minute = "0" + minute;
     }
-    if(hour != 0 && hour != false){
-      minute = ":" + minute
+    if(hour != "hide"){
+      minute = ":" + minute;
     }
     formatted += minute;
   }
-  if(second != false){
+  if(second != "hide"){
     if(second < 10){
       second = "0" + second;
     }
-    if(minute != false){
+    if(minute != "hide"){
       second = ":" + second;
     }
     formatted += second;
