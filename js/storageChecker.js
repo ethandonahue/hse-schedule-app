@@ -1,10 +1,10 @@
 if(typeof(Storage) != "undefined"){
   if(localStorage.selectedLunch == "A" || localStorage.selectedLunch == "B" || localStorage.selectedLunch == "C" || localStorage.selectedLunch == "NONE"){
-    if(window.location.pathname == "/index.html"){
+    if(window.location.pathname == "/" || window.location.pathname == "/index.html"){
       window.location.replace("/screens/online/home.html");
     }
   } else {
-    if(window.location.pathname != "/index.html"){
+    if(window.location.pathname == "/" && window.location.pathname != "/index.html"){
       window.location.replace("/index.html");
     }
   }
