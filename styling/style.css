@@ -54,6 +54,11 @@ a{
   text-align:center;
 }
 
+.navbutton img{
+  width: 24px;
+  height: 24px;
+}
+
 .centerHelper{
   display:inline-block;
   height:100%;

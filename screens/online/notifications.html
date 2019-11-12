@@ -1,72 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HSE Schedule App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="stylesheet" type="text/css" href="/styling/notifications.css">
-  <link rel="stylesheet" type="text/css" href="/styling/style.css">
-  <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="manifest" href="/manifest.json">
-  <script src="/serviceworker.js"></script>
-  <script src="/js/storageChecker.js"></script>
-  <script src="/js/ScriptPlus.js"></script>
-</head>
-<body>
-<div class="content">
-
-
-
-<div class="screenContent">
-  <button id="notificationSubscription" disabled="true">Notifications Unavailable</button>
-</div>
-
-
-
-<nav>
-  <div class="navbuttons">
-
-    <a>
-      <div class="navbutton" id="selectedNavButton">
-        <span class="centerHelper"></span>
-        <img alt="Notifications" class="center" src="/images/notifications-selected-white.png">
+   <head>
+      <title>HSE Schedule App</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" type="text/css" href="/styling/notifications.css">
+      <link rel="stylesheet" type="text/css" href="/styling/style.css">
+      <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
+      <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
+      <link rel="manifest" href="/manifest.json">
+      <script src="/serviceworker.js"></script>
+      <script src="/js/storageChecker.js"></script>
+      <script src="/js/ScriptPlus.js"></script>
+   </head>
+   <body>
+      <div class="content">
+         <div class="screenContent">
+            <button id="notificationSubscription" disabled="true">Notifications Unavailable</button>
+         </div>
+         <nav>
+            <div class="navbuttons">
+               <div class="navbutton" id="selectedNavButton">
+                  <a>
+                  <span class="centerHelper"></span>
+                  <img alt="Notifications" class="center" src="/images/notifications.png">
+                  </a>
+               </div>
+               <div class="navbutton">
+                  <a href="/screens/online/bellSchedule.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Schedule" class="center" src="/images/schedule.png">
+                  </a>
+               </div>
+               <div class="navbutton">
+                  <a href="/screens/online/home.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Home" class="center" src="/images/home.png">
+                  </a>
+               </div>
+               <div class="navbutton">
+                  <a href="/screens/online/calendar.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Calendar" class="center" src="/images/calendar.png">
+                  </a>
+               </div>
+               <div class="navbutton">
+                  <a href="/screens/online/settings.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Settings" class="center" src="/images/settings.png">
+                  </a>
+               </div>
+            </div>
+         </nav>
       </div>
-    </a>
-
-    <a href="/screens/online/bellSchedule.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Schedule" class="center" src="/images/schedule-unselected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/home.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Home" class="center" src="/images/home-unselected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/calendar.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Calendar" class="center" src="/images/calendar-unselected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/settings.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Settings" class="center" src="/images/settings-unselected-white.png">
-      </div>
-    </a>
-
-  </div>
-</nav>
-
-
-
-</div>
-</body>
+   </body>
 </html>

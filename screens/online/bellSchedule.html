@@ -1,102 +1,82 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>HSE Schedule App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="stylesheet" type="text/css" href="/styling/bellSchedule.css">
-  <link rel="stylesheet" type="text/css" href="/styling/style.css">
-  <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
-  <link rel="manifest" href="/manifest.json">
-  <script src="/serviceworker.js"></script>
-  <script src="/js/storageChecker.js"></script>
-  <script src="/js/ScriptPlus.js"></script>
-</head>
-<body>
-<div class="content">
-
-
-
-<div class="screenContent">
-
-  <div id="header">
-    <h1 id="headerText">Bell Schedule</h1>
-  </div>
-
-
-  <h2>Basic HTML Table</h2>
-
-  <table>
-    <tr>
-      <th>Firstname</th>
-      <th>Lastname</th>
-      <th>Age</th>
-    </tr>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Doe</td>
-      <td>80</td>
-    </tr>
-  </table>
-
-</div>
-
-
-
-<nav>
-  <div class="navbuttons">
-
-    <a href="/screens/online/notifications.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Notifications" class="center" src="/images/notifications-unselected-white.png">
+   <head>
+      <title>HSE Schedule App</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <link rel="stylesheet" type="text/css" href="/styling/bellSchedule.css">
+      <link rel="stylesheet" type="text/css" href="/styling/style.css">
+      <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
+      <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
+      <link rel="manifest" href="/manifest.json">
+      <script src="/serviceworker.js"></script>
+      <script src="/js/storageChecker.js"></script>
+      <script src="/js/ScriptPlus.js"></script>
+   </head>
+   <body>
+      <div class="content">
+         <div class="screenContent">
+            <div id="header">
+               <h1 id="headerText">Bell Schedule</h1>
+            </div>
+            <h2>Basic HTML Table</h2>
+            <table>
+               <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Age</th>
+               </tr>
+               <tr>
+                  <td>Jill</td>
+                  <td>Smith</td>
+                  <td>50</td>
+               </tr>
+               <tr>
+                  <td>Eve</td>
+                  <td>Jackson</td>
+                  <td>94</td>
+               </tr>
+               <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>80</td>
+               </tr>
+            </table>
+         </div>
+         <nav>
+            <div class="navbuttons">
+               <div class="navbutton">
+                  <a href="/screens/online/notifications.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Notifications" class="center" src="/images/notifications.png">
+                  </a>
+               </div>
+               <div class="navbutton" id="selectedNavButton">
+                  <a>
+                  <span class="centerHelper"></span>
+                  <img alt="Schedule" class="center" src="/images/schedule.png">
+                  </a>
+               </div>
+               <div class="navbutton">
+                  <a href="/screens/online/home.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Home" class="center" src="/images/home.png">
+                  </a>
+               </div>
+               <div class="navbutton">
+                  <a href="/screens/online/calendar.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Calendar" class="center" src="/images/calendar.png">
+                  </a>
+               </div>
+               <div class="navbutton">
+                  <a href="/screens/online/settings.html">
+                  <span class="centerHelper"></span>
+                  <img alt="Settings" class="center" src="/images/settings.png">
+                  </a>
+               </div>
+            </div>
+         </nav>
       </div>
-    </a>
-
-    <a>
-      <div class="navbutton" id="selectedNavButton">
-        <span class="centerHelper"></span>
-        <img alt="Schedule" class="center" src="/images/schedule-selected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/home.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Home" class="center" src="/images/home-unselected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/calendar.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Calendar" class="center" src="/images/calendar-unselected-white.png">
-      </div>
-    </a>
-
-    <a href="/screens/online/settings.html">
-      <div class="navbutton">
-        <span class="centerHelper"></span>
-        <img alt="Settings" class="center" src="/images/settings-unselected-white.png">
-      </div>
-    </a>
-
-  </div>
-</nav>
-
-
-
-</div>
-</body>
+   </body>
 </html>
