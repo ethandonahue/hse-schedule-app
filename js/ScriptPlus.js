@@ -295,6 +295,22 @@ function readFileOnline(file, callback) {
     rawFile.send(null);
 }
 
+function includeHTML(){
+  var tags = document.getElementsByTagName("*");
+  for(var i = 0; i < tags.length; i++){
+    var element = tags[i];
+    var file = element.getAttribute("include-html");
+    if(file){
+			readFileOnline(file, function(html){
+				element.innerHTML = html;
+				element.removeAttribute("include-html");
+				includeHTML();
+			});
+      return;
+    }
+  }
+}
+
 Array.prototype.pickValue = function(){
 	var randomValue = Math.floor(Math.random()*this.length);
 	scriptPlusDebugLogging("Picked Random Value (" + randomValue + ") From Range (0 - " + (this.length - 1) + ")");
