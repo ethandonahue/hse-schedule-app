@@ -73,6 +73,11 @@ a{
   background-color:#1158A5;
 }
 
+.navbutton img{
+  width:24px;
+  height:24px;
+}
+
 #selectedNavButton img{
   width:40px;
   height:40px;
