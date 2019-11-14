@@ -1,15 +1,36 @@
-table{
-  margin: 0 auto;
-  width: 40%;
-  padding-top: 20px;
-
+#spacer{
+     height: 20px;
 }
 
-.row{
-  text-align: center;
-  padding-top: 15px;
+ .tg {
+     border-collapse:collapse;
+     border-spacing:0;
+     margin:0 auto;
 }
 
-td {
-  border: 1px solid black;
+ .tg td{
+     font-size:14px;
+     padding:10px 5px;
+     border-style:solid;
+     border-width:1px;
+     overflow:hidden;
+     word-break:normal;
+     border-color:black;
+}
+
+ .tg th{
+     font-size:14px;
+     font-weight:normal;
+     padding:10px 5px;
+     border-style:solid;
+     border-width:1px;
+     overflow:hidden;
+     word-break:normal;
+     border-color:black;
+}
+
+ .tg .row{
+     border-color:inherit;
+     text-align:center;
+     vertical-align:top
 }
