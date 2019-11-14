@@ -1,5 +1,15 @@
 table{
   margin: 0 auto;
-     width: 70%;
+  width: 40%;
+  padding-top: 20px;
 
+}
+
+.row{
+  text-align: center;
+  padding-top: 15px;
+}
+
+td {
+  border: 1px solid black;
 }
