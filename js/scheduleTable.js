@@ -43,6 +43,8 @@ function convertTime(start, end){
   var output = "";
   var startHour;
   var endHour;
+  var startMinute;
+  var endMinute;
   if(start.hour <= 12){
     startHour = start.hour;
   } else {
@@ -55,7 +57,20 @@ function convertTime(start, end){
     endHour = end.hour-12;
   }
 
-  output += startHour + ":" + start.minute + " - " + endHour + ":" + end.minute;
+  if(start.minute < 10){
+    startMinute = "0" + start.minute;
+  } else {
+    startMinute = start.minute;
+  }
+
+  if(end.Minute < 10){
+    endMinute = "0" + end.minute;
+  } else {
+    endMinute = end.minute;
+  }
+
+
+  output += startHour + ":" + startMinute + " - " + endHour + ":" + endMinute;
 
 
 
