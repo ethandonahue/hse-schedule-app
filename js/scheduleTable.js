@@ -1,8 +1,8 @@
-var schedule1;
+var schedule;
 
 function loadSchedule(){
   if(currentSchedule.schedule != undefined){
-    schedule1 = currentSchedule.schedule;
+    schedule = currentSchedule.schedule;
     clearInterval(interval);
     createTable();
   }
@@ -12,10 +12,54 @@ var interval = setInterval(loadSchedule, 100);
 
 
 function createTable(){
-  var para = document.createElement("td");
-  var node = document.createTextNode("This is new.");
-  para.appendChild(node);
-  para.setAttribute("class", "row");
+
+  for(var i = 0; i<schedule.length; i++){
+  if(schedule[i].passing){
+    i++
+  }
+
+  var tableContainer = document.createElement("tr");
+  var tableRow1 = document.createElement("td");
+  var tableRow2 = document.createElement("td");
+  var content1 = document.createTextNode(schedule[i].periodNum);
+  var content2 = document.createTextNode(convertTime(schedule[i].startTime, schedule[i].endTime));
+
+  tableRow1.appendChild(content1);
+  tableRow2.appendChild(content2);
+
+  tableRow1.setAttribute("class", "row");
+  tableRow2.setAttribute("class", "row");
+
+  tableContainer.appendChild(tableRow1);
+  tableContainer.appendChild(tableRow2);
+
   var element = document.getElementsByTagName("table")[0];
-  element.appendChild(para);
+  element.appendChild(tableContainer);
+
+  }
+}
+
+function convertTime(start, end){
+  var output = "";
+  var startHour;
+  var endHour;
+  if(start.hour <= 12){
+    startHour = start.hour;
+  } else {
+    startHour = start.hour-12;
+  }
+
+  if(end.hour <= 12){
+    endHour = end.hour;
+  } else {
+    endHour = end.hour-12;
+  }
+
+  output += startHour + ":" + start.minute + " - " + endHour + ":" + end.minute;
+
+
+
+return output;
+
+
 }

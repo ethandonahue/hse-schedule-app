@@ -47,7 +47,9 @@ function refresh(){
     updateHeader = "School Has Ended";
     updateText = "No Time Available";
   }
-  updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, "CLOCK"), updateHeader, updateText);
+  
+    updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, "CLOCK"), updateHeader, updateText);
+
 }
 
 function updateDivs(day, date, curTime, header, text){
