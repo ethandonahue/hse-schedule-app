@@ -21,20 +21,26 @@ function createTable() {
 		var tableContainer = document.createElement("tr");
 		var periodRow = document.createElement("td");
 		var timeRow = document.createElement("td");
-		var period = document.createTextNode(schedule[i].periodNum);
-		var time = document.createTextNode(convertTime(schedule[i].startTime, schedule[i].endTime));
+		var periodVal = document.createTextNode(schedule[i].periodNum);
+		var timeVal = document.createTextNode(convertTime(schedule[i].startTime, schedule[i].endTime));
 
-		periodRow.appendChild(period);
-		timeRow.appendChild(time);
+		periodRow.appendChild(periodVal);
+		timeRow.appendChild(timeVal);
 
-		periodRow.setAttribute("class", "row");
-		timeRow.setAttribute("class", "row");
+
+		if(period.periodNum == schedule[i].periodNum && !schedule[i].passing){
+			periodRow.setAttribute("class", "row selected");
+			timeRow.setAttribute("class", "row selected");
+		} else {
+					periodRow.setAttribute("class", "row");
+					timeRow.setAttribute("class", "row");
+		}
 
 		tableContainer.appendChild(periodRow);
 		tableContainer.appendChild(timeRow);
 
-		var element = document.getElementsByTagName("table")[0];
-		element.appendChild(tableContainer);
+		var table = document.getElementsByTagName("table")[0];
+		table.appendChild(tableContainer);
 
 	}
 }

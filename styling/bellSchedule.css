@@ -34,3 +34,7 @@
      text-align:center;
      vertical-align:top
 }
+
+.selected{
+  background-color: #87CEFA;
+}
