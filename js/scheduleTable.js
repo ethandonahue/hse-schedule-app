@@ -19,19 +19,19 @@ function createTable() {
 		}
 
 		var tableContainer = document.createElement("tr");
-		var tableRow1 = document.createElement("td");
-		var tableRow2 = document.createElement("td");
-		var content1 = document.createTextNode(schedule[i].periodNum);
-		var content2 = document.createTextNode(convertTime(schedule[i].startTime, schedule[i].endTime));
+		var periodRow = document.createElement("td");
+		var timeRow = document.createElement("td");
+		var period = document.createTextNode(schedule[i].periodNum);
+		var time = document.createTextNode(convertTime(schedule[i].startTime, schedule[i].endTime));
 
-		tableRow1.appendChild(content1);
-		tableRow2.appendChild(content2);
+		periodRow.appendChild(period);
+		timeRow.appendChild(time);
 
-		tableRow1.setAttribute("class", "row");
-		tableRow2.setAttribute("class", "row");
+		periodRow.setAttribute("class", "row");
+		timeRow.setAttribute("class", "row");
 
-		tableContainer.appendChild(tableRow1);
-		tableContainer.appendChild(tableRow2);
+		tableContainer.appendChild(periodRow);
+		tableContainer.appendChild(timeRow);
 
 		var element = document.getElementsByTagName("table")[0];
 		element.appendChild(tableContainer);
