@@ -28,12 +28,12 @@ function createTable() {
 		timeRow.appendChild(timeVal);
 
 
-		if(period.periodNum == schedule[i].periodNum && !schedule[i].passing){
+		if (period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
 			periodRow.setAttribute("class", "row selected");
 			timeRow.setAttribute("class", "row selected");
 		} else {
-					periodRow.setAttribute("class", "row");
-					timeRow.setAttribute("class", "row");
+			periodRow.setAttribute("class", "row");
+			timeRow.setAttribute("class", "row");
 		}
 
 		tableContainer.appendChild(periodRow);
