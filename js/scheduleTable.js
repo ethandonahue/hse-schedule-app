@@ -69,7 +69,7 @@ function convertTime(start, end) {
 		startMinute = start.minute;
 	}
 
-	if (end.Minute < 10) {
+	if (end.minute < 10) {
 		endMinute = "0" + end.minute;
 	} else {
 		endMinute = end.minute;
