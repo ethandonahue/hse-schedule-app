@@ -25,31 +25,29 @@ function refresh(){
     updateText = currentSchedule.text;
   } else {
     currentSchedule = schedules[currentSchedule];
+    period = getCurrentPeriod(time.hour, time.minute);
+    if(period != undefined){
+      var timeUntil = TimePlus.timeUntil({
+        hour:period.endTime.hour,
+        minute:period.endTime.minute,
+        second:0
+      });
+      updateHeader = period.periodName;
+      updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
+    } else if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
+      var timeUntil = TimePlus.timeUntil({
+        hour:currentSchedule.info.schoolStartTime.hour,
+        minute:currentSchedule.info.schoolStartTime.minute,
+        second:0
+      });
+      updateHeader = "School Starts In";
+      updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
+    } else if(time.hour >= currentSchedule.info.schoolEndTime.hour || (time.hour >= currentSchedule.info.schoolEndTime.hour && time.minute > currentSchedule.info.schoolEndTime.minute)){
+      updateHeader = "School Has Ended";
+      updateText = "No Time Available";
+    }
   }
-  period = getCurrentPeriod(time.hour, time.minute);
-  if(period != undefined){
-    var timeUntil = TimePlus.timeUntil({
-      hour:period.endTime.hour,
-      minute:period.endTime.minute,
-      second:0
-    });
-    updateHeader = period.periodName;
-    updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
-  } else if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
-    var timeUntil = TimePlus.timeUntil({
-      hour:currentSchedule.info.schoolStartTime.hour,
-      minute:currentSchedule.info.schoolStartTime.minute,
-      second:0
-    });
-    updateHeader = "School Starts In";
-    updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
-  } else if(time.hour >= currentSchedule.info.schoolEndTime.hour || (time.hour >= currentSchedule.info.schoolEndTime.hour && time.minute > currentSchedule.info.schoolEndTime.minute)){
-    updateHeader = "School Has Ended";
-    updateText = "No Time Available";
-  }
-  
-    updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, "CLOCK"), updateHeader, updateText);
-
+  updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, "CLOCK"), updateHeader, updateText);
 }
 
 function updateDivs(day, date, curTime, header, text){
