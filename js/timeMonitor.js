@@ -12,10 +12,16 @@ var useMilitaryTime = false;
 
 getSchedule();
 
+/*
+Grid Ids Needed:
+ - 0              / Month Planner
+ - 1558997897     / Monday SMaRT Period
+*/
+
 function getSchedule(){
   SheetsPlus.load();
   SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", function(){
-    SheetsPlus.getData("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/edit?usp=sharing");
+    SheetsPlus.getData("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?gid=1558997897");
   });
   SheetsPlus.whenNotEquals("SheetsPlus.DATA", "false", function(){
     s = SheetsPlus.get();
@@ -64,11 +70,15 @@ function refresh(){
 }
 
 function updateDivs(day, date, curTime, header, text){
-  document.getElementById("currentDayText").textContent = day;
-  document.getElementById("currentWeekText").textContent = date;
-  document.getElementById("currentTimeText").textContent = curTime;
-  document.getElementById("timeHeader").textContent = header;
-  document.getElementById("timeText").textContent = text;
+  try{
+    document.getElementById("currentDayText").textContent = day;
+    document.getElementById("currentWeekText").textContent = date;
+    document.getElementById("currentTimeText").textContent = curTime;
+    document.getElementById("timeHeader").textContent = header;
+    document.getElementById("timeText").textContent = text;
+  } catch {
+  
+  }
   window.requestAnimationFrame(refresh);
 }
 
