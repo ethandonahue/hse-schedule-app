@@ -10,6 +10,19 @@ const schedulesPerWeek = {
 
 var useMilitaryTime = false;
 
+getSchedule();
+
+function getSchedule(){
+  SheetsPlus.load();
+  SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", function(){
+    SheetsPlus.getData("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/edit?usp=sharing");
+  });
+  SheetsPlus.whenNotEquals("SheetsPlus.DATA", "false", function(){
+    s = SheetsPlus.get();
+    console.log(s);
+  });
+}
+
 readFileOnline("/json/schedules.json", (data) => {
   schedules = JSON.parse(data);
   window.requestAnimationFrame(refresh);

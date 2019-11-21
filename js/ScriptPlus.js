@@ -263,26 +263,31 @@ var SheetsPlus = {
 	load:function(){
 			google.charts.load('current', {'packages':['corechart']});
 		},
-	get:function(url){
-		return new Promise((resolve) => {
-			SheetsPlus.getData(url);
-			var checkForData = setInterval(() => {
-				if(SheetsPlus.DATA != false){
-					var responce = SheetsPlus.DATA;
-					SheetsPlus.DATA = false;
-					clearInterval(checkForData);
-					resolve(responce);
-				}
-			}, 100);
-		});
-	},
+	get:function(){
+			var dat = SheetsPlus.DATA;
+			SheetsPlus.DATA = false;
+			return dat;
+		},
 	getData:function(url){
 			var query = new google.visualization.Query(url);
 			query.send(SheetsPlus.handleResponse);
 		},
 	handleResponse:function(response){
 		  SheetsPlus.DATA = response.getDataTable();
-		}
+		},
+	whenNotEquals:function(variable, value, run){
+	    var id = Math.random();
+	    var interval = setInterval(() => {
+				try{
+		      if(eval(variable) != eval(value)){
+		        clearInterval(interval);
+		        run();
+		      }
+				} catch{
+					
+				}
+	    }, 100, id, interval, variable, value, run);
+	  }
 }
 
 function getKeyByValue(object, val){
