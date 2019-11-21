@@ -2,18 +2,6 @@
 //Last Update: 11/9/2019
 //For Use With: HSE Schedule App
 
-google.charts.load('current', {'packages':['corechart']});
-
-function drawChart() {
-  var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/edit?usp=sharing");
-  query.send(handleQueryResponse);
-}
-
-function handleQueryResponse(response) {
-  var data = response.getDataTable();
-	console.log(data);
-}
-
 var ScriptPlus = {
 	config:{
 		debug:false,
@@ -267,6 +255,33 @@ var TimePlus = {
 			} else {
 				scriptPlusGiveErrorMessage("A Tracker Is Not Running");
 			}
+		}
+}
+
+var SheetsPlus = {
+	DATA:false,
+	load:function(){
+			google.charts.load('current', {'packages':['corechart']});
+		},
+	get:function(url){
+		return new Promise((resolve) => {
+			SheetsPlus.getData(url);
+			var checkForData = setInterval(() => {
+				if(SheetsPlus.DATA != false){
+					var responce = SheetsPlus.DATA;
+					SheetsPlus.DATA = false;
+					clearInterval(checkForData);
+					resolve(responce);
+				}
+			}, 100);
+		});
+	},
+	getData:function(url){
+			var query = new google.visualization.Query(url);
+			query.send(SheetsPlus.handleResponse);
+		},
+	handleResponse:function(response){
+		  SheetsPlus.DATA = response.getDataTable();
 		}
 }
 
