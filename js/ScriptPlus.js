@@ -2,6 +2,18 @@
 //Last Update: 11/9/2019
 //For Use With: HSE Schedule App
 
+google.charts.load('current', {'packages':['corechart']});
+
+function drawChart() {
+  var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/edit?usp=sharing");
+  query.send(handleQueryResponse);
+}
+
+function handleQueryResponse(response) {
+  var data = response.getDataTable();
+	console.log(data);
+}
+
 var ScriptPlus = {
 	config:{
 		debug:false,
@@ -256,65 +268,6 @@ var TimePlus = {
 				scriptPlusGiveErrorMessage("A Tracker Is Not Running");
 			}
 		}
-}
-
-var SheetsPlus = {
-	CLIENT_ID:'268543509261-kqe4kbjp3k6a4jcnjltdh240nem4cmga.apps.googleusercontent.com',
-  API_KEY:'AIzaSyDJBX69JyVGBdSj4KtHXHDxw7TI1wiyVKo',
-	DISCOVERY_DOCS:["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-  SCOPES:"https://www.googleapis.com/auth/spreadsheets.readonly",
-  handleClientLoad:function(){
-  		gapi.load('client:auth2', SheetsPlus.initClient);
-  	},
-  initClient:function(){
-      gapi.client.init({
-        apiKey: SheetsPlus.API_KEY,
-        clientId: SheetsPlus.CLIENT_ID,
-        discoveryDocs: SheetsPlus.DISCOVERY_DOCS,
-        scope: SheetsPlus.SCOPES
-      }).then(function (){
-        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-        SheetsPlus.handAuthClick();
-      }, function(error){
-          console.log(JSON.stringify(error, null, 2));
-      });
-  	},
-	updateSigninStatus:function(isSignedIn){
-      if (isSignedIn) {
-        authorizeButton.style.display = 'none';
-        signoutButton.style.display = 'block';
-        listMajors();
-      } else {
-        authorizeButton.style.display = 'block';
-        signoutButton.style.display = 'none';
-      }
-    },
-  handleAuthClick:function(event){
-      gapi.auth2.getAuthInstance().signIn();
-    },
-  handleSignoutClick:function(event){
-      gapi.auth2.getAuthInstance().signOut();
-    },
-  listMajors:function(){
-      gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: '1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk',
-        range: 'Class Data!A2:E',
-      }).then(function(response) {
-        var range = response.result;
-        if (range.values.length > 0) {
-          console.log('Name, Major:');
-          for (i = 0; i < range.values.length; i++) {
-            var row = range.values[i];
-            console.log(row[0] + ', ' + row[4]);
-          }
-        } else {
-          console.log('No data found.');
-        }
-      }, function(response) {
-        console.log('Error: ' + response.result.error.message);
-      });
-    }
 }
 
 function getKeyByValue(object, val){
