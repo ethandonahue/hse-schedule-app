@@ -10,22 +10,41 @@ const schedulesPerWeek = {
 
 var useMilitaryTime = false;
 
-getSchedule();
+getMonthlySchedule();
 
 /*
 Grid Ids Needed:
  - 0              / Month Planner
  - 1558997897     / Monday SMaRT Period
+ - 980257480      / Regular School Day
 */
 
-function getSchedule(){
+function getMonthlySchedule(){
   SheetsPlus.load();
-  SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", function(){
-    SheetsPlus.getData("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?gid=1558997897");
+  SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", () => {
+    SheetsPlus.getData("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?gid=0");
   });
-  SheetsPlus.whenNotEquals("SheetsPlus.DATA", "false", function(){
-    s = SheetsPlus.get();
-    console.log(s);
+  SheetsPlus.whenNotEquals("SheetsPlus.DATA", "false", () => {
+    rawMonthlySchedule = SheetsPlus.get();
+    console.log(rawMonthlySchedule);
+    monthlySchedule = {
+      "Sunday":[],
+      "Monday":[],
+      "Tuesday":[],
+      "Wednesday":[],
+      "Thursday":[],
+      "Friday":[],
+      "Saturday":[]
+    };
+    var neededSchedules = [];
+    for(var week = 1; week < rawMonthlySchedule.wg.length; week++){
+      for(var day = 0; day<rawMonthlySchedule.wg[week].c.length; day++){
+        if(rawMonthlySchedule.wg[week].c[day] != null && rawMonthlySchedule.wg[week].c[day].v != null && !neededSchedules.includes(rawMonthlySchedule.wg[week].c[day].v)){
+          neededSchedules.push(rawMonthlySchedule.wg[week].c[day].v);
+        }
+      }
+    }
+    console.log(neededSchedules);
   });
 }
 
@@ -77,7 +96,7 @@ function updateDivs(day, date, curTime, header, text){
     document.getElementById("timeHeader").textContent = header;
     document.getElementById("timeText").textContent = text;
   } catch {
-  
+
   }
   window.requestAnimationFrame(refresh);
 }
