@@ -263,10 +263,15 @@ var SheetsPlus = {
 	load:function(){
 			google.charts.load('current', {'packages':['corechart']});
 		},
-	get:function(){
-			var dat = SheetsPlus.DATA;
-			SheetsPlus.DATA = false;
-			return dat;
+	get:function(url){
+			SheetsPlus.getData(url);
+			return new Promise((resolve) => {
+				SheetsPlus.whenNotEquals("SheetsPlus.DATA", "false", () => {
+					var dat = SheetsPlus.DATA;
+					SheetsPlus.DATA = false;
+					resolve(dat);
+				});
+			});
 		},
 	getData:function(url){
 			var query = new google.visualization.Query(url);
@@ -284,7 +289,7 @@ var SheetsPlus = {
 		        run();
 		      }
 				} catch{
-					
+
 				}
 	    }, 100, id, interval, variable, value, run);
 	  }

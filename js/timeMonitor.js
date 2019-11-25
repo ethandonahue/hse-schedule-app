@@ -10,42 +10,53 @@ const schedulesPerWeek = {
 
 var useMilitaryTime = false;
 
-getMonthlySchedule();
+SheetsPlus.load();
+SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySchedule);
 
-/*
-Grid Ids Needed:
- - 0              / Month Planner
- - 1558997897     / Monday SMaRT Period
- - 980257480      / Regular School Day
-*/
-
-function getMonthlySchedule(){
-  SheetsPlus.load();
-  SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", () => {
-    SheetsPlus.getData("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?gid=0");
-  });
-  SheetsPlus.whenNotEquals("SheetsPlus.DATA", "false", () => {
-    rawMonthlySchedule = SheetsPlus.get();
-    console.log(rawMonthlySchedule);
-    monthlySchedule = {
-      "Sunday":[],
-      "Monday":[],
-      "Tuesday":[],
-      "Wednesday":[],
-      "Thursday":[],
-      "Friday":[],
-      "Saturday":[]
-    };
-    var neededSchedules = [];
-    for(var week = 1; week < rawMonthlySchedule.wg.length; week++){
-      for(var day = 0; day<rawMonthlySchedule.wg[week].c.length; day++){
-        if(rawMonthlySchedule.wg[week].c[day] != null && rawMonthlySchedule.wg[week].c[day].v != null && !neededSchedules.includes(rawMonthlySchedule.wg[week].c[day].v)){
-          neededSchedules.push(rawMonthlySchedule.wg[week].c[day].v);
-        }
+async function getMonthlySchedule(){
+  rawMonthlySchedule = await SheetsPlus.get("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=Monthly%20Planner");
+  //console.log(rawMonthlySchedule);
+  monthlySchedule = {
+    "Sunday":[],
+    "Monday":[],
+    "Tuesday":[],
+    "Wednesday":[],
+    "Thursday":[],
+    "Friday":[],
+    "Saturday":[]
+  }
+  var neededSchedules = [];
+  for(var week = 1; week < rawMonthlySchedule.wg.length; week++){
+    for(var day = 0; day<rawMonthlySchedule.wg[week].c.length; day++){
+      if(rawMonthlySchedule.wg[week].c[day] != null && rawMonthlySchedule.wg[week].c[day].v != null && !neededSchedules.includes(rawMonthlySchedule.wg[week].c[day].v)){
+        neededSchedules.push(rawMonthlySchedule.wg[week].c[day].v);
       }
     }
-    console.log(neededSchedules);
-  });
+  }
+  for(var schedule = 0; schedule < neededSchedules.length; schedule++){
+    neededSchedules[schedule] = encodeURIComponent(neededSchedules[schedule]);
+  }
+  var s = [];
+  for(var schedule = 0; schedule < neededSchedules.length; schedule++){
+    var sched = await SheetsPlus.get("https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=" + neededSchedules[schedule]);
+    s.push(sched);
+  }
+  var fullSchedule = {};
+  for(var schedule = 0; schedule <= 0; schedule++){
+    var singleSchedule = [];
+    for(var wg = 1; wg < s[schedule].wg.length; wg++){
+      singleSchedule.push({[s[schedule].wg[wg].c[0].v] : {
+        "startTime":s[schedule].wg[wg].c[1].v,
+        "endTime":s[schedule].wg[wg].c[2].v,
+        "periodNum":"test"
+      }});
+      fullSchedule[decodeURIComponent(neededSchedules[schedule])] = {
+        "schedule":singleSchedule
+      };
+    }
+  }
+  console.log(s);
+  console.log(fullSchedule);
 }
 
 readFileOnline("/json/schedules.json", (data) => {
