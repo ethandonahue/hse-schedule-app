@@ -233,6 +233,16 @@ var TimePlus = {
 			remaining.second = Math.floor(remain % 60);
 			return remaining;
 		},
+	formattedToObject:function(time){
+			var hour = parseInt(time.substring(0, time.indexOf(":")));
+			if(time.indexOf("p") > 0 && hour != 12){
+				hour += 12;
+			} else if(time.indexOf("a") > 0 && hour == 12){
+				hour = 0;
+			}
+			var minute = parseInt(time.substring(time.indexOf(":") + 1, time.indexOf(" ")));
+			return {"hour":hour, "minute":minute};
+		},
 	startTimeTracker:function(){
 			if(TimePlus.timeTracker == true){
 				TimePlus.timeTracker = new Date();
