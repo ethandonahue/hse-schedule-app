@@ -14,7 +14,7 @@ SheetsPlus.load();
 SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySchedule);
 
 async function getMonthlySchedule(){
-  rawMonthlySchedule = await SheetsPlus.get(googleSheetURL + "Monthly%20Planner");
+  rawMonthlySchedule = await SheetsPlus.get(googleSheetURL + encodeURIComponent("Monthly Planner"));
   neededSchedules = [];
   fullSchedule = {};
   var pos = 0;
@@ -85,7 +85,7 @@ async function getMonthlySchedule(){
 }
 
 function refresh(){
-  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth];
+  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth - 1];
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
