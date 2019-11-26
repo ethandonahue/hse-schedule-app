@@ -74,26 +74,26 @@ async function getMonthlySchedule(){
       }
     } else {
       fullSchedule[neededSchedules[schedule]] = {
-        "header":sched.wg[1].c[0],
-        "text":sched.wg[1].c[1]
+        "header":sched.wg[1].c[0].v,
+        "text":sched.wg[1].c[1].v
       };
     }
   }
   schedules = fullSchedule;
   saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
   window.requestAnimationFrame(refresh);
+  window.requestAnimationFrame(getMonthlySchedule);
 }
 
 function refresh(){
-  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth - 1];
+  currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth - 1]];
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
-  if(typeof(currentSchedule) == "object"){
+  if(currentSchedule.header != undefined){
     updateHeader = currentSchedule.header;
     updateText = currentSchedule.text;
   } else {
-    currentSchedule = schedules[currentSchedule];
     period = getCurrentPeriod(time.hour, time.minute);
     if(period != undefined){
       var timeUntil = TimePlus.timeUntil({
