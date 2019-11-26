@@ -1,12 +1,4 @@
-const schedulesPerWeek = {
-  "Sunday":{header:"It's The Weekend", text:"No School"},
-  "Monday":"mondaySmartPeriodDay",
-  "Tuesday":"regularSchoolDay",
-  "Wednesday":"regularSchoolDay",
-  "Thursday":"regularSchoolDay",
-  "Friday":"regularSchoolDay",
-  "Saturday":{header:"It's The Weekend", text:"No School"}
-};
+var schedulesPerWeek = [];
 
 var useMilitaryTime = false;
 
@@ -17,28 +9,24 @@ SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySc
 
 async function getMonthlySchedule(){
   rawMonthlySchedule = await SheetsPlus.get(googleSheetURL + "Monthly%20Planner");
-  monthlySchedule = {
-    "Sunday":[],
-    "Monday":[],
-    "Tuesday":[],
-    "Wednesday":[],
-    "Thursday":[],
-    "Friday":[],
-    "Saturday":[]
-  }
-  var neededSchedules = [];
-  var fullSchedule = {};
+  neededSchedules = [];
+  fullSchedule = {};
   for(var week = 1; week < rawMonthlySchedule.wg.length; week++){
     for(var day = 0; day<rawMonthlySchedule.wg[week].c.length; day++){
       if(rawMonthlySchedule.wg[week].c[day] != null && rawMonthlySchedule.wg[week].c[day].v != null && !neededSchedules.includes(rawMonthlySchedule.wg[week].c[day].v)){
-        neededSchedules.push(rawMonthlySchedule.wg[week].c[day].v);
+        neededSchedules.push({
+          "name":rawMonthlySchedule.wg[week].c[day].v
+        });
+        schedulesPerWeek.push({
+          "name":rawMonthlySchedule.wg[week].c[day].v
+        });
       }
     }
   }
   for(var schedule = 0; schedule < neededSchedules.length; schedule++){
-    neededSchedules[schedule] = encodeURIComponent(neededSchedules[schedule]);
-    var sched = await SheetsPlus.get(googleSheetURL + neededSchedules[schedule]);
-    neededSchedules[schedule] = decodeURIComponent(neededSchedules[schedule]);
+    neededSchedules[schedule].name = encodeURIComponent(neededSchedules[schedule].name);
+    var sched = await SheetsPlus.get(googleSheetURL + neededSchedules[schedule].name);
+    neededSchedules[schedule].name = decodeURIComponent(neededSchedules[schedule].name);
     var periodSchedule = [];
     if(sched.wg[0].c[1].v == "Start Time"){
       for(var wg = 1; wg < sched.wg.length; wg++){
@@ -70,7 +58,7 @@ async function getMonthlySchedule(){
             "passing":true
           });
         }
-        fullSchedule[neededSchedules[schedule]] = {
+        fullSchedule[neededSchedules[schedule].name] = {
           "info":{
             "schoolStartTime":periodSchedule[0].startTime,
             "schoolEndTime":periodSchedule[periodSchedule.length - 1].endTime
@@ -79,22 +67,19 @@ async function getMonthlySchedule(){
         };
       }
     } else {
-      fullSchedule[neededSchedules[schedule]] = {
+      fullSchedule[neededSchedules[schedule].name] = {
         "header":sched.wg[1].c[0],
         "text":sched.wg[1].c[1]
       };
     }
   }
+  schedules = fullSchedule;
   console.log(fullSchedule);
+  window.requestAnimationFrame(refresh);
 }
 
-readFileOnline("/json/schedules.json", (data) => {
-  schedules = JSON.parse(data);
-  window.requestAnimationFrame(refresh);
-});
-
 function refresh(){
-  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayName];
+  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth].name;
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
