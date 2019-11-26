@@ -20,3 +20,17 @@ function setLunch(lunch){
   }
   localStorage.selectedLunch = lunch;
 }
+
+function saveSchedules(schedules, month, layout){
+  localStorage.schedules = JSON.stringify(schedules);
+  localStorage.schedulesMonth = month;
+  localStorage.schedulesLayout = layout;
+}
+
+function getSavedSchedules(){
+  return {
+    "schedules":JSON.parse(localStorage.schedules),
+    "month":localStorage.schedulesMonth,
+    "layout":localStorage.schedulesLayout
+  };
+}

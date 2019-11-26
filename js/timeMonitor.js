@@ -4,6 +4,12 @@ var useMilitaryTime = false;
 
 const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
 
+if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlus.getCurrentDate().monthName){
+  schedules = getSavedSchedules().schedules;
+  schedulesPerWeek = getSavedSchedules().layout.split(",");
+  window.requestAnimationFrame(refresh);
+}
+
 SheetsPlus.load();
 SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySchedule);
 
@@ -11,22 +17,22 @@ async function getMonthlySchedule(){
   rawMonthlySchedule = await SheetsPlus.get(googleSheetURL + "Monthly%20Planner");
   neededSchedules = [];
   fullSchedule = {};
+  var pos = 0;
   for(var week = 1; week < rawMonthlySchedule.wg.length; week++){
     for(var day = 0; day<rawMonthlySchedule.wg[week].c.length; day++){
-      if(rawMonthlySchedule.wg[week].c[day] != null && rawMonthlySchedule.wg[week].c[day].v != null && !neededSchedules.includes(rawMonthlySchedule.wg[week].c[day].v)){
-        neededSchedules.push({
-          "name":rawMonthlySchedule.wg[week].c[day].v
-        });
-        schedulesPerWeek.push({
-          "name":rawMonthlySchedule.wg[week].c[day].v
-        });
+      if(rawMonthlySchedule.wg[week].c[day] != null && rawMonthlySchedule.wg[week].c[day].v != null){
+        schedulesPerWeek[pos] = rawMonthlySchedule.wg[week].c[day].v;
+        pos++;
+        if(!neededSchedules.includes(rawMonthlySchedule.wg[week].c[day].v)){
+          neededSchedules.push(rawMonthlySchedule.wg[week].c[day].v);
+        }
       }
     }
   }
   for(var schedule = 0; schedule < neededSchedules.length; schedule++){
-    neededSchedules[schedule].name = encodeURIComponent(neededSchedules[schedule].name);
-    var sched = await SheetsPlus.get(googleSheetURL + neededSchedules[schedule].name);
-    neededSchedules[schedule].name = decodeURIComponent(neededSchedules[schedule].name);
+    neededSchedules[schedule] = encodeURIComponent(neededSchedules[schedule]);
+    var sched = await SheetsPlus.get(googleSheetURL + neededSchedules[schedule]);
+    neededSchedules[schedule] = decodeURIComponent(neededSchedules[schedule]);
     var periodSchedule = [];
     if(sched.wg[0].c[1].v == "Start Time"){
       for(var wg = 1; wg < sched.wg.length; wg++){
@@ -58,7 +64,7 @@ async function getMonthlySchedule(){
             "passing":true
           });
         }
-        fullSchedule[neededSchedules[schedule].name] = {
+        fullSchedule[neededSchedules[schedule]] = {
           "info":{
             "schoolStartTime":periodSchedule[0].startTime,
             "schoolEndTime":periodSchedule[periodSchedule.length - 1].endTime
@@ -67,19 +73,19 @@ async function getMonthlySchedule(){
         };
       }
     } else {
-      fullSchedule[neededSchedules[schedule].name] = {
+      fullSchedule[neededSchedules[schedule]] = {
         "header":sched.wg[1].c[0],
         "text":sched.wg[1].c[1]
       };
     }
   }
   schedules = fullSchedule;
-  console.log(fullSchedule);
+  saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
   window.requestAnimationFrame(refresh);
 }
 
 function refresh(){
-  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth].name;
+  currentSchedule = schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth];
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText;
