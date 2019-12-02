@@ -27,7 +27,7 @@ function createTable() {
 		periodRow.appendChild(periodVal);
 		timeRow.appendChild(timeVal);
 
-		if (period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
+		if (eval(period) != undefined && period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
 			periodRow.setAttribute("class", "row selected");
 			timeRow.setAttribute("class", "row selected");
 		} else {
