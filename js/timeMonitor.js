@@ -102,10 +102,28 @@ function refresh(){
         minute:period.endTime.minute,
         second:0
       });
-      if(lunchText != "NONE"){
-        //lunchTime = TimePlus.timeUntil({
-          //hour:
-        //});
+      if(getLunch() != "NONE"){
+        var lunches = [];
+        var lunchInfo;
+        currentSchedule.schedule.forEach((period) => {
+          if(period.periodName.indexOf("Lunch") > 0){
+            lunches.push(period);
+          }
+        });
+        lunches.forEach((lunch) => {
+          if(getLunch() == lunch.periodName.replace("Lunch", "").trim()){
+            lunchInfo = lunch;
+          }
+        });
+        lunchTime = TimePlus.timeUntil({
+          hour:lunchInfo.startTime.hour,
+          minute:lunchInfo.startTime.minute,
+          second:0
+        });
+        if(currentSchedule.schedule.indexOf(period) < currentSchedule.schedule.indexOf(lunchInfo)){
+          lunchText = "Time Until " + getLunch() + " Lunch";
+          lunchTime = timeFormatting(lunchTime.hour, lunchTime.minute, lunchTime.second);
+        }
       }
       updateHeader = period.periodName;
       updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
