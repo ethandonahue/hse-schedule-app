@@ -16,6 +16,7 @@ const FILES_TO_CACHE = [
   '/js/ScriptPlus.js',
   '/js/timeMonitor.js',
   '/js/scheduleTable.js',
+  '/js/themeSwitcher.js',
   '/images/HSEScheduleAppLogo192.png',
   '/images/HSEScheduleAppLogo512.png',
   '/images/selected/notifications.png',
