@@ -89,7 +89,8 @@ function refresh(){
   currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth - 1]];
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
-  var updateHeader, updateText;
+  var updateHeader, updateText, lunchTime;
+  var lunchText = "NONE";
   if(currentSchedule.header != undefined){
     updateHeader = currentSchedule.header;
     updateText = currentSchedule.text;
@@ -101,6 +102,11 @@ function refresh(){
         minute:period.endTime.minute,
         second:0
       });
+      if(lunchText != "NONE"){
+        //lunchTime = TimePlus.timeUntil({
+          //hour:
+        //});
+      }
       updateHeader = period.periodName;
       updateText = timeFormatting(timeUntil.hour, timeUntil.minute, timeUntil.second);
     } else if(time.hour <= currentSchedule.info.schoolStartTime.hour || (time.hour <= currentSchedule.info.schoolStartTime.hour && time.minute < currentSchedule.info.schoolStartTime.minute)){
@@ -116,16 +122,20 @@ function refresh(){
       updateText = "No Time Available";
     }
   }
-  updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, "CLOCK"), updateHeader, updateText);
+  updateDivs(date.dayName, date.monthName + " " + date.dayOfMonth + ", " + date.year, timeFormatting(time.hour, time.minute, "CLOCK"), updateHeader, updateText, lunchText, lunchTime);
 }
 
-function updateDivs(day, date, curTime, header, text){
+function updateDivs(day, date, curTime, header, text, lunchtext, lunchtime){
   try{
     document.getElementById("currentDayText").textContent = day;
     document.getElementById("currentWeekText").textContent = date;
     document.getElementById("currentTimeText").textContent = curTime;
     document.getElementById("timeHeader").textContent = header;
     document.getElementById("timeText").textContent = text;
+    if(lunchtext != "NONE"){
+      document.getElementById("lunchText").textContent = lunchtext;
+      document.getElementById("lunchTime").textContent = lunchtime;
+    }
   } catch {
 
   }
