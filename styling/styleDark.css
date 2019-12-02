@@ -1,22 +1,6 @@
-:root {
-    --nav-color: #004794;
-    --select-color: #1158A5;
-    --font-color: black;
-    --bg-color: #FFFFFF;
-    --header-color: #e8ebe9;
-}
-
-[data-theme="dark"] {
-    --primary-color: #9A97F3;
-    --secondary-color: #818cab;
-    --font-color: #e1e1ff;
-    --bg-color: #161625;
-    --heading-color: #818cab;
-}
-
 html{
   box-sizing:border-box;
-  background-color: var(--bg-color);
+  background-color:#FFFFFF;
   overflow:hidden;
   height:100%;
   position:relative;
@@ -31,7 +15,6 @@ html{
   padding:0;
   border:0;
   font-family: 'Muli', sans-serif;
-  color: var(--font-color);
 }
 
 body{
@@ -41,7 +24,7 @@ body{
 nav{
   width:100vw;
   height:10vh;
-  background-color: var(--nav-color);
+  background-color:#004794;
   position:fixed;
   bottom:0;
   box-shadow: 0px 0px 5px grey;
@@ -87,7 +70,7 @@ a{
 }
 
 #selectedNavButton{
-  background-color: var(--select-color);
+  background-color:#1158A5;
 }
 
 .navbutton img{
@@ -103,7 +86,7 @@ a{
 #header{
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: var(--header-color);
+  background-color: #e8ebe9;
   text-align: center;
   box-shadow: 0px 0px 5px grey;
 }

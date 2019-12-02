@@ -18,6 +18,26 @@
          <div class="screenContent">
            <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
          </div>
+         <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+  </label>
+  <em>Enable Dark Mode!</em>
+</div>
+<script>
+var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+function switchTheme(e) {
+if (e.target.checked) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+else {
+  document.documentElement.setAttribute('data-theme', 'light');
+}
+}
+toggleSwitch.addEventListener('change', switchTheme, false);
+</script>
          <nav>
             <div class="navbuttons">
                <a href="/screens/online/notifications.html">
