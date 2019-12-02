@@ -20,6 +20,14 @@ function setLunch(lunch){
   localStorage.selectedLunch = lunch;
 }
 
+function setTheme(theme){
+  localStorage.theme = theme;
+}
+
+function getTheme(){
+  return localStorage.theme;
+}
+
 function saveSchedules(schedules, month, layout){
   localStorage.schedules = JSON.stringify(schedules);
   localStorage.schedulesMonth = month;
