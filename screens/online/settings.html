@@ -12,6 +12,7 @@
       <script src="/serviceworker.js"></script>
       <script src="/js/storageChecker.js"></script>
       <script src="/js/ScriptPlus.js"></script>
+
    </head>
    <body>
       <div class="content">
@@ -25,19 +26,7 @@
   </label>
   <em>Enable Dark Mode!</em>
 </div>
-<script>
-var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-
-function switchTheme(e) {
-if (e.target.checked) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-}
-else {
-  document.documentElement.setAttribute('data-theme', 'light');
-}
-}
-toggleSwitch.addEventListener('change', switchTheme, false);
-</script>
+<script src="/js/themeSwitcher.js"></script>
          <nav>
             <div class="navbuttons">
                <a href="/screens/online/notifications.html">
