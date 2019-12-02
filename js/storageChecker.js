@@ -20,6 +20,10 @@ function setLunch(lunch){
   localStorage.selectedLunch = lunch;
 }
 
+function getLunch(){
+  return localStorage.selectedLunch;
+}
+
 function setTheme(theme){
   localStorage.theme = theme;
 }
