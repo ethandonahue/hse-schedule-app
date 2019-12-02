@@ -153,6 +153,8 @@ function updateDivs(day, date, curTime, header, text, lunchtext, lunchtime){
     if(lunchtext != "NONE"){
       document.getElementById("lunchText").textContent = lunchtext;
       document.getElementById("lunchTime").textContent = lunchtime;
+    } else {
+      document.getElementById("lunch").style.display = "none";
     }
   } catch {
 
