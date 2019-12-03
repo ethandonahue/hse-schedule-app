@@ -1,4 +1,5 @@
 var schedule;
+var listObjects = [];
 
 function loadSchedule() {
 	if (currentSchedule.schedule != undefined) {
@@ -27,6 +28,11 @@ function createTable() {
 		periodRow.appendChild(periodVal);
 		timeRow.appendChild(timeVal);
 
+		listObjects.push({
+			"period":periodRow,
+			"time":timeRow
+		});
+
 		if (eval(period) != undefined && period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
 			periodRow.setAttribute("class", "row selected");
 			timeRow.setAttribute("class", "row selected");
@@ -43,6 +49,22 @@ function createTable() {
 		table.appendChild(tableContainer);
 
 	}
+	window.requestAnimationFrame(highlightSelected);
+}
+
+function highlightSelected(){
+	for(var i = 0; i<listObjects.length; i++){
+		listObjects[i].period.removeAttribute("class");
+		listObjects[i].time.removeAttribute("class");
+		if(eval(period) != undefined && listObjects[i].period.textContent == period.periodNum && !schedule[i].passing) {
+			listObjects[i].period.setAttribute("class", "row selected");
+			listObjects[i].time.setAttribute("class", "row selected");
+		} else {
+			listObjects[i].period.setAttribute("class", "row");
+			listObjects[i].time.setAttribute("class", "row");
+		}
+	}
+	window.requestAnimationFrame(highlightSelected);
 }
 
 function convertTime(start, end) {
