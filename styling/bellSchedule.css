@@ -1,3 +1,11 @@
+/* :root {
+    --select-color: #87CEFA;
+}
+
+[data-theme="dark"] {
+
+} */
+
 #spacer{
      height: 20px;
 }
@@ -36,5 +44,5 @@
 }
 
 .selected{
-  background-color: #87CEFA;
+  background-color: var(--highlight-color);
 }
