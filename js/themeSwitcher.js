@@ -10,13 +10,21 @@ if(getTheme() == "dark"){
 }
 
 function switchTheme(e) {
-if (e.target.checked) {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  setTheme("dark");
-}
-else {
-  document.documentElement.setAttribute('data-theme', 'light');
-  setTheme("light");
-}
+  if (e.target.checked) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    setTheme("dark");
+    toggleSwitch.disabled = true;
+    setTimeout(() => {
+      toggleSwitch.disabled = false;
+    }, 400);
+  }
+  else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    setTheme("light");
+    toggleSwitch.disabled = true;
+    setTimeout(() => {
+      toggleSwitch.disabled = false;
+    }, 400);
+  }
 }
 toggleSwitch.addEventListener('change', switchTheme, false);
