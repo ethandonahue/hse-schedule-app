@@ -120,7 +120,7 @@ function refresh(){
           minute:lunchInfo.startTime.minute,
           second:0
         });
-        if(currentSchedule.schedule.indexOf(period) < currentSchedule.schedule.indexOf(lunchInfo)){
+        if(currentSchedule.schedule.indexOf(period) > currentSchedule.schedule.indexOf(lunchInfo)){
           lunchText = "Time Until " + getLunch() + " Lunch";
           lunchTime = timeFormatting(lunchTime.hour, lunchTime.minute, lunchTime.second);
         }
