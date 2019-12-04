@@ -1,6 +1,3 @@
-var toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-
-
 if(getTheme() == "dark"){
   document.documentElement.setAttribute('data-theme', 'dark');
   document.getElementById("checkbox").checked = true;
@@ -9,8 +6,8 @@ if(getTheme() == "dark"){
     document.getElementById("checkbox").checked = false;
 }
 
-function switchTheme(e) {
-if (e.target.checked) {
+function switchTheme() {
+if (document.getElementById("checkbox").checked) {
   document.documentElement.setAttribute('data-theme', 'dark');
   setTheme("dark");
 }
@@ -19,4 +16,3 @@ else {
   setTheme("light");
 }
 }
-toggleSwitch.addEventListener('change', switchTheme, false);
