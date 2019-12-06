@@ -279,6 +279,13 @@ var SheetsPlus = {
 				SheetsPlus.whenNotEquals("SheetsPlus.DATA", "false", () => {
 					var dat = SheetsPlus.DATA;
 					SheetsPlus.DATA = false;
+					var tags = document.getElementsByTagName("script");
+				  for(var i = 0; i < tags.length; i++){
+				    var element = tags[i];
+				    if(element.src.indexOf(googleSheetURL) > -1){
+							element.remove();
+				    }
+				  }
 					resolve(dat);
 				});
 			});
