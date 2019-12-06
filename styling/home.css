@@ -9,20 +9,20 @@
 #timeHeader{
   display:block;
   padding-bottom: 2%;
-  width:100%;
-  height:100%;
+  font-size: 4vw;
 }
 
  #time{
    display:block;
-   width:100%;
+   font-size: 5vw;
 }
 
-#TimeContainer{
-  display:inline-block;
-  width:100%;
-  height:100%;
-  vertical-align:middle;
+.Centered{
+    display: table-cell;
+    height:79vh;
+    text-align: center;
+    width: 50vw;
+    vertical-align: middle;
 }
 
 #currentWeek{
@@ -58,7 +58,7 @@
 }
 
 .row {
-  height:90%;
+  height:89%;
   width:100%;
   vertical-align:middle;
   text-align:center;
