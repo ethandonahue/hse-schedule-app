@@ -1,4 +1,8 @@
- #currentTime{
+#currentDayText, #currentTimeText, #lunchText, #timeHeader{
+  color: var(--header-text-color);
+}
+ @media screen and (orientation:landscape) {
+   #currentTime{
      float: right;
 }
 
@@ -10,7 +14,6 @@
   display:block;
   padding-bottom: 2%;
   font-size: 4vw;
-  color: var(--header-text-color);
 }
 
  #time{
@@ -42,13 +45,6 @@
   padding-bottom:2%;
 }
 
-#lunchTime{
-  display:inline-block;
-}
-
-#currentDayText, #currentTimeText, #lunchText{
-  color: var(--header-text-color);
-}
 
 .column {
   float: left;
@@ -86,4 +82,8 @@
 .screenContent{
   height:90%;
   width:100%;
+}
+}
+@media screen and (orientation:portrait) {
+
 }
