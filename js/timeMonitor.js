@@ -157,7 +157,7 @@ function updateDivs(day, date, curTime, header, text, lunchtext, lunchtime){
     document.getElementById("timeHeader").textContent = header;
     document.getElementById("timeText").textContent = text;
     if(lunchtext != "NONE"){
-      document.getElementById("lunch").style.display = "block";
+      document.getElementById("lunch").style.display = "table-cell";
       document.getElementById("lunchText").textContent = lunchtext;
       document.getElementById("lunchTime").textContent = lunchtime;
     } else {
