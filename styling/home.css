@@ -16,7 +16,7 @@
 
 .CenteredMiddle{
     display: table-cell;
-    height:77vh;
+    height:80vh;
     text-align: center;
     width: 50vw;
     vertical-align: middle;
@@ -24,7 +24,7 @@
 
 .CenteredSide{
   display: table-cell;
-  height:77vh;
+  height:80vh;
   text-align: center;
   width: 25vw;
   vertical-align: middle;
