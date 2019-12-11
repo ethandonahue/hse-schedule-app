@@ -2,7 +2,6 @@
   color: var(--header-text-color);
 }
 
-@media screen and (orientation:landscape) {
 #timeHeader{
   display:block;
   padding-bottom: 2%;
@@ -11,6 +10,15 @@
 
  #time{
    display:block;
+   font-size: 5vw;
+}
+
+@media screen and (orientation:landscape) {
+#timeHeader{
+  font-size: 4vw;
+}
+
+ #time{
    font-size: 5vw;
 }
 
@@ -85,5 +93,27 @@
 }
 }
 @media screen and (orientation:portrait) {
+  .CenteredMiddle{
+      display: table-cell;
+      height:35vh;
+      text-align: center;
+      width: 100vw;
+      vertical-align: middle;
+  }
 
+  .CenteredSide{
+    display: table-cell;
+    height:20vh;
+    text-align: center;
+    width: 100vw;
+    vertical-align: middle;
+  }
+
+  #timeHeader{
+    font-size: 10vw;
+  }
+
+   #time{
+     font-size: 12vw;
+  }
 }
