@@ -2,6 +2,9 @@
   color: var(--header-text-color);
 }
 
+@media screen and (orientation:landscape) {
+
+
 
 #timeHeader{
   display:block;
