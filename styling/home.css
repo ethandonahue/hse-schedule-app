@@ -10,6 +10,7 @@
   display:block;
   padding-bottom: 2%;
   font-size: 4vw;
+  color: var(--header-text-color);
 }
 
  #time{
@@ -34,10 +35,11 @@
 }
 
 #lunchTime{
-  border-style:solid;
-  border-width:2px;
   display:inline-block;
-  padding:1%;
+}
+
+#currentDayText, #currentTimeText, #lunchText{
+  color: var(--header-text-color);
 }
 
 .column {
@@ -51,6 +53,8 @@
 .left, .right {
   width: 25%;
 }
+
+
 
 .middle {
   width: 50%;
