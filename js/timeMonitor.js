@@ -4,6 +4,8 @@ var useMilitaryTime = false;
 
 const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
 
+var scheduleRefreshRate = 30;
+
 if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlus.getCurrentDate().monthName){
   schedules = getSavedSchedules().schedules;
   schedulesPerWeek = getSavedSchedules().layout.split(",");
@@ -12,6 +14,8 @@ if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlu
 
 SheetsPlus.load();
 SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySchedule);
+
+//"https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=Monday%20SMaRT%20Period%20Day&amp;tqx=reqId%3A478
 
 async function getMonthlySchedule(){
   rawMonthlySchedule = await SheetsPlus.get(googleSheetURL + encodeURIComponent("Monthly Planner"));
@@ -82,7 +86,9 @@ async function getMonthlySchedule(){
   schedules = fullSchedule;
   saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
   window.requestAnimationFrame(refresh);
-  window.requestAnimationFrame(getMonthlySchedule);
+  setTimeout(() => {
+    window.requestAnimationFrame(getMonthlySchedule);
+  }, scheduleRefreshRate * 1000);
 }
 
 function refresh(){

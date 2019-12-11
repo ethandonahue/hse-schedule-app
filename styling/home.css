@@ -18,12 +18,20 @@
    font-size: 5vw;
 }
 
-.Centered{
+.CenteredMiddle{
     display: table-cell;
-    height:79vh;
+    height:77vh;
     text-align: center;
     width: 50vw;
     vertical-align: middle;
+}
+
+.CenteredSide{
+  display: table-cell;
+  height:77vh;
+  text-align: center;
+  width: 25vw;
+  vertical-align: middle;
 }
 
 #currentWeek{
