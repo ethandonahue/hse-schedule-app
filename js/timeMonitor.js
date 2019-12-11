@@ -112,7 +112,7 @@ function refresh(){
         var lunches = [];
         var lunchInfo;
         currentSchedule.schedule.forEach((period) => {
-          if(period.periodName.indexOf("Lunch") > 0){
+          if(period.periodName.indexOf("Lunch") > -1){
             lunches.push(period);
           }
         });
