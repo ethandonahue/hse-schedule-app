@@ -1,14 +1,7 @@
 #currentDayText, #currentTimeText, #lunchText, #timeHeader{
   color: var(--header-text-color);
 }
- @media screen and (orientation:landscape) {
-   #currentTime{
-     float: right;
-}
 
- #currentDay, #currentTime{
-     display: inline-block;
-}
 
 #timeHeader{
   display:block;
