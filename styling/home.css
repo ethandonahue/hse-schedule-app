@@ -43,6 +43,11 @@
 
 #lunchText{
   padding-bottom:2%;
+  font-size: 2vw;
+}
+
+#lunchTime{
+  font-size:4vw;
 }
 
 
