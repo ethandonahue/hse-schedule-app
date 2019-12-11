@@ -2,6 +2,13 @@
   color: var(--header-text-color);
 }
 
+<<<<<<< HEAD
+=======
+@media screen and (orientation:landscape) {
+
+
+
+>>>>>>> 09a326059efd37c0d462e2181af5f1dbed0773d5
 #timeHeader{
   display:block;
   padding-bottom: 2%;
