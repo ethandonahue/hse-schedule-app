@@ -97,7 +97,7 @@
 @media screen and (orientation:portrait) {
   .CenteredMiddle{
       display: table-cell;
-      height:35vh;
+      padding-top: 15%;
       text-align: center;
       width: 100vw;
       vertical-align: middle;
@@ -105,10 +105,14 @@
 
   .CenteredSide{
     display: table-cell;
-    height:20vh;
     text-align: center;
+    padding-top: 5%;
     width: 100vw;
     vertical-align: middle;
+  }
+
+  #lunch{
+    padding-top: 10%;
   }
 
   #timeHeader{
