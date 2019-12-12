@@ -5,12 +5,10 @@
 #timeHeader{
   display:block;
   padding-bottom: 2%;
-  font-size: 4vw;
 }
 
  #time{
    display:block;
-   font-size: 5vw;
 }
 
 @media screen and (orientation:landscape) {
@@ -19,7 +17,7 @@
 }
 
  #time{
-   font-size: 5vw;
+   font-size: 4.5vw;
 }
 
 .CenteredMiddle{
@@ -110,10 +108,10 @@
   }
 
   #timeHeader{
-    font-size: 10vw;
+    font-size: 9vw;
   }
 
    #time{
-     font-size: 12vw;
+     font-size: 10vw;
   }
 }
