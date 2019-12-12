@@ -1,6 +1,6 @@
 html{
     box-sizing:border-box;
-     background-color:#004794;
+     background-color:#525252;
      overflow:hidden;
      height:100%;
      position:relative;
@@ -14,7 +14,7 @@ html{
      margin:0;
      padding:0;
      border:0;
-     font-family: 'Muli', sans-serif;
+     font-family: 'Rubik', sans-serif;
 }
 
  body{
@@ -29,12 +29,13 @@ html{
  h3{
      padding-top: 10px;
      padding-bottom: 10px;
+     color: #d9d9d9;
 }
 
  a{
-     background-color: #DCDCDC;
+     background-color: #f2f2f2;
      color: #004794;
-     padding: 14px 25px;
+     padding: 4% 3%;
      text-align: center;
      text-decoration: none;
      display: inline-block;
