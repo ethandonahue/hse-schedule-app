@@ -61,7 +61,7 @@ async function getMonthlySchedule(){
         });
         if(sched.wg[wg + 1] != undefined && sched.wg[wg].c[2].v != sched.wg[wg + 1].c[1].v){
           periodSchedule.push({
-            "periodName":"Passing Period",
+            "periodName":"Passing Period\n(Go To Period " + sched.wg[wg + 1].c[0].v.replace("Period", "").trim() + ")",
             "startTime":endTime,
             "endTime":TimePlus.formattedToObject(sched.wg[wg + 1].c[1].v),
             "periodNum":sched.wg[wg + 1].c[0].v.replace("Period", "").trim(),
@@ -154,7 +154,12 @@ function updateDivs(day, date, curTime, header, text, lunchtext, lunchtime){
     document.getElementById("currentDayText").textContent = day;
     document.getElementById("currentWeekText").textContent = date;
     document.getElementById("currentTimeText").textContent = curTime;
-    document.getElementById("timeHeader").textContent = header;
+    if(header.indexOf("\n") > -1){
+      document.getElementById("timeHeader").textContent = header.substring(0, header.indexOf("\n"));
+      document.getElementById("timeSecondaryHeader").textContent = header.substring(header.indexOf("\n"));
+    } else {
+      document.getElementById("timeHeader").textContent = header;
+    }
     document.getElementById("timeText").textContent = text;
     if(lunchtext != "NONE"){
       document.getElementById("lunch").style.display = "table-cell";

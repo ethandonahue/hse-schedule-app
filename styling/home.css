@@ -1,4 +1,4 @@
-#currentDayText, #currentTimeText, #lunchText, #timeHeader{
+#currentDayText, #currentTimeText, #lunchText, #timeHeader, #timeSecondaryHeader{
   color: var(--header-text-color);
 }
 
@@ -13,6 +13,10 @@
 
 #lunchText{
   padding-bottom:2%;
+}
+
+#currentWeek{
+  padding: 10px;
 }
 
 @media screen and (orientation:landscape) {
@@ -42,10 +46,6 @@
 
 #dateAndTime{
   font-size:2vw;
-}
-
-#currentWeek{
-  padding: 10px;
 }
 
 #lunchText{
