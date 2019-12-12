@@ -11,6 +11,10 @@
    display:block;
 }
 
+#lunchText{
+  padding-bottom:2%;
+}
+
 @media screen and (orientation:landscape) {
 #timeHeader{
   font-size: 4vw;
@@ -113,5 +117,13 @@
 
    #time{
      font-size: 10vw;
+  }
+
+  #lunchText{
+    font-size: 7vw;
+  }
+
+  #lunchTime{
+    font-size:9vw;
   }
 }
