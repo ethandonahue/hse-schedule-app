@@ -1,6 +1,8 @@
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
+  padding-top: 40px;
+  padding-left: 20px;
 }
 
 .theme-switch {
@@ -50,4 +52,23 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+h3{
+  padding-left: 20px;
+  width: 100%;
+}
+.lunchButton{
+background-color: #f2f2f2;
+color: #004794;
+padding: 20px 10px;
+margin-left: 0.5vw;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+}
+
+.lunchButtons{
+  padding-left: 20px;
+  padding-top: 30px;
 }
