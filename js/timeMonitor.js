@@ -61,7 +61,7 @@ async function getMonthlySchedule(){
         });
         if(sched.wg[wg + 1] != undefined && sched.wg[wg].c[2].v != sched.wg[wg + 1].c[1].v){
           periodSchedule.push({
-            "periodName":"Passing Period\n(Go To Period " + sched.wg[wg + 1].c[0].v.replace("Period", "").trim() + ")",
+            "periodName":"Passing Period\n(Go To " + sched.wg[wg + 1].c[0].v + ")",
             "startTime":endTime,
             "endTime":TimePlus.formattedToObject(sched.wg[wg + 1].c[1].v),
             "periodNum":sched.wg[wg + 1].c[0].v.replace("Period", "").trim(),
