@@ -6,6 +6,10 @@ const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe
 
 var scheduleRefreshRate = 30;
 
+var simulateDay = null;
+
+var simulatePeriod = null;
+
 if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlus.getCurrentDate().monthName){
   schedules = getSavedSchedules().schedules;
   schedulesPerWeek = getSavedSchedules().layout.split(",");
@@ -93,6 +97,10 @@ async function getMonthlySchedule(){
 
 function refresh(){
   currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth - 1]];
+  if(simulateDay != null){
+    currentSchedule = schedules[schedulesPerWeek[simulateDay]];
+  }
+  updateAroundLunch();
   time = TimePlus.getCurrentTime();
   date = TimePlus.getCurrentDate();
   var updateHeader, updateText, lunchTime;
@@ -121,13 +129,20 @@ function refresh(){
             lunchInfo = lunch;
           }
         });
+        if(lunchInfo == undefined){
+          lunchInfo = lunches[0];
+        }
         lunchTime = TimePlus.timeUntil({
           hour:lunchInfo.startTime.hour,
           minute:lunchInfo.startTime.minute,
           second:0
         });
         if(currentSchedule.schedule.indexOf(period) < currentSchedule.schedule.indexOf(lunchInfo)){
-          lunchText = "Time Until " + getLunch() + " Lunch";
+          if(lunchInfo.periodNum == "Lunch"){
+            lunchText = "Time Until Lunch";
+          } else {
+            lunchText = "Time Until " + getLunch() + " Lunch";
+          }
           lunchTime = timeFormatting(lunchTime.hour, lunchTime.minute, lunchTime.second);
         }
       }
@@ -181,9 +196,29 @@ function getCurrentPeriod(hour, minute){
     var start = new Date(date.year, date.month, date.dayOfMonth, sched[i].startTime.hour, sched[i].startTime.minute, 0, 0);
     var end = new Date(date.year, date.month, date.dayOfMonth, sched[i].endTime.hour, sched[i].endTime.minute, 0, 0);
     if(TimePlus.getFullDate() >= start && TimePlus.getFullDate() < end){
+      if(simulatePeriod != null){
+        i = simulatePeriod;
+      }
       return sched[i];
     }
   }
+}
+
+function updateAroundLunch(){
+  var lunches = [];
+  currentSchedule.schedule.forEach((period) => {
+    if(period.periodName.indexOf("/") > -1){
+      lunches.push(period);
+    }
+  });
+  lunches.forEach((lunch) => {
+    if(getLunch() == lunch.periodName.substring(lunch.periodName.indexOf("/") + 2).replace("Lunch", "").trim()){
+      lunch.periodName = lunch.periodName.substring(lunch.periodName.indexOf("/ ") + 2);
+    } else {
+      lunch.periodName = lunch.periodName.substring(0, lunch.periodName.indexOf(" /"));
+    }
+    lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2)
+  });
 }
 
 function timeFormatting(hour, minute, second){
