@@ -206,19 +206,23 @@ function getCurrentPeriod(hour, minute){
 
 function updateAroundLunch(){
   var lunches = [];
-  currentSchedule.schedule.forEach((period) => {
-    if(period.periodName.indexOf("/") > -1){
-      lunches.push(period);
+  if(currentSchedule.schedule != undefined){
+    currentSchedule.schedule.forEach((period) => {
+      if(period.periodName.indexOf("/") > -1){
+        lunches.push(period);
+      }
+    });
+    if(lunches.length > 0){
+      lunches.forEach((lunch) => {
+        if(getLunch() == lunch.periodName.substring(lunch.periodName.indexOf("/") + 2).replace("Lunch", "").trim()){
+          lunch.periodName = lunch.periodName.substring(lunch.periodName.indexOf("/ ") + 2);
+        } else {
+          lunch.periodName = lunch.periodName.substring(0, lunch.periodName.indexOf(" /"));
+        }
+        lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2)
+      });
     }
-  });
-  lunches.forEach((lunch) => {
-    if(getLunch() == lunch.periodName.substring(lunch.periodName.indexOf("/") + 2).replace("Lunch", "").trim()){
-      lunch.periodName = lunch.periodName.substring(lunch.periodName.indexOf("/ ") + 2);
-    } else {
-      lunch.periodName = lunch.periodName.substring(0, lunch.periodName.indexOf(" /"));
-    }
-    lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2)
-  });
+  }
 }
 
 function timeFormatting(hour, minute, second){
@@ -261,4 +265,13 @@ function timeFormatting(hour, minute, second){
     formatted += second;
   }
   return formatted;
+}
+
+function changeMilitaryTime(){
+  if (document.getElementById("toggle24Hour").checked) {
+    useMilitaryTime = true;
+  }
+  else {
+    useMilitaryTime = false;
+  }
 }
