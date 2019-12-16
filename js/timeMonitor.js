@@ -219,7 +219,7 @@ function updateAroundLunch(){
           } else {
             lunch.periodName = lunch.periodName.substring(0, lunch.periodName.indexOf(" /"));
           }
-          lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2)
+          lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2);
         });
       }
       if(lunches[1].periodName == lunches[2].periodName && window.location.pathname == "/screens/online/home.html"){
