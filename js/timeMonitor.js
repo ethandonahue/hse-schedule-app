@@ -19,8 +19,6 @@ if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlu
 SheetsPlus.load();
 SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySchedule);
 
-//"https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=Monday%20SMaRT%20Period%20Day&amp;tqx=reqId%3A478
-
 async function getMonthlySchedule(){
   rawMonthlySchedule = await SheetsPlus.get(googleSheetURL + encodeURIComponent("Monthly Planner"));
   neededSchedules = [];
@@ -172,6 +170,7 @@ function updateDivs(day, date, curTime, header, text, lunchtext, lunchtime){
     if(header.indexOf("\n") > -1){
       document.getElementById("timeHeader").textContent = header.substring(0, header.indexOf("\n"));
       document.getElementById("timeSecondaryHeader").textContent = header.substring(header.indexOf("\n"));
+      document.getElementById("timeSecondaryHeader").style.display = "block";
     } else {
       document.getElementById("timeHeader").textContent = header;
       document.getElementById("timeSecondaryHeader").style.display = "none";
@@ -205,22 +204,32 @@ function getCurrentPeriod(hour, minute){
 }
 
 function updateAroundLunch(){
-  var lunches = [];
-  if(currentSchedule.schedule != undefined){
-    currentSchedule.schedule.forEach((period) => {
-      if(period.periodName.indexOf("/") > -1){
-        lunches.push(period);
-      }
-    });
-    if(lunches.length > 0){
-      lunches.forEach((lunch) => {
-        if(getLunch() == lunch.periodName.substring(lunch.periodName.indexOf("/") + 2).replace("Lunch", "").trim()){
-          lunch.periodName = lunch.periodName.substring(lunch.periodName.indexOf("/ ") + 2);
-        } else {
-          lunch.periodName = lunch.periodName.substring(0, lunch.periodName.indexOf(" /"));
+  if(currentSchedule.info.updatedAroundLunch == undefined){
+    var lunches = [];
+    if(currentSchedule.schedule != undefined){
+      currentSchedule.schedule.forEach((period) => {
+        if(period.periodName.indexOf("/") > -1){
+          lunches.push(period);
         }
-        lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2)
       });
+      if(lunches.length > 0){
+        lunches.forEach((lunch) => {
+          if(getLunch() == lunch.periodName.substring(lunch.periodName.indexOf("/") + 2).replace("Lunch", "").trim()){
+            lunch.periodName = lunch.periodName.substring(lunch.periodName.indexOf("/ ") + 2);
+          } else {
+            lunch.periodName = lunch.periodName.substring(0, lunch.periodName.indexOf(" /"));
+          }
+          lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2)
+        });
+      }
+      if(lunches[1].periodName == lunches[2].periodName && window.location.pathname == "/screens/online/home.html"){
+        lunches[1].endTime = lunches[2].endTime;
+        currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[2]), 1);
+      } else if (lunches[0].periodName == lunches[1].periodName && window.location.pathname == "/screens/online/home.html"){
+        lunches[0].endTime = lunches[1].endTime;
+        currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[1]), 1);
+      }
+      currentSchedule.info.updatedAroundLunch = true;
     }
   }
 }
@@ -268,10 +277,9 @@ function timeFormatting(hour, minute, second){
 }
 
 function changeMilitaryTime(){
-  if (document.getElementById("toggle24Hour").checked) {
+  if(document.getElementById("toggle24Hour").checked){
     useMilitaryTime = true;
-  }
-  else {
+  } else {
     useMilitaryTime = false;
   }
 }
