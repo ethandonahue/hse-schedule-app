@@ -1,9 +1,17 @@
-
-
+@media screen and (orientation:landscape) {
 .pfp{
   margin: 20px;
   height:200px;
-  width:150px;
+  width:10vw;
+}
+}
+
+@media screen and (orientation:portrait) {
+.pfp{
+  margin: 20px;
+  height:200px;
+  width:35vw;
+}
 }
 
 h2{
