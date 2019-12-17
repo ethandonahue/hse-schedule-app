@@ -48,6 +48,9 @@ function createTable() {
 		var table = document.getElementsByTagName("table")[0];
 		table.appendChild(tableContainer);
 
+		// document.getElementById("period").innerHTML = "Period";
+		// document.getElementById("time").innerHTML = "Time";
+
 	}
 	window.requestAnimationFrame(highlightSelected);
 }
