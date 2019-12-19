@@ -222,12 +222,14 @@ function updateAroundLunch(){
           lunch.periodNum = lunch.periodNum.substring(lunch.periodNum.indexOf("/ ") + 2);
         });
       }
-      if(lunches[1].periodName == lunches[2].periodName && window.location.pathname == "/screens/online/home.html"){
-        lunches[1].endTime = lunches[2].endTime;
-        currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[2]), 1);
-      } else if (lunches[0].periodName == lunches[1].periodName && window.location.pathname == "/screens/online/home.html"){
-        lunches[0].endTime = lunches[1].endTime;
-        currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[1]), 1);
+      if(lunches.length > 1){
+        if(lunches[1].periodName == lunches[2].periodName && window.location.pathname == "/screens/online/home.html"){
+          lunches[1].endTime = lunches[2].endTime;
+          currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[2]), 1);
+        } else if (lunches[0].periodName == lunches[1].periodName && window.location.pathname == "/screens/online/home.html"){
+          lunches[0].endTime = lunches[1].endTime;
+          currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[1]), 1);
+        }
       }
       currentSchedule.info.updatedAroundLunch = true;
     }
