@@ -204,7 +204,7 @@ function getCurrentPeriod(hour, minute){
 }
 
 function updateAroundLunch(){
-  if(currentSchedule.info.updatedAroundLunch == undefined){
+  if(currentSchedule.info != undefined && currentSchedule.info.updatedAroundLunch == undefined){
     var lunches = [];
     if(currentSchedule.schedule != undefined){
       currentSchedule.schedule.forEach((period) => {
