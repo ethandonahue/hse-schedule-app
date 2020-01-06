@@ -15,10 +15,37 @@
       <script src="/js/ScriptPlus.js"></script>
       <script src="https://www.gstatic.com/charts/loader.js"></script>
       <script src="/js/timeMonitor.js"></script>
+      <script src="/js/scheduleTable.js"></script>
       <script src="/js/themeSwitcher.js"></script>
    <body>
       <div class="content">
          <div class="screenContent">
+           <div id="ABOUT SCREEN">
+             <div id="header">
+                <h1 id="headerText">About Us</h1>
+             </div>
+              <h2>Made by Ethan Donahue and Isaac Robbins</h2>
+              <img alt="Ethan" class="pfp" src="/images/ethan.jpg"></img>
+              <img alt="Isaac" class="pfp" src="/images/isaac.jpg"></img>
+          </div>
+          <div id="BELLSCHEDULE SCREEN">
+            <div id="header">
+               <h1 id="headerText">Bell Schedule</h1>
+            </div>
+            <div id="spacer">
+            </div>
+            <table class="tg">
+               <colgroup>
+                  <col style="width: 20%">
+                  <col style="width: 60%">
+               </colgroup>
+
+               <tr>
+                  <td class="row" id="period">Period</td>
+                  <td class="row" id="time">Time</td>
+               </tr>
+            </table>
+          </div>
            <div id="HOME SCREEN">
            <div id="header">
               <h1 id="headerText">HSE Schedule</h1>
@@ -56,6 +83,46 @@
              </div>
            </div>
          </div>
+         <div id="CALENDAR SCREEN">
+           <div id="header">
+              <h1 id="headerText">Calendar</h1>
+           </div>
+           <h2>
+              Coming Soon!
+           </h2>
+        </div>
+        <div id="SETTINGS SCREEN">
+          <div id="header">
+             <h1 id="headerText">Settings</h1>
+          </div>
+
+
+        <div class="theme-switch-wrapper">
+   <label class="theme-switch" for="checkbox">
+       <input type="checkbox" id="checkbox" onchange="switchTheme()" />
+       <div class="slider round"></div>
+ </label>
+ <h3>Dark Theme</h3>
+</div>
+</div>
+ <div class="lunchButtons">
+   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('A')">
+     A Lunch
+   </a>
+
+   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('B')">
+     B Lunch
+   </a>
+
+   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('C')">
+     C Lunch
+   </a>
+
+   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('NONE')">
+     None
+   </a>
+ </div>
+        </div>
        </div>
          <nav>
             <div class="navbuttons">
