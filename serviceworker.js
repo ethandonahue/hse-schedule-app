@@ -33,12 +33,12 @@ const FILES_TO_CACHE = [
 
 const publicKey = "BHV9vDKgZXPZH3S--ZPlDH4R4LQ636jvztTtYQppjrpVfJY3btRPzFhuvGY_xFrvpvCeAvMnJ7p3Vh2rykeaV54";
 
-if('serviceWorker' in navigator && 'PushManager' in window){
+if('serviceWorker' in navigator){ //&& 'PushManager' in window){
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/serviceworker.js')
       .then((reg) => {
         registration = reg;
-        checkNotificationSubscription();
+        //checkNotificationSubscription();
         //console.log('Service worker registered.', reg);
       }).catch(function(err){
         //console.error("Service worker registration failed with error "+err);
