@@ -4,7 +4,7 @@ var useMilitaryTime = false;
 
 const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
 
-var scheduleRefreshRate = 30;
+var scheduleRefreshRate = 5;
 
 var simulateDay = null;
 
@@ -88,6 +88,11 @@ async function getMonthlySchedule(){
   schedules = fullSchedule;
   saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
   window.requestAnimationFrame(refresh);
+  if(mostRecentVersion() != true){
+    delete localStorage.firstLoadedLayout;
+    delete localStorage.firstLoadedSchedule;
+    window.location.reload();
+  }
   setTimeout(() => {
     window.requestAnimationFrame(getMonthlySchedule);
   }, scheduleRefreshRate * 1000);

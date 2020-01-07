@@ -2,7 +2,7 @@ const CACHE_NAME = 'HSEScheduleAppCache';
 
 const FILES_TO_CACHE = [
   '/index.html',
-  '/screens/offline/offline.html',
+  '/main.html',
   '/styling/index.css',
   '/styling/notifications.css',
   '/styling/bellSchedule.css',

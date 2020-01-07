@@ -21,7 +21,8 @@
       <script src="/js/timeMonitor.js"></script>
       <script src="/js/scheduleTable.js"></script>
       <script src="/js/themeSwitcher.js"></script>
-   <body>
+      <script src="/js/pageSwitcher.js"></script>
+   <body onload="showSection('');onLoadCheckTheme();">
       <div class="content">
          <div class="screenContent">
            <div id="ABOUT SCREEN" class="hideDIV">
@@ -108,21 +109,21 @@
  </label>
  <h3>Dark Theme</h3>
 </div>
-</div>
+
  <div class="lunchButtons">
-   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('A')">
+   <a class="lunchButton" onclick="setLunch('A')">
      A Lunch
    </a>
 
-   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('B')">
+   <a class="lunchButton" onclick="setLunch('B')">
      B Lunch
    </a>
 
-   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('C')">
+   <a class="lunchButton" onclick="setLunch('C')">
      C Lunch
    </a>
 
-   <a class="lunchButton" href="/screens/online/home.html" onclick="setLunch('NONE')">
+   <a class="lunchButton" onclick="setLunch('NONE')">
      None
    </a>
  </div>
@@ -130,34 +131,34 @@
        </div>
          <nav>
             <div class="navbuttons">
-               <a href="/screens/online/notifications.html">
+               <a onclick="showSection('about')" id="aboutButton">
                   <div class="navbutton">
                      <span class="centerHelper"></span>
-                     <img alt="Notifications" class="center" src="/images/unselected/notifications.png">
+                     <img alt="Notifications" class="center" src="/images/unselected/notifications.png" id="aboutIcon">
                   </div>
                </a>
-               <a href="/screens/online/bellSchedule.html">
+               <a onclick="showSection('bell')" id="bellButton">
                   <div class="navbutton">
                      <span class="centerHelper"></span>
-                     <img alt="Schedule" class="center" src="/images/unselected/schedule.png">
+                     <img alt="Schedule" class="center" src="/images/unselected/schedule.png" id="bellIcon">
                   </div>
                </a>
-               <a>
-                  <div class="navbutton" id="selectedNavButton">
-                     <span class="centerHelper"></span>
-                     <img alt="Home" class="center" src="/images/selected/home.png">
-                  </div>
-               </a>
-               <a href="/screens/online/calendar.html">
+               <a onclick="showSection('home')" id="homeButton">
                   <div class="navbutton">
                      <span class="centerHelper"></span>
-                     <img alt="Calendar" class="center" src="/images/unselected/calendar.png">
+                     <img alt="Home" class="center" src="/images/unselected/home.png" id="homeIcon">
                   </div>
                </a>
-               <a href="/screens/online/settings.html">
+               <a onclick="showSection('calendar')" id="calendarButton">
                   <div class="navbutton">
                      <span class="centerHelper"></span>
-                     <img alt="Settings" class="center" src="/images/unselected/settings.png">
+                     <img alt="Calendar" class="center" src="/images/unselected/calendar.png" id="calendarIcon">
+                  </div>
+               </a>
+               <a onclick="showSection('settings')" id="settingsButton">
+                  <div class="navbutton">
+                     <span class="centerHelper"></span>
+                     <img alt="Settings" class="center" src="/images/unselected/settings.png" id="settingsIcon">
                   </div>
                </a>
             </div>
