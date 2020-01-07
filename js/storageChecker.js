@@ -1,7 +1,7 @@
 if(typeof(Storage) != undefined){
   if(localStorage.selectedLunch != undefined){
     if(window.location.pathname == "/" || window.location.pathname == "/index.html"){
-      window.location.replace("/screens/online/main.html");
+      window.location.replace("/main.html");
     }
   } else {
     if(window.location.pathname != "/" && window.location.pathname != "/index.html"){
