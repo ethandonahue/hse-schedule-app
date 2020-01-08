@@ -4,13 +4,9 @@ var listObjects = [];
 function loadSchedule() {
 	if (currentSchedule.schedule != undefined) {
 		schedule = currentSchedule.schedule;
-		clearInterval(interval);
 		createTable();
 	}
 }
-
-var interval = setInterval(loadSchedule, 100);
-
 
 function createTable() {
 
