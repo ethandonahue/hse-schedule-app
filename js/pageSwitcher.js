@@ -1,6 +1,6 @@
 var screens = ["ABOUT SCREEN", "BELLSCHEDULE SCREEN", "HOME SCREEN", "CALENDAR SCREEN", "SETTINGS SCREEN"];
 var buttons = ["aboutButton", "bellButton", "homeButton", "calendarButton", "settingsButton"];
-var icons = ["notifications.png", "schedule.png", "home.png", "calendar.png", "settings.png"];
+var icons = ["about.png", "schedule.png", "home.png", "calendar.png", "settings.png"];
 
 function showSection(section){
   switch(section){
