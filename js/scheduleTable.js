@@ -48,6 +48,12 @@ function createTable() {
 	window.requestAnimationFrame(highlightSelected);
 }
 
+function deleteTable(){
+	while(document.getElementsByTagName("tr").length > 1){
+		document.getElementsByTagName("tr")[1].remove();
+	}
+}
+
 function highlightSelected(){
 	for(var i = 0; i<listObjects.length; i++){
 		listObjects[i].period.removeAttribute("class");
