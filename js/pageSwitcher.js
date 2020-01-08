@@ -32,6 +32,8 @@ function showSection(section){
       }
       break;
   }
+  simulateDay = null;
+  simulatePeriod = null;
   if(section != ""){
     window.location.hash = section;
   }

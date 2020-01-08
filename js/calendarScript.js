@@ -27,7 +27,8 @@ for (var i = 1; i <= TimePlus.getCurrentDate().daysInMonth; i++) {
 
 function displaySelectedSchedule(day){
 	deleteTable();
-	simulateDay = day - 1;
+	simulateDay = day + 1;
+	simulatePeriod = 0;
 	loadSchedule();
 	display(1);
 }
