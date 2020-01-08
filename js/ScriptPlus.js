@@ -348,6 +348,9 @@ function readFileOnline(file, callback) {
 				callback(rawFile.responseText);
 			}
     }
+		rawFile.onerror = function(){
+			callback(404);
+		}
     rawFile.send(null);
 }
 
