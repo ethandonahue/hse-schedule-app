@@ -32,8 +32,13 @@ function showSection(section){
       }
       break;
   }
-  simulateDay = null;
-  simulatePeriod = null;
+  if(simulateDay != null || simulatePeriod != null){
+    simulateDay = null;
+    simulatePeriod = null;
+    deleteTable();
+    refresh();
+    loadSchedule();
+  }
   if(section != ""){
     window.location.hash = section;
   }

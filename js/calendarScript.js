@@ -27,8 +27,10 @@ for (var i = 1; i <= TimePlus.getCurrentDate().daysInMonth; i++) {
 
 function displaySelectedSchedule(day){
 	deleteTable();
-	simulateDay = day + 1;
-	simulatePeriod = 0;
+	simulateDay = day;
+	simulatePeriod = -1;
+	currentSchedule = schedules[schedulesPerWeek[simulateDay - 1]];
+	refresh();
 	loadSchedule();
 	display(1);
 }

@@ -101,7 +101,7 @@ async function getMonthlySchedule(){
 function refresh(){
   currentSchedule = schedules[schedulesPerWeek[TimePlus.getCurrentDate().dayOfMonth - 1]];
   if(simulateDay != null){
-    currentSchedule = schedules[schedulesPerWeek[simulateDay]];
+    currentSchedule = schedules[schedulesPerWeek[simulateDay - 1]];
   }
   updateAroundLunch();
   time = TimePlus.getCurrentTime();
