@@ -18,6 +18,7 @@ for (var i = 1; i <= TimePlus.getCurrentDate().daysInMonth; i++) {
 
 		var day = document.createElement("li");
     var dayVal = document.createTextNode(i);
+		day.setAttribute("onclick", "displaySelectedSchedule(" + i + ")");
 		day.appendChild(dayVal);
 
 
@@ -26,3 +27,7 @@ for (var i = 1; i <= TimePlus.getCurrentDate().daysInMonth; i++) {
 		calendar.appendChild(day);
 
 	}
+
+function displaySelectedSchedule(day){
+	console.log(day);
+}
