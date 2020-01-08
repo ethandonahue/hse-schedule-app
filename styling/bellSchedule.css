@@ -1,14 +1,8 @@
-#spacer{
-     height: 20px;
-}
-
  .tg {
      border-collapse:collapse;
      border-spacing:0;
      margin:0 auto;
-}
-
-@media screen and (orientation:landscape) {
+     margin-top: 20px;
 }
 
  .tg td{
@@ -32,7 +26,7 @@
      border-color:black;
 }
 
- .tg .row{
+ .tg .bellRow{
      border-color:inherit;
      text-align:center;
      vertical-align:top

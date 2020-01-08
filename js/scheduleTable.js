@@ -30,11 +30,11 @@ function createTable() {
 		});
 
 		if (eval(period) != undefined && period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
-			periodRow.setAttribute("class", "row selected");
-			timeRow.setAttribute("class", "row selected");
+			periodRow.setAttribute("class", "bellRow selected");
+			timeRow.setAttribute("class", "bellRow selected");
 		} else {
-			periodRow.setAttribute("class", "row");
-			timeRow.setAttribute("class", "row");
+			periodRow.setAttribute("class", "bellRow");
+			timeRow.setAttribute("class", "bellRow");
 		}
 
 
@@ -53,11 +53,11 @@ function highlightSelected(){
 		listObjects[i].period.removeAttribute("class");
 		listObjects[i].time.removeAttribute("class");
 		if(eval(period) != undefined && listObjects[i].period.textContent == period.periodNum){
-			listObjects[i].period.setAttribute("class", "row selected");
-			listObjects[i].time.setAttribute("class", "row selected");
+			listObjects[i].period.setAttribute("class", "bellRow selected");
+			listObjects[i].time.setAttribute("class", "bellRow selected");
 		} else {
-			listObjects[i].period.setAttribute("class", "row");
-			listObjects[i].time.setAttribute("class", "row");
+			listObjects[i].period.setAttribute("class", "bellRow");
+			listObjects[i].time.setAttribute("class", "bellRow");
 		}
 	}
 	window.requestAnimationFrame(highlightSelected);

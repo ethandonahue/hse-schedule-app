@@ -7,9 +7,6 @@ for (var i = 0; i <= TimePlus.getCurrentDate().firstDayOfMonth-1; i++) {
 	var day = document.createElement("li");
 	var dayVal = document.createTextNode("");
 	day.appendChild(dayVal);
-
-
-
 	var calendar = document.getElementsByClassName('days')[0];
 	calendar.appendChild(day);
 }
