@@ -1,6 +1,8 @@
 var schedule;
 var listObjects = [];
 
+SheetsPlus.whenNotEquals("currentSchedule", "undefined", loadSchedule);
+
 function loadSchedule() {
 	if (currentSchedule.schedule != undefined) {
 		schedule = currentSchedule.schedule;
