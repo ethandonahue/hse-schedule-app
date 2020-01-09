@@ -18,6 +18,31 @@ function setLunch(lunch){
     return;
   }
   localStorage.selectedLunch = lunch;
+  selectLunch();
+}
+
+function selectLunch(){
+  removeSelectedLunch();
+  var lunchElement;
+
+  if(getLunch() == "A"){
+    lunchElement = document.getElementById("aLunch");
+  } else if (getLunch() == "B"){
+    lunchElement = document.getElementById("bLunch");
+  } else if (getLunch() == "C"){
+    lunchElement = document.getElementById("cLunch");
+  } else {
+    lunchElement = document.getElementById("noLunch");
+  }
+
+  lunchElement.classList.add("selectedLunch");
+
+}
+
+function removeSelectedLunch(){
+  for(var i = 0; i < document.getElementsByClassName("selectedLunch").length; i++){
+    document.getElementsByClassName("selectedLunch")[i].classList.remove("selectedLunch");
+  }
 }
 
 function getLunch(){

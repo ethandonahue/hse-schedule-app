@@ -22,7 +22,7 @@
       <script src="/js/scheduleTable.js"></script>
       <script src="/js/themeSwitcher.js"></script>
       <script src="/js/pageSwitcher.js"></script>
-   <body onload="showSection('');onLoadCheckTheme();">
+   <body onload="showSection('');onLoadCheckTheme();selectLunch();">
       <div class="content">
          <div class="screenContent">
             <div id="ABOUT SCREEN" class="hideDIV">
@@ -126,16 +126,16 @@
                   <h3 class="darkTheme">Dark Theme</h3>
                </div>
                <div class="lunchButtons">
-                  <a class="lunchButton" onclick="setLunch('A')">
+                  <a id="aLunch" class="lunchButton" onclick="setLunch('A')">
                   A Lunch
                   </a>
-                  <a class="lunchButton" onclick="setLunch('B')">
+                  <a id="bLunch" class="lunchButton" onclick="setLunch('B')">
                   B Lunch
                   </a>
-                  <a class="lunchButton" onclick="setLunch('C')">
+                  <a id="cLunch" class="lunchButton" onclick="setLunch('C')">
                   C Lunch
                   </a>
-                  <a class="lunchButton" onclick="setLunch('NONE')">
+                  <a id="noLunch" class="lunchButton" onclick="setLunch('NONE')">
                   None
                   </a>
                </div>
