@@ -67,7 +67,7 @@ padding: 8px 20px;}
 
 .cal .cal-month {
 	font-size: 20px;
-	background-color: #1158a5;
+	background-color: var(--select-color);
 	text-align: center;
 	vertical-align: top
 }
@@ -76,7 +76,8 @@ padding: 8px 20px;}
 	font-size: 24px;
 	background-color: #dddddd;
 	text-align: center;
-	vertical-align: top
+	vertical-align: top;
+  font-weight:bold;
 }
 
 .cal .cal-days {
@@ -86,16 +87,24 @@ padding: 8px 20px;}
 	vertical-align: top
 }
 
-.cal .calendarGrayBackground{
+.cal .calendarOtherMonth {
   font-size: 24px;
-	background-color: #222222;
+	background-color: #eeeeee;
+	text-align: center;
+	vertical-align: top
+}
+
+.cal .calendarNoSchool{
+  font-size: 24px;
+	background-color: #bbbbbb;
 	text-align: center;
 	vertical-align: top
 }
 
 .cal .calendarCurrentDay{
   font-size: 24px;
-	background-color: #0000ff;
+	background-color: var(--highlight-color);
+  color: var(--font-color);
 	text-align: center;
 	vertical-align: top
 }
