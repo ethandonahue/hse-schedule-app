@@ -1,6 +1,6 @@
 @media only screen and (orientation: portrait) {
     .cal td {
-      padding: 8px 8px;
+      padding: 8px 6px;
     }
 }
 
@@ -9,6 +9,28 @@
       padding: 8px 20px;
     }
 }
+
+
+
+
+/* td .cal {
+padding: 8px 20px;}
+
+@media screen and (max-width: 600px) {
+  td .cal {
+  padding: 8px 8px;
+}
+}
+
+@media screen and (min-width: 601px) and  (max-width: 1024px){
+  td .cal {
+  padding: 300px 8px;}
+}
+
+@media screen and (min-width: 1025px) {
+  td .cal {
+  padding: 8px 8px;}
+} */
 
 
 .cal {
