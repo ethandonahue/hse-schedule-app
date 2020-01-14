@@ -63,3 +63,17 @@
 	text-align: center;
 	vertical-align: top
 }
+
+.cal .calendarGrayBackground{
+  font-size: 24px;
+	background-color: #222222;
+	text-align: center;
+	vertical-align: top
+}
+
+.cal .calendarCurrentDay{
+  font-size: 24px;
+	background-color: #0000ff;
+	text-align: center;
+	vertical-align: top
+}

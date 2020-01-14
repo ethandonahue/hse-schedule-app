@@ -11,7 +11,14 @@ for(var w = 0; w < 5; w++){
 			dy.innerHTML = "";
 		} else {
 			dy.innerHTML = calendarDayToPrint;
-			dy.setAttribute("onclick", "displaySelectedSchedule(" + calendarDayToPrint + ")");
+			if(schedules[schedulesPerWeek[calendarDayToPrint - 1]].schedule){
+				dy.setAttribute("onclick", "displaySelectedSchedule(" + calendarDayToPrint + ")");
+			} else {
+				dy.setAttribute("class", "calendarGrayBackground");
+			}
+			if(calendarDayToPrint == TimePlus.getCurrentDate().dayOfMonth){
+				dy.setAttribute("class", "calendarCurrentDay");
+			}
 			calendarDayToPrint++;
 		}
 		wk.appendChild(dy);
