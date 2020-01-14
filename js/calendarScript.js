@@ -1,29 +1,22 @@
-document.getElementById("monthName").innerHTML = TimePlus.getCurrentDate().monthName;
-document.getElementById("yearVal").innerHTML = TimePlus.getCurrentDate().year;
+var calendarDayToPrint = 1;
 
+document.getElementById("cal-month").innerHTML = TimePlus.getCurrentDate().monthName + "<br>" + TimePlus.getCurrentDate().year;
 
-
-for (var i = 0; i <= TimePlus.getCurrentDate().firstDayOfMonth-1; i++) {
-	var day = document.createElement("li");
-	var dayVal = document.createTextNode("");
-	day.appendChild(dayVal);
-	var calendar = document.getElementsByClassName('days')[0];
-	calendar.appendChild(day);
-}
-
-for (var i = 1; i <= TimePlus.getCurrentDate().daysInMonth; i++) {
-
-		var day = document.createElement("li");
-    var dayVal = document.createTextNode(i);
-		day.setAttribute("onclick", "displaySelectedSchedule(" + i + ")");
-		day.appendChild(dayVal);
-
-
-
-		var calendar = document.getElementsByClassName('days')[0];
-		calendar.appendChild(day);
-
+for(var w = 0; w < 5; w++){
+	for(var d = 0; d < 7; d++){
+		var wk = document.getElementById("cal-week-" + (w + 1));
+		var dy = document.createElement("td");
+		dy.setAttribute("class", "cal-days");
+		if(w == 0 && d < TimePlus.getCurrentDate().firstDayOfMonth || calendarDayToPrint == TimePlus.getCurrentDate().daysInMonth){
+			dy.innerHTML = "";
+		} else {
+			dy.innerHTML = calendarDayToPrint;
+			dy.setAttribute("onclick", "displaySelectedSchedule(" + calendarDayToPrint + ")");
+			calendarDayToPrint++;
+		}
+		wk.appendChild(dy);
 	}
+}
 
 function displaySelectedSchedule(day){
 	deleteTable();

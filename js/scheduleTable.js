@@ -39,6 +39,7 @@ function createTable() {
 			timeRow.setAttribute("class", "bellRow");
 		}
 
+		tableContainer.setAttribute("class", "bell-schedule-table");
 
 		tableContainer.appendChild(periodRow);
 		tableContainer.appendChild(timeRow);
@@ -51,8 +52,8 @@ function createTable() {
 }
 
 function deleteTable(){
-	while(document.getElementsByTagName("tr").length > 1){
-		document.getElementsByTagName("tr")[1].remove();
+	while(document.getElementsByClassName("bell-schedule-table").length > 0){
+		document.getElementsByClassName("bell-schedule-table")[0].remove();
 	}
 }
 
