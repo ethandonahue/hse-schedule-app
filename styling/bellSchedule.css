@@ -1,3 +1,27 @@
+
+
+#bellScheduleTable {
+  font-size:15px;
+width: 100%;}
+
+@media screen and (max-width: 600px) {
+  #bellScheduleTable {
+    font-size:13px;
+  width: 90%;}
+}
+
+@media screen and (min-width: 601px) and  (max-width: 1024px){
+  #bellScheduleTable {
+  width: 90%;}
+}
+
+@media screen and (min-width: 1025px) {
+  #bellScheduleTable {
+    font-size:13px;
+  width: 40%;}
+}
+
+
  .tg {
      border-collapse:collapse;
      border-spacing:0;
@@ -6,8 +30,9 @@
 }
 
  .tg td{
-     font-size:15px;
-     padding:10px 5px;
+   padding: 10px 5px;
+
+
      border-style:solid;
      border-width:1px;
      overflow:hidden;
