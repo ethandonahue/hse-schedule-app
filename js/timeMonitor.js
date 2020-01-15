@@ -87,12 +87,12 @@ async function getMonthlySchedule(){
   }
   schedules = fullSchedule;
   saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
-  window.requestAnimationFrame(refresh);
   if(mostRecentVersion() != true){
     delete localStorage.firstLoadedLayout;
     delete localStorage.firstLoadedSchedule;
     window.location.reload();
   }
+  window.requestAnimationFrame(refresh);
   setTimeout(() => {
     window.requestAnimationFrame(getMonthlySchedule);
   }, scheduleRefreshRate * 1000);

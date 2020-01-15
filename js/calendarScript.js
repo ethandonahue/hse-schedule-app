@@ -30,6 +30,15 @@ function generateCalendar(){
 	}
 }
 
+function deleteCalendar(){
+	for(var w = 0; w < 5; w++){
+		var wk = document.getElementById("cal-week-" + (w + 1));
+		for(var d = 0; d < 7; d++){
+			wk.children[0].remove();
+		}
+	}
+}
+
 function displaySelectedSchedule(day){
 	deleteTable();
 	simulateDay = day;
