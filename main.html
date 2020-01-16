@@ -22,7 +22,8 @@
       <script src="/js/scheduleTable.js"></script>
       <script src="/js/themeSwitcher.js"></script>
       <script src="/js/pageSwitcher.js"></script>
-   <body onload="showSection('');onLoadCheckTheme();selectLunch();" class="disable-selection">
+      <script src="/js/completionCircle.js"></script>
+   <body onload="showSection('');onLoadCheckTheme();selectLunch();getCanvas();" class="disable-selection">
       <div class="content">
          <div class="screenContent">
             <div id="ABOUT SCREEN" class="hideDIV">
@@ -70,6 +71,7 @@
                         </div>
                      </div>
                   </div>
+                  <canvas id="completionCircle"></canvas>
                   <div class="column middle">
                      <div id="TimeContainer" class="CenteredMiddle">
                         <div id="timeRemaining">
