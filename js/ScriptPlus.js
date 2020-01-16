@@ -390,6 +390,13 @@ function includeHTML(){
   }
 }
 
+function landOrPort(){
+	if(window.matchMedia("(orientation: landscape)").matches){
+		return "landscape";
+	}
+	return "portrait";
+}
+
 Array.prototype.pickValue = function(){
 	var randomValue = Math.floor(Math.random()*this.length);
 	scriptPlusDebugLogging("Picked Random Value (" + randomValue + ") From Range (0 - " + (this.length - 1) + ")");
