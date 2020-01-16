@@ -11,7 +11,6 @@ function getCanvas(){
   canvas.height = window.innerHeight * 0.54;
   surface = canvas.getContext("2d");
   //surface.fillRect(0, 0, canvas.width, canvas.height);
-  completeCircle(0.5);
   setInterval(() => {
     canvas.width = window.innerWidth * 0.5;
     canvas.height = window.innerHeight * 0.8;
