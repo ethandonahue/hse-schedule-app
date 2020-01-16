@@ -2,8 +2,8 @@ var canvas, surface;
 
 var startingPos = 1.5 * Math.PI;
 
-var fgColor = "#FFFFFF";
-var bgColor = "#6698FF";
+fgColorCircle = "#FFFFFF";
+bgColorCircle = "#6698FF";
 
 function getCanvas(){
   canvas = document.getElementById("completionCircle");
@@ -31,12 +31,12 @@ function completeCircle(percentage){
     radius = canvas.height / 2.1;
   }
   surface.beginPath();
-  surface.strokeStyle = bgColor;
+  surface.strokeStyle = bgColorCircle;
   surface.lineWidth = 2;
   surface.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);
   surface.stroke();
   surface.beginPath();
-  surface.strokeStyle = fgColor;
+  surface.strokeStyle = fgColorCircle;
   surface.lineWidth = 5;
   surface.arc(canvas.width / 2, canvas.height / 2, radius, startingPos, endingPos);
   surface.stroke();
