@@ -27,13 +27,6 @@
   display:block
 }
 
-canvas{
-  z-index:-3;
-  position:absolute;
-  display:block;
-  padding:0;
-}
-
 @media screen and (orientation:landscape) {
 #timeHeader{
   font-size: 4vw;
@@ -108,10 +101,6 @@ canvas{
   height:90%;
   width:100%;
 }
-
-canvas{
-  margin:0 25%;
-}
 }
 @media screen and (orientation:portrait) {
   .CenteredMiddle{
@@ -148,9 +137,5 @@ canvas{
 
   #lunchTime{
     font-size:9vw;
-  }
-
-  canvas{
-    margin:-35% 25%;
   }
 }
