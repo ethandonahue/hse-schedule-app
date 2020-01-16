@@ -8,32 +8,36 @@ var bgColor = "#6698FF";
 function getCanvas(){
   canvas = document.getElementById("completionCircle");
   surface = canvas.getContext("2d");
-  //surface.fillRect(0, 0, canvas.width, canvas.height);
   setInterval(() => {
     if(landOrPort() == "landscape"){
       canvas.width = window.innerWidth * 0.5;
       canvas.height = window.innerHeight * 0.8;
     } else {
-      canvas.width = window.innerWidth * 0.9;
-      canvas.height = window.innerHeight * 0.6;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 0.3;
     }
+    //surface.fillRect(0, 0, canvas.width, canvas.height);
     completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
-  }, 100);
+  }, 10);
 }
 
 function completeCircle(percentage){
+  var radius = canvas.width / 3;
   var endingPos = (percentage * 2 * Math.PI) - (0.5 * Math.PI);
   if(endingPos == startingPos){
     endingPos = 3.5 * Math.PI;
   }
+  if(landOrPort() == "portrait"){
+    radius = canvas.height / 2.1;
+  }
   surface.beginPath();
   surface.strokeStyle = bgColor;
   surface.lineWidth = 2;
-  surface.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, 0, 2 * Math.PI);
+  surface.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);
   surface.stroke();
   surface.beginPath();
   surface.strokeStyle = fgColor;
   surface.lineWidth = 5;
-  surface.arc(canvas.width / 2, canvas.height / 2, canvas.width / 3, startingPos, endingPos);
+  surface.arc(canvas.width / 2, canvas.height / 2, radius, startingPos, endingPos);
   surface.stroke();
 }
