@@ -235,26 +235,6 @@ var TimePlus = {
 			remaining.second = Math.floor(remain % 60);
 			return remaining;
 		},
-	timeBetween:function(t1, t2){
-		var remain;
-		var remaining = {};
-		if(!t1.second){
-			t1.second = 0;
-		}
-		var start = new Date(TimePlus.getCurrentDate().year, TimePlus.getCurrentDate().month, TimePlus.getCurrentDate().dayOfMonth, t1.hour, t1.minute, t1.second, 0);
-		var end = new Date(TimePlus.getCurrentDate().year, TimePlus.getCurrentDate().month, TimePlus.getCurrentDate().dayOfMonth, t2.hour, t2.minute, 0, 0);
-		remain = Math.abs((start - end) / 1000);
-		remaining.hour = Math.floor((remain / 3600));
-		remaining.minute = Math.floor((remain / 60) % 60);
-		remaining.second = Math.floor(remain % 60);
-		return remaining;
-	},
-	toSeconds:function(time){
-		var seconds = time.second;
-		seconds += time.minute * 60;
-		seconds += time.hour * 3600;
-		return seconds;
-	},
 	formattedToObject:function(time){
 			var hour = parseInt(time.substring(0, time.indexOf(":")));
 			if(time.indexOf("p") > 0 && hour != 12){
