@@ -5,20 +5,29 @@ var startingPos = 1.5 * Math.PI;
 fgColorCircle = "#FFFFFF";
 bgColorCircle = "#6698FF";
 
+SheetsPlus.whenNotEquals("period", "undefined", getCanvas);
+
 function getCanvas(){
   canvas = document.getElementById("completionCircle");
   surface = canvas.getContext("2d");
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
   setInterval(() => {
-    if(landOrPort() == "landscape"){
-      canvas.width = window.innerWidth * 0.5;
-      canvas.height = window.innerHeight * 0.8;
-    } else {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.35;
-    }
+    surface.clearRect(0, 0, canvas.width, canvas.height);
     //surface.fillRect(0, 0, canvas.width, canvas.height);
     completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
   }, 10);
+}
+
+function resizeCanvas(){
+  if(landOrPort() == "landscape"){
+    canvas.width = window.innerWidth * 0.5;
+    canvas.height = window.innerHeight * 0.8;
+  } else {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight * 0.35;
+  }
+  completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
 }
 
 function completeCircle(percentage){

@@ -76,8 +76,7 @@ async function getMonthlySchedule(){
             "schoolEndTime":periodSchedule[periodSchedule.length - 1].endTime,
             "name":neededSchedules[schedule]
           },
-          "schedule":periodSchedule,
-          "uneditedSchedule":periodSchedule
+          "schedule":periodSchedule
         };
       }
     } else {
@@ -230,10 +229,10 @@ function updateAroundLunch(){
         });
       }
       if(lunches.length > 1){
-        if(lunches[1].periodName == lunches[2].periodName && false){
+        if(lunches[1].periodName == lunches[2].periodName){
           lunches[1].endTime = lunches[2].endTime;
           currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[2]), 1);
-        } else if (lunches[0].periodName == lunches[1].periodName && false){
+        } else if (lunches[0].periodName == lunches[1].periodName){
           lunches[0].endTime = lunches[1].endTime;
           currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[1]), 1);
         }

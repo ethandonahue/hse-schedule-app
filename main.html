@@ -23,8 +23,9 @@
     <script src="/js/themeSwitcher.js"></script>
     <script src="/js/pageSwitcher.js"></script>
     <script src="/js/completionCircle.js"></script>
+    <script src="/js/calendarScript.js"></script>
   </head>
-  <body onload="showSection('');onLoadCheckTheme();selectLunch();getCanvas();" class="disable-selection">
+  <body onload="showSection('');onLoadCheckTheme();selectLunch();" class="disable-selection">
     <div class="content">
       <div class="screenContent">
         <div id="ABOUT SCREEN" class="hideDIV">
@@ -117,68 +118,67 @@
             </table>
           </div>
         </div>
-        <script src="/js/calendarScript.js"></script>
-            <div id="SETTINGS SCREEN" class="hideDIV">
-               <div id="header">
-                  <h1 id="headerText">Settings</h1>
-               </div>
-               <div class="theme-switch-wrapper">
-                  <label class="theme-switch" for="checkbox">
-                     <input type="checkbox" id="checkbox" onchange="switchTheme()" />
-                     <div class="slider round"></div>
-                  </label>
-                  <h3 class="darkTheme">Dark Theme</h3>
-               </div>
-               <div class="lunchButtons">
-                  <a id="aLunch" class="lunchButton" onclick="setLunch('A')">
-                  A Lunch
-                  </a>
-                  <a id="bLunch" class="lunchButton" onclick="setLunch('B')">
-                  B Lunch
-                  </a>
-                  <a id="cLunch" class="lunchButton" onclick="setLunch('C')">
-                  C Lunch
-                  </a>
-                  <a id="noLunch" class="lunchButton" onclick="setLunch('NONE')">
-                  None
-                  </a>
-               </div>
-            </div>
-         </div>
-         <nav>
-            <div class="navbuttons">
-               <a onclick="showSection('about')" id="aboutButton">
-                  <div class="navbutton">
-                     <span class="centerHelper"></span>
-                     <img alt="About" class="center" src="/images/unselected/about.png" id="aboutIcon">
-                  </div>
-               </a>
-               <a onclick="showSection('bell')" id="bellButton">
-                  <div class="navbutton">
-                     <span class="centerHelper"></span>
-                     <img alt="Schedule" class="center" src="/images/unselected/schedule.png" id="bellIcon">
-                  </div>
-               </a>
-               <a onclick="showSection('home')" id="homeButton">
-                  <div class="navbutton">
-                     <span class="centerHelper"></span>
-                     <img alt="Home" class="center" src="/images/unselected/home.png" id="homeIcon">
-                  </div>
-               </a>
-               <a onclick="showSection('calendar')" id="calendarButton">
-                  <div class="navbutton">
-                     <span class="centerHelper"></span>
-                     <img alt="Calendar" class="center" src="/images/unselected/calendar.png" id="calendarIcon">
-                  </div>
-               </a>
-               <a onclick="showSection('settings')" id="settingsButton">
-                  <div class="navbutton">
-                     <span class="centerHelper"></span>
-                     <img alt="Settings" class="center" src="/images/unselected/settings.png" id="settingsIcon">
-                  </div>
-               </a>
-            </div>
-         </nav>
+        <div id="SETTINGS SCREEN" class="hideDIV">
+          <div id="header">
+            <h1 id="headerText">Settings</h1>
+          </div>
+          <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+              <input type="checkbox" id="checkbox" onchange="switchTheme()" />
+              <div class="slider round"></div>
+            </label>
+            <h3 class="darkTheme">Dark Theme</h3>
+          </div>
+          <div class="lunchButtons">
+            <a id="aLunch" class="lunchButton" onclick="setLunch('A')">
+              A Lunch
+            </a>
+            <a id="bLunch" class="lunchButton" onclick="setLunch('B')">
+              B Lunch
+            </a>
+            <a id="cLunch" class="lunchButton" onclick="setLunch('C')">
+              C Lunch
+            </a>
+            <a id="noLunch" class="lunchButton" onclick="setLunch('NONE')">
+              None
+            </a>
+          </div>
+        </div>
       </div>
-   </body>
+      <nav>
+        <div class="navbuttons">
+          <a onclick="showSection('about')" id="aboutButton">
+            <div class="navbutton">
+              <span class="centerHelper"></span>
+              <img alt="About" class="center" src="/images/unselected/about.png" id="aboutIcon">
+            </div>
+          </a>
+          <a onclick="showSection('bell')" id="bellButton">
+            <div class="navbutton">
+              <span class="centerHelper"></span>
+              <img alt="Schedule" class="center" src="/images/unselected/schedule.png" id="bellIcon">
+            </div>
+          </a>
+          <a onclick="showSection('home')" id="homeButton">
+            <div class="navbutton">
+              <span class="centerHelper"></span>
+              <img alt="Home" class="center" src="/images/unselected/home.png" id="homeIcon">
+            </div>
+          </a>
+          <a onclick="showSection('calendar')" id="calendarButton">
+            <div class="navbutton">
+              <span class="centerHelper"></span>
+              <img alt="Calendar" class="center" src="/images/unselected/calendar.png" id="calendarIcon">
+            </div>
+          </a>
+          <a onclick="showSection('settings')" id="settingsButton">
+            <div class="navbutton">
+              <span class="centerHelper"></span>
+              <img alt="Settings" class="center" src="/images/unselected/settings.png" id="settingsIcon">
+            </div>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </body>
 </html>
