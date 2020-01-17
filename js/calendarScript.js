@@ -15,7 +15,7 @@ function generateCalendar(){
 				dy.setAttribute("class", "calendarOtherMonth");
 			} else {
 				dy.innerHTML = calendarDayToPrint;
-				if(schedules[schedulesPerWeek[calendarDayToPrint - 1]].schedule){
+				if(schedules[schedulesPerWeek[calendarDayToPrint - 1]].uneditedSchedule){
 					dy.setAttribute("onclick", "displaySelectedSchedule(" + calendarDayToPrint + ")");
 				} else {
 					dy.setAttribute("class", "calendarNoSchool");
@@ -44,7 +44,7 @@ function displaySelectedSchedule(day){
 	simulateDay = day;
 	simulatePeriod = -1;
 	currentSchedule = schedules[schedulesPerWeek[simulateDay - 1]];
-	refresh();
+	//refresh();
 	loadSchedule();
 	display(1);
 }

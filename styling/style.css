@@ -96,6 +96,14 @@ a{
   vertical-align:middle;
 }
 
+.hideDIV{
+  display:none
+}
+
+.showDIV{
+  display:block
+}
+
 #selectedNavButton{
   background-color: var(--select-color);
 }

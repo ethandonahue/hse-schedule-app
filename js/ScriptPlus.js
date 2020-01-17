@@ -397,6 +397,10 @@ function landOrPort(){
 	return "portrait";
 }
 
+function isAppleDevice(){
+  return /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
+}
+
 Array.prototype.pickValue = function(){
 	var randomValue = Math.floor(Math.random()*this.length);
 	scriptPlusDebugLogging("Picked Random Value (" + randomValue + ") From Range (0 - " + (this.length - 1) + ")");

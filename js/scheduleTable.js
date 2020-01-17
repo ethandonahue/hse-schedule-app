@@ -4,8 +4,8 @@ var listObjects = [];
 SheetsPlus.whenNotEquals("currentSchedule", "undefined", loadSchedule);
 
 function loadSchedule() {
-	if (currentSchedule.schedule != undefined) {
-		schedule = currentSchedule.schedule;
+	if (currentSchedule.uneditedSchedule != undefined) {
+		schedule = currentSchedule.uneditedSchedule;
 		createTable();
 	}
 }

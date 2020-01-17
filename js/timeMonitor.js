@@ -73,9 +73,11 @@ async function getMonthlySchedule(){
         fullSchedule[neededSchedules[schedule]] = {
           "info":{
             "schoolStartTime":periodSchedule[0].startTime,
-            "schoolEndTime":periodSchedule[periodSchedule.length - 1].endTime
+            "schoolEndTime":periodSchedule[periodSchedule.length - 1].endTime,
+            "name":neededSchedules[schedule]
           },
-          "schedule":periodSchedule
+          "schedule":periodSchedule,
+          "uneditedSchedule":periodSchedule
         };
       }
     } else {
@@ -228,10 +230,10 @@ function updateAroundLunch(){
         });
       }
       if(lunches.length > 1){
-        if(lunches[1].periodName == lunches[2].periodName && window.location.pathname == "/screens/online/home.html"){
+        if(lunches[1].periodName == lunches[2].periodName && false){
           lunches[1].endTime = lunches[2].endTime;
           currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[2]), 1);
-        } else if (lunches[0].periodName == lunches[1].periodName && window.location.pathname == "/screens/online/home.html"){
+        } else if (lunches[0].periodName == lunches[1].periodName && false){
           lunches[0].endTime = lunches[1].endTime;
           currentSchedule.schedule.splice(currentSchedule.schedule.indexOf(lunches[1]), 1);
         }
