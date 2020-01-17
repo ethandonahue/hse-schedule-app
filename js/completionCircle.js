@@ -14,7 +14,7 @@ function getCanvas(){
       canvas.height = window.innerHeight * 0.8;
     } else {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.3;
+      canvas.height = window.innerHeight * 0.35;
     }
     //surface.fillRect(0, 0, canvas.width, canvas.height);
     completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
