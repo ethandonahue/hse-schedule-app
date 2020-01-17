@@ -13,9 +13,11 @@ function getCanvas(){
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
   setInterval(() => {
-    surface.clearRect(0, 0, canvas.width, canvas.height);
-    //surface.fillRect(0, 0, canvas.width, canvas.height);
-    completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
+    if(period != undefined){
+      surface.clearRect(0, 0, canvas.width, canvas.height);
+      //surface.fillRect(0, 0, canvas.width, canvas.height);
+      completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
+    }
   }, 10);
 }
 
