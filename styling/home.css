@@ -131,7 +131,9 @@ canvas{
   }
 
   #lunch{
-    padding-top: 10%;
+    position:fixed;
+    bottom:15vh;
+    padding-top: 15%;
   }
 
   #timeHeader{

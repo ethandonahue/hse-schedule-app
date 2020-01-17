@@ -1,135 +1,123 @@
 <!DOCTYPE html>
 <html>
-   <head>
-      <title>HSE Schedule App</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <link rel="stylesheet" type="text/css" href="/styling/about.css">
-      <link rel="stylesheet" type="text/css" href="/styling/bellSchedule.css">
-      <link rel="stylesheet" type="text/css" href="/styling/home.css">
-      <link rel="stylesheet" type="text/css" href="/styling/calendar.css">
-      <link rel="stylesheet" type="text/css" href="/styling/settings.css">
-      <link rel="stylesheet" type="text/css" href="/styling/style.css">
-      <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
-      <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
-      <link rel="manifest" href="/manifest.json">
-      <link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">
-      <script src="/serviceworker.js"></script>
-      <script src="/js/storageChecker.js"></script>
-      <script src="/js/ScriptPlus.js"></script>
-      <script src="https://www.gstatic.com/charts/loader.js"></script>
-      <script src="/js/timeMonitor.js"></script>
-      <script src="/js/scheduleTable.js"></script>
-      <script src="/js/themeSwitcher.js"></script>
-      <script src="/js/pageSwitcher.js"></script>
-      <script src="/js/completionCircle.js"></script>
-   <body onload="showSection('');onLoadCheckTheme();selectLunch();getCanvas();" class="disable-selection">
-      <div class="content">
-         <div class="screenContent">
-            <div id="ABOUT SCREEN" class="hideDIV">
-               <div id="header">
-                  <h1 id="headerText">About Us</h1>
-               </div>
-               <div class="info">
-               <h2>Made by Ethan Donahue and Isaac Robbins</h2>
-             </div>
-               <img alt="Ethan" class="pfp" src="/images/ethan.jpg"></img>
-               <img alt="Isaac" class="pfp" src="/images/isaac.jpg"></img>
-            </div>
-            <div id="BELLSCHEDULE SCREEN" class="hideDIV">
-               <div id="header">
-                  <h1 id="headerText">Bell Schedule</h1>
-               </div>
-
-               <table class="tg" id="bellScheduleTable">
-                  <colgroup>
-                     <col style="width: 20%">
-                     <col style="width: 60%">
-                  </colgroup>
-                  <tr id="tableToNotDelete">
-                     <td class="bellRow">Period</td>
-                     <td class="bellRow">Time</td>
-                  </tr>
-               </table>
-
+  <head>
+    <title>HSE Schedule App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" type="text/css" href="/styling/about.css">
+    <link rel="stylesheet" type="text/css" href="/styling/bellSchedule.css">
+    <link rel="stylesheet" type="text/css" href="/styling/home.css">
+    <link rel="stylesheet" type="text/css" href="/styling/calendar.css">
+    <link rel="stylesheet" type="text/css" href="/styling/settings.css">
+    <link rel="stylesheet" type="text/css" href="/styling/style.css">
+    <link rel="apple-touch-icon" href="/images/HSEScheduleAppLogo192.png">
+    <link rel="shortcut icon" href="/images/HSEScheduleAppLogo192.png">
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">
+    <script src="/serviceworker.js"></script>
+    <script src="/js/storageChecker.js"></script>
+    <script src="/js/ScriptPlus.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/js/timeMonitor.js"></script>
+    <script src="/js/scheduleTable.js"></script>
+    <script src="/js/themeSwitcher.js"></script>
+    <script src="/js/pageSwitcher.js"></script>
+    <script src="/js/completionCircle.js"></script>
+  </head>
+  <body onload="showSection('');onLoadCheckTheme();selectLunch();getCanvas();" class="disable-selection">
+    <div class="content">
+      <div class="screenContent">
+        <div id="ABOUT SCREEN" class="hideDIV">
+          <div id="header">
+            <h1 id="headerText">About Us</h1>
           </div>
-            <div id="HOME SCREEN" class="hideDIV">
-               <div id="header">
-                  <h1 id="headerText">HSE Schedule</h1>
-               </div>
-               <div class="row">
-                  <div class="column left">
-                     <div id="dateAndTime" class="CenteredSide">
-                        <div id="currentDay">
-                           <h1 id="currentDayText"></h1>
-                        </div>
-                        <div id="currentWeek">
-                           <h1 id="currentWeekText"></h1>
-                        </div>
-                        <div id="currentTime">
-                           <h1 id="currentTimeText"></h1>
-                        </div>
-                     </div>
-                  </div>
-                  <canvas id="completionCircle"></canvas>
-                  <div class="column middle">
-                     <div id="TimeContainer" class="CenteredMiddle">
-                        <div id="timeRemaining">
-                           <h3 id="timeHeader">Please Wait</h3>
-                           <h3 id="timeSecondaryHeader"></h3>
-                        </div>
-                        <div id="time">
-                           <h1 id="timeText">Loading Schedules</h1>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="column right">
-                     <div id="lunch" class="CenteredSide">
-                        <h3 id="lunchText">
-                        </h1>
-                        <h1 id="lunchTime"></h1>
-                     </div>
-                  </div>
-               </div>
+          <div class="info">
+            <h2>Made by Ethan Donahue and Isaac Robbins</h2>
+          </div>
+          <img alt="Ethan" class="pfp" src="/images/ethan.jpg"></img>
+          <img alt="Isaac" class="pfp" src="/images/isaac.jpg"></img>
+        </div>
+        <div id="BELLSCHEDULE SCREEN" class="hideDIV">
+          <div id="header">
+            <h1 id="headerText">Bell Schedule</h1>
+          </div>
+          <table class="tg" id="bellScheduleTable">
+            <colgroup>
+              <col style="width: 20%">
+              <col style="width: 60%">
+            </colgroup>
+            <tr id="tableToNotDelete">
+              <td class="bellRow">Period</td>
+              <td class="bellRow">Time</td>
+            </tr>
+          </table>
+        </div>
+        <div id="HOME SCREEN" class="hideDIV">
+          <div id="header">
+            <h1 id="headerText">HSE Schedule</h1>
+          </div>
+          <div class="row">
+            <div class="column left">
+              <div id="dateAndTime" class="CenteredSide">
+                <div id="currentDay">
+                  <h1 id="currentDayText"></h1>
+                </div>
+                <div id="currentWeek">
+                  <h1 id="currentWeekText"></h1>
+                </div>
+                <div id="currentTime">
+                  <h1 id="currentTimeText"></h1>
+                </div>
+              </div>
             </div>
-            <div id="CALENDAR SCREEN" class="hideDIV">
-               <div id="header">
-                  <h1 id="headerText">Calendar</h1>
-               </div>
-<div id="calendar">
-  <h2 style="text-align:center;margin-top:10px;">Click A Day To View It's Schedule</h2>
-<table class="cal">
-  <tr>
-    <th class="cal-month" colspan="7" id="cal-month">Month<br>Year</th>
-  </tr>
-  <tr>
-    <td class="cal-header">Su</td>
-    <td class="cal-header">Mo</td>
-    <td class="cal-header">Tu</td>
-    <td class="cal-header">We</td>
-    <td class="cal-header">Th</td>
-    <td class="cal-header">Fr</td>
-    <td class="cal-header">Sa</td>
-  </tr>
-  <tr id="cal-week-1">
-
-  </tr>
-  <tr id="cal-week-2">
-
-  </tr>
-  <tr id="cal-week-3">
-
-  </tr>
-  <tr id="cal-week-4">
-
-  </tr>
-  <tr id="cal-week-5">
-
-  </tr>
-</table>
-</div>
+            <canvas id="completionCircle"></canvas>
+            <div class="column middle">
+              <div id="TimeContainer" class="CenteredMiddle">
+                <div id="timeRemaining">
+                  <h3 id="timeHeader">Please Wait</h3>
+                  <h3 id="timeSecondaryHeader"></h3>
+                </div>
+                <div id="time">
+                  <h1 id="timeText">Loading Schedules</h1>
+                </div>
+              </div>
             </div>
-            <script src="/js/calendarScript.js"></script>
+            <div class="column right">
+              <div id="lunch" class="CenteredSide">
+                <h3 id="lunchText"></h3>
+                <h1 id="lunchTime"></h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="CALENDAR SCREEN" class="hideDIV">
+          <div id="header">
+            <h1 id="headerText">Calendar</h1>
+          </div>
+          <div id="calendar">
+            <h2 style="text-align:center;margin-top:10px;">Click A Day To View It's Schedule</h2>
+            <table class="cal">
+              <tr>
+                <th class="cal-month" colspan="7" id="cal-month">Month<br>Year</th>
+              </tr>
+              <tr>
+                <td class="cal-header">Su</td>
+                <td class="cal-header">Mo</td>
+                <td class="cal-header">Tu</td>
+                <td class="cal-header">We</td>
+                <td class="cal-header">Th</td>
+                <td class="cal-header">Fr</td>
+                <td class="cal-header">Sa</td>
+              </tr>
+              <tr id="cal-week-1"></tr>
+              <tr id="cal-week-2"></tr>
+              <tr id="cal-week-3"></tr>
+              <tr id="cal-week-4"></tr>
+              <tr id="cal-week-5"></tr>
+            </table>
+          </div>
+        </div>
+        <script src="/js/calendarScript.js"></script>
             <div id="SETTINGS SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">Settings</h1>
