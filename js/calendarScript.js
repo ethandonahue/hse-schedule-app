@@ -37,6 +37,7 @@ function deleteCalendar(){
 			wk.children[0].remove();
 		}
 	}
+	calendarDayToPrint = 1;
 }
 
 function displaySelectedSchedule(day){

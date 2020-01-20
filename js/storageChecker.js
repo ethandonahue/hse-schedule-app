@@ -57,6 +57,14 @@ function getTheme(){
   return localStorage.theme;
 }
 
+function getDay(){
+  return localStorage.day;
+}
+
+function setDay(day){
+  localStorage.day = day;
+}
+
 function saveSchedules(schedules, month, layout){
   localStorage.schedules = JSON.stringify(schedules);
   localStorage.schedulesMonth = month;

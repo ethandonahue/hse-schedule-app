@@ -10,6 +10,10 @@ var simulateDay = null;
 
 var simulatePeriod = null;
 
+if(localStorage.day == undefined){
+  localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
+}
+
 if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlus.getCurrentDate().monthName){
   schedules = getSavedSchedules().schedules;
   schedulesPerWeek = getSavedSchedules().layout.split(",");
@@ -88,6 +92,11 @@ async function getMonthlySchedule(){
   }
   schedules = fullSchedule;
   saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
+  if(localStorage.day != TimePlus.getCurrentDate().dayOfMonth){
+    localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
+    deleteCalendar();
+    generateCalendar();
+  }
   if(mostRecentVersion() != true){
     delete localStorage.firstLoadedLayout;
     delete localStorage.firstLoadedSchedule;
