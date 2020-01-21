@@ -61,7 +61,7 @@ function highlightSelected(){
 	for(var i = 0; i<listObjects.length; i++){
 		listObjects[i].period.removeAttribute("class");
 		listObjects[i].time.removeAttribute("class");
-		if(eval(period) != undefined && listObjects[i].period.textContent == period.periodNum){
+		if(eval(period) != undefined && listObjects[i].period.textContent.indexOf(period.periodNum) > -1){
 			listObjects[i].period.setAttribute("class", "bellRow selected");
 			listObjects[i].time.setAttribute("class", "bellRow selected");
 		} else {

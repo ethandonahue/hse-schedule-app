@@ -10,10 +10,6 @@ var simulateDay = null;
 
 var simulatePeriod = null;
 
-if(localStorage.day == undefined){
-  localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
-}
-
 if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlus.getCurrentDate().monthName){
   schedules = getSavedSchedules().schedules;
   schedulesPerWeek = getSavedSchedules().layout.split(",");

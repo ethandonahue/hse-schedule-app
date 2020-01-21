@@ -12,6 +12,14 @@ if(typeof(Storage) != undefined){
 
 }
 
+if(localStorage.day == undefined){
+  localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
+}
+
+if(localStorage.popups == undefined){
+  localStorage.popups = JSON.stringify({});
+}
+
 function setLunch(lunch){
   if(lunch != "A" && lunch != "B" && lunch !="C" && lunch != "NONE"){
     console.error("Incorrect Lunch Type Entered");
@@ -63,6 +71,23 @@ function getDay(){
 
 function setDay(day){
   localStorage.day = day;
+}
+
+function addPopId(id){
+  var pop = JSON.parse(localStorage.popups);
+  pop[id] = false;
+  localStorage.popups = JSON.stringify(pop);
+}
+
+function popupSeen(id){
+  var pop = JSON.parse(localStorage.popups);
+  return pop[id];
+}
+
+function popupSetSeen(id){
+  var pop = JSON.parse(localStorage.popups);
+  pop[id] = true;
+  localStorage.popups = JSON.stringify(pop);
 }
 
 function saveSchedules(schedules, month, layout){

@@ -130,6 +130,52 @@ a{
   font-size:5.5vh;
 }
 
+#popup{
+  z-index:3;
+  position:absolute;
+  background-color: var(--highlight-color);
+  padding:0;
+  opacity: 0.95;
+  filter: alpha(opacity=95);
+  text-align: center;
+}
+
+#popup-header{
+  height:8%;
+}
+
+#popup-message{
+  height:70%;
+}
+
+#popup-exit-message{
+  height:10%;
+}
+
+@media screen and (orientation:landscape) {
+  #popup{
+    margin-left:35vw;
+    margin-top: 30vh;
+    width:30vw;
+    height:40vh;
+  }
+  #popup-message{
+    max-width: 30vw;
+  }
+}
+
+@media screen and (orientation:portrait) {
+  #popup{
+    margin-left:20vw;
+    margin-top: 30vh;
+    width:60vw;
+    height:40vh;
+  }
+  #popup-message{
+    max-width: 60vw;
+  }
+}
+
 .disable-selection {
      -moz-user-select: none; /* Firefox */
       -ms-user-select: none; /* Internet Explorer */

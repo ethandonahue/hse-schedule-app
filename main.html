@@ -15,8 +15,8 @@
     <link rel="manifest" href="/manifest.json">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">
     <script src="/serviceworker.js"></script>
-    <script src="/js/storageChecker.js"></script>
     <script src="/js/ScriptPlus.js"></script>
+    <script src="/js/storageChecker.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/js/timeMonitor.js"></script>
     <script src="/js/scheduleTable.js"></script>
@@ -24,10 +24,16 @@
     <script src="/js/pageSwitcher.js"></script>
     <script src="/js/completionCircle.js"></script>
     <script src="/js/calendarScript.js"></script>
+    <script src="/js/popup.js"></script>
   </head>
   <body onload="showSection('');onLoadCheckTheme();selectLunch();" class="disable-selection">
     <div class="content">
       <div class="screenContent">
+        <div id="popup" class="hideDIV">
+          <h1 id="popup-header"></h1><br>
+          <p id="popup-message"></p>
+          <h3 id="popup-exit-message">Tap To Dismiss</h3>
+        </div>
         <div id="ABOUT SCREEN" class="hideDIV">
           <div id="header">
             <h1 id="headerText">About Us</h1>
