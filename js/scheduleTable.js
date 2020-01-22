@@ -61,7 +61,7 @@ function highlightSelected(){
 	for(var i = 0; i<listObjects.length; i++){
 		listObjects[i].period.removeAttribute("class");
 		listObjects[i].time.removeAttribute("class");
-		if(eval(period) != undefined && listObjects[i].period.textContent.indexOf(period.periodNum) > -1){
+		if(eval(period) != undefined && getCurrentTablePeriod(time.hour, time.minute).indexOf(listObjects[i].period.textContent) > -1){
 			listObjects[i].period.setAttribute("class", "bellRow selected");
 			listObjects[i].time.setAttribute("class", "bellRow selected");
 		} else {
@@ -70,6 +70,20 @@ function highlightSelected(){
 		}
 	}
 	window.requestAnimationFrame(highlightSelected);
+}
+
+function getCurrentTablePeriod(hour, minute){
+  var sched = schedule;
+  for(var i = 0; i<sched.length; i++){
+    var start = new Date(date.year, date.month, date.dayOfMonth, sched[i].startTime.hour, sched[i].startTime.minute, 0, 0);
+    var end = new Date(date.year, date.month, date.dayOfMonth, sched[i].endTime.hour, sched[i].endTime.minute, 0, 0);
+    if(TimePlus.getFullDate() >= start && TimePlus.getFullDate() < end){
+      if(simulatePeriod != null){
+        i = simulatePeriod;
+      }
+      return sched[i].periodName;
+    }
+  }
 }
 
 function convertTime(start, end) {

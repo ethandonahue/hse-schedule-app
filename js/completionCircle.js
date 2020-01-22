@@ -23,29 +23,11 @@ function getCanvas(){
 
 function resizeCanvas(){
   if(landOrPort() == "landscape"){
-    canvas.width = window.screen.width * 0.5;
-    canvas.height = window.screen.height * 0.8;
+    canvas.width = window.innerWidth * 0.5;
+    canvas.height = window.innerHeight * 0.8;
   } else {
-    canvas.width = window.screen.width;
-    canvas.height = window.screen.height * 0.32;
-  }
-  if(isAppleDevice() && !inStandalone()){
-    if(landOrPort() == "landscape"){
-      canvas.width = window.innerWidth * 0.5;
-      canvas.height = window.innerHeight * 0.8;
-    } else {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.35;
-    }
-  }
-  if(inStandalone()){
-    if(landOrPort() == "landscape"){
-      canvas.width = window.innerWidth * 0.5;
-      canvas.height = window.innerHeight * 0.8;
-    } else {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.35;
-    }
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight * 0.35;
   }
   completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
 }
