@@ -2,7 +2,7 @@ function showPopup(header, message, id){
   if(popupSeen(id) == undefined){
     addPopId(id);
   }
-  if(popupSeen(id) == false || popupSeen(id) == true){
+  if(popupSeen(id) == false){
       document.getElementById("popup-header").innerHTML = header;
       document.getElementById("popup-message").innerHTML = message;
       document.getElementById("popup").setAttribute("class", "showDIV");
@@ -22,7 +22,7 @@ window.ontouch = function(event){
 }
 
 function appleInstaller(){
-  if(isAppleDevice()){
+  if(isAppleDevice() && !inStandalone()){
     //showPopup("Install On iOS", "1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'", "apple-installer");
   }
 }

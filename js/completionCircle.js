@@ -16,7 +16,7 @@ function getCanvas(){
     surface.clearRect(0, 0, canvas.width, canvas.height);
     if(period != undefined){
       //surface.fillRect(0, 0, canvas.width, canvas.height);
-      completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
+      //completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
     }
   }, 10);
 }
