@@ -25,10 +25,6 @@ function hidePopup(){
   }
 }
 
-window.addEventListener("touchstart", hidePopup, false);
-window.addEventListener("touchmove", hidePopup, false);
-window.addEventListener("touchend", hidePopup, false);
-window.addEventListener("touchcancel", hidePopup, false);
 window.onclick = function(event){
   hidePopup();
 }
