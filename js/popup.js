@@ -23,6 +23,6 @@ window.ontouch = function(event){
 
 function appleInstaller(){
   if(isAppleDevice() && !inStandalone()){
-    //showPopup("Install On iOS", "1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'", "apple-installer");
+    showPopup("Install On iOS", "1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'", "apple-installer");
   }
 }

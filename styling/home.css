@@ -31,7 +31,7 @@ canvas{
   font-size: 4vw;
 }
 
- #time{
+ #timeText{
    font-size: 4.5vw;
 }
 
@@ -103,12 +103,13 @@ canvas{
 
 canvas{
   margin:0 25%;
+  position:fixed;
 }
 }
 @media screen and (orientation:portrait) {
   .CenteredMiddle{
       display: table-cell;
-      padding-top: 12vh;
+      padding-top: 11vh;
       text-align: center;
       width: 100vw;
       vertical-align: middle;
@@ -128,7 +129,7 @@ canvas{
 
   #lunch{
     position:fixed;
-    bottom:15vh;
+    bottom:13vh;
     padding-top: 15%;
   }
 
@@ -136,8 +137,8 @@ canvas{
     font-size: 4vh;
   }
 
-   #time{
-     font-size: 5vh;
+   #timeText{
+     font-size: 9vh;
   }
 
   #lunchText{
