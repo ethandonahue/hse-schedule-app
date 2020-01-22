@@ -405,6 +405,16 @@ function inStandalone(){
 	 return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone) || document.referrer.includes('android-app://');
 }
 
+/*function reorient(){
+	if(window.screen.orientation.angle % 180 != 0){
+		document.getElementById("contentHolder").setAttribute("class", "contentRotated");
+	} else {
+		document.getElementById("contentHolder").setAttribute("class", "content");
+	}
+}
+
+setInterval(reorient, 100);*/
+
 Array.prototype.pickValue = function(){
 	var randomValue = Math.floor(Math.random()*this.length);
 	scriptPlusDebugLogging("Picked Random Value (" + randomValue + ") From Range (0 - " + (this.length - 1) + ")");
