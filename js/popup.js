@@ -44,5 +44,5 @@ function appleInstaller(){
 }
 
 function recentUpdate(){  //Don't forget to change the update id
-  showPopup("Recent Update:", "-Added notification pop-ups<br><br>-Bell Schedule Highlighting Fixes<br><br>-Completion Circle Enhancements", "Update-1-2");
+  showPopup("Recent Update:", "-Embeded HSE's Twitter On The Info Tab<br><br>-Completion Circle Enhancements", "Update-1-3");
 }
