@@ -24,6 +24,9 @@ function showSection(section){
       display(4);
       highlightButton(4);
       break;
+    case "testing":
+      display(5);
+      break;
     default:
       if(window.location.hash == ""){
         showSection("home");
