@@ -142,14 +142,17 @@ a{
 
 #popup-header{
   height:8%;
+  max-height:8%;
 }
 
 #popup-message{
   height:70%;
+  max-height:70%;
 }
 
 #popup-exit-message{
   height:10%;
+  max-height:10%;
 }
 
 @media screen and (orientation:landscape) {

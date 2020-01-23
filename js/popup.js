@@ -15,13 +15,15 @@ function showPopup(header, message, id){
 }
 
 function hidePopup(){
-  document.getElementById("popup").setAttribute("class", "hideDIV");
-  popupSetSeen(showingPopId);
-  if(showingPopId == "apple-installer"){
-    showingPopId = null;
-    recentUpdate();
-  } else {
-    showingPopId = null;
+  if(showingPopId != null){
+    document.getElementById("popup").setAttribute("class", "hideDIV");
+    popupSetSeen(showingPopId);
+    if(showingPopId == "apple-installer"){
+      showingPopId = null;
+      setTimeout(recentUpdate, 1000);
+    } else {
+      showingPopId = null;
+    }
   }
 }
 
@@ -42,5 +44,5 @@ function appleInstaller(){
 }
 
 function recentUpdate(){  //Don't forget to change the update id
-  showPopup("Recent Update:", "-Added notification pop-ups<br><br>-Bell Schedule Highlighting Fixes<br><br>-Completion Circle Enhancements", "Update-1");
+  showPopup("Recent Update:", "-Added notification pop-ups<br><br>-Bell Schedule Highlighting Fixes<br><br>-Completion Circle Enhancements", "Update-1-2");
 }
