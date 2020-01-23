@@ -25,6 +25,15 @@
     <script src="/js/completionCircle.js"></script>
     <script src="/js/calendarScript.js"></script>
     <script src="/js/popup.js"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      var OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "7c75438e-a133-43aa-a17a-f52bd7d7bd5d",
+        });
+      });
+    </script>
   </head>
   <body onload="showSection('');onLoadCheckTheme();selectLunch();appleInstaller();recentUpdate();" class="disable-selection">
     <div id="contentHolder" class="content">
@@ -155,7 +164,7 @@
           </div>
           <!--Have a comment/suggestion or find a bug?<br>
           Let us know!<br>
-          <a href="mailto:test@example.com?subject=Testing out mailto!&body=This is only a test!">Click Here To E-Mail</a>-->
+          <a href="mailto:hsescheduleapp@outlook.com?subject=In-App Feedback&body=Here is my feedback on the HSE Schedule App:">Click Here To E-Mail Us</a>-->
         </div>
       </div>
       <nav>
