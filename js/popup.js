@@ -25,6 +25,9 @@ function hidePopup(){
   }
 }
 
+window.ontouchstart = function(event){
+  hidePopup();
+}
 window.onclick = function(event){
   hidePopup();
 }
