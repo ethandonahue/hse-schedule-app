@@ -1,4 +1,4 @@
-var screens = ["ABOUT SCREEN", "BELLSCHEDULE SCREEN", "HOME SCREEN", "CALENDAR SCREEN", "SETTINGS SCREEN", "testing"];
+var screens = ["ABOUT SCREEN", "BELLSCHEDULE SCREEN", "HOME SCREEN", "CALENDAR SCREEN", "SETTINGS SCREEN"];
 var buttons = ["aboutButton", "bellButton", "homeButton", "calendarButton", "settingsButton"];
 var icons = ["about.png", "schedule.png", "home.png", "calendar.png", "settings.png"];
 
@@ -23,9 +23,6 @@ function showSection(section){
     case "settings":
       display(4);
       highlightButton(4);
-      break;
-    case "testing":
-      display(5);
       break;
     default:
       if(window.location.hash == ""){

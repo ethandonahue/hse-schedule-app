@@ -422,6 +422,34 @@ Array.prototype.pickValue = function(){
 	return this[randomValue];
 }
 
+String.prototype.contains = function(value){
+	return this.indexOf(value) > -1;
+}
+
+String.prototype.occurs = function(value){
+	var count = 0;
+	var string = this;
+	while(string.length > 0 && value != ""){
+		if(string.substring(0, value.length) == value){
+			count++;
+		}
+		string = string.slice(1);
+	}
+	return count;
+}
+
+String.prototype.indexesOf = function(value){
+	var indexes = [];
+	var string = this;
+	while(string.length > 0 && value != ""){
+		if(string.substring(0, value.length) == value){
+			indexes.push(this.length - string.length);
+		}
+		string = string.slice(1);
+	}
+	return indexes;
+}
+
 Date.prototype.getWeek = function() {
   var d = new Date(this.getFullYear(),0,1);
   return Math.ceil((((this - d) / 86400000) + d.getDay()+1)/7) - 1;
