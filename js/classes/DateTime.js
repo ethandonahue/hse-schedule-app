@@ -26,6 +26,10 @@ function DateTime(custom){
     return this.date;
   }
 
+  this.getTimeUntil = function(otherDateTime){
+    return this._timeSubtraction(otherDateTime);
+  }
+
   this.getTimeAsString = function(){
     return this._timeObjectToString(this.time);
   }
@@ -217,6 +221,18 @@ function DateTime(custom){
       }
     }
     return object;
+  }
+
+  this._timeSubtraction = function(other){
+    var remaining = {};
+    var start = new Date(this.date.year, this.date.month, this.date.dayOfMonth, this.time.hour, this.time.minute, this.time.second, this.time.millisecond);
+    var end = new Date(other.date.year, other.date.month, other.date.dayOfMonth, other.time.hour, other.time.minute, other.time.second, other.time.millisecond);
+    var totalSeconds = Math.abs(end - start) / 1000;
+    remaining.hour = Math.floor((totalSeconds / 3600));
+		remaining.minute = Math.floor((totalSeconds / 60) % 60);
+		remaining.second = Math.floor(totalSeconds % 60);
+    remaining.millisecond = Math.floor((totalSeconds - Math.floor(totalSeconds)) * 1000);
+    return remaining;
   }
 
   this._toSeconds = function(time){
