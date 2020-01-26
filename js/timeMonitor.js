@@ -1,3 +1,6 @@
+//Developed By: Isaac Robbins
+//For Use With: HSE Schedule App
+
 var schedulesPerWeek = [];
 
 var useMilitaryTime = false;

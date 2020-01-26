@@ -179,7 +179,8 @@ function DateTime(custom){
   this._timeObjectToString = function(object){
     var string = "";
     var aOrP = "";
-    object = this._formatStaticTime(object);
+    var object = this._formatStaticTime(object);
+    var minute = object.minute;
     if(object.hour < 13){
       string += object.hour;
       aOrP = "a.m.";
@@ -187,7 +188,10 @@ function DateTime(custom){
       string += (object.hour - 12);
       aOrP = "p.m.";
     }
-    string += ":" + object.minute + " " + aOrP;
+    if(minute < 10){
+      minute = "0" + minute;
+    }
+    string += ":" + minute + " " + aOrP;
     return string;
   }
 

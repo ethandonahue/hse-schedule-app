@@ -1,3 +1,6 @@
+//Developed By: Isaac Robbins
+//For Use With: HSE Schedule App
+
 var canvas, surface;
 
 var startingPos = 1.5 * Math.PI;
