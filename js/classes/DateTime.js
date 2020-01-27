@@ -10,11 +10,12 @@ function DateTime(custom){
   this.staticDate = false;
 
   if(custom != undefined){
+    var formatter = new DateTime();
     if(custom.time != undefined){
-      this.staticTime = this._formatStaticTime(custom.time);
+      this.staticTime = formatter._formatStaticTime(custom.time);
     }
     if(custom.date != undefined){
-      this.staticDate = this._formatStaticDate(custom.date);
+      this.staticDate = formatter._formatStaticDate(custom.date);
     }
   }
 
@@ -28,6 +29,10 @@ function DateTime(custom){
 
   this.getTimeUntil = function(otherDateTime){
     return this._timeSubtraction(otherDateTime);
+  }
+
+  this.isBetween = function(firstDateTime, secondDateTime){
+    return this._betweenTimes(firstDateTime, secondDateTime);
   }
 
   this.getTimeAsString = function(){
@@ -227,10 +232,14 @@ function DateTime(custom){
     return object;
   }
 
+  this._giveDateObject = function(dt){
+    return new Date(dt.date.year, dt.date.month, dt.date.dayOfMonth, dt.time.hour, dt.time.minute, dt.time.second, dt.time.millisecond);
+  }
+
   this._timeSubtraction = function(other){
     var remaining = {};
-    var start = new Date(this.date.year, this.date.month, this.date.dayOfMonth, this.time.hour, this.time.minute, this.time.second, this.time.millisecond);
-    var end = new Date(other.date.year, other.date.month, other.date.dayOfMonth, other.time.hour, other.time.minute, other.time.second, other.time.millisecond);
+    var start = this._giveDateObject(this);
+    var end = this._giveDateObject(other);
     var totalSeconds = Math.abs(end - start) / 1000;
     remaining.hour = Math.floor((totalSeconds / 3600));
 		remaining.minute = Math.floor((totalSeconds / 60) % 60);
@@ -239,8 +248,19 @@ function DateTime(custom){
     return remaining;
   }
 
+  this._betweenTimes = function(first, second){
+    var isBetween = false;
+    var myself = this._giveDateObject(this);
+    first = this._giveDateObject(first);
+    second = this._giveDateObject(second);
+    if(myself >= first && myself <= second){
+      isBetween = true;
+    }
+    return isBetween;
+  }
+
   this._toSeconds = function(time){
-    time = this._formatStaticTime(time);
+    var time = this._formatStaticTime(time);
 		var seconds = time.second;
 		seconds += time.minute * 60;
 		seconds += time.hour * 3600;

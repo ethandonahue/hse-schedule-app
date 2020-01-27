@@ -1,8 +1,15 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
-function Schedule(layout){
-  this.layout = layout;
+function Schedule(name){
+  this.schoolStartTime = false;
+  this.schoolEndTime = false;
+  this.layout = false;
+  this.name = name;
+
+  this.setLayout = function(layout){
+    this.layout = layout;
+  }
 }
 
 function Period(){
