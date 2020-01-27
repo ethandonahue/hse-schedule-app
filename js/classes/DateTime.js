@@ -44,11 +44,11 @@ function DateTime(custom){
   }
 
   this.setCustomTime = function(time){
-    this.staticTime = this._formatStaticTime(time);;
+    this.staticTime = this._formatStaticTime(time);
   }
 
   this.setCustomDate = function(date){
-    this.staticDate = this._formatStaticDate(date);;
+    this.staticDate = this._formatStaticDate(date);
   }
 
   this.removeCustomTime = function(){

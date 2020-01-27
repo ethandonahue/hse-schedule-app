@@ -1,6 +1,57 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
+function Schedules(month){
+  this.month = month;
+  this.requiredSchedules = {};
+  this.scheduleLayout = [];
+
+  this.setSchedules = async function(url, sheetsMonthlyRawData){
+    var needed = this._parseRequiredSchedules(sheetsMonthlyRawData);
+    for(var sched = 0; sched < needed.length; sched++){
+      var name = needed[sched];
+      console.log(url + encodeURIComponent(name));
+      var raw = new Sheet(url + encodeURIComponent(name));
+      raw = await raw.getRawData();
+      console.log(raw.rawData);
+      this.requiredSchedules[name] = new Schedule(name);
+      this.requiredSchedules[name].setLayout(raw.rawData);
+    }
+  }
+
+  this.getScheduleLayout = function(){
+    return this.scheduleLayout;
+  }
+
+  this.getRequiredSchedules = function(){
+    return this.requiredSchedules;
+  }
+
+  this._addScheduleToLayout = function(schedule){
+    this.scheduleLayout.push(schedule);
+  }
+
+  this._addRequiredSchedules = function(name, schedule){
+    if(!(name in this.requiredSchedules)){
+      this.requiredSchedules[name] = schedule;
+    }
+  }
+
+  this._parseRequiredSchedules = function(data){
+    var parsed = [];
+    data = data.wg;
+    for(var week = 1; week < data.length; week++){
+      for(var day = 0; day < 7; day++){
+        var info = data[week].c[day];
+        if(info != null && parsed.occurs(info.v) == 0){
+          parsed.push(info.v);
+        }
+      }
+    }
+    return parsed;
+  }
+}
+
 function Schedule(name){
   this.schoolStartTime = false;
   this.schoolEndTime = false;
@@ -43,10 +94,7 @@ function Schedule(name){
       var info = data[1].c;
       var specialDay = new Period();
       specialDay.setDisplayName(info[0].v);
-      specialDay.setTimes("12:00 a.m.", "11:59 p.m.");
-      specialDay.endTime.staticTime.second = 59;
-      specialDay.endTime.staticTime.millisecond = 999;
-      specialDay.endTime.update();
+      specialDay.setTimes("12:00 a.m.", {hour:24,minute:0,second:0,millisecond:0});
       parsed.push(specialDay);
     }
     return parsed;

@@ -421,6 +421,16 @@ Array.prototype.pickValue = function(){
 	return this[randomValue];
 }
 
+Array.prototype.occurs = function(value){
+	var count = 0;
+	for(var i = 0; i < this.length; i++){
+		if(this[i] == value){
+			count++;
+		}
+	}
+	return count;
+}
+
 String.prototype.contains = function(value){
 	return this.indexOf(value) > -1;
 }
