@@ -8,7 +8,37 @@ function Schedule(name){
   this.name = name;
 
   this.setLayout = function(layout){
+    if(Array.isArray(layout) == false){
+      layout = this._parseRawData(layout);
+    }
     this.layout = layout;
+    this.schoolStartTime = layout[0].startTime;
+    this.schoolEndTime = layout[layout.length - 1].endTime;
+  }
+
+  this.setCustomStart = function(startDateTime){
+    this.schoolStartTime = startDateTime;
+  }
+
+  this.setCustomEnd = function(endDateTime){
+    this.schoolEndTime = endDateTime;
+  }
+
+  this.getLayout = function(){
+    return this.layout;
+  }
+
+  this._parseRawData = function(data){
+    var parsed = [];
+    data = data.wg;
+    for(var period = 1; period < data.length; period++){
+      var info = data[period].c;
+      var newPeriod = new Period();
+      newPeriod.setDisplayName(info[0].v);
+      newPeriod.setTimes(info[1].v, info[2].v);
+      parsed.push(newPeriod);
+    }
+    return parsed;
   }
 }
 
