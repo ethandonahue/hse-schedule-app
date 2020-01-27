@@ -31,12 +31,23 @@ function Schedule(name){
   this._parseRawData = function(data){
     var parsed = [];
     data = data.wg;
-    for(var period = 1; period < data.length; period++){
-      var info = data[period].c;
-      var newPeriod = new Period();
-      newPeriod.setDisplayName(info[0].v);
-      newPeriod.setTimes(info[1].v, info[2].v);
-      parsed.push(newPeriod);
+    if(data[0].c[1].v != "Message"){
+      for(var period = 1; period < data.length; period++){
+        var info = data[period].c;
+        var newPeriod = new Period();
+        newPeriod.setDisplayName(info[0].v);
+        newPeriod.setTimes(info[1].v, info[2].v);
+        parsed.push(newPeriod);
+      }
+    } else {
+      var info = data[1].c;
+      var specialDay = new Period();
+      specialDay.setDisplayName(info[0].v);
+      specialDay.setTimes("12:00 a.m.", "11:59 p.m.");
+      specialDay.endTime.staticTime.second = 59;
+      specialDay.endTime.staticTime.millisecond = 999;
+      specialDay.endTime.update();
+      parsed.push(specialDay);
     }
     return parsed;
   }
