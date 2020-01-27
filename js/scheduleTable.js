@@ -7,10 +7,34 @@ function loadSchedule() {
 	if (currentSchedule.schedule != undefined) {
 		schedule = getSavedSchedules().schedules[currentSchedule.info.name].schedule;
 		createTable();
+	} else {
+		var noSchool = document.createElement("h2");
+		var headerVal = document.createTextNode("No School Today");
+		noSchool.appendChild(headerVal);
+		noSchool.setAttribute("class", "noSchool");
+		var tableHeader = document.getElementById("tableToNotDelete");
+		tableHeader.appendChild(noSchool);
 	}
 }
 
 function createTable() {
+
+	var tableHeader = document.getElementById("tableToNotDelete");
+
+	var periodHeader = document.createElement("td");
+	var periodText = document.createTextNode("Period");
+	periodHeader.appendChild(periodText);
+	periodHeader.setAttribute("class", "bellRow");
+	tableHeader.appendChild(periodHeader);
+
+	var timeHeader = document.createElement("td");
+	var timeText = document.createTextNode("Time");
+	timeHeader.appendChild(timeText);
+	timeHeader.setAttribute("class", "bellRow");
+	tableHeader.appendChild(timeHeader);
+
+
+
 
 	for (var i = 0; i < schedule.length; i++) {
 		if (schedule[i].passing) {
@@ -54,6 +78,7 @@ function createTable() {
 function deleteTable(){
 	while(document.getElementsByClassName("bell-schedule-table").length > 0){
 		document.getElementsByClassName("bell-schedule-table")[0].remove();
+		document.getElementById("tableToNotDelete").innerHTML = "";
 	}
 }
 
