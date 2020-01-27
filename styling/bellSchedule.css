@@ -60,3 +60,8 @@ width: 100%;}
 .selected{
   background-color: var(--highlight-color);
 }
+
+.noSchool{
+  padding-top: 20px;
+  text-align: center;
+}
