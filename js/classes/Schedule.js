@@ -10,10 +10,8 @@ function Schedules(month){
     var needed = this._parseRequiredSchedules(sheetsMonthlyRawData);
     for(var sched = 0; sched < needed.length; sched++){
       var name = needed[sched];
-      console.log(url + encodeURIComponent(name));
       var raw = new Sheet(url + encodeURIComponent(name));
-      raw = await raw.getRawData();
-      console.log(raw.rawData);
+      await raw.getRawData();
       this.requiredSchedules[name] = new Schedule(name);
       this.requiredSchedules[name].setLayout(raw.rawData);
     }
