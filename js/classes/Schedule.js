@@ -8,12 +8,16 @@ function Schedules(month){
 
   this.setSchedules = async function(url, sheetsMonthlyRawData){
     var needed = this._parseRequiredSchedules(sheetsMonthlyRawData);
+    var layout = this._parseScheduleLayout(sheetsMonthlyRawData);
     for(var sched = 0; sched < needed.length; sched++){
       var name = needed[sched];
       var raw = new Sheet(url + encodeURIComponent(name));
       await raw.getRawData();
       this.requiredSchedules[name] = new Schedule(name);
       this.requiredSchedules[name].setLayout(raw.rawData);
+    }
+    for(var sched = 0; sched < layout.length; sched++){
+      this.scheduleLayout.push(layout[sched]);
     }
   }
 
@@ -25,16 +29,6 @@ function Schedules(month){
     return this.requiredSchedules;
   }
 
-  this._addScheduleToLayout = function(schedule){
-    this.scheduleLayout.push(schedule);
-  }
-
-  this._addRequiredSchedules = function(name, schedule){
-    if(!(name in this.requiredSchedules)){
-      this.requiredSchedules[name] = schedule;
-    }
-  }
-
   this._parseRequiredSchedules = function(data){
     var parsed = [];
     data = data.wg;
@@ -42,6 +36,20 @@ function Schedules(month){
       for(var day = 0; day < 7; day++){
         var info = data[week].c[day];
         if(info != null && parsed.occurs(info.v) == 0){
+          parsed.push(info.v);
+        }
+      }
+    }
+    return parsed;
+  }
+
+  this._parseScheduleLayout = function(data){
+    var parsed = [];
+    data = data.wg;
+    for(var week = 1; week < data.length; week++){
+      for(var day = 0; day < 7; day++){
+        var info = data[week].c[day];
+        if(info != null){
           parsed.push(info.v);
         }
       }
