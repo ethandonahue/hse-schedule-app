@@ -12,7 +12,7 @@
      border-collapse: collapse;
      border-spacing: 0;
      border-color: #9ABAD9;
-
+     margin: 0 auto;
      margin-top: 20px;
 
 }
@@ -79,6 +79,8 @@
  .key {
      border-collapse:separate;
      border-spacing:20px;
+     position: absolute;
+     right: 0;
 }
  .key td{
      font-family:Arial, sans-serif;
@@ -125,6 +127,7 @@
 
 #cal-container{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  /* justify-content: center;
+  align-items: center; */
 }
