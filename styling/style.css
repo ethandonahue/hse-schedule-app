@@ -162,4 +162,7 @@
      -webkit-touch-callout: none;
     /* Disable Android and iOS callouts*/
 }
- 
+
+#timeText{
+    font-size: 60px;
+}
