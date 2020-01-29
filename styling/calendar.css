@@ -12,8 +12,9 @@
      border-collapse: collapse;
      border-spacing: 0;
      border-color: #9ABAD9;
-     margin: 0 auto;
+
      margin-top: 20px;
+
 }
  .cal td {
      font-size: 14px;
@@ -120,4 +121,10 @@
      border-color:transparent;
      text-align:left;
      vertical-align:top
+}
+
+#cal-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
