@@ -405,13 +405,13 @@ function inStandalone(){
 }
 
 function cloneObject(obj){
-	var copy = {};
+	var clone = {};
   for(var attr in obj){
 		if(obj.hasOwnProperty(attr)){
-			copy[attr] = obj[attr];
+			clone[attr] = obj[attr];
     }
 	}
-	return copy;
+	return clone;
 }
 
 /*function reorient(){

@@ -28,6 +28,7 @@ function update(){
   globalTime.update();
   currentSchedule = cloneObject(schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]]);
   personalSchedule = cloneObject(currentSchedule);
+  personalizeSchedule();
   console.log(currentSchedule);
   console.log(personalSchedule);
   //window.requestAnimationFrame(update);
@@ -38,4 +39,8 @@ async function refreshSchedules(){
   await scheduless.setSchedules(googleSheetURL, monthlyRawData.rawData);
   monthlyLayout = scheduless.getScheduleLayout();
   schedulesRequired = scheduless.getRequiredSchedules();
+}
+
+function personalizeSchedule(){
+  
 }
