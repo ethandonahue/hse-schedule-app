@@ -2,11 +2,29 @@
      .cal td {
          padding: 8px 6px;
     }
+    .key {
+      margin: 0 auto;
+   }
+
 }
  @media only screen and (orientation: landscape) {
      .cal td {
          padding: 8px 20px;
     }
+
+    #cal-container{
+      display: flex;
+      position: relative;
+    }
+
+    .key {
+        position: absolute;
+        right: 0;
+   }
+
+
+
+
 }
  .cal {
      border-collapse: collapse;
@@ -79,11 +97,8 @@
  .key {
      border-collapse:separate;
      border-spacing:20px;
-     position: absolute;
-     right: 0;
 }
  .key td{
-     font-family:Arial, sans-serif;
      font-size:14px;
      padding:0px 6px;
      border-style:solid;
@@ -93,7 +108,6 @@
      border-color:black;
 }
  .key th{
-     font-family:Arial, sans-serif;
      font-size:14px;
      font-weight:normal;
      padding:0px 6px;
@@ -123,11 +137,4 @@
      border-color:transparent;
      text-align:left;
      vertical-align:top
-}
-
-#cal-container{
-  display: flex;
-  position: relative;
-  /* justify-content: center;
-  align-items: center; */
 }
