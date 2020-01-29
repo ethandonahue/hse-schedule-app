@@ -1,8 +1,6 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
-loadGoogleCharts();
-
 function Sheet(url){
   this.url = url;
   this.rawData = false;
@@ -44,4 +42,16 @@ function Sheet(url){
 
 function loadGoogleCharts(){
   google.charts.load('current', {'packages':['corechart']});
+  return new Promise((resolve) => {
+    var loaded = setInterval(() => {
+      try{
+        if(google.visualization.Query != undefined){
+          clearInterval(loaded);
+          resolve();
+        }
+      } catch {
+
+      }
+    }, 100, loaded);
+  });
 }

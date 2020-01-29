@@ -8,14 +8,21 @@ function Schedules(month){
 
   this.setSchedules = async function(url, sheetsMonthlyRawData){
     var needed = this._parseRequiredSchedules(sheetsMonthlyRawData);
+    var layout = this._parseScheduleLayout(sheetsMonthlyRawData);
+    var promises = [];
+    var me = this;
     for(var sched = 0; sched < needed.length; sched++){
-      var name = needed[sched];
-      console.log(url + encodeURIComponent(name));
-      var raw = new Sheet(url + encodeURIComponent(name));
-      raw = await raw.getRawData();
-      console.log(raw.rawData);
-      this.requiredSchedules[name] = new Schedule(name);
-      this.requiredSchedules[name].setLayout(raw.rawData);
+      promises.push(new Sheet(url + encodeURIComponent(needed[sched])).getRawData());
+    }
+    await Promise.all(promises).then((scheds) => {
+      for(var sched = 0; sched < scheds.length; sched++){
+        me.requiredSchedules[needed[sched]] = new Schedule(needed[sched]);
+        me.requiredSchedules[needed[sched]].setLayout(scheds[sched]);
+      }
+    });
+    //console.log(this.requiredSchedules);
+    for(var sched = 0; sched < layout.length; sched++){
+      this.scheduleLayout.push(layout[sched]);
     }
   }
 
@@ -27,16 +34,6 @@ function Schedules(month){
     return this.requiredSchedules;
   }
 
-  this._addScheduleToLayout = function(schedule){
-    this.scheduleLayout.push(schedule);
-  }
-
-  this._addRequiredSchedules = function(name, schedule){
-    if(!(name in this.requiredSchedules)){
-      this.requiredSchedules[name] = schedule;
-    }
-  }
-
   this._parseRequiredSchedules = function(data){
     var parsed = [];
     data = data.wg;
@@ -44,6 +41,20 @@ function Schedules(month){
       for(var day = 0; day < 7; day++){
         var info = data[week].c[day];
         if(info != null && parsed.occurs(info.v) == 0){
+          parsed.push(info.v);
+        }
+      }
+    }
+    return parsed;
+  }
+
+  this._parseScheduleLayout = function(data){
+    var parsed = [];
+    data = data.wg;
+    for(var week = 1; week < data.length; week++){
+      for(var day = 0; day < 7; day++){
+        var info = data[week].c[day];
+        if(info != null){
           parsed.push(info.v);
         }
       }
