@@ -16,11 +16,11 @@ var simulatePeriod = null;
 if(localStorage.schedules != undefined && localStorage.schedulesMonth == TimePlus.getCurrentDate().monthName){
   schedules = getSavedSchedules().schedules;
   schedulesPerWeek = getSavedSchedules().layout.split(",");
-  window.requestAnimationFrame(refresh);
+  //window.requestAnimationFrame(refresh);
 }
 
-SheetsPlus.load();
-SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySchedule);
+//SheetsPlus.load();
+//SheetsPlus.whenNotEquals("google.visualization.Query", "undefined", getMonthlySchedule);
 
 async function getMonthlySchedule(){
   rawMonthlySchedule = await SheetsPlus.get(googleSheetURL + encodeURIComponent("Monthly Planner"));

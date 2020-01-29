@@ -404,6 +404,16 @@ function inStandalone(){
 	 return (window.matchMedia('(display-mode: standalone)').matches) || (window.navigator.standalone) || document.referrer.includes('android-app://');
 }
 
+function cloneObject(obj){
+	var copy = {};
+  for(var attr in obj){
+		if(obj.hasOwnProperty(attr)){
+			copy[attr] = obj[attr];
+    }
+	}
+	return copy;
+}
+
 /*function reorient(){
 	if(window.screen.orientation.angle % 180 != 0){
 		document.getElementById("contentHolder").setAttribute("class", "contentRotated");

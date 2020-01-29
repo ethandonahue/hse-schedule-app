@@ -9,13 +9,18 @@ function Schedules(month){
   this.setSchedules = async function(url, sheetsMonthlyRawData){
     var needed = this._parseRequiredSchedules(sheetsMonthlyRawData);
     var layout = this._parseScheduleLayout(sheetsMonthlyRawData);
+    var promises = [];
+    var me = this;
     for(var sched = 0; sched < needed.length; sched++){
-      var name = needed[sched];
-      var raw = new Sheet(url + encodeURIComponent(name));
-      await raw.getRawData();
-      this.requiredSchedules[name] = new Schedule(name);
-      this.requiredSchedules[name].setLayout(raw.rawData);
+      promises.push(new Sheet(url + encodeURIComponent(needed[sched])).getRawData());
     }
+    await Promise.all(promises).then((scheds) => {
+      for(var sched = 0; sched < scheds.length; sched++){
+        me.requiredSchedules[needed[sched]] = new Schedule(needed[sched]);
+        me.requiredSchedules[needed[sched]].setLayout(scheds[sched]);
+      }
+    });
+    //console.log(this.requiredSchedules);
     for(var sched = 0; sched < layout.length; sched++){
       this.scheduleLayout.push(layout[sched]);
     }
