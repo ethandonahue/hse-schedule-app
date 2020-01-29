@@ -2,29 +2,23 @@
      .cal td {
          padding: 8px 6px;
     }
-    .key {
-      margin: 0 auto;
-   }
-
+     .key {
+         padding-top: 20px;
+         margin: 0 auto;
+    }
 }
  @media only screen and (orientation: landscape) {
      .cal td {
          padding: 8px 20px;
     }
-
-    #cal-container{
-      display: flex;
-      position: relative;
+     #cal-container{
+         display: flex;
+         position: relative;
     }
-
-    .key {
-        position: absolute;
-        right: 0;
-   }
-
-
-
-
+     .key {
+         position: absolute;
+         right: 0;
+    }
 }
  .cal {
      border-collapse: collapse;
@@ -32,7 +26,6 @@
      border-color: #9ABAD9;
      margin: 0 auto;
      margin-top: 20px;
-
 }
  .cal td {
      font-size: 14px;
@@ -119,7 +112,9 @@
 }
  .key .key-header{
      text-align:center;
-     vertical-align:top
+     vertical-align:top;
+     font-size: 20px;
+     font-weight: bold;
 }
  .key .key-today{
      background-color:var(--highlight-color);
