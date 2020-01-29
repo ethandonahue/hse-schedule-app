@@ -441,6 +441,10 @@ Array.prototype.occurs = function(value){
 	return count;
 }
 
+Array.prototype.pushAt = function(pos, value){
+	this.splice(pos, 0, value);
+}
+
 String.prototype.contains = function(value){
 	return this.indexOf(value) > -1;
 }
@@ -455,6 +459,15 @@ String.prototype.occurs = function(value){
 		string = string.slice(1);
 	}
 	return count;
+}
+
+String.prototype.indexOfNumber = function(){
+	for(var i = 0; i < 10; i++){
+		if(this.contains(i)){
+			return this.indexOf(i);
+		}
+	}
+	return -1;
 }
 
 String.prototype.indexesOf = function(value){

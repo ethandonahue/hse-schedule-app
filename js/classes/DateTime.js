@@ -43,6 +43,10 @@ function DateTime(custom){
     return this._toSeconds(this.time);
   }
 
+  this.getDateAsString = function(){
+    return this._dateObjectToString(this.date);
+  }
+
   this.setCustomTime = function(time){
     this.staticTime = this._formatStaticTime(time);
   }
@@ -230,6 +234,10 @@ function DateTime(custom){
       }
     }
     return object;
+  }
+
+  this._dateObjectToString = function(obj){
+    return obj.monthName + " " + obj.dayOfMonth + ", " + obj.year;
   }
 
   this._giveDateObject = function(dt){

@@ -68,6 +68,7 @@ function Schedule(name){
   this.schoolEndTime = false;
   this.layout = false;
   this.name = name;
+  this.currentPeriod = false;
 
   this.setLayout = function(layout){
     if(Array.isArray(layout) == false){
@@ -98,13 +99,29 @@ function Schedule(name){
         var info = data[period].c;
         var newPeriod = new Period();
         newPeriod.setDisplayName(info[0].v);
+        newPeriod.setPeriodNumber(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.indexOfNumber() + 1));
         newPeriod.setTimes(info[1].v, info[2].v);
+        newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
+        if(newPeriod.displayName.contains("Lunch")){
+          newPeriod.makeLunchPeriod(info[0].v.substring(info[0].v.indexOf("Lunch") - 2, info[0].v.length));
+        }
         parsed.push(newPeriod);
+      }
+      for(var period = 0; period < parsed.length - 1; period++){
+        if(parsed[period].endTime.getTimeInSeconds() != parsed[period + 1].startTime.getTimeInSeconds()){
+          var newPassing = new PassingPeriod();
+          newPassing.setDisplayName("Passing Period");
+          newPassing.setLowerDisplayName("(Go To " + parsed[period + 1].displayName + ")");
+          newPassing.setPeriodNumber(parsed[period + 1].periodNum);
+          newPassing.setTimes(parsed[period].endTime.getTimeAsString(), parsed[period + 1].startTime.getTimeAsString());
+          parsed.pushAt(period + 1, newPassing);
+        }
       }
     } else {
       var info = data[1].c;
       var specialDay = new Period();
       specialDay.setDisplayName(info[0].v);
+      specialDay.setPeriodNumber("Special Day");
       specialDay.setTimes("12:00 a.m.", {hour:24,minute:0,second:0,millisecond:0});
       parsed.push(specialDay);
     }
@@ -164,6 +181,15 @@ function Period(){
     this._updateTableDisplay();
   }
 
+  this.setTableDisplay = function(period, time){
+    if(period != undefined){
+      this.tableDisplay.period = period;
+    }
+    if(time != undefined){
+      this.tableDisplay.time = time;
+    }
+  }
+
   this._updateTableDisplay = function(){
     if(this.periodNum != false && this.startTime != false && this.endTime != false){
       this.tableDisplay.period = this.periodNum;
@@ -196,6 +222,10 @@ function PassingPeriod(){
 
   this.setLowerDisplayName = function(name){
     this.lowerDisplayName = name;
+  }
+
+  this.setPeriodNumber = function(num){
+    this.periodNum = num;
   }
 
   this.setTimes = function(start, end){
