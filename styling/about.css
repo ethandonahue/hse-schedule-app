@@ -1,23 +1,33 @@
 @media screen and (orientation:landscape) {
-     .pfp{
-         margin: 20px;
-         height:300px;
-         width:200px;
-    }
+.pfp{
+  margin: 20px;
+  height:300px;
+  width:200px;
 }
- @media screen and (orientation:portrait) {
-     .pfp{
-         margin: 20px;
-         height:170px;
-         width: 110px;
-    }
 }
- .info {
-     padding-top: 20px;
-     padding-left: 20px;
+
+@media screen and (orientation:portrait) {
+.pfp{
+  margin: 20px;
+  height:170px;
+  width: 110px;
 }
+<<<<<<< HEAD
  #twitter{
      text-align: center;
 
      padding-top: 20px;
 }
+=======
+}
+
+.info {
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+#twitter{
+  text-align: center;
+  padding-top: 20px;
+}
+>>>>>>> parent of 1a53c66... Merge branch 'master' of https://github.com/donaheth000/hse-schedule-app

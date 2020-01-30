@@ -1,34 +1,11 @@
-@media only screen and (max-device-width : 999px) and (min-device-width : 567px){
+@media only screen and (orientation: portrait) {
      .cal td {
          padding: 8px 6px;
     }
-     .key {
-         padding-top: 20px;
-         margin: 0 auto;
-         border-spacing:20px;
-    }
 }
- @media only screen and (orientation: landscape) and (min-device-width : 1000px) {
+ @media only screen and (orientation: landscape) {
      .cal td {
          padding: 8px 20px;
-    }
-     #cal-container{
-         display: flex;
-         position: relative;
-    }
-     .key {
-         position: absolute;
-         right: 0;
-         border-spacing:20px;
-    }
-}
- @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
-     .cal td {
-         padding: 1px 1px;
-    }
-     .key {
-         margin: 0 auto;
-         border-spacing:14px;
     }
 }
  .cal {
@@ -100,8 +77,10 @@
 }
  .key {
      border-collapse:separate;
+     border-spacing:20px;
 }
  .key td{
+     font-family:Arial, sans-serif;
      font-size:14px;
      padding:0px 6px;
      border-style:solid;
@@ -111,6 +90,7 @@
      border-color:black;
 }
  .key th{
+     font-family:Arial, sans-serif;
      font-size:14px;
      font-weight:normal;
      padding:0px 6px;
@@ -119,6 +99,10 @@
      overflow:hidden;
      word-break:normal;
      border-color:transparent;
+}
+ .key .key-header{
+     text-align:center;
+     vertical-align:top
 }
  .key .key-today{
      background-color:var(--highlight-color);
@@ -137,4 +121,3 @@
      text-align:left;
      vertical-align:top
 }
- 
