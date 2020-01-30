@@ -5,6 +5,7 @@ function Schedules(month){
   this.month = month;
   this.requiredSchedules = {};
   this.scheduleLayout = [];
+  this.scheduleData = [];
 
   this.setSchedules = async function(url, sheetsMonthlyRawData){
     var needed = this._parseRequiredSchedules(sheetsMonthlyRawData);
@@ -16,8 +17,10 @@ function Schedules(month){
     }
     await Promise.all(promises).then((scheds) => {
       for(var sched = 0; sched < scheds.length; sched++){
+        me.scheduleData.push(scheds[sched]);
         me.requiredSchedules[needed[sched]] = new Schedule(needed[sched]);
         me.requiredSchedules[needed[sched]].setLayout(scheds[sched]);
+        me.requiredSchedules[needed[sched]].setRawData(scheds[sched]);
       }
     });
     //console.log(this.requiredSchedules);
@@ -69,6 +72,8 @@ function Schedule(name){
   this.layout = false;
   this.name = name;
   this.currentPeriod = false;
+  this.rawData = false;
+  this.lunchPeriod = false;
 
   this.setLayout = function(layout){
     if(Array.isArray(layout) == false){
@@ -91,6 +96,17 @@ function Schedule(name){
     return this.layout;
   }
 
+  this.setRawData = function(data){
+    this.rawData = data;
+  }
+
+  this.clone = function(){
+    var clone = new Schedule("Clone of " + this.name);
+    clone.setLayout(this.rawData);
+    clone.setRawData(this.rawData);
+    return clone;
+  }
+
   this._parseRawData = function(data){
     var parsed = [];
     data = data.wg;
@@ -103,7 +119,7 @@ function Schedule(name){
         newPeriod.setTimes(info[1].v, info[2].v);
         newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
         if(newPeriod.displayName.contains("Lunch")){
-          newPeriod.makeLunchPeriod(info[0].v.substring(info[0].v.indexOf("Lunch") - 2, info[0].v.length));
+          newPeriod.makeLunchPeriod(info[0].v);
         }
         parsed.push(newPeriod);
       }
@@ -137,6 +153,7 @@ function Period(){
   this.endTime = false;
   this.isLunch = false;
   this.lunchName = false;
+  this.notLunchName = false;
   this.tableDisplay = {
     period:false,
     time:false
@@ -157,7 +174,8 @@ function Period(){
 
   this.makeLunchPeriod = function(name){
     this.isLunch = true;
-    this.lunchName = name;
+    this.lunchName = name.substring(name.indexOf("/") + 2, name.length);
+    this.notLunchName = name.substring(0, name.indexOf("/") - 1);
     this._updateTableDisplay();
   }
 

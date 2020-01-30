@@ -190,11 +190,15 @@ function DateTime(custom){
     var aOrP = "";
     var object = this._formatStaticTime(object);
     var minute = object.minute;
-    if(object.hour < 13){
+    if(object.hour < 12){
       string += object.hour;
       aOrP = "a.m.";
     } else {
-      string += (object.hour - 12);
+      if(object.hour == 12){
+        string += object.hour;
+      } else {
+        string += (object.hour - 12);
+      }
       aOrP = "p.m.";
     }
     if(minute < 10){
@@ -248,7 +252,7 @@ function DateTime(custom){
     var remaining = {};
     var start = this._giveDateObject(this);
     var end = this._giveDateObject(other);
-    var totalSeconds = Math.abs(end - start) / 1000;
+    var totalSeconds = (end - start) / 1000;
     remaining.hour = Math.floor((totalSeconds / 3600));
 		remaining.minute = Math.floor((totalSeconds / 60) % 60);
 		remaining.second = Math.floor(totalSeconds % 60);
