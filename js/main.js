@@ -39,6 +39,7 @@ async function preupdate(){
   //}
   update();
   createScheduleTable();
+  setTimeout(refreshSchedules, 5000);
 }
 
 function update(){
@@ -59,6 +60,7 @@ async function refreshSchedules(){
   await scheduless.setSchedules(googleSheetURL, monthlyRawData.rawData);
   monthlyLayout = scheduless.getScheduleLayout();
   schedulesRequired = scheduless.getRequiredSchedules();
+  setTimeout(refreshSchedules, 5000);
 }
 
 function personalizeSchedule(){
@@ -108,12 +110,18 @@ function personalizeSchedule(){
 }
 
 function setCurrentPeriod(schedule){
-  if(globalTime.getTimeInSeconds() < schedule.schoolStartTime.getTimeInSeconds()){
+  periodShowLower = true;
+  showLunch = true;
+  if(globalTime.getTimeInSeconds() <= schedule.schoolStartTime.getTimeInSeconds()){
     schedule.currentPeriod = "Before School";
+    periodShowLower = false;
+    showLunch = true;
     return;
   }
-  if(globalTime.getTimeInSeconds() > schedule.schoolEndTime.getTimeInSeconds()){
+  if(globalTime.getTimeInSeconds() >= schedule.schoolEndTime.getTimeInSeconds()){
     schedule.currentPeriod = "After School";
+    periodShowLower = false;
+    showLunch = false;
     return;
   }
   for(var p = 0; p < schedule.layout.length; p++){
@@ -122,43 +130,50 @@ function setCurrentPeriod(schedule){
       return;
     }
   }
+  if(schedule.layout[0].periodNum == "Special Day"){
+    schedule.currentPeriod = 0;
+    showLunch = false;
+    if(schedule.layout[0].lowerDisplayName == false){
+      periodShowLower = false;
+    } else {
+      periodShowLower = true;
+    }
+    return;
+  }
+  return;
 }
 
 function getPeriodHeader(){
-  if(personalSchedule.currentPeriod == "Before School"){
-    periodShowLower = false;
-    showLunch = false;
+  if(personalSchedule.currentPeriod == false){
+    return "Header";
+  } else if(personalSchedule.currentPeriod == "Before School"){
     return "School Starts In";
   } else if(personalSchedule.currentPeriod == "After School"){
-    periodShowLower = false;
-    showLunch = false;
     return "School Has Ended";
-  } else if(personalSchedule != undefined){
-    periodShowLower = true;
-    showLunch = true;
-    try{
-      return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
-    } catch {
-      periodShowLower = false;
-      showLunch = false;
-      return "Header";
-    }
+  } else {
+    return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
   }
 }
 
 function getPeriodTimeLeft(){
-  if(personalSchedule.currentPeriod == "Before School"){
+  if(personalSchedule.currentPeriod == false){
+    try{
+      if(personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime != false){
+        return personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime;
+      } else {
+        return "Time";
+      }
+    } catch {
+      return "Time";
+    }
+  } else if(personalSchedule.currentPeriod == "Before School"){
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.schoolStartTime));
   } else if(personalSchedule.currentPeriod == "After School"){
     return "No Time Available";
+  } else if(personalSchedule.currentPeriod == "Special Day"){
+    return ;
   } else {
-    try{
-      return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
-    } catch {
-      periodShowLower = false;
-      showLunch = false;
-      return "Time";
-    }
+    return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
   }
 }
 
@@ -185,7 +200,7 @@ function updateDisplays(){
   document.getElementById("currentTimeText").textContent = globalTime.getTimeAsString();
   document.getElementById("timeHeader").textContent = periodHeader;
   document.getElementById("timeText").textContent = periodTimeLeft;
-  if(periodShowLower && personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName != false){
+  if(periodShowLower && personalSchedule.layout[personalSchedule.currentPeriod] != undefined && personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName != false){
     document.getElementById("timeSecondaryHeader").textContent = personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName;
     document.getElementById("timeSecondaryHeader").style.display = "block";
   } else {

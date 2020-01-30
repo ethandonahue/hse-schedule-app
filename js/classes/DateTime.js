@@ -191,7 +191,11 @@ function DateTime(custom){
     var object = this._formatStaticTime(object);
     var minute = object.minute;
     if(object.hour < 12){
-      string += object.hour;
+      if(object.hour == 0){
+        string += (object.hour + 12);
+      } else {
+        string += object.hour;
+      }
       aOrP = "a.m.";
     } else {
       if(object.hour == 12){

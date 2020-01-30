@@ -137,6 +137,7 @@ function Schedule(name){
       var info = data[1].c;
       var specialDay = new Period();
       specialDay.setDisplayName(info[0].v);
+      specialDay.setCustomPeriodTime(info[1].v);
       specialDay.setPeriodNumber("Special Day");
       specialDay.setTimes("12:00 a.m.", {hour:23,minute:59,second:59,millisecond:999});
       parsed.push(specialDay);
@@ -148,6 +149,7 @@ function Schedule(name){
 function Period(){
   this.displayName = false;
   this.lowerDisplayName = false;
+  this.customPeriodTime = false;
   this.periodNum = false;
   this.startTime = false;
   this.endTime = false;
@@ -165,6 +167,10 @@ function Period(){
 
   this.setLowerDisplayName = function(name){
     this.lowerDisplayName = name;
+  }
+
+  this.setCustomPeriodTime = function(name){
+    this.customPeriodTime = name;
   }
 
   this.setPeriodNumber = function(num){
