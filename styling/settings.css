@@ -53,11 +53,22 @@
  .lunchButton{
      background-color: #f2f2f2;
      color: #004794;
-     padding: 20px 10px;
-     margin-left: 0.5vw;
      text-align: center;
      text-decoration: none;
      display: inline-block;
+}
+
+@media screen and (orientation:landscape) {
+  .lunchButton{
+    padding: 20px 10px;
+    margin-left: 0.5vw;
+  }
+}
+ @media screen and (orientation:portrait) {
+   .lunchButton{
+     padding: 20px 5px;
+     margin-left: 0.5vw;
+   }
 }
  .lunchButtons{
      padding-left: 20px;
@@ -67,4 +78,3 @@
      background-color: #004794;
      color: #fff;
 }
- 
