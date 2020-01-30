@@ -8,7 +8,7 @@ function noSchoolTable() {
 }
 
 function createScheduleTable() {
-
+	//if()
 	var tableHeader = document.getElementById("tableToNotDelete");
 
 	var periodHeader = document.createElement("td");

@@ -1,7 +1,7 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
-//const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
+const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
 
 const globalTime = new DateTime();
 const scheduless = new Schedules(globalTime.getDate().monthName);
@@ -31,12 +31,12 @@ preupdate();
 
 async function preupdate(){
   await loadGoogleCharts();
-  if(localStorage.schedules != undefined){
+  //if(localStorage.schedules != undefined){
     await refreshSchedules();
     console.log(scheduless);
-  } else {
+  //} else {
 
-  }
+  //}
   update();
   createScheduleTable();
 }
@@ -45,9 +45,9 @@ function update(){
   globalTime.update();
   currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
   personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
+  personalizeSchedule();
   setCurrentPeriod(currentSchedule);
   setCurrentPeriod(personalSchedule);
-  personalizeSchedule();
   periodHeader = getPeriodHeader();
   periodTimeLeft = getPeriodTimeLeft();
   updateDisplays();
@@ -184,15 +184,15 @@ function updateDisplays(){
   document.getElementById("currentWeekText").textContent = globalTime.getDateAsString();
   document.getElementById("currentTimeText").textContent = globalTime.getTimeAsString();
   document.getElementById("timeHeader").textContent = periodHeader;
+  document.getElementById("timeText").textContent = periodTimeLeft;
   if(periodShowLower && personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName != false){
     document.getElementById("timeSecondaryHeader").textContent = personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName;
     document.getElementById("timeSecondaryHeader").style.display = "block";
   } else {
     document.getElementById("timeSecondaryHeader").style.display = "none";
   }
-  document.getElementById("timeText").textContent = periodTimeLeft;
   if(showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()){
-    document.getElementById("lunchText").textContent = personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
+    document.getElementById("lunchText").textContent = "Time Until " + personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
     document.getElementById("lunchTime").textContent = formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.lunchPeriod].startTime));
     document.getElementById("lunch").style.display = "table-cell";
   } else {
