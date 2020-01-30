@@ -1,67 +1,58 @@
-
-
 #bellScheduleTable {
-  font-size:15px;
-width: 100%;}
-
+    font-size:15px;
+    width: 100%;
+}
 @media screen and (max-width: 600px) {
-  #bellScheduleTable {
-    font-size:13px;
-  width: 90%;}
+    #bellScheduleTable {
+        font-size:13px;
+        width: 90%;
+   }
 }
-
-@media screen and (min-width: 601px) and  (max-width: 1024px){
-  #bellScheduleTable {
-  width: 90%;}
+@media screen and (min-width: 601px) and (max-width: 1024px){
+    #bellScheduleTable {
+        width: 90%;
+   }
 }
-
 @media screen and (min-width: 1025px) {
-  #bellScheduleTable {
-    font-size:13px;
-  width: 40%;}
+    #bellScheduleTable {
+        font-size:13px;
+        width: 40%;
+   }
 }
-
-
- .tg {
-     border-collapse:collapse;
-     border-spacing:0;
-     margin:0 auto;
-     margin-top: 20px;
+.tg {
+    border-collapse:collapse;
+    border-spacing:0;
+    margin:0 auto;
+    margin-top: 20px;
 }
-
- .tg td{
-   padding: 10px 5px;
-
-
-     border-style:solid;
-     border-width:1px;
-     overflow:hidden;
-     word-break:normal;
-     border-color:black;
+.tg td{
+    padding: 10px 5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+    border-color:black;
 }
-
- .tg th{
-     font-size:14px;
-     font-weight:normal;
-     padding:10px 5px;
-     border-style:solid;
-     border-width:1px;
-     overflow:hidden;
-     word-break:normal;
-     border-color:black;
+.tg th{
+    font-size:14px;
+    font-weight:normal;
+    padding:10px 5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+    border-color:black;
 }
-
- .tg .bellRow{
-     border-color:inherit;
-     text-align:center;
-     vertical-align:top
+.tg .bellRow{
+    border-color:inherit;
+    text-align:center;
+    vertical-align:top
 }
-
 .selected{
-  background-color: var(--highlight-color);
+    background-color: var(--highlight-color);
 }
-
 .noSchool{
-  padding-top: 20px;
-  text-align: center;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 50px;
 }
