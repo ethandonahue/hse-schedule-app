@@ -1,23 +1,13 @@
-var schedule;
-var listObjects = [];
-
-SheetsPlus.whenNotEquals("currentSchedule", "undefined", loadSchedule);
-
-function loadSchedule() {
-	if (currentSchedule.schedule != undefined) {
-		schedule = getSavedSchedules().schedules[currentSchedule.info.name].schedule;
-		createTable();
-	} else {
+function noSchoolTable() {
 		var noSchool = document.createElement("h2");
 		var headerVal = document.createTextNode("No School Today");
 		noSchool.appendChild(headerVal);
 		noSchool.setAttribute("class", "noSchool");
 		var tableHeader = document.getElementById("tableToNotDelete");
 		tableHeader.appendChild(noSchool);
-	}
 }
 
-function createTable() {
+function createScheduleTable() {
 
 	var tableHeader = document.getElementById("tableToNotDelete");
 

@@ -15,6 +15,18 @@ var periodHeader = undefined;
 var periodShowLower = undefined;
 var showLunch = undefined;
 
+/*saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
+if(localStorage.day != TimePlus.getCurrentDate().dayOfMonth){
+  localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
+  deleteCalendar();
+  generateCalendar();
+}
+if(mostRecentVersion() != true){
+  delete localStorage.firstLoadedLayout;
+  delete localStorage.firstLoadedSchedule;
+  window.location.reload();
+}*/
+
 preupdate();
 
 async function preupdate(){
@@ -26,15 +38,16 @@ async function preupdate(){
 
   }
   update();
+  createScheduleTable();
 }
 
 function update(){
   globalTime.update();
   currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
   personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
-  personalizeSchedule();
   setCurrentPeriod(currentSchedule);
   setCurrentPeriod(personalSchedule);
+  personalizeSchedule();
   periodHeader = getPeriodHeader();
   periodTimeLeft = getPeriodTimeLeft();
   updateDisplays();
@@ -120,10 +133,16 @@ function getPeriodHeader(){
     periodShowLower = false;
     showLunch = false;
     return "School Has Ended";
-  } else {
+  } else if(personalSchedule != undefined){
     periodShowLower = true;
     showLunch = true;
-    return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
+    try{
+      return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
+    } catch {
+      periodShowLower = false;
+      showLunch = false;
+      return "Header";
+    }
   }
 }
 
@@ -133,7 +152,13 @@ function getPeriodTimeLeft(){
   } else if(personalSchedule.currentPeriod == "After School"){
     return "No Time Available";
   } else {
-    return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
+    try{
+      return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
+    } catch {
+      periodShowLower = false;
+      showLunch = false;
+      return "Time";
+    }
   }
 }
 

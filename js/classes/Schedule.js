@@ -138,7 +138,7 @@ function Schedule(name){
       var specialDay = new Period();
       specialDay.setDisplayName(info[0].v);
       specialDay.setPeriodNumber("Special Day");
-      specialDay.setTimes("12:00 a.m.", {hour:24,minute:0,second:0,millisecond:0});
+      specialDay.setTimes("12:00 a.m.", {hour:23,minute:59,second:59,millisecond:999});
       parsed.push(specialDay);
     }
     return parsed;
