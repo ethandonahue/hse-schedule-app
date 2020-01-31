@@ -71,7 +71,7 @@ function Schedule(name){
   this.schoolEndTime = false;
   this.layout = false;
   this.name = name;
-  this.currentPeriod = false;
+  this.currentPeriod = undefined;
   this.rawData = false;
   this.lunchPeriod = false;
 
@@ -133,9 +133,14 @@ function Schedule(name){
         var info = data[period].c;
         var newPeriod = new Period();
         newPeriod.setDisplayName(info[0].v);
-        newPeriod.setPeriodNumber(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.indexOfNumber() + 1));
         newPeriod.setTimes(info[1].v, info[2].v);
-        newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
+        if(info[0].v.indexOfNumber() > -1){
+          newPeriod.setPeriodNumber(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.indexOfNumber() + 1));
+          newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
+        } else {
+          newPeriod.setPeriodNumber(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
+          newPeriod.setTableDisplay(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
+        }
         if(newPeriod.displayName.contains("Lunch")){
           newPeriod.makeLunchPeriod(info[0].v);
         }

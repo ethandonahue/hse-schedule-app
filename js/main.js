@@ -155,7 +155,7 @@ function setCurrentPeriod(schedule){
 }
 
 function getPeriodHeader(){
-  if(personalSchedule.currentPeriod == false){
+  if(personalSchedule.currentPeriod == undefined){
     try{
       if(personalSchedule.layout[personalSchedule.currentPeriod].displayName != false){
         return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
@@ -175,7 +175,7 @@ function getPeriodHeader(){
 }
 
 function getPeriodTimeLeft(){
-  if(personalSchedule.currentPeriod == false){
+  if(personalSchedule.currentPeriod == undefined){
     try{
       if(personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime != false){
         return personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime;
@@ -190,7 +190,7 @@ function getPeriodTimeLeft(){
   } else if(personalSchedule.currentPeriod == "After School"){
     return "No Time Available";
   } else if(personalSchedule.currentPeriod == "Special Day"){
-    return ;
+    return personalSchedule.layout[0].customPeriodTime;
   } else {
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
   }
