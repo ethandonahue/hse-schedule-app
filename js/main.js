@@ -46,6 +46,10 @@ function update(){
   globalTime.update();
   currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
   personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
+  globalTime.setCustomDate("1/27/20");
+  currentSchedule.updateTimes();
+  personalSchedule.updateTimes();
+  return;
   personalizeSchedule();
   setCurrentPeriod(currentSchedule);
   setCurrentPeriod(personalSchedule);
@@ -147,7 +151,15 @@ function setCurrentPeriod(schedule){
 
 function getPeriodHeader(){
   if(personalSchedule.currentPeriod == false){
-    return "Header";
+    try{
+      if(personalSchedule.layout[personalSchedule.currentPeriod].displayName != false){
+        return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
+      } else {
+        return "Header";
+      }
+    } catch {
+      return "Header";
+    }
   } else if(personalSchedule.currentPeriod == "Before School"){
     return "School Starts In";
   } else if(personalSchedule.currentPeriod == "After School"){

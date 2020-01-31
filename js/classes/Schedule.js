@@ -107,6 +107,15 @@ function Schedule(name){
     return clone;
   }
 
+  this.updateTimes = function(){
+    for(var p = 0; p < this.layout.length; p++){
+      console.log(this.layout[p]);
+      this.layout[p].startTime.update();
+      this.layout[p].endTime.update();
+      console.log(this.layout[p]);
+    }
+  }
+
   this._parseRawData = function(data){
     var parsed = [];
     data = data.wg;
