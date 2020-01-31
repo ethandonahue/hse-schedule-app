@@ -7,8 +7,12 @@ function noSchoolTable() {
 		tableHeader.appendChild(noSchool);
 }
 
-function createScheduleTable() {
-	//if()
+function createScheduleTable(){
+	deleteTable();
+	if(currentSchedule.layout[0].periodNum == "Special Day"){
+		noSchoolTable();
+		return;
+	}
 	var tableHeader = document.getElementById("tableToNotDelete");
 
 	var periodHeader = document.createElement("td");
@@ -26,41 +30,38 @@ function createScheduleTable() {
 
 
 
-	for (var i = 0; i < schedule.length; i++) {
-		if (schedule[i].passing) {
-			i++
+	for (var i = 0; i < currentSchedule.layout.length; i++) {
+		if (currentSchedule.layout[i].tableDisplay != undefined){
+			var tableContainer = document.createElement("tr");
+			var periodRow = document.createElement("td");
+			var timeRow = document.createElement("td");
+			var periodVal = document.createTextNode(currentSchedule.layout[i].tableDisplay.period);
+			var timeVal = document.createTextNode(currentSchedule.layout[i].tableDisplay.time);
+
+			periodRow.appendChild(periodVal);
+			timeRow.appendChild(timeVal);
+
+			//listObjects.push({
+				//"period":periodRow,
+				//"time":timeRow
+			//});
+
+			//if (eval(period) != undefined && period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
+				//periodRow.setAttribute("class", "bellRow selected");
+				//timeRow.setAttribute("class", "bellRow selected");
+			//} else {
+				periodRow.setAttribute("class", "bellRow");
+				timeRow.setAttribute("class", "bellRow");
+			//}
+
+			tableContainer.setAttribute("class", "bell-schedule-table");
+
+			tableContainer.appendChild(periodRow);
+			tableContainer.appendChild(timeRow);
+
+			var table = document.getElementsByTagName("table")[0];
+			table.appendChild(tableContainer);
 		}
-
-		var tableContainer = document.createElement("tr");
-		var periodRow = document.createElement("td");
-		var timeRow = document.createElement("td");
-		var periodVal = document.createTextNode(schedule[i].periodNum);
-		var timeVal = document.createTextNode(convertTime(schedule[i].startTime, schedule[i].endTime));
-
-		periodRow.appendChild(periodVal);
-		timeRow.appendChild(timeVal);
-
-		listObjects.push({
-			"period":periodRow,
-			"time":timeRow
-		});
-
-		if (eval(period) != undefined && period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
-			periodRow.setAttribute("class", "bellRow selected");
-			timeRow.setAttribute("class", "bellRow selected");
-		} else {
-			periodRow.setAttribute("class", "bellRow");
-			timeRow.setAttribute("class", "bellRow");
-		}
-
-		tableContainer.setAttribute("class", "bell-schedule-table");
-
-		tableContainer.appendChild(periodRow);
-		tableContainer.appendChild(timeRow);
-
-		var table = document.getElementsByTagName("table")[0];
-		table.appendChild(tableContainer);
-
 	}
 	window.requestAnimationFrame(highlightSelected);
 }
