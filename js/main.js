@@ -4,7 +4,7 @@
 const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
 
 const globalTime = new DateTime();
-const scheduless = new Schedules(globalTime.getDate().monthName);
+const schedules = new Schedules(globalTime.getDate().monthName);
 const monthlyRawData = new Sheet(googleSheetURL);
 var monthlyLayout = undefined;
 var schedulesRequired = undefined;
@@ -31,12 +31,11 @@ preupdate();
 
 async function preupdate(){
   await loadGoogleCharts();
-  //if(localStorage.schedules != undefined){
+  if(localStorage.schedules == undefined){
     await refreshSchedules();
-    console.log(scheduless);
-  //} else {
-
-  //}
+  } else {
+    
+  }
   update();
   createScheduleTable();
   setTimeout(refreshSchedules, 5000);
@@ -57,9 +56,9 @@ function update(){
 
 async function refreshSchedules(){
   await monthlyRawData.getRawData();
-  await scheduless.setSchedules(googleSheetURL, monthlyRawData.rawData);
-  monthlyLayout = scheduless.getScheduleLayout();
-  schedulesRequired = scheduless.getRequiredSchedules();
+  await schedules.setSchedules(googleSheetURL, monthlyRawData.rawData);
+  monthlyLayout = schedules.getScheduleLayout();
+  schedulesRequired = schedules.getRequiredSchedules();
   setTimeout(refreshSchedules, 5000);
 }
 

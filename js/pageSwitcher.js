@@ -1,6 +1,7 @@
 var screens = ["ABOUT SCREEN", "BELLSCHEDULE SCREEN", "HOME SCREEN", "CALENDAR SCREEN", "SETTINGS SCREEN"];
 var buttons = ["aboutButton", "bellButton", "homeButton", "calendarButton", "settingsButton"];
 var icons = ["about.png", "schedule.png", "home.png", "calendar.png", "settings.png"];
+var hashes = ["about", "bell", "home", "calendar", "settings"];
 
 function showSection(section){
   switch(section){
@@ -27,8 +28,10 @@ function showSection(section){
     default:
       if(window.location.hash == ""){
         showSection("home");
-      } else {
+      } else if(hashes.occurs(window.location.hash.replace("#", "")) > 0){
         showSection(window.location.hash.replace("#", ""));
+      } else {
+        showSection("home");
       }
       break;
   }
