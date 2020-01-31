@@ -43,12 +43,14 @@ async function preupdate(){
 
 function update(){
   globalTime.update();
-  currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
-  personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
   try{
+    currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
+    personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
     currentSchedule.updateTimes();
     personalSchedule.updateTimes();
   } catch {
+    currentSchedule = schedulesRequired[monthlyLayout[0]].clone();
+    personalSchedule = schedulesRequired[monthlyLayout[0]].clone();
     currentSchedule.removeCustomDates();
     personalSchedule.removeCustomDates();
   }

@@ -46,13 +46,13 @@ function createScheduleTable(){
 				//"time":timeRow
 			//});
 
-			//if (eval(period) != undefined && period.periodNum == schedule[i].periodNum && !schedule[i].passing) {
-				//periodRow.setAttribute("class", "bellRow selected");
-				//timeRow.setAttribute("class", "bellRow selected");
-			//} else {
+			if (i == currentSchedule.currentPeriod || i - 1 == currentSchedule.currentPeriod){
+				periodRow.setAttribute("class", "bellRow selected");
+				timeRow.setAttribute("class", "bellRow selected");
+			} else {
 				periodRow.setAttribute("class", "bellRow");
 				timeRow.setAttribute("class", "bellRow");
-			//}
+			}
 
 			tableContainer.setAttribute("class", "bell-schedule-table");
 
@@ -67,9 +67,9 @@ function createScheduleTable(){
 }
 
 function deleteTable(){
+	document.getElementById("tableToNotDelete").innerHTML = "";
 	while(document.getElementsByClassName("bell-schedule-table").length > 0){
 		document.getElementsByClassName("bell-schedule-table")[0].remove();
-		document.getElementById("tableToNotDelete").innerHTML = "";
 	}
 }
 
