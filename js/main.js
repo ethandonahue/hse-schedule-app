@@ -31,11 +31,12 @@ preupdate();
 
 async function preupdate(){
   await loadGoogleCharts();
-  if(localStorage.schedules == undefined){
+  //if(localStorage.schedules == undefined){
     await refreshSchedules();
-  } else {
-    
-  }
+  //} else {
+    //monthlyLayout = localStorage.schedulesLayout;
+    //schedulesRequired = localStorage.schedules;
+  //}
   update();
   createScheduleTable();
   setTimeout(refreshSchedules, 5000);
@@ -59,6 +60,8 @@ async function refreshSchedules(){
   await schedules.setSchedules(googleSheetURL, monthlyRawData.rawData);
   monthlyLayout = schedules.getScheduleLayout();
   schedulesRequired = schedules.getRequiredSchedules();
+  localStorage.schedulesLayout = JSON.stringify(schedules.getScheduleLayout());
+  localStorage.schedules = JSON.stringify(schedules.getRequiredSchedules());
   setTimeout(refreshSchedules, 5000);
 }
 
