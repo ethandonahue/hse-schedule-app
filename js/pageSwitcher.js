@@ -35,16 +35,12 @@ function showSection(section){
       }
       break;
   }
-  if(simulateDay != null || simulatePeriod != null){
-    simulateDay = null;
-    simulatePeriod = null;
-    deleteTable();
-    refresh();
-    loadSchedule();
-  }
   if(section != ""){
     window.location.hash = section;
   }
+  globalTime.removeCustomTime();
+  globalTime.removeCustomDate();
+  globalTime.update();
 }
 
 function display(screen){
