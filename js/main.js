@@ -46,10 +46,13 @@ function update(){
   globalTime.update();
   currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
   personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
-  globalTime.setCustomDate("1/27/20");
-  currentSchedule.updateTimes();
-  personalSchedule.updateTimes();
-  return;
+  try{
+    currentSchedule.updateTimes();
+    personalSchedule.updateTimes();
+  } catch {
+    currentSchedule.removeCustomDates();
+    personalSchedule.removeCustomDates();
+  }
   personalizeSchedule();
   setCurrentPeriod(currentSchedule);
   setCurrentPeriod(personalSchedule);
@@ -220,11 +223,15 @@ function updateDisplays(){
   } else {
     document.getElementById("timeSecondaryHeader").style.display = "none";
   }
-  if(showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()){
-    document.getElementById("lunchText").textContent = "Time Until " + personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
-    document.getElementById("lunchTime").textContent = formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.lunchPeriod].startTime));
-    document.getElementById("lunch").style.display = "table-cell";
-  } else {
+  try{
+    if(showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()){
+      document.getElementById("lunchText").textContent = "Time Until " + personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
+      document.getElementById("lunchTime").textContent = formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.lunchPeriod].startTime));
+      document.getElementById("lunch").style.display = "table-cell";
+    } else {
+      document.getElementById("lunch").style.display = "none";
+    }
+  } catch {
     document.getElementById("lunch").style.display = "none";
   }
 }

@@ -109,10 +109,19 @@ function Schedule(name){
 
   this.updateTimes = function(){
     for(var p = 0; p < this.layout.length; p++){
-      console.log(this.layout[p]);
+      this.layout[p].startTime.setCustomDate(globalTime.getDate());
       this.layout[p].startTime.update();
+      this.layout[p].endTime.setCustomDate(globalTime.getDate());
       this.layout[p].endTime.update();
-      console.log(this.layout[p]);
+    }
+  }
+
+  this.removeCustomDates = function(){
+    for(var p = 0; p < this.layout.length; p++){
+      this.layout[p].startTime.removeCustomDate();
+      this.layout[p].startTime.update();
+      this.layout[p].endTime.removeCustomDate();
+      this.layout[p].endTime.update();
     }
   }
 
