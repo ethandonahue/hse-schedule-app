@@ -156,15 +156,7 @@ function setCurrentPeriod(schedule){
 
 function getPeriodHeader(){
   if(personalSchedule.currentPeriod == undefined){
-    try{
-      if(personalSchedule.layout[personalSchedule.currentPeriod].displayName != false){
-        return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
-      } else {
-        return "Header";
-      }
-    } catch {
-      return "Header";
-    }
+    return "Header";
   } else if(personalSchedule.currentPeriod == "Before School"){
     return "School Starts In";
   } else if(personalSchedule.currentPeriod == "After School"){
@@ -176,15 +168,7 @@ function getPeriodHeader(){
 
 function getPeriodTimeLeft(){
   if(personalSchedule.currentPeriod == undefined){
-    try{
-      if(personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime != false){
-        return personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime;
-      } else {
-        return "Time";
-      }
-    } catch {
-      return "Time";
-    }
+    return "Time";
   } else if(personalSchedule.currentPeriod == "Before School"){
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.schoolStartTime));
   } else if(personalSchedule.currentPeriod == "After School"){
