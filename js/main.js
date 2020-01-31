@@ -38,7 +38,6 @@ async function preupdate(){
     //schedulesRequired = localStorage.schedules;
   //}
   update();
-  createScheduleTable();
   setTimeout(refreshSchedules, 5000);
 }
 
@@ -59,6 +58,7 @@ function update(){
   periodHeader = getPeriodHeader();
   periodTimeLeft = getPeriodTimeLeft();
   updateDisplays();
+  createScheduleTable();
   window.requestAnimationFrame(update);
 }
 
