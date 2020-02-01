@@ -170,7 +170,7 @@ function getPeriodTimeLeft(){
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.schoolStartTime));
   } else if(personalSchedule.currentPeriod == "After School"){
     return "No Time Available";
-  } else if(personalSchedule.currentPeriod == "Special Day"){
+  } else if(personalSchedule.layout[0].periodNum == "Special Day"){
     return personalSchedule.layout[0].customPeriodTime;
   } else {
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
