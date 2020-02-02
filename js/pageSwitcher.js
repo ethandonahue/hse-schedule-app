@@ -38,9 +38,9 @@ function showSection(section){
   if(section != ""){
     window.location.hash = section;
   }
-  globalTime.removeCustomTime();
-  globalTime.removeCustomDate();
-  globalTime.update();
+  //globalTime.removeCustomTime();
+  //globalTime.removeCustomDate();
+  //globalTime.update();
 }
 
 function display(screen){
