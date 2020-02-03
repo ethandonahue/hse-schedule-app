@@ -100,14 +100,19 @@ function personalizeSchedule(){
             personalSchedule.layout.pushAt(lunchIndexes[1], pass);
             break;
           case 1:
-            middle.setDisplayName(middle.lunchName);
             start.setDisplayName(start.notLunchName);
+            middle.setDisplayName(middle.lunchName);
             end.setDisplayName(end.notLunchName);
+            start.startTime.addMinutes(7);
+            pass.setDisplayName("Passing Period");
+            pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
+            pass.setPeriodNumber(start.periodNum);
+            pass.setTimes(start.startTime.getTimeAsString(), start.startTime.getTimeAsString());
             personalSchedule.lunchPeriod = lunchIndexes[1];
             break;
           case 2:
-            end.setDisplayName(end.lunchName);
             start.setDisplayName(start.notLunchName);
+            end.setDisplayName(end.lunchName);
             start.setTimes(start.startTime.getTimeAsString(), middle.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[1], 1);
             personalSchedule.lunchPeriod = lunchIndexes[2] - 1;
