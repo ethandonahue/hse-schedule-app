@@ -79,46 +79,51 @@ function personalizeSchedule(){
     }
   }
   if(lunchIndexes.length > 0){
+    var start = personalSchedule.layout[lunchIndexes[0]];
+    var middle = personalSchedule.layout[lunchIndexes[1]];
+    var end = personalSchedule.layout[lunchIndexes[2]];
+    var pass = new PassingPeriod();
     for(var l = 0; l < lunchIndexes.length; l++){
       if(personalSchedule.layout[lunchIndexes[l]].lunchName != undefined && personalSchedule.layout[lunchIndexes[l]].lunchName.contains(localStorage.selectedLunch)){
         switch(l){
           case 0:
-            var me = personalSchedule.layout[lunchIndexes[0]];
-            var middle = personalSchedule.layout[lunchIndexes[1]];
-            var end = personalSchedule.layout[lunchIndexes[2]];
-            me.setDisplayName(me.lunchName);
-            middle.setDisplayName(me.notLunchName);
+            start.setDisplayName(start.lunchName);
+            middle.startTime.addMinutes(7);
+            middle.setDisplayName(start.notLunchName);
             middle.setTimes(middle.startTime.getTimeAsString(), end.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[2], 1);
             personalSchedule.lunchPeriod = lunchIndexes[0];
+            pass.setDisplayName("Passing Period");
+            pass.setLowerDisplayName("(Go To " + middle.notLunchName + ")");
+            pass.setPeriodNumber(middle.periodNum);
+            pass.setTimes(start.endTime.getTimeAsString(), middle.startTime.getTimeAsString());
+            personalSchedule.layout.pushAt(lunchIndexes[1], pass);
             break;
           case 1:
-            var start = personalSchedule.layout[lunchIndexes[0]];
-            var me = personalSchedule.layout[lunchIndexes[1]];
-            var end = personalSchedule.layout[lunchIndexes[2]];
-            me.setDisplayName(me.lunchName);
+            middle.setDisplayName(middle.lunchName);
             start.setDisplayName(start.notLunchName);
             end.setDisplayName(end.notLunchName);
             personalSchedule.lunchPeriod = lunchIndexes[1];
             break;
           case 2:
-            var start = personalSchedule.layout[lunchIndexes[0]];
-            var middle = personalSchedule.layout[lunchIndexes[1]];
-            var me = personalSchedule.layout[lunchIndexes[2]];
-            me.setDisplayName(me.lunchName);
+            end.setDisplayName(end.lunchName);
             start.setDisplayName(start.notLunchName);
             start.setTimes(start.startTime.getTimeAsString(), middle.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[1], 1);
             personalSchedule.lunchPeriod = lunchIndexes[2] - 1;
             break;
         }
+        return;
       } else if(localStorage.selectedLunch == "NONE"){
-        var start = personalSchedule.layout[lunchIndexes[0]];
-        var middle = personalSchedule.layout[lunchIndexes[1]];
-        var end = personalSchedule.layout[lunchIndexes[2]];
         start.setDisplayName(start.notLunchName);
         start.setTimes(start.startTime.getTimeAsString(), end.endTime.getTimeAsString());
         personalSchedule.layout.splice(lunchIndexes[1], 2);
+        personalSchedule.lunchPeriod = "NONE";
+        return;
+      } else if(localStorage.selectedLunch == "ALL"){
+        start.setDisplayName(start.lunchName);
+        middle.setDisplayName(middle.lunchName);
+        end.setDisplayName(end.lunchName);
         personalSchedule.lunchPeriod = lunchIndexes[0];
         return;
       }
