@@ -4,7 +4,7 @@ var icons = ["about.png", "schedule.png", "home.png", "calendar.png", "settings.
 var hashes = ["about", "bell", "home", "calendar", "settings"];
 
 function showSection(section){
-  if(window.location.hash == "#calendar"){
+  if(window.location.hash.contains("calendar")){
     globalTime.removeCustomTime();
     globalTime.removeCustomDate();
     globalTime.update();
