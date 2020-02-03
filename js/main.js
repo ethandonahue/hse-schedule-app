@@ -112,6 +112,15 @@ function personalizeSchedule(){
             personalSchedule.lunchPeriod = lunchIndexes[2] - 1;
             break;
         }
+      } else if(localStorage.selectedLunch == "NONE"){
+        var start = personalSchedule.layout[lunchIndexes[0]];
+        var middle = personalSchedule.layout[lunchIndexes[1]];
+        var end = personalSchedule.layout[lunchIndexes[2]];
+        start.setDisplayName(start.notLunchName);
+        start.setTimes(start.startTime.getTimeAsString(), end.endTime.getTimeAsString());
+        personalSchedule.layout.splice(lunchIndexes[1], 2);
+        personalSchedule.lunchPeriod = lunchIndexes[0];
+        return;
       }
     }
   }
