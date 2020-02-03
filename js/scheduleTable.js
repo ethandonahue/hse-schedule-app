@@ -15,8 +15,9 @@ function createScheduleTable(){
 	timeHeader.appendChild(timeText);
 	timeHeader.setAttribute("class", "bellRow");
 	tableHeader.appendChild(timeHeader);
-	for (var i = 0; i < currentSchedule.layout.length; i++) {
-		if (currentSchedule.layout[i].tableDisplay != undefined){
+	var highlighted = false;
+	for(var i = 0; i < currentSchedule.layout.length; i++){
+		if(currentSchedule.layout[i].isPassing == false){
 			var tableContainer = document.createElement("tr");
 			var periodRow = document.createElement("td");
 			var timeRow = document.createElement("td");
@@ -24,9 +25,18 @@ function createScheduleTable(){
 			var timeVal = document.createTextNode(currentSchedule.layout[i].tableDisplay.time);
 			periodRow.appendChild(periodVal);
 			timeRow.appendChild(timeVal);
-			if (i == currentSchedule.currentPeriod || i - 1 == currentSchedule.currentPeriod){
+			var pass = false;
+			try{
+				if(currentSchedule.layout[currentSchedule.currentPeriod].isPassing){
+					pass = currentSchedule.layout[currentSchedule.currentPeriod].periodNum;
+				}
+			} catch {
+
+			}
+			if ((i == currentSchedule.currentPeriod || currentSchedule.layout[i].periodNum == pass) && !highlighted){
 				periodRow.setAttribute("class", "bellRow selected");
 				timeRow.setAttribute("class", "bellRow selected");
+				highlighted = true;
 			} else {
 				periodRow.setAttribute("class", "bellRow");
 				timeRow.setAttribute("class", "bellRow");

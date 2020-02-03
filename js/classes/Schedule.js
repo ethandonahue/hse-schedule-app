@@ -179,6 +179,7 @@ function Period(){
   this.isLunch = false;
   this.lunchName = false;
   this.notLunchName = false;
+  this.isPassing = false;
   this.tableDisplay = {
     period:false,
     time:false
@@ -257,6 +258,7 @@ function PassingPeriod(){
   this.periodNum = false;
   this.startTime = false;
   this.endTime = false;
+  this.isPassing = true;
 
   this.setDisplayNames = function(upper, lower){
     this.displayName = upper;
