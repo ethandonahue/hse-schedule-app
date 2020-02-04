@@ -1,5 +1,15 @@
-var screenHeight = window.screen.height * .6;
-var screenWidth = window.screen.width * .9;
+var screenHeight = window.screen.height;
+var screenWidth = window.screen.width;
+
+if(screenHeight >= screenWidth){
+  screenHeight *= .6;
+  screenWidth *= .9;
+} else {
+  screenHeight *= .6;
+  screenWidth *= .3;
+}
+
+
 
 var twitterElem = document.getElementById("twitter");
 var twitterFeed = document.createElement("a");
