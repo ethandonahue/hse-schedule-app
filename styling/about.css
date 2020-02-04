@@ -1,8 +1,10 @@
 @media screen and (orientation:landscape) {
      .pfp{
-         margin: 20px;
+         padding-top:10px;
+         padding-right: 10px;
          height:200px;
          width:200px;
+
     }
 }
  @media screen and (orientation:portrait) {
@@ -12,11 +14,16 @@
          width: 110px;
     }
 }
+
+.pfpImages{
+  display: inline-block;
+}
+
  .info {
      padding-top: 20px;
      padding-left: 20px;
      position: absolute;
-     float: right;
+     right: 250px;
 }
  #twitter{
     padding-left: 20px;
@@ -24,19 +31,13 @@
 }
 
 .aboutLink{
-  padding-left: 20px;
   padding-top: 20px;
+}
+
+.aboutLink a{
+  color: var(--header-text-color);
 }
 
 #about{
 display: flex;
-}
-
-#links{
-  position: absolute;
-  right: 20px;
-}
-
-#infoTitle{
-
 }
