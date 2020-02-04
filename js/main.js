@@ -98,7 +98,7 @@ function personalizeSchedule(){
             start.setDisplayName(start.notLunchName);
             middle.setDisplayName(middle.lunchName);
             end.setDisplayName(end.notLunchName);
-            personalSchedule.lunchPeriod = lunchIndexes[1];
+            personalSchedule.lunchPeriod = lunchIndexes[2];
             var beforeChange = start.startTime.getTimeAsString();
             start.startTime.addMinutes(7);
             pass.setDisplayName("Passing Period");
@@ -118,7 +118,7 @@ function personalizeSchedule(){
             end.setDisplayName(end.lunchName);
             start.setTimes(start.startTime.getTimeAsString(), middle.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[1], 1);
-            personalSchedule.lunchPeriod = lunchIndexes[2] - 1;
+            personalSchedule.lunchPeriod = lunchIndexes[2];
             var beforeChange = start.startTime.getTimeAsString();
             start.startTime.addMinutes(7);
             pass.setDisplayName("Passing Period");
