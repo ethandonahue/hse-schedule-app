@@ -5,8 +5,8 @@ const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe
 
 const globalTime = new DateTime();
 const calTime = new DateTime();
-const schedules = new Schedules(globalTime.getDate().monthName);
 const monthlyRawData = new Sheet(googleSheetURL);
+const schedules = new Schedules(globalTime.getDate().monthName);
 var firstLoadedSchedules = undefined;
 var monthlyLayout = undefined;
 var schedulesRequired = undefined;
@@ -16,10 +16,6 @@ var periodTimeLeft = undefined;
 var periodHeader = undefined;
 var periodShowLower = undefined;
 var showLunch = undefined;
-
-if(mostRecentVersion() != true){
-  window.location.reload();
-}
 
 preupdate();
 
@@ -60,7 +56,13 @@ async function refreshSchedules(){
   monthlyLayout = schedules.getScheduleLayout();
   schedulesRequired = schedules.getRequiredSchedules();
   if(firstLoadedSchedules == undefined){
+    //console.log("set first load");
     firstLoadedSchedules = schedules.clone();
+  }
+  //console.log("reloaded");
+  if(!(schedules.isEqualTo(firstLoadedSchedules))){
+    //console.log("reloading");
+    window.location.reload();
   }
   setTimeout(refreshSchedules, 5000);
 }
