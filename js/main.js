@@ -7,6 +7,7 @@ const globalTime = new DateTime();
 const calTime = new DateTime();
 const schedules = new Schedules(globalTime.getDate().monthName);
 const monthlyRawData = new Sheet(googleSheetURL);
+var firstLoadedSchedules = undefined;
 var monthlyLayout = undefined;
 var schedulesRequired = undefined;
 var currentSchedule = undefined;
@@ -16,17 +17,9 @@ var periodHeader = undefined;
 var periodShowLower = undefined;
 var showLunch = undefined;
 
-/*saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
-if(localStorage.day != TimePlus.getCurrentDate().dayOfMonth){
-  localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
-  deleteCalendar();
-  generateCalendar();
-}
 if(mostRecentVersion() != true){
-  delete localStorage.firstLoadedLayout;
-  delete localStorage.firstLoadedSchedule;
   window.location.reload();
-}*/
+}
 
 preupdate();
 
@@ -66,8 +59,9 @@ async function refreshSchedules(){
   await schedules.setSchedules(googleSheetURL, monthlyRawData.rawData);
   monthlyLayout = schedules.getScheduleLayout();
   schedulesRequired = schedules.getRequiredSchedules();
-  localStorage.schedulesLayout = JSON.stringify(schedules.getScheduleLayout());
-  localStorage.schedules = JSON.stringify(schedules.getRequiredSchedules());
+  if(firstLoadedSchedules == undefined){
+    firstLoadedSchedules = schedules.clone();
+  }
   setTimeout(refreshSchedules, 5000);
 }
 

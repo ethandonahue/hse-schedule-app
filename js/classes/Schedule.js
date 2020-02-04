@@ -4,6 +4,7 @@
 function Schedules(month){
   this.month = month;
   this.requiredSchedules = {};
+  this.requiredSchedulesList = [];
   this.scheduleLayout = [];
   this.scheduleData = [];
 
@@ -18,12 +19,12 @@ function Schedules(month){
     await Promise.all(promises).then((scheds) => {
       for(var sched = 0; sched < scheds.length; sched++){
         me.scheduleData.push(scheds[sched]);
+        me.requiredSchedulesList.push(needed[sched]);
         me.requiredSchedules[needed[sched]] = new Schedule(needed[sched]);
         me.requiredSchedules[needed[sched]].setLayout(scheds[sched]);
         me.requiredSchedules[needed[sched]].setRawData(scheds[sched]);
       }
     });
-    //console.log(this.requiredSchedules);
     for(var sched = 0; sched < layout.length; sched++){
       this.scheduleLayout.push(layout[sched]);
     }
@@ -35,6 +36,19 @@ function Schedules(month){
 
   this.getRequiredSchedules = function(){
     return this.requiredSchedules;
+  }
+
+  this.clone = function(){
+    var clone = new Schedules(this.month);
+    for(var s = 0; s < this.requiredSchedulesList.length; s++){
+      clone.requiredSchedules[this.requiredSchedulesList[s]] = new Schedule(this.requiredSchedulesList[s]);
+      clone.requiredSchedules[this.requiredSchedulesList[s]].setLayout(this.scheduleData[s]);
+      clone.requiredSchedules[this.requiredSchedulesList[s]].setRawData(this.scheduleData[s]);
+    }
+    for(var s = 0; s < this.getScheduleLayout().length; s++){
+      clone.scheduleLayout.push(this.getScheduleLayout()[s]);
+    }
+    return clone;
   }
 
   this._parseRequiredSchedules = function(data){
