@@ -100,7 +100,7 @@ function personalizeSchedule(){
             end.setDisplayName(end.notLunchName);
             personalSchedule.lunchPeriod = lunchIndexes[2];
             var beforeChange = start.startTime.getTimeAsString();
-            start.startTime.addMinutes(5);
+            start.startTime.addMinutes(7);
             pass.setDisplayName("Passing Period");
             pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
             pass.setPeriodNumber(start.periodNum);
