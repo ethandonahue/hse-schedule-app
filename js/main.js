@@ -83,6 +83,7 @@ function personalizeSchedule(){
     var middle = personalSchedule.layout[lunchIndexes[1]];
     var end = personalSchedule.layout[lunchIndexes[2]];
     var pass = new PassingPeriod();
+    var pass2 = new PassingPeriod();
     for(var l = 0; l < lunchIndexes.length; l++){
       if(personalSchedule.layout[lunchIndexes[l]].lunchName != undefined && personalSchedule.layout[lunchIndexes[l]].lunchName.contains(localStorage.selectedLunch)){
         switch(l){
@@ -103,12 +104,20 @@ function personalizeSchedule(){
             start.setDisplayName(start.notLunchName);
             middle.setDisplayName(middle.lunchName);
             end.setDisplayName(end.notLunchName);
+            personalSchedule.lunchPeriod = lunchIndexes[1];
+            var beforeChange = start.startTime.getTimeAsString();
             start.startTime.addMinutes(7);
             pass.setDisplayName("Passing Period");
             pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
             pass.setPeriodNumber(start.periodNum);
-            pass.setTimes(start.startTime.getTimeAsString(), start.startTime.getTimeAsString());
-            personalSchedule.lunchPeriod = lunchIndexes[1];
+            pass.setTimes(beforeChange, start.startTime.getTimeAsString());
+            end.startTime.addMinutes(7);
+            pass2.setDisplayName("Passing Period");
+            pass2.setLowerDisplayName("(Go To " + end.notLunchName + ")");
+            pass2.setPeriodNumber(end.periodNum);
+            pass2.setTimes(middle.endTime.getTimeAsString(), end.startTime.getTimeAsString());
+            personalSchedule.layout.pushAt(lunchIndexes[0], pass);
+            personalSchedule.layout.pushAt(lunchIndexes[2] + 1, pass2);
             break;
           case 2:
             start.setDisplayName(start.notLunchName);
