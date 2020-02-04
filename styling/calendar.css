@@ -24,7 +24,7 @@
 }
  @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : portrait) {
      .cal td {
-         padding: 1px 1px;
+         padding: 5px 5px;
     }
      .key {
          margin: 0 auto;

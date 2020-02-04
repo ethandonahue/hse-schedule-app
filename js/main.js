@@ -83,7 +83,7 @@ function personalizeSchedule(){
         switch(l){
           case 0:
             start.setDisplayName(start.lunchName);
-            middle.startTime.addMinutes(7);
+            middle.startTime.addMinutes(5);
             middle.setDisplayName(start.notLunchName);
             middle.setTimes(middle.startTime.getTimeAsString(), end.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[2], 1);
@@ -100,12 +100,12 @@ function personalizeSchedule(){
             end.setDisplayName(end.notLunchName);
             personalSchedule.lunchPeriod = lunchIndexes[2];
             var beforeChange = start.startTime.getTimeAsString();
-            start.startTime.addMinutes(7);
+            start.startTime.addMinutes(5);
             pass.setDisplayName("Passing Period");
             pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
             pass.setPeriodNumber(start.periodNum);
             pass.setTimes(beforeChange, start.startTime.getTimeAsString());
-            end.startTime.addMinutes(7);
+            end.startTime.addMinutes(5);
             pass2.setDisplayName("Passing Period");
             pass2.setLowerDisplayName("(Go To " + end.notLunchName + ")");
             pass2.setPeriodNumber(end.periodNum);
@@ -120,7 +120,7 @@ function personalizeSchedule(){
             personalSchedule.layout.splice(lunchIndexes[1], 1);
             personalSchedule.lunchPeriod = lunchIndexes[2];
             var beforeChange = start.startTime.getTimeAsString();
-            start.startTime.addMinutes(7);
+            start.startTime.addMinutes(5);
             pass.setDisplayName("Passing Period");
             pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
             pass.setPeriodNumber(start.periodNum);
