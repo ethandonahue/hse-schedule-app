@@ -24,6 +24,12 @@ function Sheet(url){
 
   this._handleQueryResponse = function(response){
     me.rawData = response.getDataTable();
+    var scripts = document.getElementsByTagName("script");
+    for(var s = 0; s < scripts.length; s++){
+      if(scripts[s].getAttribute("src").contains(me.url)){
+        scripts[s].remove();
+      }
+    }
   }
 
   this._whenRawData = function(callback){

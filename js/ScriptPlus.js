@@ -1,6 +1,14 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
+window.onload = function(){
+	showSection('');
+	onLoadCheckTheme();
+	selectLunch();
+	appleInstaller();
+	recentUpdate();
+}
+
 function landOrPort(){
 	if(window.matchMedia("(orientation: landscape)").matches){
 		return "landscape";

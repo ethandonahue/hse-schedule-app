@@ -71,7 +71,7 @@ function Schedule(name){
   this.schoolEndTime = false;
   this.layout = false;
   this.name = name;
-  this.currentPeriod = false;
+  this.currentPeriod = undefined;
   this.rawData = false;
   this.lunchPeriod = false;
 
@@ -109,10 +109,19 @@ function Schedule(name){
 
   this.updateTimes = function(){
     for(var p = 0; p < this.layout.length; p++){
-      console.log(this.layout[p]);
+      this.layout[p].startTime.setCustomDate(globalTime.getDate());
       this.layout[p].startTime.update();
+      this.layout[p].endTime.setCustomDate(globalTime.getDate());
       this.layout[p].endTime.update();
-      console.log(this.layout[p]);
+    }
+  }
+
+  this.removeCustomDates = function(){
+    for(var p = 0; p < this.layout.length; p++){
+      this.layout[p].startTime.removeCustomDate();
+      this.layout[p].startTime.update();
+      this.layout[p].endTime.removeCustomDate();
+      this.layout[p].endTime.update();
     }
   }
 
@@ -124,9 +133,14 @@ function Schedule(name){
         var info = data[period].c;
         var newPeriod = new Period();
         newPeriod.setDisplayName(info[0].v);
-        newPeriod.setPeriodNumber(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.indexOfNumber() + 1));
         newPeriod.setTimes(info[1].v, info[2].v);
-        newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
+        if(info[0].v.indexOfNumber() > -1){
+          newPeriod.setPeriodNumber(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.indexOfNumber() + 1));
+          newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
+        } else {
+          newPeriod.setPeriodNumber(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
+          newPeriod.setTableDisplay(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
+        }
         if(newPeriod.displayName.contains("Lunch")){
           newPeriod.makeLunchPeriod(info[0].v);
         }
@@ -165,6 +179,7 @@ function Period(){
   this.isLunch = false;
   this.lunchName = false;
   this.notLunchName = false;
+  this.isPassing = false;
   this.tableDisplay = {
     period:false,
     time:false
@@ -243,6 +258,7 @@ function PassingPeriod(){
   this.periodNum = false;
   this.startTime = false;
   this.endTime = false;
+  this.isPassing = true;
 
   this.setDisplayNames = function(upper, lower){
     this.displayName = upper;

@@ -1,26 +1,30 @@
 var calendarDayToPrint = 1;
 
-SheetsPlus.whenNotEquals("currentSchedule", "undefined", generateCalendar);
-
 function generateCalendar(){
-	document.getElementById("cal-month").innerHTML = TimePlus.getCurrentDate().monthName + "<br>" + TimePlus.getCurrentDate().year;
+	deleteCalendar();
+	calTime.removeCustomDate();
+	calTime.update();
+	document.getElementById("cal-month").innerHTML = calTime.getDate().monthName + "<br>" + calTime.getDate().year;
 	for(var w = 0; w < 5; w++){
 		for(var d = 0; d < 7; d++){
 			var wk = document.getElementById("cal-week-" + (w + 1));
 			var dy = document.createElement("td");
 			dy.setAttribute("class", "cal-days");
-			if(w == 0 && d < TimePlus.getCurrentDate().firstDayOfMonth || calendarDayToPrint > TimePlus.getCurrentDate().daysInMonth){
+			if(w == 0 && d < calTime.getDate().firstDayOfMonth || calendarDayToPrint > calTime.getDate().daysInMonth){
 				dy.innerHTML = "";
 				dy.setAttribute("class", "calendarOtherMonth");
 			} else {
 				dy.innerHTML = calendarDayToPrint;
-				var scheduleAvail = getSavedSchedules().schedules[getSavedSchedules().layout.split(",")[calendarDayToPrint - 1]].info;
-				if(scheduleAvail != undefined){
+				calTime.setCustomDate(calTime.getDate().month + 1 + "/" + calendarDayToPrint + "/" + calTime.getDate().year);
+				calTime.update();
+				var calSched = schedulesRequired[monthlyLayout[calTime.getDate().dayOfMonth - 1]].clone();
+				var scheduleAvail = calSched.layout[0].periodNum;
+				if(scheduleAvail != "Special Day"){
 					dy.setAttribute("onclick", "displaySelectedSchedule(" + calendarDayToPrint + ")");
 				} else {
 					dy.setAttribute("class", "calendarNoSchool");
 				}
-				if(calendarDayToPrint == TimePlus.getCurrentDate().dayOfMonth){
+				if(calendarDayToPrint == globalTime.getDate().dayOfMonth){
 					dy.setAttribute("class", "calendarCurrentDay");
 				}
 				calendarDayToPrint++;
@@ -34,18 +38,20 @@ function deleteCalendar(){
 	for(var w = 0; w < 5; w++){
 		var wk = document.getElementById("cal-week-" + (w + 1));
 		for(var d = 0; d < 7; d++){
-			wk.children[0].remove();
+			try{
+				wk.children[0].remove();
+			} catch {
+
+			}
 		}
 	}
 	calendarDayToPrint = 1;
 }
 
 function displaySelectedSchedule(day){
-	deleteTable();
-	simulateDay = day;
-	simulatePeriod = -1;
-	currentSchedule = getSavedSchedules().schedules[getSavedSchedules().layout.split(",")[day - 1]];
-	//refresh();
-	loadSchedule();
+	globalTime.setCustomDate(globalTime.getDate().month + 1 + "/" + day + "/" + globalTime.getDate().year);
+	globalTime.setCustomTime("12:00 a.m.");
+	globalTime.update();
+	//console.log(globalTime);
 	display(1);
 }

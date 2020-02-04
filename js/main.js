@@ -4,6 +4,7 @@
 const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
 
 const globalTime = new DateTime();
+const calTime = new DateTime();
 const schedules = new Schedules(globalTime.getDate().monthName);
 const monthlyRawData = new Sheet(googleSheetURL);
 var monthlyLayout = undefined;
@@ -31,31 +32,32 @@ preupdate();
 
 async function preupdate(){
   await loadGoogleCharts();
-  //if(localStorage.schedules == undefined){
-    await refreshSchedules();
-  //} else {
-    //monthlyLayout = localStorage.schedulesLayout;
-    //schedulesRequired = localStorage.schedules;
-  //}
+  await refreshSchedules();
   update();
-  createScheduleTable();
+  generateCalendar();
   setTimeout(refreshSchedules, 5000);
 }
 
 function update(){
   globalTime.update();
-  currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
-  personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
-  globalTime.setCustomDate("1/27/20");
-  currentSchedule.updateTimes();
-  personalSchedule.updateTimes();
-  return;
+  try{
+    currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
+    personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
+    currentSchedule.updateTimes();
+    personalSchedule.updateTimes();
+  } catch {
+    currentSchedule = schedulesRequired[monthlyLayout[0]].clone();
+    personalSchedule = schedulesRequired[monthlyLayout[0]].clone();
+    currentSchedule.removeCustomDates();
+    personalSchedule.removeCustomDates();
+  }
   personalizeSchedule();
   setCurrentPeriod(currentSchedule);
   setCurrentPeriod(personalSchedule);
   periodHeader = getPeriodHeader();
   periodTimeLeft = getPeriodTimeLeft();
   updateDisplays();
+  createScheduleTable();
   window.requestAnimationFrame(update);
 }
 
@@ -77,39 +79,58 @@ function personalizeSchedule(){
     }
   }
   if(lunchIndexes.length > 0){
+    var start = personalSchedule.layout[lunchIndexes[0]];
+    var middle = personalSchedule.layout[lunchIndexes[1]];
+    var end = personalSchedule.layout[lunchIndexes[2]];
+    var pass = new PassingPeriod();
     for(var l = 0; l < lunchIndexes.length; l++){
       if(personalSchedule.layout[lunchIndexes[l]].lunchName != undefined && personalSchedule.layout[lunchIndexes[l]].lunchName.contains(localStorage.selectedLunch)){
         switch(l){
           case 0:
-            var me = personalSchedule.layout[lunchIndexes[0]];
-            var middle = personalSchedule.layout[lunchIndexes[1]];
-            var end = personalSchedule.layout[lunchIndexes[2]];
-            me.setDisplayName(me.lunchName);
-            middle.setDisplayName(me.notLunchName);
+            start.setDisplayName(start.lunchName);
+            middle.startTime.addMinutes(7);
+            middle.setDisplayName(start.notLunchName);
             middle.setTimes(middle.startTime.getTimeAsString(), end.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[2], 1);
             personalSchedule.lunchPeriod = lunchIndexes[0];
+            pass.setDisplayName("Passing Period");
+            pass.setLowerDisplayName("(Go To " + middle.notLunchName + ")");
+            pass.setPeriodNumber(middle.periodNum);
+            pass.setTimes(start.endTime.getTimeAsString(), middle.startTime.getTimeAsString());
+            personalSchedule.layout.pushAt(lunchIndexes[1], pass);
             break;
           case 1:
-            var start = personalSchedule.layout[lunchIndexes[0]];
-            var me = personalSchedule.layout[lunchIndexes[1]];
-            var end = personalSchedule.layout[lunchIndexes[2]];
-            me.setDisplayName(me.lunchName);
             start.setDisplayName(start.notLunchName);
+            middle.setDisplayName(middle.lunchName);
             end.setDisplayName(end.notLunchName);
+            start.startTime.addMinutes(7);
+            pass.setDisplayName("Passing Period");
+            pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
+            pass.setPeriodNumber(start.periodNum);
+            pass.setTimes(start.startTime.getTimeAsString(), start.startTime.getTimeAsString());
             personalSchedule.lunchPeriod = lunchIndexes[1];
             break;
           case 2:
-            var start = personalSchedule.layout[lunchIndexes[0]];
-            var middle = personalSchedule.layout[lunchIndexes[1]];
-            var me = personalSchedule.layout[lunchIndexes[2]];
-            me.setDisplayName(me.lunchName);
             start.setDisplayName(start.notLunchName);
+            end.setDisplayName(end.lunchName);
             start.setTimes(start.startTime.getTimeAsString(), middle.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[1], 1);
             personalSchedule.lunchPeriod = lunchIndexes[2] - 1;
             break;
         }
+        return;
+      } else if(localStorage.selectedLunch == "NONE"){
+        start.setDisplayName(start.notLunchName);
+        start.setTimes(start.startTime.getTimeAsString(), end.endTime.getTimeAsString());
+        personalSchedule.layout.splice(lunchIndexes[1], 2);
+        personalSchedule.lunchPeriod = "NONE";
+        return;
+      } else if(localStorage.selectedLunch == "ALL"){
+        start.setDisplayName(start.lunchName);
+        middle.setDisplayName(middle.lunchName);
+        end.setDisplayName(end.lunchName);
+        personalSchedule.lunchPeriod = lunchIndexes[0];
+        return;
       }
     }
   }
@@ -150,16 +171,8 @@ function setCurrentPeriod(schedule){
 }
 
 function getPeriodHeader(){
-  if(personalSchedule.currentPeriod == false){
-    try{
-      if(personalSchedule.layout[personalSchedule.currentPeriod].displayName != false){
-        return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
-      } else {
-        return "Header";
-      }
-    } catch {
-      return "Header";
-    }
+  if(personalSchedule.currentPeriod == undefined){
+    return "Header";
   } else if(personalSchedule.currentPeriod == "Before School"){
     return "School Starts In";
   } else if(personalSchedule.currentPeriod == "After School"){
@@ -170,22 +183,14 @@ function getPeriodHeader(){
 }
 
 function getPeriodTimeLeft(){
-  if(personalSchedule.currentPeriod == false){
-    try{
-      if(personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime != false){
-        return personalSchedule.layout[personalSchedule.currentPeriod].customPeriodTime;
-      } else {
-        return "Time";
-      }
-    } catch {
-      return "Time";
-    }
+  if(personalSchedule.currentPeriod == undefined){
+    return "Time";
   } else if(personalSchedule.currentPeriod == "Before School"){
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.schoolStartTime));
   } else if(personalSchedule.currentPeriod == "After School"){
     return "No Time Available";
-  } else if(personalSchedule.currentPeriod == "Special Day"){
-    return ;
+  } else if(personalSchedule.layout[0].periodNum == "Special Day"){
+    return personalSchedule.layout[0].customPeriodTime;
   } else {
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
   }
@@ -220,11 +225,15 @@ function updateDisplays(){
   } else {
     document.getElementById("timeSecondaryHeader").style.display = "none";
   }
-  if(showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()){
-    document.getElementById("lunchText").textContent = "Time Until " + personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
-    document.getElementById("lunchTime").textContent = formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.lunchPeriod].startTime));
-    document.getElementById("lunch").style.display = "table-cell";
-  } else {
+  try{
+    if(showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()){
+      document.getElementById("lunchText").textContent = "Time Until " + personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
+      document.getElementById("lunchTime").textContent = formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.lunchPeriod].startTime));
+      document.getElementById("lunch").style.display = "table-cell";
+    } else {
+      document.getElementById("lunch").style.display = "none";
+    }
+  } catch {
     document.getElementById("lunch").style.display = "none";
   }
 }

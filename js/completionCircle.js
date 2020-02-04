@@ -8,7 +8,7 @@ var startingPos = 1.5 * Math.PI;
 fgColorCircle = "#FFFFFF";
 bgColorCircle = "#6698FF";
 
-SheetsPlus.whenNotEquals("period", "undefined", getCanvas);
+//SheetsPlus.whenNotEquals("period", "undefined", getCanvas);
 
 function getCanvas(){
   canvas = document.getElementById("completionCircle");

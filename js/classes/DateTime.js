@@ -3,7 +3,7 @@
 
 function DateTime(custom){
   this.dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  this.monthNames = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   this.time = false;
   this.date = false;
   this.staticTime = false;
@@ -53,6 +53,14 @@ function DateTime(custom){
 
   this.setCustomDate = function(date){
     this.staticDate = this._formatStaticDate(date);
+  }
+
+  this.addMinutes = function(amount){
+    var base = this._giveDateObject(this);
+    base.setMinutes(base.getMinutes() + amount);
+    this.setCustomTime(this._giveDateAsDateTime(base).time);
+    this.setCustomDate(this._giveDateAsDateTime(base).date);
+    this.update();
   }
 
   this.removeCustomTime = function(){
@@ -250,6 +258,28 @@ function DateTime(custom){
 
   this._giveDateObject = function(dt){
     return new Date(dt.date.year, dt.date.month, dt.date.dayOfMonth, dt.time.hour, dt.time.minute, dt.time.second, dt.time.millisecond);
+  }
+
+  this._giveDateAsDateTime = function(date){
+    var obj = {};
+    obj.time = {
+      hour:date.getHours(),
+      minute:date.getMinutes(),
+      second:date.getSeconds(),
+      millisecond:date.getMilliseconds()
+    };
+    obj.date = {
+      year:date.getFullYear(),
+      month:date.getMonth(),
+      weekOfYear:date.getWeek(),
+      dayOfWeek:date.getDay(),
+      dayOfMonth:date.getDate(),
+      firstDayOfMonth:new Date(date.getFullYear(), date.getMonth(), 1).getDay(),
+      daysInMonth:new Date(date.getFullYear(), date.getMonth(), 0).getDate(),
+      monthName:this.monthNames[date.getMonth()],
+      dayName:this.dayNames[date.getDay()]
+    };
+    return obj;
   }
 
   this._timeSubtraction = function(other){

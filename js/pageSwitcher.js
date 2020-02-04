@@ -4,6 +4,11 @@ var icons = ["about.png", "schedule.png", "home.png", "calendar.png", "settings.
 var hashes = ["about", "bell", "home", "calendar", "settings"];
 
 function showSection(section){
+  if(window.location.hash.contains("calendar")){
+    globalTime.removeCustomTime();
+    globalTime.removeCustomDate();
+    globalTime.update();
+  }
   switch(section){
     case "about":
       display(0);
@@ -34,13 +39,6 @@ function showSection(section){
         showSection("home");
       }
       break;
-  }
-  if(simulateDay != null || simulatePeriod != null){
-    simulateDay = null;
-    simulatePeriod = null;
-    deleteTable();
-    refresh();
-    loadSchedule();
   }
   if(section != ""){
     window.location.hash = section;
