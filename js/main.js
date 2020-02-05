@@ -33,9 +33,9 @@ async function preupdate(){
     appleInstallPop.show();
   }
 
-  var recentUpdate = new PopUp("Update-1-3");
+  var recentUpdate = new PopUp("Update-1-4");
   recentUpdate.setHeader("Recent Update:");
-  recentUpdate.setMessage("-Embeded HSE's Twitter On The Info Tab<br><br>-Completion Circle Enhancements");
+  recentUpdate.setMessage("-Passing Period Around Lunch<br><br>-Removed Completion Circle For More Testing<br><br>-Calendar Key");
   recentUpdate.show();
 }
 
