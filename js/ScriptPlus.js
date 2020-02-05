@@ -5,8 +5,6 @@ window.onload = function(){
 	showSection('');
 	onLoadCheckTheme();
 	selectLunch();
-	appleInstaller();
-	recentUpdate();
 }
 
 function landOrPort(){

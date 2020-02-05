@@ -25,6 +25,18 @@ async function preupdate(){
   update();
   generateCalendar();
   setTimeout(refreshSchedules, 5000);
+
+  if(isAppleDevice() && !inStandalone()){
+    var appleInstallPop = new PopUp("apple-installer");
+    appleInstallPop.setHeader("Install On iOS");
+    appleInstallPop.setMessage("1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'");
+    appleInstallPop.show();
+  }
+
+  var recentUpdate = new PopUp("Update-1-3");
+  recentUpdate.setHeader("Recent Update:");
+  recentUpdate.setMessage("-Embeded HSE's Twitter On The Info Tab<br><br>-Completion Circle Enhancements");
+  recentUpdate.show();
 }
 
 function update(){
