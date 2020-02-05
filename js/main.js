@@ -5,8 +5,9 @@ const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe
 
 const globalTime = new DateTime();
 const calTime = new DateTime();
-const schedules = new Schedules(globalTime.getDate().monthName);
 const monthlyRawData = new Sheet(googleSheetURL);
+const schedules = new Schedules(globalTime.getDate().monthName);
+var firstLoadedSchedules = undefined;
 var monthlyLayout = undefined;
 var schedulesRequired = undefined;
 var currentSchedule = undefined;
@@ -15,18 +16,6 @@ var periodTimeLeft = undefined;
 var periodHeader = undefined;
 var periodShowLower = undefined;
 var showLunch = undefined;
-
-/*saveSchedules(schedules, TimePlus.getCurrentDate().monthName, schedulesPerWeek);
-if(localStorage.day != TimePlus.getCurrentDate().dayOfMonth){
-  localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
-  deleteCalendar();
-  generateCalendar();
-}
-if(mostRecentVersion() != true){
-  delete localStorage.firstLoadedLayout;
-  delete localStorage.firstLoadedSchedule;
-  window.location.reload();
-}*/
 
 preupdate();
 
@@ -66,8 +55,15 @@ async function refreshSchedules(){
   await schedules.setSchedules(googleSheetURL, monthlyRawData.rawData);
   monthlyLayout = schedules.getScheduleLayout();
   schedulesRequired = schedules.getRequiredSchedules();
-  localStorage.schedulesLayout = JSON.stringify(schedules.getScheduleLayout());
-  localStorage.schedules = JSON.stringify(schedules.getRequiredSchedules());
+  if(firstLoadedSchedules == undefined){
+    //console.log("set first load");
+    firstLoadedSchedules = schedules.clone();
+  }
+  //console.log("reloaded");
+  if(!(schedules.isEqualTo(firstLoadedSchedules))){
+    //console.log("reloading");
+    window.location.reload();
+  }
   setTimeout(refreshSchedules, 5000);
 }
 
@@ -89,7 +85,7 @@ function personalizeSchedule(){
         switch(l){
           case 0:
             start.setDisplayName(start.lunchName);
-            middle.startTime.addMinutes(7);
+            middle.startTime.addMinutes(5);
             middle.setDisplayName(start.notLunchName);
             middle.setTimes(middle.startTime.getTimeAsString(), end.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[2], 1);
@@ -104,14 +100,14 @@ function personalizeSchedule(){
             start.setDisplayName(start.notLunchName);
             middle.setDisplayName(middle.lunchName);
             end.setDisplayName(end.notLunchName);
-            personalSchedule.lunchPeriod = lunchIndexes[1];
+            personalSchedule.lunchPeriod = lunchIndexes[2];
             var beforeChange = start.startTime.getTimeAsString();
             start.startTime.addMinutes(7);
             pass.setDisplayName("Passing Period");
             pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
             pass.setPeriodNumber(start.periodNum);
             pass.setTimes(beforeChange, start.startTime.getTimeAsString());
-            end.startTime.addMinutes(7);
+            end.startTime.addMinutes(5);
             pass2.setDisplayName("Passing Period");
             pass2.setLowerDisplayName("(Go To " + end.notLunchName + ")");
             pass2.setPeriodNumber(end.periodNum);
@@ -124,7 +120,14 @@ function personalizeSchedule(){
             end.setDisplayName(end.lunchName);
             start.setTimes(start.startTime.getTimeAsString(), middle.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[1], 1);
-            personalSchedule.lunchPeriod = lunchIndexes[2] - 1;
+            personalSchedule.lunchPeriod = lunchIndexes[2];
+            var beforeChange = start.startTime.getTimeAsString();
+            start.startTime.addMinutes(5);
+            pass.setDisplayName("Passing Period");
+            pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
+            pass.setPeriodNumber(start.periodNum);
+            pass.setTimes(beforeChange, start.startTime.getTimeAsString());
+            personalSchedule.layout.pushAt(lunchIndexes[0], pass);
             break;
         }
         return;

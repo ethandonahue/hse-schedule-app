@@ -4,6 +4,7 @@
 function Schedules(month){
   this.month = month;
   this.requiredSchedules = {};
+  this.requiredSchedulesList = [];
   this.scheduleLayout = [];
   this.scheduleData = [];
 
@@ -16,14 +17,17 @@ function Schedules(month){
       promises.push(new Sheet(url + encodeURIComponent(needed[sched])).getRawData());
     }
     await Promise.all(promises).then((scheds) => {
+      me.scheduleData = [];
+      me.requiredSchedulesList = [];
       for(var sched = 0; sched < scheds.length; sched++){
         me.scheduleData.push(scheds[sched]);
+        me.requiredSchedulesList.push(needed[sched]);
         me.requiredSchedules[needed[sched]] = new Schedule(needed[sched]);
         me.requiredSchedules[needed[sched]].setLayout(scheds[sched]);
         me.requiredSchedules[needed[sched]].setRawData(scheds[sched]);
       }
     });
-    //console.log(this.requiredSchedules);
+    this.scheduleLayout = [];
     for(var sched = 0; sched < layout.length; sched++){
       this.scheduleLayout.push(layout[sched]);
     }
@@ -35,6 +39,45 @@ function Schedules(month){
 
   this.getRequiredSchedules = function(){
     return this.requiredSchedules;
+  }
+
+  this.clone = function(){
+    var clone = new Schedules(this.month);
+    for(var s = 0; s < this.requiredSchedulesList.length; s++){
+      clone.scheduleData.push(this.scheduleData[s]);
+      clone.requiredSchedulesList.push(this.scheduleData[s]);
+      clone.requiredSchedules[this.requiredSchedulesList[s]] = new Schedule(this.requiredSchedulesList[s]);
+      clone.requiredSchedules[this.requiredSchedulesList[s]].setLayout(this.scheduleData[s]);
+      clone.requiredSchedules[this.requiredSchedulesList[s]].setRawData(this.scheduleData[s]);
+    }
+    for(var s = 0; s < this.getScheduleLayout().length; s++){
+      clone.scheduleLayout.push(this.getScheduleLayout()[s]);
+    }
+    return clone;
+  }
+
+  this.isEqualTo = function(otherSchedules){
+    if(this == otherSchedules){
+      return true;
+    }
+    if(this.month != otherSchedules.month){
+      return false;
+    }
+    for(var scheduleName in this.requiredSchedules){
+      try{
+        if(!(this.requiredSchedules[scheduleName].isEqualTo(otherSchedules.requiredSchedules[scheduleName]))){
+          return false;
+        }
+      } catch {
+        return false;
+      }
+    }
+    for(var l = 0; l < this.scheduleLayout.length; l++){
+      if(this.scheduleLayout[l] != otherSchedules.scheduleLayout[l]){
+        return false;
+      }
+    }
+    return true;
   }
 
   this._parseRequiredSchedules = function(data){
@@ -101,7 +144,7 @@ function Schedule(name){
   }
 
   this.clone = function(){
-    var clone = new Schedule("Clone of " + this.name);
+    var clone = new Schedule(this.name);
     clone.setLayout(this.rawData);
     clone.setRawData(this.rawData);
     return clone;
@@ -123,6 +166,69 @@ function Schedule(name){
       this.layout[p].endTime.removeCustomDate();
       this.layout[p].endTime.update();
     }
+  }
+
+  this.isEqualTo = function(otherSchedule){
+    //console.log("schedule");
+    if(this == otherSchedule){
+      return true;
+    }
+    if(this.name != otherSchedule.name){
+      //console.log("name");
+      return false;
+    }
+    if(this.schoolStartTime.getTimeInSeconds() != otherSchedule.schoolStartTime.getTimeInSeconds()){
+      //console.log("start");
+      return false;
+    }
+    if(this.schoolEndTime.getTimeInSeconds() != otherSchedule.schoolEndTime.getTimeInSeconds()){
+      //console.log("end");
+      return false;
+    }
+    if(this.rawData != otherSchedule.rawData){
+      try{
+        for(var d = 0; d < this.rawData.wg.length; d++){
+          try{
+            for(var c = 0; c < this.rawData.wg[d].c.length; c++){
+              try{
+                if(!(this.rawData.wg[d].c[c].v == otherSchedule.rawData.wg[d].c[c].v)){
+                  //console.log("try loop");
+                  return false;
+                }
+                //console.log(this.rawData.wg[d].c[c].v);
+              } catch {
+                //console.log("second loop catch");
+                try{
+                  if(!(this.rawData.wg[d].c[c] == otherSchedule.rawData.wg[d].c[c])){
+                    //console.log("try loop 2");
+                    return false;
+                  }
+                } catch {
+                  //console.log("third loop catch");
+                  return false;
+                }
+              }
+            }
+          } catch {
+            //console.log("first loop catch");
+            //console.log(this.rawData.wg[d]);
+            return false;
+          }
+        }
+      } catch {
+        return false;
+      }
+    }
+    for(var p = 0; p < this.layout.length; p++){
+      try{
+        if(!(this.layout[p].isEqualTo(otherSchedule.layout[p]))){
+          return false;
+        }
+      } catch {
+        return false;
+      }
+    }
+    return true;
   }
 
   this._parseRawData = function(data){
@@ -238,6 +344,41 @@ function Period(){
     }
   }
 
+  this.isEqualTo = function(otherPeriod){
+    //console.log("period");
+    if(this == otherPeriod){
+      return true;
+    }
+    if(this.displayName != otherPeriod.displayName){
+      return false;
+    }
+    if(this.lowerDisplayName != otherPeriod.lowerDisplayName){
+      return false;
+    }
+    if(this.customPeriodTime != otherPeriod.customPeriodTime){
+      return false;
+    }
+    if(this.periodNum != otherPeriod.periodNum){
+      return false;
+    }
+    if(this.startTime.getTimeInSeconds() != otherPeriod.startTime.getTimeInSeconds()){
+      return false;
+    }
+    if(this.endTime.getTimeInSeconds() != otherPeriod.endTime.getTimeInSeconds()){
+      return false;
+    }
+    if(this.isLunch != otherPeriod.isLunch){
+      return false;
+    }
+    if(this.lunchName != otherPeriod.lunchName){
+      return false;
+    }
+    if(this.notLunchName != otherPeriod.notLunchName){
+      return false;
+    }
+    return true;
+  }
+
   this._updateTableDisplay = function(){
     if(this.periodNum != false && this.startTime != false && this.endTime != false){
       this.tableDisplay.period = this.periodNum;
@@ -284,5 +425,28 @@ function PassingPeriod(){
     this.endTime = new DateTime();
     this.endTime.setCustomTime(end);
     this.endTime.update();
+  }
+
+  this.isEqualTo = function(otherPassing){
+    //console.log("passing");
+    if(this == otherPassing){
+      return true;
+    }
+    if(this.displayName != otherPassing.displayName){
+      return false;
+    }
+    if(this.lowerDisplayName != otherPassing.lowerDisplayName){
+      return false;
+    }
+    if(this.periodNum != otherPassing.periodNum){
+      return false;
+    }
+    if(this.startTime.getTimeInSeconds() != otherPassing.startTime.getTimeInSeconds()){
+      return false;
+    }
+    if(this.endTime.getTimeInSeconds() != otherPassing.endTime.getTimeInSeconds()){
+      return false;
+    }
+    return true;
   }
 }

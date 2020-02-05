@@ -12,16 +12,12 @@ if(typeof(Storage) != undefined){
 
 }
 
-if(localStorage.day == undefined){
-  localStorage.day = TimePlus.getCurrentDate().dayOfMonth;
-}
-
 if(localStorage.popups == undefined){
   localStorage.popups = JSON.stringify({});
 }
 
 function setLunch(lunch){
-  if(lunch != "A" && lunch != "B" && lunch !="C" && lunch != "NONE"){
+  if(lunch != "A" && lunch != "B" && lunch !="C" && lunch != "NONE" && lunch != "ALL"){
     console.error("Incorrect Lunch Type Entered");
     return;
   }
@@ -39,8 +35,10 @@ function selectLunch(){
     lunchElement = document.getElementById("bLunch");
   } else if (getLunch() == "C"){
     lunchElement = document.getElementById("cLunch");
-  } else {
+  } else if(getLunch() == "NONE"){
     lunchElement = document.getElementById("noLunch");
+  } else {
+    lunchElement = document.getElementById("allLunch");
   }
 
   lunchElement.classList.add("selectedLunch");
