@@ -6,6 +6,34 @@
          width:200px;
 
     }
+
+    .pfpImages{
+      display: inline-block;
+    }
+
+     .info {
+         padding-top: 20px;
+         padding-left: 20px;
+         position: absolute;
+         right: 10%;
+    }
+     #twitter{
+        padding-left: 20px;
+         padding-top: 20px;
+    }
+
+    .aboutLink{
+      padding-top: 20px;
+    }
+
+    .aboutLink a{
+      color: var(--header-text-color);
+    }
+
+    #about{
+    display: flex;
+    }
+
 }
  @media screen and (orientation:portrait) {
      .pfp{
@@ -13,31 +41,29 @@
          height:170px;
          width: 110px;
     }
+
+    #twitter{
+      text-align: center;
+      padding-top: 10px;
+    }
+
+    #credits{
+      display: none;
+    }
+
+    .aboutLink{
+      padding-left: 10px;
+      padding-top: 10px;
+    }
+
+    #credits{
+      padding-left: 10px;
+      padding-top: 10px;
+    }
+
+
 }
 
-.pfpImages{
-  display: inline-block;
-}
-
- .info {
-     padding-top: 20px;
-     padding-left: 20px;
-     position: absolute;
-     right: 10%;
-}
- #twitter{
-    padding-left: 20px;
-     padding-top: 20px;
-}
-
-.aboutLink{
-  padding-top: 20px;
-}
-
-.aboutLink a{
-  color: var(--header-text-color);
-}
-
-#about{
-display: flex;
+#backButton{
+  display: none;
 }
