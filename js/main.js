@@ -25,6 +25,18 @@ async function preupdate(){
   update();
   generateCalendar();
   setTimeout(refreshSchedules, 5000);
+
+  if(isAppleDevice() && !inStandalone()){
+    var appleInstallPop = new PopUp("apple-installer");
+    appleInstallPop.setHeader("Install On iOS");
+    appleInstallPop.setMessage("1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'");
+    appleInstallPop.show();
+  }
+
+  var recentUpdate = new PopUp("Update-1-3");
+  recentUpdate.setHeader("Recent Update:");
+  recentUpdate.setMessage("-Embeded HSE's Twitter On The Info Tab<br><br>-Completion Circle Enhancements");
+  recentUpdate.show();
 }
 
 function update(){
@@ -85,7 +97,7 @@ function personalizeSchedule(){
         switch(l){
           case 0:
             start.setDisplayName(start.lunchName);
-            middle.startTime.addMinutes(5);
+            middle.startTime.addMinutes(7);
             middle.setDisplayName(start.notLunchName);
             middle.setTimes(middle.startTime.getTimeAsString(), end.endTime.getTimeAsString());
             personalSchedule.layout.splice(lunchIndexes[2], 1);
@@ -122,7 +134,7 @@ function personalizeSchedule(){
             personalSchedule.layout.splice(lunchIndexes[1], 1);
             personalSchedule.lunchPeriod = lunchIndexes[2];
             var beforeChange = start.startTime.getTimeAsString();
-            start.startTime.addMinutes(5);
+            start.startTime.addMinutes(7);
             pass.setDisplayName("Passing Period");
             pass.setLowerDisplayName("(Go To " + start.notLunchName + ")");
             pass.setPeriodNumber(start.periodNum);
