@@ -299,7 +299,7 @@ function DateTime(custom){
     var myself = this._giveDateObject(this);
     first = this._giveDateObject(first);
     second = this._giveDateObject(second);
-    if(myself >= first && myself < second){
+    if(myself >= first && myself <= second){
       isBetween = true;
     }
     return isBetween;

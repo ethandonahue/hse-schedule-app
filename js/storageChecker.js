@@ -63,14 +63,6 @@ function getTheme(){
   return localStorage.theme;
 }
 
-function getDay(){
-  return localStorage.day;
-}
-
-function setDay(day){
-  localStorage.day = day;
-}
-
 function addPopId(id){
   var pop = JSON.parse(localStorage.popups);
   pop[id] = false;
@@ -86,34 +78,4 @@ function popupSetSeen(id){
   var pop = JSON.parse(localStorage.popups);
   pop[id] = true;
   localStorage.popups = JSON.stringify(pop);
-}
-
-function saveSchedules(schedules, month, layout){
-  localStorage.schedules = JSON.stringify(schedules);
-  localStorage.schedulesMonth = month;
-  localStorage.schedulesLayout = layout;
-  if(localStorage.firstLoadedSchedule == undefined){
-    localStorage.firstLoadedSchedule = JSON.stringify(schedules);
-  }
-  if(localStorage.firstLoadedLayout == undefined){
-    localStorage.firstLoadedLayout = layout;
-  }
-}
-
-function getSavedSchedules(){
-  return {
-    "schedules":JSON.parse(localStorage.schedules),
-    "month":localStorage.schedulesMonth,
-    "layout":localStorage.schedulesLayout
-  };
-}
-
-function mostRecentVersion(){
-  if(localStorage.firstLoadedLayout != undefined && localStorage.firstLoadedSchedule != undefined){
-    if(localStorage.schedulesLayout == localStorage.firstLoadedLayout && localStorage.schedules == localStorage.firstLoadedSchedule){
-      return true;
-    }
-    return false;
-  }
-  return true;
 }

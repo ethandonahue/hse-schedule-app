@@ -68,12 +68,9 @@ async function refreshSchedules(){
   monthlyLayout = schedules.getScheduleLayout();
   schedulesRequired = schedules.getRequiredSchedules();
   if(firstLoadedSchedules == undefined){
-    //console.log("set first load");
     firstLoadedSchedules = schedules.clone();
   }
-  //console.log("reloaded");
   if(!(schedules.isEqualTo(firstLoadedSchedules))){
-    //console.log("reloading");
     window.location.reload();
   }
   setTimeout(refreshSchedules, 5000);
