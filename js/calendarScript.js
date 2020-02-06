@@ -52,6 +52,5 @@ function displaySelectedSchedule(day){
 	globalTime.setCustomDate(globalTime.getDate().month + 1 + "/" + day + "/" + globalTime.getDate().year);
 	globalTime.setCustomTime("12:00 a.m.");
 	globalTime.update();
-	//console.log(globalTime);
 	display(1);
 }

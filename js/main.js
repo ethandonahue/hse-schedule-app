@@ -33,9 +33,9 @@ async function preupdate(){
     appleInstallPop.show();
   }
 
-  var recentUpdate = new PopUp("Update-1-3");
+  var recentUpdate = new PopUp("Update-1-4");
   recentUpdate.setHeader("Recent Update:");
-  recentUpdate.setMessage("-Embeded HSE's Twitter On The Info Tab<br><br>-Completion Circle Enhancements");
+  recentUpdate.setMessage("-Passing Period Around Lunch<br><br>-Removed Completion Circle For More Testing<br><br>-Calendar Key");
   recentUpdate.show();
 }
 
@@ -68,12 +68,9 @@ async function refreshSchedules(){
   monthlyLayout = schedules.getScheduleLayout();
   schedulesRequired = schedules.getRequiredSchedules();
   if(firstLoadedSchedules == undefined){
-    //console.log("set first load");
     firstLoadedSchedules = schedules.clone();
   }
-  //console.log("reloaded");
   if(!(schedules.isEqualTo(firstLoadedSchedules))){
-    //console.log("reloading");
     window.location.reload();
   }
   setTimeout(refreshSchedules, 5000);

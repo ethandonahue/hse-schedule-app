@@ -169,20 +169,16 @@ function Schedule(name){
   }
 
   this.isEqualTo = function(otherSchedule){
-    //console.log("schedule");
     if(this == otherSchedule){
       return true;
     }
     if(this.name != otherSchedule.name){
-      //console.log("name");
       return false;
     }
     if(this.schoolStartTime.getTimeInSeconds() != otherSchedule.schoolStartTime.getTimeInSeconds()){
-      //console.log("start");
       return false;
     }
     if(this.schoolEndTime.getTimeInSeconds() != otherSchedule.schoolEndTime.getTimeInSeconds()){
-      //console.log("end");
       return false;
     }
     if(this.rawData != otherSchedule.rawData){
@@ -192,26 +188,19 @@ function Schedule(name){
             for(var c = 0; c < this.rawData.wg[d].c.length; c++){
               try{
                 if(!(this.rawData.wg[d].c[c].v == otherSchedule.rawData.wg[d].c[c].v)){
-                  //console.log("try loop");
                   return false;
                 }
-                //console.log(this.rawData.wg[d].c[c].v);
               } catch {
-                //console.log("second loop catch");
                 try{
                   if(!(this.rawData.wg[d].c[c] == otherSchedule.rawData.wg[d].c[c])){
-                    //console.log("try loop 2");
                     return false;
                   }
                 } catch {
-                  //console.log("third loop catch");
                   return false;
                 }
               }
             }
           } catch {
-            //console.log("first loop catch");
-            //console.log(this.rawData.wg[d]);
             return false;
           }
         }
@@ -345,7 +334,6 @@ function Period(){
   }
 
   this.isEqualTo = function(otherPeriod){
-    //console.log("period");
     if(this == otherPeriod){
       return true;
     }
@@ -428,7 +416,6 @@ function PassingPeriod(){
   }
 
   this.isEqualTo = function(otherPassing){
-    //console.log("passing");
     if(this == otherPassing){
       return true;
     }
