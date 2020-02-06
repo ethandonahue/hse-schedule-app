@@ -1,4 +1,4 @@
-@media screen and (orientation:landscape) {
+@media screen and (min-device-width: 850px){
      .pfp{
          padding-top:10px;
          padding-right: 10px;
@@ -26,16 +26,16 @@
       padding-top: 20px;
     }
 
-    .aboutLink a{
-      color: var(--header-text-color);
-    }
-
     #about{
     display: flex;
     }
 
+    #creditsButton{
+      display: none;
+    }
+
 }
- @media screen and (orientation:portrait) {
+ @media screen and (max-device-width: 849px) {
      .pfp{
          margin: 20px;
          height:170px;
@@ -52,8 +52,8 @@
     }
 
     .aboutLink{
-      padding-left: 10px;
-      padding-top: 10px;
+      padding-left: 20px;
+      padding-top: 15px;
     }
 
     #credits{
@@ -67,3 +67,8 @@
 #backButton{
   display: none;
 }
+
+
+    .aboutLink a{
+      color: var(--font-color);
+    }
