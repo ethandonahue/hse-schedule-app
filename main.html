@@ -196,59 +196,69 @@
                   <h3 class="darkTheme">Dark Theme</h3>
                </div>
                <div class="lunchButtons">
-                  <a id="aLunch" class="lunchButton" onclick="setLunch('A')">
-                  A Lunch
-                  </a>
-                  <a id="bLunch" class="lunchButton" onclick="setLunch('B')">
-                  B Lunch
-                  </a>
-                  <a id="cLunch" class="lunchButton" onclick="setLunch('C')">
-                  C Lunch
-                  </a>
-                  <a id="noLunch" class="lunchButton" onclick="setLunch('NONE')">
-                  None
-                  </a>
-                  <a id="allLunch" class="lunchButton" onclick="setLunch('ALL')">
-                  All
-                  </a>
-               </div>
-               <style>
+                 <style>
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #004794;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
+/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
   z-index: 1;
 }
 
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-p {
-  color: #000;
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: var(--highlight-color);
 }
-
 </style>
 
-
 <div class="dropdown">
-  <span>Mouse over me</span>
+  <button class="dropbtn">Lunch</button>
   <div class="dropdown-content">
-  <p>A</p>
-  <p>B</p>
-  <p>C</p>
-  <p>None</p>
-  <p>All</p>
+    <a href="#">A</a>
+    <a href="#">B</a>
+    <a href="#">C</a>
+    <a href="#">None</a>
+    <a href="#">All</a>
   </div>
 </div>
+               </div>
+
+
+
                <!--Have a comment/suggestion or find a bug?<br>
                   Let us know!<br>
                   <a href="mailto:hsescheduleapp@outlook.com?subject=In-App Feedback&body=Here is my feedback on the HSE Schedule App:">Click Here To E-Mail Us</a>-->
