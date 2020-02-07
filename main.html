@@ -16,13 +16,13 @@
       <link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">
       <script src="https://www.gstatic.com/charts/loader.js"></script>
       <script src="/serviceworker.js"></script>
-      <script src="/js/ScriptPlus.js"></script>
-      <script src="/js/storageChecker.js"></script>
       <script src="/js/classes/DateTime.js"></script>
       <script src="/js/classes/Sheets.js"></script>
       <script src="/js/classes/Schedule.js"></script>
       <script src="/js/classes/PopUp.js"></script>
       <script src="/js/classes/Storage.js"></script>
+      <script src="/js/addons.js"></script>
+      <script src="/js/storageChecker.js"></script>
       <script src="/js/pageSwitcher.js"></script>
       <script src="/js/scheduleTable.js"></script>
       <script src="/js/themeSwitcher.js"></script>
@@ -171,6 +171,9 @@
                <div id="header">
                   <h1 id="headerText">Settings</h1>
                </div>
+               <div id="Version">
+                 <h2>Version 1.0</h2>
+               </div>
                <div class="theme-switch-wrapper">
                   <label class="theme-switch" for="checkbox">
                      <input type="checkbox" id="checkbox" onchange="switchTheme()" />
@@ -190,9 +193,6 @@
                      </div>
                   </div>
                </div>
-            </div>
-            <div id="testing" class="hideDIV">
-               <div class='onesignal-customlink-container'></div>
             </div>
          </div>
          <nav>
