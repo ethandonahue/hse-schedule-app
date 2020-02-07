@@ -108,7 +108,7 @@ canvas{
 @media screen and (orientation:portrait) {
   .CenteredMiddle{
       display: table-cell;
-      padding-top: 12vh;
+      padding-top: 25%;
       text-align: center;
       width: 100vw;
       vertical-align: middle;
@@ -117,7 +117,6 @@ canvas{
   .CenteredSide{
     display: table-cell;
     text-align: center;
-    padding-top: 5%;
     width: 100vw;
     vertical-align: middle;
   }
@@ -129,7 +128,6 @@ canvas{
   #lunch{
     position:fixed;
     bottom:15vh;
-    padding-top: 15%;
   }
 
   #timeHeader{
@@ -137,7 +135,8 @@ canvas{
   }
 
    #time{
-     font-size: 5vh;
+     font-size: 4.5vh;
+     text-align: center;
   }
 
   #lunchText{
@@ -151,4 +150,5 @@ canvas{
   canvas{
     margin:5% 0;
   }
+
 }
