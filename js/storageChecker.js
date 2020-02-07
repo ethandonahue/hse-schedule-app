@@ -1,58 +1,73 @@
-if(typeof(Storage) != undefined){
-  if(localStorage.selectedLunch != undefined){
+const storage = new Store();
+
+if(!storage.exists()){
+  console.error("localStorage is not available on this device");
+}
+
+setStorageAttributes();
+showLaunchScreen();
+
+function setStorageAttributes(){
+  if(storage.get("selectedLunch") == undefined){
+    storage.set("selectedLunch", "UNCHOSEN");
+  }
+  if(storage.get("theme") == undefined){
+    storage.set("theme", "light");
+  }
+  if(storage.get("popups") == undefined){
+    storage.set("popups", "{}");
+  }
+  storage.getAllNames().forEach((name) => {
+    if(name != "selectedLunch" && name != "theme" && name != "popups"){
+      storage.remove(name);
+    }
+  });
+}
+
+function showLaunchScreen(){
+  if(storage.get("selectedLunch") == "UNCHOSEN"){
+    if(window.location.pathname == "/" || window.location.pathname == "/main.html"){
+      window.location.replace("/index.html");
+    }
+  } else {
     if(window.location.pathname == "/" || window.location.pathname == "/index.html"){
       window.location.replace("/main.html");
     }
-  } else {
-    if(window.location.pathname != "/" && window.location.pathname != "/index.html"){
-      window.location.replace("/index.html");
-    }
   }
-} else {
-
-}
-
-if(localStorage.popups == undefined){
-  localStorage.popups = JSON.stringify({});
 }
 
 function setLunch(lunch){
-  if(lunch != "A" && lunch != "B" && lunch !="C" && lunch != "NONE" && lunch != "ALL"){
-    console.error("Incorrect Lunch Type Entered");
-    return;
-  }
-  localStorage.selectedLunch = lunch;
+  storage.set("selectedLunch", lunch);
   selectLunch();
 }
 
 function selectLunch(){
   removeSelectedLunch();
   var lunchElement;
-
-  if(getLunch() == "A"){
-    lunchElement = document.getElementById("aLunch");
-  } else if (getLunch() == "B"){
-    lunchElement = document.getElementById("bLunch");
-  } else if (getLunch() == "C"){
-    lunchElement = document.getElementById("cLunch");
-  } else if(getLunch() == "NONE"){
-    lunchElement = document.getElementById("noLunch");
-  } else {
-    lunchElement = document.getElementById("allLunch");
+  switch(storage.get("selectedLunch")){
+    case "A":
+      lunchElement = document.getElementById("aLunch");
+      break;
+    case "B":
+      lunchElement = document.getElementById("bLunch");
+      break;
+    case "C":
+      lunchElement = document.getElementById("cLunch");
+      break;
+    case "NONE":
+      lunchElement = document.getElementById("noLunch");
+      break;
+    case "ALL":
+      lunchElement = document.getElementById("allLunch");
+      break;
   }
-
   lunchElement.classList.add("selectedLunch");
-
 }
 
 function removeSelectedLunch(){
   for(var i = 0; i < document.getElementsByClassName("selectedLunch").length; i++){
     document.getElementsByClassName("selectedLunch")[i].classList.remove("selectedLunch");
   }
-}
-
-function getLunch(){
-  return localStorage.selectedLunch;
 }
 
 function setTheme(theme){
