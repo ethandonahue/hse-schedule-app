@@ -22,7 +22,6 @@ preupdate();
 async function preupdate(){
   await loadGoogleCharts();
   await refreshSchedules();
-  getCanvas();
   update();
   generateCalendar();
   setTimeout(refreshSchedules, 5000);
@@ -60,7 +59,6 @@ function update(){
   periodTimeLeft = getPeriodTimeLeft();
   updateDisplays();
   createScheduleTable();
-  completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
   window.requestAnimationFrame(update);
 }
 
