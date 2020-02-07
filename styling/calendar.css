@@ -1,46 +1,38 @@
 @media screen and (orientation:landscape){
-
-  #cal-container{
-    height: 60vh;
-    display: flex;
-    position: relative;
-  }
-
-  .key {
-      position: absolute;
-      right: 0;
-      border-spacing:20px;
-      width: 20%;
-  }
-
-  table.cal{
-    table-layout: auto;
-    width: 50%;
-    height: 100%;
-    border-collapse: collapse;
-  }
+     #cal-container{
+         height: 60vh;
+         display: flex;
+         position: relative;
+    }
+     .key {
+         position: absolute;
+         right: 0;
+         border-spacing:20px;
+         width: 20%;
+    }
+     table.cal{
+         table-layout: auto;
+         width: 50%;
+         height: 100%;
+         border-collapse: collapse;
+    }
 }
-
-@media screen and (orientation:portrait){
-
-  #cal-container{
-    height: 40vh;
-  }
-
-  table.cal{
-    table-layout: auto;
-    width: 70%;
-    height: 100%;
-    border-collapse: collapse;
-  }
-
-  .key {
-      margin-left: 15%;
-      border-spacing:20px;
-      width: 60%;
- }
+ @media screen and (orientation:portrait){
+     #cal-container{
+         height: 40vh;
+    }
+     table.cal{
+         table-layout: auto;
+         width: 70%;
+         height: 100%;
+         border-collapse: collapse;
+    }
+     .key {
+         margin-left: 15%;
+         border-spacing:20px;
+         width: 60%;
+    }
 }
-
  .cal {
      border-spacing: 0;
      border-color: #9ABAD9;
@@ -146,3 +138,4 @@
      text-align:left;
      vertical-align:top
 }
+ 

@@ -1,17 +1,13 @@
 @media screen and (orientation:landscape){
      .pfp{
-
          padding-top:10px;
          padding-right: 10px;
          height: 30%;
          width:40%;
-
     }
-
-    .pfpImages{
-      display: inline-block;
+     .pfpImages{
+         display: inline-block;
     }
-
      .info {
          padding-top: 10px;
          padding-left: 20px;
@@ -20,23 +16,19 @@
          width: 50%;
     }
      #twitter{
-        padding-left: 20px;
+         padding-left: 20px;
          padding-top: 20px;
          width: 40%;
     }
-
-    .aboutLink{
-      padding-top: 20px;
+     .aboutLink{
+         padding-top: 20px;
     }
-
-    #about{
-    display: flex;
+     #about{
+         display: flex;
     }
-
-    #creditsButton{
-      display: none;
+     #creditsButton{
+         display: none;
     }
-
 }
  @media screen and (orientation:portrait) {
      .pfp{
@@ -44,34 +36,27 @@
          height:170px;
          width: 110px;
     }
-
-    #twitter{
-      margin: 0 auto;
-      padding-top: 10px;
-      width: 90%;
+     #twitter{
+         margin: 0 auto;
+         padding-top: 10px;
+         width: 90%;
     }
-
-    #credits{
-      display: none;
+     #credits{
+         display: none;
     }
-
-    .aboutLink{
-      margin-left: 5%;
-      padding-top: 15px;
+     .aboutLink{
+         margin-left: 5%;
+         padding-top: 15px;
     }
-
-    #credits{
-      padding-left: 10px;
-      padding-top: 10px;
+     #credits{
+         padding-left: 10px;
+         padding-top: 10px;
     }
-
 }
-
-#backButton{
-  display: none;
+ #backButton{
+     display: none;
 }
-
-
-    .aboutLink a{
-      color: var(--font-color);
-    }
+ .aboutLink a{
+     color: var(--font-color);
+}
+ 
