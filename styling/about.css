@@ -32,7 +32,8 @@
 }
  @media screen and (orientation:portrait) {
      .pfp{
-         margin: 20px;
+         margin-right: 20px;
+         margin-top: 20px;
          height:170px;
          width: 110px;
     }
@@ -45,11 +46,11 @@
          display: none;
     }
      .aboutLink{
-         margin-left: 5%;
+         margin-left: 20px;
          padding-top: 15px;
     }
      #credits{
-         padding-left: 10px;
+         padding-left: 20px;
          padding-top: 10px;
     }
 }
