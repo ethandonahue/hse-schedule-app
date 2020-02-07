@@ -6,10 +6,8 @@ var vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0
 
 if(vh >= vw){
   vh *= .6;
-  vw *= .9;
 } else {
-  vh *= .65;
-  vw *= .3;
+  vh *= 0.7;
 }
 
 
