@@ -8,12 +8,17 @@ var startingPos = 1.5 * Math.PI;
 fgColorCircle = "#FFFFFF";
 bgColorCircle = "#6698FF";
 
+
+
 function getCanvas(){
   canvas = document.getElementById("completionCircle");
   surface = canvas.getContext("2d");
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
+
 }
+
+
 
 function resizeCanvas(){
   if(landOrPort() == "landscape"){
@@ -27,6 +32,7 @@ function resizeCanvas(){
     canvas.width = window.innerWidth * window.devicePixelRatio;
     canvas.height = window.innerHeight * 0.35 * window.devicePixelRatio;
   }
+  document.getElementById("timeComponents").style.height = canvas.style.height;
   surface.scale(window.devicePixelRatio, window.devicePixelRatio);
 }
 

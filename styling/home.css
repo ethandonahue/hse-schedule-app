@@ -106,13 +106,6 @@ canvas{
 }
 }
 @media screen and (orientation:portrait) {
-  .CenteredMiddle{
-      display: table-cell;
-      padding-top: 25%;
-      text-align: center;
-      width: 100vw;
-      vertical-align: middle;
-  }
 
   .CenteredSide{
     display: table-cell;
@@ -123,6 +116,7 @@ canvas{
 
   #dateAndTime{
     font-size:2vh;
+    padding-top: 4%;
   }
 
   #lunch{
@@ -147,8 +141,22 @@ canvas{
     font-size:9vw;
   }
 
-  canvas{
-    margin:5% 0;
+  #timeComponents{
+    margin-top: 40px;
+    display: inline-block;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 100vw;
+  }
+
+  #TimeContainer{
+    display: inline-block;
+    font-size: 2.5vw;
+  }
+
+  #timeElement{
+    padding-top: 4%;
   }
 
 }
