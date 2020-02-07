@@ -8,20 +8,11 @@ var startingPos = 1.5 * Math.PI;
 fgColorCircle = "#FFFFFF";
 bgColorCircle = "#6698FF";
 
-//SheetsPlus.whenNotEquals("period", "undefined", getCanvas);
-
 function getCanvas(){
   canvas = document.getElementById("completionCircle");
   surface = canvas.getContext("2d");
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
-  setInterval(() => {
-    surface.clearRect(0, 0, canvas.width, canvas.height);
-    if(period != undefined){
-      //surface.fillRect(0, 0, canvas.width, canvas.height);
-      //completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
-    }
-  }, 10);
 }
 
 function resizeCanvas(){
@@ -37,10 +28,10 @@ function resizeCanvas(){
     canvas.height = window.innerHeight * 0.35 * window.devicePixelRatio;
   }
   surface.scale(window.devicePixelRatio, window.devicePixelRatio);
-  //completeCircle(1 - TimePlus.toSeconds(TimePlus.timeBetween(TimePlus.getCurrentTime(), period.endTime)) / TimePlus.toSeconds(TimePlus.timeBetween(period.startTime, period.endTime)));
 }
 
 function completeCircle(percentage){
+  surface.clearRect(0, 0, canvas.width, canvas.height);
   var width = canvas.style.width.substring(0, canvas.style.width.indexOf("px"));
   var height = canvas.style.height.substring(0, canvas.style.height.indexOf("px"));
   var radius = width / 3;
