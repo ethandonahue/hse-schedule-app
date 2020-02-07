@@ -43,53 +43,43 @@
                <div id="header">
                   <h1 id="headerText">Info Board</h1>
                </div>
-
-              <div id="about">
-               <div id="twitter">
+               <div id="about">
+                  <div id="twitter">
+                  </div>
+                  <script src="/js/twitterFeed.js"></script>
+                  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                  <!-- <div id="links">
+                     <div class="aboutLink">
+                     <a href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
+                     </div>
+                     <div class="aboutLink">
+                     <a href="">Credits</a>
+                     </div>
+                     </div> -->
+                  <div class="info">
+                     <div id="credits">
+                        <div id="infoTitle">
+                           <h2>Made by Ethan Donahue and Isaac Robbins</h2>
+                        </div>
+                        <div class="pfpImages">
+                           <img alt="Ethan" class="pfp" src="/images/ethan.jpg"></img>
+                           <img alt="Isaac" class="pfp" src="/images/isaac.jpg"></img>
+                        </div>
+                     </div>
+                     <div id="links">
+                        <div class="aboutLink">
+                           <a href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
+                        </div>
+                        <div class="aboutLink">
+                           <a id="creditsButton" onclick="showCredits()">Credits</a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="aboutLink" id="backButton">
+                     <a onclick="showTwitter()">Back</a>
+                  </div>
                </div>
-
-               <script src="/js/twitterFeed.js"></script>
-
-
-               <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-               <!-- <div id="links">
-               <div class="aboutLink">
-              <a href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
             </div>
-            <div class="aboutLink">
-              <a href="">Credits</a>
-            </div>
-          </div> -->
-
-          <div class="info">
-            <div id="credits">
-            <div id="infoTitle">
-             <h2>Made by Ethan Donahue and Isaac Robbins</h2>
-           </div>
-              <div class="pfpImages">
-             <img alt="Ethan" class="pfp" src="/images/ethan.jpg"></img>
-             <img alt="Isaac" class="pfp" src="/images/isaac.jpg"></img>
-           </div>
-         </div>
-           <div id="links">
-<div class="aboutLink">
-<a href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
-</div>
-<div class="aboutLink">
-<a id="creditsButton" onclick="showCredits()">Credits</a>
-</div>
-
-</div>
-           </div>
-
-           <div class="aboutLink" id="backButton">
-           <a onclick="showTwitter()">Back</a>
-           </div>
-
-            </div>
-          </div>
             <div id="BELLSCHEDULE SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">Bell Schedule</h1>
@@ -146,43 +136,36 @@
                   <h1 id="headerText">Calendar</h1>
                </div>
                <h2 style="text-align:center;margin-top:10px;">Click A Day To View Its Schedule</h2>
-
                <div id="cal-container">
-
-               <table class="cal">
-                  <tr>
-                     <th class="cal-month" colspan="7" id="cal-month">Month<br>Year</th>
-                  </tr>
-                  <tr>
-                     <td class="cal-header">Su</td>
-                     <td class="cal-header">Mo</td>
-                     <td class="cal-header">Tu</td>
-                     <td class="cal-header">We</td>
-                     <td class="cal-header">Th</td>
-                     <td class="cal-header">Fr</td>
-                     <td class="cal-header">Sa</td>
-                  </tr>
-                  <tr id="cal-week-1"></tr>
-                  <tr id="cal-week-2"></tr>
-                  <tr id="cal-week-3"></tr>
-                  <tr id="cal-week-4"></tr>
-                  <tr id="cal-week-5"></tr>
-               </table>
-               <table class="key">
-                  <colgroup>
-                     <col style="width: 27px">
-                     <col style="width: 177px">
-                  </colgroup>
-                  <tr>
+                  <table class="cal">
+                     <tr>
+                        <th class="cal-month" colspan="7" id="cal-month"><br></th>
+                     </tr>
+                     <tr>
+                        <td class="cal-header">Su</td>
+                        <td class="cal-header">Mo</td>
+                        <td class="cal-header">Tu</td>
+                        <td class="cal-header">We</td>
+                        <td class="cal-header">Th</td>
+                        <td class="cal-header">Fr</td>
+                        <td class="cal-header">Sa</td>
+                     </tr>
+                     <tr id="cal-week-1"></tr>
+                     <tr id="cal-week-2"></tr>
+                     <tr id="cal-week-3"></tr>
+                     <tr id="cal-week-4"></tr>
+                     <tr id="cal-week-5"></tr>
+                  </table>
+                  <table class="key">
                      <td class="key-today"></td>
                      <td class="key-row">Today</td>
-                  </tr>
-                  <tr>
-                     <td class="key-noSchool"></td>
-                     <td class="key-row">No School</td>
-                  </tr>
-               </table>
-             </div>
+                     </tr>
+                     <tr>
+                        <td class="key-noSchool"></td>
+                        <td class="key-row">No School</td>
+                     </tr>
+                  </table>
+               </div>
             </div>
             <div id="SETTINGS SCREEN" class="hideDIV">
                <div id="header">
@@ -196,19 +179,17 @@
                   <h3 class="darkTheme">Dark Theme</h3>
                </div>
                <div class="lunchButtons">
-
-<div class="dropdown">
-  <button class="dropbtn">Select Your Lunch</button>
-  <div class="dropdown-content">
-    <a id="aLunch" onclick="setLunch('A')">A</a>
-    <a id="bLunch" onclick="setLunch('B')">B</a>
-    <a id="cLunch" onclick="setLunch('C')">C</a>
-    <a id="noLunch" onclick="setLunch('NONE')">None</a>
-    <a id="allLunch" onclick="setLunch('ALL')">All</a>
-  </div>
-</div>
+                  <div class="dropdown">
+                     <button class="dropbtn">Select Your Lunch</button>
+                     <div class="dropdown-content">
+                        <a id="aLunch" onclick="setLunch('A')">A</a>
+                        <a id="bLunch" onclick="setLunch('B')">B</a>
+                        <a id="cLunch" onclick="setLunch('C')">C</a>
+                        <a id="noLunch" onclick="setLunch('NONE')">None</a>
+                        <a id="allLunch" onclick="setLunch('ALL')">All</a>
+                     </div>
+                  </div>
                </div>
-
                <!-- <div class="lunchButtons">
                   <a id="aLunch" class="lunchButton" onclick="setLunch('A')">
                   A Lunch
@@ -225,8 +206,7 @@
                   <a id="allLunch" class="lunchButton" onclick="setLunch('ALL')">
                   All
                   </a>
-               </div> -->
-
+                  </div> -->
                <!--Have a comment/suggestion or find a bug?<br>
                   Let us know!<br>
                   <a href="mailto:hsescheduleapp@outlook.com?subject=In-App Feedback&body=Here is my feedback on the HSE Schedule App:">Click Here To E-Mail Us</a>-->
