@@ -33,9 +33,9 @@ async function preupdate(){
     appleInstallPop.show();
   }
 
-  var recentUpdate = new PopUp("Update-1-4");
+  var recentUpdate = new PopUp("Update-1-5");
   recentUpdate.setHeader("Recent Update:");
-  recentUpdate.setMessage("-Passing Period Around Lunch<br><br>-Removed Completion Circle For More Testing<br><br>-Calendar Key");
+  recentUpdate.setMessage("-Lunch Selection Dropdown<br><br>-Fixed Scaling Issues");
   recentUpdate.show();
 }
 
