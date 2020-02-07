@@ -1,7 +1,7 @@
 .theme-switch-wrapper {
      display: flex;
      align-items: center;
-     padding-top: 40px;
+     padding-top: 20px;
      padding-left: 20px;
 }
  .theme-switch {
@@ -99,4 +99,11 @@
 }
  .dropdown:hover .dropbtn {
      background-color: var(--select-color);
+}
+
+#Version{
+  display:block;
+  text-align: center;
+  vertical-align: middle;
+  padding-top:10px;
 }
