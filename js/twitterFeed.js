@@ -13,7 +13,6 @@ if(vh >= vw){
 }
 
 
-
 var twitterElem = document.getElementById("twitter");
 var twitterFeed = document.createElement("a");
 twitterFeed.setAttribute("class", "twitter-timeline");
