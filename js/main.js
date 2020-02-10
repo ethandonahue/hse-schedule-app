@@ -60,7 +60,11 @@ function update(){
   periodTimeLeft = getPeriodTimeLeft();
   updateDisplays();
   createScheduleTable();
-  completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
+  try{
+    completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
+  } catch {
+    
+  }
   window.requestAnimationFrame(update);
 }
 
