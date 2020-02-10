@@ -6,6 +6,7 @@
      --header-color: #414141;
      --highlight-color: #1158A5;
      --header-text-color: #6698FF;
+     --bs-background-color: #4d4d4d;
 }
  [data-theme="light"] {
      --nav-color: #004794;
@@ -15,6 +16,7 @@
      --header-color: #e8ebe9;
      --highlight-color: #87CEFA;
      --header-text-color: #6698FF;
+     --bs-background-color: #ededed;
 }
  html{
      box-sizing:border-box;
