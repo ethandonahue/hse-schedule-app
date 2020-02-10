@@ -1,24 +1,15 @@
-#bellScheduleTable {
-    font-size:15px;
-    width: 100%;
+@media screen and (orientation:landscape){
+  #bellScheduleTable{
+    width: 50%;
 }
-@media screen and (max-width: 600px) {
-    #bellScheduleTable {
-        font-size:13px;
-        width: 90%;
-   }
 }
-@media screen and (min-width: 601px) and (max-width: 1024px){
-    #bellScheduleTable {
-        width: 90%;
-   }
+
+@media screen and (orientation:portrait){
+  #bellScheduleTable{
+    width: 90%;
 }
-@media screen and (min-width: 1025px) {
-    #bellScheduleTable {
-        font-size:13px;
-        width: 40%;
-   }
 }
+
 .tg {
     border-collapse:collapse;
     border-spacing:0;
@@ -26,7 +17,7 @@
     margin-top: 20px;
 }
 .tg td{
-    padding: 10px 5px;
+    line-height: 5vh;
     border-style:solid;
     border-width:1px;
     overflow:hidden;
@@ -46,7 +37,7 @@
 .tg .bellRow{
     border-color:inherit;
     text-align:center;
-    vertical-align:top
+    vertical-align: middle;
 }
 .selected{
     background-color: var(--highlight-color);
