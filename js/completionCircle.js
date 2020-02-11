@@ -36,8 +36,12 @@ function resizeCanvas(){
   surface.scale(window.devicePixelRatio, window.devicePixelRatio);
 }
 
-function completeCircle(percentage){
+function clearCircle(){
   surface.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function completeCircle(percentage){
+  clearCircle();
   var width = canvas.style.width.substring(0, canvas.style.width.indexOf("px"));
   var height = canvas.style.height.substring(0, canvas.style.height.indexOf("px"));
   var radius = width / 3;
