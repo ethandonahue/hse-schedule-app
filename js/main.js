@@ -63,7 +63,7 @@ function update(){
   try{
     completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
   } catch {
-    
+    clearCircle();
   }
   window.requestAnimationFrame(update);
 }
