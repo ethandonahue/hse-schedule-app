@@ -62,7 +62,7 @@
      padding-top: 30px;
 }
  .selectedLunch {
-     background-color: #9499a1;
+     background-color: var(--header-text-color) !important;
      color: #fff;
 }
  .dropbtn {
@@ -82,12 +82,13 @@
      position: absolute;
      background-color: #f9f9f9;
      min-width: 160px;
+     width: 100%;
      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
      z-index: 1;
 }
  .dropdown-content a {
      color: black;
-     padding: 12px 16px;
+     padding: 8px 16px;
      text-decoration: none;
      display: block;
 }
