@@ -18,6 +18,7 @@
      --header-text-color: #6698FF;
      --bs-background-color: #ededed;
 }
+
  html{
      box-sizing:border-box;
      background-color: var(--bg-color);
@@ -162,7 +163,7 @@
 
 
 
-.pageContent {
+.animation-wrapper {
     -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
        -moz-animation: fadein 0.5s; /* Firefox < 16 */
         -ms-animation: fadein 0.5s; /* Internet Explorer */
