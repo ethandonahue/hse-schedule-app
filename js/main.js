@@ -34,9 +34,9 @@ async function preupdate(){
     appleInstallPop.show();
   }
 
-  var recentUpdate = new PopUp("Update-1-5");
-  recentUpdate.setHeader("Recent Update:");
-  recentUpdate.setMessage("-Lunch Selection Dropdown<br><br>-Fixed Scaling Issues");
+  var recentUpdate = new PopUp("Update V. 1.0");
+  recentUpdate.setHeader("Version 1.0");
+  recentUpdate.setMessage("-Added Back The Circle<br><br>-Added Animations<br><br>-Updated The Bell Schedule Styling");
   recentUpdate.show();
 }
 
