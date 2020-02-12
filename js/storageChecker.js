@@ -17,8 +17,11 @@ function setStorageAttributes(){
   if(storage.get("popups") == undefined){
     storage.set("popups", "{}");
   }
+  if(storage.get("animationState") == undefined){
+    storage.set("animationState", false);
+  }
   storage.getAllNames().forEach((name) => {
-    if(name != "selectedLunch" && name != "theme" && name != "popups"){
+    if(name != "selectedLunch" && name != "theme" && name != "popups" && name != "animationState"){
       storage.remove(name);
     }
   });
@@ -40,6 +43,15 @@ function setLunch(lunch){
   storage.set("selectedLunch", lunch);
   selectLunch();
 }
+
+function setAnimation(state){
+  storage.set("animationState", state);
+}
+
+function getAnimation(){
+  return localStorage.animationState;
+}
+
 
 function selectLunch(){
   removeSelectedLunch();
