@@ -79,6 +79,7 @@ canvas{
 }
 
 .middle {
+  padding-top:0;
   width: 50%;
   font-size: 100%;
 }
@@ -100,10 +101,6 @@ canvas{
 .screenContent{
   height:90%;
   width:100%;
-}
-
-canvas{
-
 }
 }
 @media screen and (orientation:portrait) {
