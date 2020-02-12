@@ -15,7 +15,7 @@ function getCanvas(){
   surface = canvas.getContext("2d");
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
-
+  window.addEventListener("orientationchange", resizeCanvas);
 }
 
 
