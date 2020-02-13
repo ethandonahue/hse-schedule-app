@@ -17,7 +17,6 @@ font-family: 'Roboto', monospace !important;
 
 #lunchText{
   padding-bottom:2%;
-  font-family: 'Roboto', monospace !important;
 }
 
 #currentWeek{
@@ -32,7 +31,9 @@ canvas{
 }
 
 
-
+#lunchTime{
+  font-family: 'Roboto', monospace !important;
+}
 
 
 @media screen and (orientation:landscape) {
