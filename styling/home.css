@@ -12,7 +12,7 @@
 }
 
 #timeText{
-font-family: 'Roboto', monospace !important;
+font-family: 'Roboto Mono', monospace; !important;
 }
 
 #lunchText{
@@ -32,7 +32,7 @@ canvas{
 
 
 #lunchTime{
-  font-family: 'Roboto', monospace !important;
+  font-family: 'Roboto Mono', monospace; !important;
 }
 
 
