@@ -11,6 +11,10 @@
    display:block;
 }
 
+#timeText{
+font-family: 'Roboto Mono', monospace; !important;
+}
+
 #lunchText{
   padding-bottom:2%;
 }
@@ -25,6 +29,12 @@ canvas{
   display:block;
   padding:0;
 }
+
+
+#lunchTime{
+  font-family: 'Roboto Mono', monospace; !important;
+}
+
 
 @media screen and (orientation:landscape) {
 #timeHeader{
