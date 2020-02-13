@@ -25,7 +25,7 @@ async function preupdate(){
   getCanvas();
   update();
   generateCalendar();
-  setTimeout(refreshSchedules, 5000);
+  setTimeout(refreshSchedules, 10000);
 
   if(isAppleDevice() && !inStandalone()){
     var appleInstallPop = new PopUp("apple-installer");
@@ -79,7 +79,7 @@ async function refreshSchedules(){
   if(!(schedules.isEqualTo(firstLoadedSchedules))){
     window.location.reload();
   }
-  setTimeout(refreshSchedules, 5000);
+  setTimeout(refreshSchedules, 10000);
 }
 
 function personalizeSchedule(){

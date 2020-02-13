@@ -8,8 +8,6 @@ var startingPos = 1.5 * Math.PI;
 fgColorCircle = "#FFFFFF";
 bgColorCircle = "#6698FF";
 
-
-
 function getCanvas(){
   canvas = document.getElementById("completionCircle");
   surface = canvas.getContext("2d");
@@ -17,8 +15,6 @@ function getCanvas(){
   window.addEventListener("resize", resizeCanvas);
   window.addEventListener("orientationchange", resizeCanvas);
 }
-
-
 
 function resizeCanvas(){
   if(landOrPort() == "landscape"){
