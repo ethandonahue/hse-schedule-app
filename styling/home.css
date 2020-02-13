@@ -11,8 +11,13 @@
    display:block;
 }
 
+#timeText{
+font-family: 'Roboto', monospace !important;
+}
+
 #lunchText{
   padding-bottom:2%;
+  font-family: 'Roboto', monospace !important;
 }
 
 #currentWeek{
@@ -25,6 +30,10 @@ canvas{
   display:block;
   padding:0;
 }
+
+
+
+
 
 @media screen and (orientation:landscape) {
 #timeHeader{
