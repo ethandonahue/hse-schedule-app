@@ -29,6 +29,8 @@
       <script src="/js/completionCircle.js"></script>
       <script src="/js/calendarScript.js"></script>
       <script src="/js/main.js"></script>
+      <script src="/js/animations.js"></script>
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
    </head>
    <body class="disable-selection">
       <div id="contentHolder" class="content">
@@ -43,7 +45,7 @@
                <div id="header">
                   <h1 id="headerText">Info Board</h1>
                </div>
-               <div id="about">
+               <div id="about" class="pageContent">
                   <div id="twitter">
                   </div>
                   <script src="/js/twitterFeed.js"></script>
@@ -72,10 +74,11 @@
                   </div>
                </div>
             </div>
-            <div id="BELLSCHEDULE SCREEN" class="hideDIV">
+            <div id="BELLSCHEDULE SCREEN" class="hideDIV ppp">
                <div id="header">
                   <h1 id="headerText">Bell Schedule</h1>
                </div>
+               <div class="pageContent">
                <table class="tg" id="bellScheduleTable">
                   <colgroup>
                      <col style="width: 20%">
@@ -85,10 +88,12 @@
                   </tr>
                </table>
             </div>
+          </div>
             <div id="HOME SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">HSE Schedule</h1>
                </div>
+               <div class="pageContent">
                <div class="row">
                   <div class="column left">
                      <div id="dateAndTime" class="CenteredSide">
@@ -103,8 +108,13 @@
                         </div>
                      </div>
                   </div>
-                  <canvas id="completionCircle"></canvas>
-                  <div class="column middle">
+
+
+                  <div id="timeElement" class="column middle">
+                    <div id="circleContainer">
+                    <canvas id="completionCircle"></canvas>
+                  </div>
+                  <div id="timeComponents">
                      <div id="TimeContainer" class="CenteredMiddle">
                         <div id="timeRemaining">
                            <h3 id="timeHeader">Please Wait</h3>
@@ -113,8 +123,11 @@
                         <div id="time">
                            <h1 id="timeText">Loading Schedules</h1>
                         </div>
-                     </div>
                   </div>
+                </div>
+              </div>
+
+
                   <div class="column right">
                      <div id="lunch" class="CenteredSide">
                         <h3 id="lunchText"></h3>
@@ -123,10 +136,13 @@
                   </div>
                </div>
             </div>
+          </div>
+
             <div id="CALENDAR SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">Calendar</h1>
                </div>
+               <div class="pageContent">
                <h2 style="text-align:center;margin-top:10px;">Click A Day To View Its Schedule</h2>
                <div id="cal-container">
                   <table class="cal">
@@ -159,20 +175,32 @@
                   </table>
                </div>
             </div>
+          </div>
             <div id="SETTINGS SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">Settings</h1>
                </div>
+               <div class="pageContent">
                <div id="Version">
                  <h2>Version 1.0</h2>
                </div>
                <div class="theme-switch-wrapper">
-                  <label class="theme-switch" for="checkbox">
-                     <input type="checkbox" id="checkbox" onchange="switchTheme()" />
+                  <label class="theme-switch" for="themeSlider">
+                     <input type="checkbox" id="themeSlider" onchange="switchTheme()" />
                      <div class="slider round"></div>
                   </label>
-                  <h3 class="darkTheme">Dark Theme</h3>
+                  <h3 class="buttonLabel">Dark Theme</h3>
                </div>
+
+               <div class="theme-switch-wrapper">
+                  <label class="theme-switch" for="animationSlider">
+                     <input type="checkbox" id="animationSlider" onchange="switchAnimations()" />
+                     <div class="slider round"></div>
+                  </label>
+                  <h3 class="buttonLabel">Animations</h3>
+               </div>
+
+
                <div class="lunchButtons">
                   <div class="dropdown">
                      <button class="dropbtn">Select Your Lunch</button>
@@ -186,7 +214,8 @@
                   </div>
                </div>
             </div>
-         </div>
+          </div>
+
          <nav>
             <div class="navbuttons">
                <a onclick="showSection('about')" id="aboutButton">

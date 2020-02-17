@@ -82,7 +82,7 @@ function Schedules(month){
 
   this._parseRequiredSchedules = function(data){
     var parsed = [];
-    data = data.wg;
+    data = data.eg;
     for(var week = 1; week < data.length; week++){
       for(var day = 0; day < 7; day++){
         var info = data[week].c[day];
@@ -96,7 +96,7 @@ function Schedules(month){
 
   this._parseScheduleLayout = function(data){
     var parsed = [];
-    data = data.wg;
+    data = data.eg;
     for(var week = 1; week < data.length; week++){
       for(var day = 0; day < 7; day++){
         var info = data[week].c[day];
@@ -183,16 +183,16 @@ function Schedule(name){
     }
     if(this.rawData != otherSchedule.rawData){
       try{
-        for(var d = 0; d < this.rawData.wg.length; d++){
+        for(var d = 0; d < this.rawData.eg.length; d++){
           try{
-            for(var c = 0; c < this.rawData.wg[d].c.length; c++){
+            for(var c = 0; c < this.rawData.eg[d].c.length; c++){
               try{
-                if(!(this.rawData.wg[d].c[c].v == otherSchedule.rawData.wg[d].c[c].v)){
+                if(!(this.rawData.eg[d].c[c].v == otherSchedule.rawData.eg[d].c[c].v)){
                   return false;
                 }
               } catch {
                 try{
-                  if(!(this.rawData.wg[d].c[c] == otherSchedule.rawData.wg[d].c[c])){
+                  if(!(this.rawData.eg[d].c[c] == otherSchedule.rawData.eg[d].c[c])){
                     return false;
                   }
                 } catch {
@@ -222,7 +222,7 @@ function Schedule(name){
 
   this._parseRawData = function(data){
     var parsed = [];
-    data = data.wg;
+    data = data.eg;
     if(data[0].c[1].v != "Message"){
       for(var period = 1; period < data.length; period++){
         var info = data[period].c;

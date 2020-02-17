@@ -2,8 +2,9 @@
 //For Use With: HSE Schedule App
 
 window.onload = function(){
-	showSection();
+	showSection("");
 	onLoadCheckTheme();
+	onLoadCheckAnimation();
 	selectLunch();
 }
 

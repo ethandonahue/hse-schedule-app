@@ -60,11 +60,9 @@ var mql = window.matchMedia("(orientation: portrait)");
 
 mql.addListener(function(m) {
 	if(m.matches) {
-    console.log("portrait b");
 		showTwitter();
 	}
 	else {
-    console.log("land b");
     creditsReset();
 	}
 });

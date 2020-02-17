@@ -25,7 +25,7 @@ async function preupdate(){
   getCanvas();
   update();
   generateCalendar();
-  setTimeout(refreshSchedules, 5000);
+  setTimeout(refreshSchedules, 10000);
 
   if(isAppleDevice() && !inStandalone()){
     var appleInstallPop = new PopUp("apple-installer");
@@ -34,9 +34,9 @@ async function preupdate(){
     appleInstallPop.show();
   }
 
-  var recentUpdate = new PopUp("Update-1-5");
-  recentUpdate.setHeader("Recent Update:");
-  recentUpdate.setMessage("-Lunch Selection Dropdown<br><br>-Fixed Scaling Issues");
+  var recentUpdate = new PopUp("Update V. 1.0");
+  recentUpdate.setHeader("Version 1.0");
+  recentUpdate.setMessage("-Added Back The Circle<br><br>-Added Animations<br><br>-Updated The Bell Schedule Styling");
   recentUpdate.show();
 }
 
@@ -60,7 +60,11 @@ function update(){
   periodTimeLeft = getPeriodTimeLeft();
   updateDisplays();
   createScheduleTable();
-  completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
+  try{
+    completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
+  } catch {
+    clearCircle();
+  }
   window.requestAnimationFrame(update);
 }
 
@@ -75,7 +79,7 @@ async function refreshSchedules(){
   if(!(schedules.isEqualTo(firstLoadedSchedules))){
     window.location.reload();
   }
-  setTimeout(refreshSchedules, 5000);
+  setTimeout(refreshSchedules, 10000);
 }
 
 function personalizeSchedule(){

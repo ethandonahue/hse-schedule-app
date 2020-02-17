@@ -13,6 +13,7 @@ function getCanvas(){
   surface = canvas.getContext("2d");
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("orientationchange", resizeCanvas);
 }
 
 function resizeCanvas(){
@@ -27,14 +28,20 @@ function resizeCanvas(){
     canvas.width = window.innerWidth * window.devicePixelRatio;
     canvas.height = window.innerHeight * 0.35 * window.devicePixelRatio;
   }
+  document.getElementById("timeComponents").style.height = canvas.style.height;
+  document.getElementById("timeComponents").style.width = canvas.style.width;
   surface.scale(window.devicePixelRatio, window.devicePixelRatio);
 }
 
-function completeCircle(percentage){
+function clearCircle(){
   surface.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function completeCircle(percentage){
+  clearCircle();
   var width = canvas.style.width.substring(0, canvas.style.width.indexOf("px"));
   var height = canvas.style.height.substring(0, canvas.style.height.indexOf("px"));
-  var radius = width / 3;
+  var radius = width / 3.1;
   var endingPos = (percentage * 2 * Math.PI) - (0.5 * Math.PI);
   if(endingPos == startingPos){
     endingPos = 3.5 * Math.PI;

@@ -6,6 +6,7 @@
      --header-color: #414141;
      --highlight-color: #1158A5;
      --header-text-color: #6698FF;
+     --bs-background-color: #4d4d4d;
 }
  [data-theme="light"] {
      --nav-color: #004794;
@@ -15,7 +16,9 @@
      --header-color: #e8ebe9;
      --highlight-color: #87CEFA;
      --header-text-color: #6698FF;
+     --bs-background-color: #ededed;
 }
+
  html{
      box-sizing:border-box;
      background-color: var(--bg-color);
@@ -156,4 +159,44 @@
      -khtml-user-select: none;
      -webkit-user-select: none;
      -webkit-touch-callout: none;
+}
+
+
+
+.animation-wrapper {
+    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.5s; /* Firefox < 16 */
+        -ms-animation: fadein 0.5s; /* Internet Explorer */
+         -o-animation: fadein 0.5s; /* Opera < 12.1 */
+            animation: fadein 0.5s;
+}
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
