@@ -22,7 +22,7 @@
  html{
      box-sizing:border-box;
      background-color: var(--bg-color);
-     overflow:hidden;
+     overflow:scroll;
      height:100%;
      width:100%;
      position:relative;
@@ -62,6 +62,7 @@
 }
  .navbuttons{
      height:100%;
+
 }
  .navbutton{
      width:20%;

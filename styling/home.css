@@ -130,11 +130,12 @@ canvas{
 
   #lunch{
     position:fixed;
-    bottom:15vh;
+    padding-top: 10px;
+  /* bottom: 13vh; */
   }
 
   #timeHeader{
-    font-size: 3.5vh;
+    font-size: 3vh;
   }
 
    #time{
@@ -143,11 +144,11 @@ canvas{
   }
 
   #lunchText{
-    font-size: 4vh;
+    font-size: 3.5vh;
   }
 
   #lunchTime{
-    font-size:5vh;
+    font-size:4vh;
   }
 
   #timeComponents{

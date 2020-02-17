@@ -1,7 +1,7 @@
 html{
      box-sizing:border-box;
      background-color:#1158A5;
-     overflow:hidden;
+     /* overflow:hidden; */
      height:100%;
      position:relative;
 }
@@ -47,4 +47,3 @@ html{
  .topText h1{
      color:#FFF;
 }
- 
