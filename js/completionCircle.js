@@ -9,6 +9,9 @@ fgColorCircle = "#FFFFFF";
 bgColorCircle = "#6698FF";
 
 function getCanvas(){
+  if(currentSchedule.layout[0].periodNum == "Special Day"){
+      document.getElementById("completionCircle").style.display = "none";
+	}
   canvas = document.getElementById("completionCircle");
   surface = canvas.getContext("2d");
   resizeCanvas();

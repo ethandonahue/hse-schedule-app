@@ -22,7 +22,6 @@ preupdate();
 async function preupdate(){
   await loadGoogleCharts();
   await refreshSchedules();
-  getCanvas();
   update();
   generateCalendar();
   setTimeout(refreshSchedules, 10000);
@@ -58,6 +57,7 @@ function update(){
   setCurrentPeriod(personalSchedule);
   periodHeader = getPeriodHeader();
   periodTimeLeft = getPeriodTimeLeft();
+  getCanvas();
   updateDisplays();
   createScheduleTable();
   try{
