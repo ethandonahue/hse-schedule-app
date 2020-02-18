@@ -35,6 +35,16 @@ canvas{
   font-family: 'Roboto Mono', monospace; !important;
 }
 
+#rotationContainer {
+  display: none;
+  height: 100%;
+margin: 0 auto;
+
+}
+#rotationText {
+    display: table-cell;
+    vertical-align: middle;
+}
 
 @media screen and (orientation:landscape) {
 #timeHeader{
