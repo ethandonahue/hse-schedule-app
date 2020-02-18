@@ -22,7 +22,7 @@
  html{
      box-sizing:border-box;
      background-color: var(--bg-color);
-     overflow:scroll;
+     overflow:none;
      height:100%;
      width:100%;
      position:relative;
