@@ -9,7 +9,12 @@ app.get("/", function(req, res){
 });
 app.use("/", express.static(__dirname + "/"));
 
-var __ConnectTo__ = os.networkInterfaces()["Ethernet"][1].address + ":" + port;
+var __ConnectTo__;
+try{
+	__ConnectTo__ = os.networkInterfaces()["Wi-Fi"][1].address + ":" + port;
+} catch {
+	__ConnectTo__ = os.networkInterfaces()["Ethernet"][1].address + ":" + port;
+}
 
 serv.listen(port);
 console.clear();
