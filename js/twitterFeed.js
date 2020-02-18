@@ -66,3 +66,15 @@ mql.addListener(function(m) {
     creditsReset();
 	}
 });
+
+function resizeTwitter(){
+  try{
+    var feed = document.getElementById("twitter-widget-0");
+    var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    feed.style.width = vw.toString();
+    feed.style.height = vh.toString();
+  } catch {
+    
+  }
+}

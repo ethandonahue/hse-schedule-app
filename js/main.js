@@ -65,6 +65,7 @@ function update(){
   } catch {
     clearCircle();
   }
+  resizeTwitter();
   window.requestAnimationFrame(update);
 }
 
