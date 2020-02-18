@@ -25,7 +25,6 @@ async function preupdate(){
   update();
   generateCalendar();
   setTimeout(refreshSchedules, 10000);
-
   if(isAppleDevice() && !inStandalone()){
     var appleInstallPop = new PopUp("apple-installer");
     appleInstallPop.setHeader("Install On iOS");
