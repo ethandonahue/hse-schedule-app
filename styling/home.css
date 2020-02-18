@@ -140,8 +140,7 @@ margin: 0 auto;
 
   #lunch{
     position:fixed;
-    padding-top: 10px;
-  /* bottom: 13vh; */
+    bottom: 13vh;
   }
 
   #timeHeader{
