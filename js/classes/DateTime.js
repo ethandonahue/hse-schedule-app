@@ -286,8 +286,33 @@ function DateTime(custom){
     var remaining = {};
     var start = this._giveDateObject(this);
     var end = this._giveDateObject(other);
+    var startTotalDays = new Date(start.getFullYear(), start.getMonth(), 0).getDate();
+    var endTotalDays = new Date(end.getFullYear(), end.getMonth(), 0).getDate();
     var totalSeconds = (end - start) / 1000;
+    remaining.year = end.getFullYear() - start.getFullYear();
+    if(end.getMonth() == start.getMonth()){
+      remaining.month = 0;
+    } else {
+      remaining.month = end.getMonth() - start.getMonth() - 1;
+    }
+    remaining.week = end.getWeek() - start.getWeek();
+    if(end.getDate() == start.getDate()){
+      remaining.day = 0;
+    } else {
+      remaining.day = end.getDate() - start.getDate() - 1;
+    }
+    if(endTotalDays != startTotalDays){
+      remaining.day += Math.abs(endTotalDays - startTotalDays) - 1;
+    }
     remaining.hour = Math.floor((totalSeconds / 3600));
+    if(remaining.hour < 24){
+      remaining.day = 0;
+    } else {
+      while(remaining.hour > 24){
+        remaining.hour -= 24;
+      }
+      remaining.hour++;
+    }
 		remaining.minute = Math.floor((totalSeconds / 60) % 60);
 		remaining.second = Math.floor(totalSeconds % 60);
     remaining.millisecond = Math.floor((totalSeconds - Math.floor(totalSeconds)) * 1000);
