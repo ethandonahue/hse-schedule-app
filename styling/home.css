@@ -125,6 +125,10 @@ margin: 0 auto;
 }
 @media screen and (orientation:portrait) {
 
+  .pageContent{
+    height: 100%;
+  }
+
   .CenteredSide{
     display: table-cell;
     text-align: center;
@@ -139,8 +143,7 @@ margin: 0 auto;
   }
 
   #lunch{
-    position:fixed;
-    margin-top: 5vh;
+    padding-top: 20px;
   }
 
   #timeHeader{
