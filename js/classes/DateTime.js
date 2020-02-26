@@ -100,6 +100,8 @@ function DateTime(custom){
     		monthName:this.monthNames[d.getMonth()],
     		dayName:this.dayNames[d.getDay()]
     	};
+      var firstDayOfYear = Math.floor(new Date(d.getFullYear(), 0, 1) / 86400000);
+      this.date.dayOfYear = Math.ceil((new Date(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000) - firstDayOfYear);
     } else {
       this.date = {
         year:this.staticDate.year,
@@ -107,6 +109,7 @@ function DateTime(custom){
     		weekOfYear:this.staticDate.weekOfYear,
     		dayOfWeek:this.staticDate.dayOfWeek,
     		dayOfMonth:this.staticDate.dayOfMonth,
+        dayOfYear:this.staticDate.dayOfYear,
     		firstDayOfMonth:this.staticDate.firstDayOfMonth,
     		daysInMonth:this.staticDate.daysInMonth,
     		monthName:this.staticDate.monthName,
@@ -151,6 +154,10 @@ function DateTime(custom){
     }
     if(static.dayOfWeek == undefined){
       static.dayOfWeek = new Date(static.year, static.month, static.dayOfMonth).getDay();
+    }
+    if(static.dayOfYear == undefined){
+      var firstDayOfYear = Math.floor(new Date(static.year, 0, 1) / 86400000);
+      static.dayOfYear = Math.ceil((new Date(static.year, static.month, static.dayOfMonth) / 86400000) - firstDayOfYear);
     }
     if(static.weekOfYear == undefined){
       static.weekOfYear = new Date(static.year, static.month, static.dayOfMonth).getWeek();
@@ -279,6 +286,8 @@ function DateTime(custom){
       monthName:this.monthNames[date.getMonth()],
       dayName:this.dayNames[date.getDay()]
     };
+    var firstDayOfYear = Math.floor(new Date(date.getFullYear(), 0, 1) / 86400000);
+    obj.date.dayOfYear = Math.ceil((new Date(date.getFullYear(), date.getMonth(), date.getDate()) / 86400000) - firstDayOfYear);
     return obj;
   }
 
@@ -286,36 +295,15 @@ function DateTime(custom){
     var remaining = {};
     var start = this._giveDateObject(this);
     var end = this._giveDateObject(other);
-    var startTotalDays = new Date(start.getFullYear(), start.getMonth(), 0).getDate();
-    var endTotalDays = new Date(end.getFullYear(), end.getMonth(), 0).getDate();
     var totalSeconds = (end - start) / 1000;
-    remaining.year = end.getFullYear() - start.getFullYear();
-    if(end.getMonth() == start.getMonth()){
-      remaining.month = 0;
-    } else {
-      remaining.month = end.getMonth() - start.getMonth() - 1;
-    }
-    remaining.week = end.getWeek() - start.getWeek();
-    if(end.getDate() == start.getDate()){
-      remaining.day = 0;
-    } else {
-      remaining.day = end.getDate() - start.getDate() - 1;
-    }
-    if(endTotalDays != startTotalDays){
-      remaining.day += Math.abs(endTotalDays - startTotalDays) - 1;
-    }
-    remaining.hour = Math.floor((totalSeconds / 3600));
-    if(remaining.hour < 24){
-      remaining.day = 0;
-    } else {
-      while(remaining.hour > 24){
-        remaining.hour -= 24;
-      }
-      remaining.hour++;
-    }
-		remaining.minute = Math.floor((totalSeconds / 60) % 60);
-		remaining.second = Math.floor(totalSeconds % 60);
-    remaining.millisecond = Math.floor((totalSeconds - Math.floor(totalSeconds)) * 1000);
+    remaining.millisecond = end.getTime() - start.getTime();
+    remaining.second = Math.floor(remaining.millisecond / 1000);
+    remaining.minute = Math.floor(remaining.second / 60);
+    remaining.hour = Math.floor(remaining.minute / 60);
+    remaining.day = Math.floor(remaining.hour / 24);
+    remaining.week = Math.floor(remaining.day / 7);
+    remaining.month = 0;
+    remaining.year = 0;
     return remaining;
   }
 
