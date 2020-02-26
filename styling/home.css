@@ -1,184 +1,88 @@
 #currentDayText, #currentTimeText, #lunchText, #timeHeader, #timeSecondaryHeader{
-  color: var(--header-text-color);
+     color: var(--header-text-color);
 }
-
-#timeHeader{
-  display:block;
-  padding-bottom: 2%;
+ #timeHeader{
+     display:block;
 }
-
  #time{
-   display:block;
+     display:block;
 }
-
-#timeText{
-font-family: 'Roboto Mono', monospace; !important;
+ @font-face {
+     font-family: "Rubik-Clock";
+     src: url("/fonts/Rubik-MonoClock.ttf") format("truetype");
 }
-
-#lunchText{
-  padding-bottom:2%;
+ #timeText{
+     font-family: 'Rubik-Clock' !important;
+     font-kerning: none;
+     font-weight: lighter;
 }
-
-#currentWeek{
-  padding: 10px;
+ #currentWeek{
+     padding: 10px;
 }
-
-canvas{
-  z-index:-3;
-  position:absolute;
-  display:block;
-  padding:0;
+ canvas{
+     position:absolute;
+     display:block;
 }
-
-
-#lunchTime{
-  font-family: 'Roboto Mono', monospace; !important;
+ #lunchTime{
+     font-family: 'Rubik-Clock' !important;
+     font-kerning: none;
+     font-weight: lighter;
 }
-
-#rotationContainer {
-  display: none;
-  height: 100%;
-margin: 0 auto;
-
+ #rotationContainer {
+     display: none;
+     height: 100%;
+     margin: 0 auto;
 }
-#rotationText {
-    display: table-cell;
-    vertical-align: middle;
+ #rotationText {
+     display: table-cell;
+     vertical-align: middle;
 }
-
-@media screen and (orientation:landscape) {
-#timeHeader{
-  font-size: 4vw;
+ @media screen and (orientation:landscape) {
+     .homeContent{
+         display: flex;
+         flex-wrap: nowrap;
+         align-items: center;
+         height: calc(var(--vh, 1vh) * 81);
+    }
+     .homeContent > .mainElement{
+         width: 100%;
+         text-align: center;
+         vertical-align: middle;
+         font-size: 2.5vh;
+    }
+     #timeHeader{
+         font-size: 4vw;
+    }
+     #time{
+         font-size: 4vw;
+    }
+     #dateAndTime{
+         font-size:2vw;
+    }
+     #lunchText{
+         font-size: 3vw;
+    }
+     #lunchTime{
+         font-size:5vw;
+    }
 }
-
- #time{
-   font-size: 4vw;
+ @media screen and (orientation:portrait) {
+     .homeContent{
+         display: flex;
+         flex-wrap: nowrap;
+         flex-direction: column;
+         height: calc(var(--vh, 1vh) * 81);
+         justify-content: space-between;
+         align-items: center;
+         padding-top: 3vh;
+         padding-bottom: 3vh;
+    }
+     .homeContent >.mainElement{
+         width: 100%;
+         text-align: center;
+         vertical-align: middle;
+         font-size: 2.5vh;
+         align-items: center;
+    }
 }
-
-.CenteredMiddle{
-    display: table-cell;
-    height:80vh;
-    text-align: center;
-    width: 50vw;
-    vertical-align: middle;
-}
-
-.CenteredSide{
-  display: table-cell;
-  height:80vh;
-  text-align: center;
-  width: 25vw;
-  vertical-align: middle;
-}
-
-#dateAndTime{
-  font-size:2vw;
-  padding-top: 2%;
-}
-
-#lunchText{
-  padding-bottom:2%;
-  font-size: 3vw;
-}
-
-#lunchTime{
-  font-size:5vw;
-}
-
-
-.column {
-  float: left;
-  padding: 10px;
-  height:100%;
-  width:50%;
-  display: inline-block;
-}
-
-.left, .right {
-  width: 25%;
-}
-
-.middle {
-  padding-top:0;
-  width: 50%;
-  font-size: 100%;
-}
-
-.row {
-  height:89%;
-  width:100%;
-  vertical-align:middle;
-  text-align:center;
-  display: inline-block;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.screenContent{
-  height:90%;
-  width:100%;
-}
-}
-@media screen and (orientation:portrait) {
-
-  .pageContent{
-    height: 100%;
-  }
-
-  .CenteredSide{
-    display: table-cell;
-    text-align: center;
-    width: 100vw;
-    vertical-align: middle;
-  }
-
-
-  #dateAndTime{
-    font-size:2vh;
-    padding-top: 4%;
-  }
-
-  #lunch{
-    padding-top: 20px;
-  }
-
-  #timeHeader{
-    font-size: 3vh;
-  }
-
-   #time{
-     font-size: 4vh;
-     text-align: center;
-  }
-
-  #lunchText{
-    font-size: 3.5vh;
-  }
-
-  #lunchTime{
-    font-size:4vh;
-  }
-
-  #timeComponents{
-    margin-top: 40px;
-    display: inline-block;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    width: 100vw;
-  }
-
-  #TimeContainer{
-    display: inline-block;
-    font-size: 2.5vw;
-  }
-
-  #timeElement{
-    padding-top: 4%;
-  }
-
-}
+ 
