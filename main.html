@@ -30,12 +30,11 @@
       <script src="/js/calendarScript.js"></script>
       <script src="/js/main.js"></script>
       <script src="/js/animations.js"></script>
-      <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
    </head>
    <body class="disable-selection">
-     <div id="rotationContainer">
-       <h1 id="rotationText">Please Rotate Screen</h1>
-     </div>
+      <div id="rotationContainer">
+         <h1 id="rotationText">Please Rotate Screen</h1>
+      </div>
       <div id="contentHolder" class="content">
          <div class="screenContent">
             <div id="popup" class="hideDIV">
@@ -82,24 +81,23 @@
                   <h1 id="headerText">Bell Schedule</h1>
                </div>
                <div class="pageContent">
-               <table class="tg" id="bellScheduleTable">
-                  <colgroup>
-                     <col style="width: 20%">
-                     <col style="width: 60%">
-                  </colgroup>
-                  <tr id="tableToNotDelete">
-                  </tr>
-               </table>
+                  <table class="tg" id="bellScheduleTable">
+                     <colgroup>
+                        <col style="width: 20%">
+                        <col style="width: 60%">
+                     </colgroup>
+                     <tr id="tableToNotDelete">
+                     </tr>
+                  </table>
+               </div>
             </div>
-          </div>
             <div id="HOME SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">HSE Schedule</h1>
                </div>
-               <div class="pageContent">
-               <div class="row">
-                  <div class="column left">
-                     <div id="dateAndTime" class="CenteredSide">
+               <div class="pageContent homeContent">
+                  <div class="mainElement">
+                     <div id="dateAndTime">
                         <div id="currentDay">
                            <h1 id="currentDayText"></h1>
                         </div>
@@ -111,114 +109,104 @@
                         </div>
                      </div>
                   </div>
-
-
-                  <div id="timeElement" class="column middle">
-                    <div id="circleContainer">
-                    <canvas id="completionCircle"></canvas>
-                  </div>
-                  <div id="timeComponents">
-                     <div id="TimeContainer" class="CenteredMiddle">
-                        <div id="timeRemaining">
-                           <h3 id="timeHeader">Please Wait</h3>
-                           <h3 id="timeSecondaryHeader"></h3>
+                  <div class="mainElement timeMain">
+                     <canvas id="completionCircle"></canvas>
+                     <div id="timeElement">
+                        <div id="timeComponents">
+                           <div id="TimeContainer">
+                              <div id="timeRemaining">
+                                 <h3 id="timeHeader">Please Wait</h3>
+                                 <h3 id="timeSecondaryHeader"></h3>
+                              </div>
+                              <div id="time">
+                                 <h1 id="timeText">Loading Schedules</h1>
+                              </div>
+                           </div>
                         </div>
-                        <div id="time">
-                           <h1 id="timeText">Loading Schedules</h1>
-                        </div>
-                  </div>
-                </div>
-              </div>
-
-
-                  <div class="column right">
-                     <div id="lunch" class="CenteredSide">
-                        <h3 id="lunchText"></h3>
-                        <h1 id="lunchTime"></h1>
                      </div>
+                  </div>
+                  <div class="mainElement">
+                     <h3 id="lunchText"></h3>
+                     <h1 id="lunchTime"></h1>
+                     <div id="lunch"></div>
                   </div>
                </div>
             </div>
-          </div>
-
             <div id="CALENDAR SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">Calendar</h1>
                </div>
                <div class="pageContent">
-               <h2 style="text-align:center;margin-top:10px;">Click A Day To View Its Schedule</h2>
-               <div id="cal-container">
-                  <table class="cal">
-                     <tr>
-                        <th class="cal-month" colspan="7" id="cal-month"><br></th>
-                     </tr>
-                     <tr>
-                        <td class="cal-header">Su</td>
-                        <td class="cal-header">Mo</td>
-                        <td class="cal-header">Tu</td>
-                        <td class="cal-header">We</td>
-                        <td class="cal-header">Th</td>
-                        <td class="cal-header">Fr</td>
-                        <td class="cal-header">Sa</td>
-                     </tr>
-                     <tr id="cal-week-1"></tr>
-                     <tr id="cal-week-2"></tr>
-                     <tr id="cal-week-3"></tr>
-                     <tr id="cal-week-4"></tr>
-                     <tr id="cal-week-5"></tr>
-                  </table>
-                  <table class="key">
-                     <td class="key-today"></td>
-                     <td class="key-row">Today</td>
-                     </tr>
-                     <tr>
-                        <td class="key-noSchool"></td>
-                        <td class="key-row">No School</td>
-                     </tr>
-                  </table>
+                  <h2 style="text-align:center;margin-top:10px;">Click A Day To View Its Schedule</h2>
+                  <div id="cal-container">
+                     <table class="cal">
+                        <tr>
+                           <th class="cal-month" colspan="7" id="cal-month"><br></th>
+                        </tr>
+                        <tr>
+                           <td class="cal-header">Su</td>
+                           <td class="cal-header">Mo</td>
+                           <td class="cal-header">Tu</td>
+                           <td class="cal-header">We</td>
+                           <td class="cal-header">Th</td>
+                           <td class="cal-header">Fr</td>
+                           <td class="cal-header">Sa</td>
+                        </tr>
+                        <tr id="cal-week-1"></tr>
+                        <tr id="cal-week-2"></tr>
+                        <tr id="cal-week-3"></tr>
+                        <tr id="cal-week-4"></tr>
+                        <tr id="cal-week-5"></tr>
+                     </table>
+                     <table class="key">
+                        <td class="key-today"></td>
+                        <td class="key-row">Today</td>
+                        </tr>
+                        <tr>
+                           <td class="key-noSchool"></td>
+                           <td class="key-row">No School</td>
+                        </tr>
+                     </table>
+                  </div>
                </div>
             </div>
-          </div>
             <div id="SETTINGS SCREEN" class="hideDIV">
                <div id="header">
                   <h1 id="headerText">Settings</h1>
                </div>
                <div class="pageContent">
-               <div id="Version">
-                 <h2>Version 1.0.2</h2>
-               </div>
-               <div class="theme-switch-wrapper">
-                  <label class="theme-switch" for="themeSlider">
-                     <input type="checkbox" id="themeSlider" onchange="switchTheme()" />
-                     <div class="slider round"></div>
-                  </label>
-                  <h3 class="buttonLabel">Dark Theme</h3>
-               </div>
-
-               <div class="theme-switch-wrapper">
-                  <label class="theme-switch" for="animationSlider">
-                     <input type="checkbox" id="animationSlider" onchange="switchAnimations()" />
-                     <div class="slider round"></div>
-                  </label>
-                  <h3 class="buttonLabel">Animations</h3>
-               </div>
-
-
-               <div class="lunchButtons">
-                  <div class="dropdown">
-                     <button class="dropbtn">Select Your Lunch</button>
-                     <div class="dropdown-content">
-                        <a id="aLunch" onclick="setLunch('A')">A</a>
-                        <a id="bLunch" onclick="setLunch('B')">B</a>
-                        <a id="cLunch" onclick="setLunch('C')">C</a>
-                        <a id="noLunch" onclick="setLunch('NONE')">None</a>
-                        <a id="allLunch" onclick="setLunch('ALL')">All</a>
+                  <div id="Version">
+                     <h2>Version 1.0.2</h2>
+                  </div>
+                  <div class="theme-switch-wrapper">
+                     <label class="theme-switch" for="themeSlider">
+                        <input type="checkbox" id="themeSlider" onchange="switchTheme()" />
+                        <div class="slider round"></div>
+                     </label>
+                     <h3 class="buttonLabel">Dark Theme</h3>
+                  </div>
+                  <div class="theme-switch-wrapper">
+                     <label class="theme-switch" for="animationSlider">
+                        <input type="checkbox" id="animationSlider" onchange="switchAnimations()" />
+                        <div class="slider round"></div>
+                     </label>
+                     <h3 class="buttonLabel">Animations</h3>
+                  </div>
+                  <div class="lunchButtons">
+                     <div class="dropdown">
+                        <button class="dropbtn">Select Your Lunch</button>
+                        <div class="dropdown-content">
+                           <a id="aLunch" onclick="setLunch('A')">A</a>
+                           <a id="bLunch" onclick="setLunch('B')">B</a>
+                           <a id="cLunch" onclick="setLunch('C')">C</a>
+                           <a id="noLunch" onclick="setLunch('NONE')">None</a>
+                           <a id="allLunch" onclick="setLunch('ALL')">All</a>
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
-          </div>
-</div>
+         </div>
          <nav>
             <div class="navbuttons">
                <a onclick="showSection('about')" id="aboutButton">
@@ -256,5 +244,5 @@
       </div>
    </body>
 </html>
-
 <script src="/js/rotationDetect.js"></script>
+<script src="/js/mobileBrowser.js"></script>

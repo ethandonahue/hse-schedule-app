@@ -26,14 +26,29 @@ function resizeCanvas(){
     canvas.style.height = window.innerHeight * 0.8 + "px";
     canvas.width = window.innerWidth * 0.5 * window.devicePixelRatio;
     canvas.height = window.innerHeight * 0.8 * window.devicePixelRatio;
+
+    var circleHeight = parseInt(canvas.style.height, 10);
+    var circleWidth = parseInt(canvas.style.width, 10);
+    var elemHeight = document.getElementsByClassName("timeMain")[0].offsetHeight;
+    var docCanvas = document.getElementsByTagName("canvas")[0];
+
+    docCanvas.style.marginTop = -1 * (circleHeight/2 - elemHeight/2) + "px";
+    docCanvas.style.marginLeft = -1 * (circleWidth/6) + "px";
   } else {
     canvas.style.width = window.innerWidth + "px";
     canvas.style.height = window.innerHeight * 0.35 + "px";
     canvas.width = window.innerWidth * window.devicePixelRatio;
     canvas.height = window.innerHeight * 0.35 * window.devicePixelRatio;
+
+    var circleHeight = parseInt(canvas.style.height, 10);
+    var circleWidth = parseInt(canvas.style.width, 10);
+    var elemHeight = document.getElementsByClassName("timeMain")[0].offsetHeight;
+    var docCanvas = document.getElementsByTagName("canvas")[0];
+
+    docCanvas.style.marginTop = -1 * (circleHeight/2 - elemHeight/2) + "px";
+    docCanvas.style.marginLeft = 0 + "px";
   }
-  document.getElementById("timeComponents").style.height = canvas.style.height;
-  document.getElementById("timeComponents").style.width = canvas.style.width;
+  
   surface.scale(window.devicePixelRatio, window.devicePixelRatio);
 }
 
