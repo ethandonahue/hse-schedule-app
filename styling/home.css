@@ -84,4 +84,19 @@
          vertical-align: middle;
          align-items: center;
     }
+    #timeHeader{
+        font-size: 3vh;
+   }
+    #time{
+        font-size: 4vh;
+   }
+    #dateAndTime{
+        font-size:1.5vh;
+   }
+    #lunchText{
+        font-size: 3vh;
+   }
+    #lunchTime{
+        font-size:5vh;
+   }
 }
