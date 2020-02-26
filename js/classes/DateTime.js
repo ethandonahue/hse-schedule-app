@@ -297,13 +297,13 @@ function DateTime(custom){
     var end = this._giveDateObject(other);
     var totalSeconds = (end - start) / 1000;
     remaining.millisecond = end.getTime() - start.getTime();
-    remaining.second = Math.floor(remaining.millisecond / 1000);
-    remaining.minute = Math.floor(remaining.second / 60);
-    remaining.hour = Math.floor(remaining.minute / 60);
-    remaining.day = Math.floor(remaining.hour / 24);
-    remaining.week = Math.floor(remaining.day / 7);
-    remaining.month = 0;
-    remaining.year = 0;
+    remaining.second = Math.floor(remaining.millisecond / 1000) % 60;
+    remaining.minute = Math.floor(remaining.millisecond / 1000 / 60) % 60;
+    remaining.hour = Math.floor(remaining.millisecond / 1000 / 60 / 60) % 60;
+    //remaining.day = Math.floor(remaining.hour / 1000 / 60 / 60 / 24);
+    //remaining.week = Math.floor(remaining.day / 7);
+    //remaining.month = 0;
+    //remaining.year = 0;
     return remaining;
   }
 
