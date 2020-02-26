@@ -84,5 +84,19 @@
          font-size: 2.5vh;
          align-items: center;
     }
+    #timeHeader{
+        font-size: 5vw;
+   }
+    #time{
+        font-size: 5vw;
+   }
+    #dateAndTime{
+        font-size:3vw;
+   }
+    #lunchText{
+        font-size: 5vw;
+   }
+    #lunchTime{
+        font-size:7vw;
+   }
 }
- 

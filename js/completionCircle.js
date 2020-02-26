@@ -36,9 +36,9 @@ function resizeCanvas(){
     docCanvas.style.marginLeft = -1 * (circleWidth/6) + "px";
   } else {
     canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight * 0.35 + "px";
+    canvas.style.height = window.innerHeight * 0.4 + "px";
     canvas.width = window.innerWidth * window.devicePixelRatio;
-    canvas.height = window.innerHeight * 0.35 * window.devicePixelRatio;
+    canvas.height = window.innerHeight * 0.4 * window.devicePixelRatio;
 
     var circleHeight = parseInt(canvas.style.height, 10);
     var circleWidth = parseInt(canvas.style.width, 10);
@@ -48,7 +48,7 @@ function resizeCanvas(){
     docCanvas.style.marginTop = -1 * (circleHeight/2 - elemHeight/2) + "px";
     docCanvas.style.marginLeft = 0 + "px";
   }
-  
+
   surface.scale(window.devicePixelRatio, window.devicePixelRatio);
 }
 
