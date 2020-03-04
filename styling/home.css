@@ -43,6 +43,8 @@
          flex-wrap: nowrap;
          align-items: center;
          height: 81vh;
+         padding-left: 1vw;
+         padding-right: 1vw;
     }
      .homeContent > .mainElement{
          width: 100%;
@@ -71,12 +73,8 @@
          display: flex;
          flex-wrap: nowrap;
          flex-direction: column;
-         /* height: 81vh; */
          justify-content: space-between;
          align-items: center;
-         /* padding-top: 2vh;
-         padding-bottom: 4vh; */
-         /* font-size: 2.5vh; */
     }
      .homeContent >.mainElement{
          width: 100%;

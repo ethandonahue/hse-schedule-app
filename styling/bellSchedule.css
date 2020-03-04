@@ -23,7 +23,9 @@
     margin-top: 20px;
 }
 .tg td{
-  line-height: 190%;
+
+  /* padding-top: 1.5vh;
+    padding-bottom: 1.5vh; */
     border-style:solid;
     border-width:1px;
     /* overflow:hidden; */
@@ -33,7 +35,7 @@
 }
 
 .tg th{
-    font-size:14px;
+    /* font-size:14px; */
     font-weight:normal;
     padding:10px 5px;
     border-style:solid;
