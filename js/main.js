@@ -16,6 +16,7 @@ var periodTimeLeft = undefined;
 var periodHeader = undefined;
 var periodShowLower = undefined;
 var showLunch = undefined;
+var tickCount = 0;
 
 preupdate();
 
@@ -58,13 +59,16 @@ function update(){
   periodTimeLeft = getPeriodTimeLeft();
   getCanvas();
   updateDisplays();
-  createScheduleTable();
   try{
     completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
   } catch {
     clearCircle();
   }
   resizeTwitter();
+  if(tickCount == 0){
+    createScheduleTable();
+  }
+  tickCount = (tickCount + 1) % 60;
   window.requestAnimationFrame(update);
 }
 

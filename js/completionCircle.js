@@ -85,10 +85,12 @@ function completeCircle(percentage){
 }
 
 function onLoadCheckCircle(){
-  if(storage.get("showCircle") == true){
+  if(storage.get("showCircle") == "true"){
     document.getElementById("circleSlider").checked = true;
+    showCircle = true;
   } else {
     document.getElementById("circleSlider").checked = false;
+    showCircle = false;
   }
 }
 

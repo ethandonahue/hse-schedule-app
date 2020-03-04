@@ -18,6 +18,9 @@ function Sheet(url){
   }
 
   this.getRows = function(){
+    while(this.rawData == false){
+      
+    }
     return this.rawData.eg.length - 1;
   }
 
