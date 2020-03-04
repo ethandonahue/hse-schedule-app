@@ -17,7 +17,7 @@ function createScheduleTable(){
 	tableHeader.appendChild(timeHeader);
 	var highlighted = false;
 
-	
+
 
 
 
