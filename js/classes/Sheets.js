@@ -17,6 +17,10 @@ function Sheet(url){
     });
   }
 
+  this.getRows = function(){
+    return this.rawData.eg.length - 1;
+  }
+
   this._makeQuery = function(){
     var query = new google.visualization.Query(this.url);
     query.send(this._handleQueryResponse);
