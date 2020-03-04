@@ -42,7 +42,7 @@
          display: flex;
          flex-wrap: nowrap;
          align-items: center;
-         height: 81vh;
+         /* height: 81vh; */
          padding-left: 1vw;
          padding-right: 1vw;
     }
@@ -89,7 +89,7 @@
         font-size: 4vh;
    }
     #dateAndTime{
-        font-size:1.5vh;
+        font-size:2vh;
    }
     #lunchText{
         font-size: 3vh;

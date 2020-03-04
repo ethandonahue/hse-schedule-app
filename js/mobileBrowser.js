@@ -6,7 +6,8 @@ changeHeight();
 function changeHeight(){
 
   if(window.innerHeight > window.innerWidth){
-    console.log("f");
+    //
+    // console.log(monthlyRawData.getRows());
     document.getElementById("bellScheduleTable").style.lineHeight = window.innerHeight / 20 + "px";
   var innerSize = window.innerHeight;
   mobileWindow.style.height = innerSize * .81 +  "px";
@@ -16,6 +17,9 @@ function changeHeight(){
   // for(var i = 0; i < document.getElementsByClassName("tg").length; i++){
   //   document.getElementsByClassName("tg")[i].style.fontSize = 20 + "vh";
   // }
+} else {
+    var innerSize = window.innerHeight;
+  mobileWindow.style.height = innerSize * .81 +  "px";
 }
 }
 
