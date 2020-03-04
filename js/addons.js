@@ -5,6 +5,7 @@ window.onload = function(){
 	showSection("");
 	onLoadCheckTheme();
 	onLoadCheckAnimation();
+	onLoadCheckCircle();
 	selectLunch();
 }
 

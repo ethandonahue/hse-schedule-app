@@ -10,7 +10,7 @@ function generateCalendar(){
 			var wk = document.getElementById("cal-week-" + (w + 1));
 			var dy = document.createElement("td");
 			dy.setAttribute("class", "cal-days");
-			if(w == 0 && d < calTime.getDate().firstDayOfMonth || calendarDayToPrint > calTime.getDate().daysInMonth){
+			if(w == 0 && d < calTime.getDate().firstDayOfMonth || calendarDayToPrint > monthlyLayout.length){
 				dy.innerHTML = "";
 				dy.setAttribute("class", "calendarOtherMonth");
 			} else {

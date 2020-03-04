@@ -3,6 +3,8 @@
 
 var canvas, surface;
 
+var showCircle = storage.get("showCircle");
+
 var startingPos = 1.5 * Math.PI;
 
 fgColorCircle = "#FFFFFF";
@@ -58,24 +60,43 @@ function clearCircle(){
 
 function completeCircle(percentage){
   clearCircle();
-  var width = canvas.style.width.substring(0, canvas.style.width.indexOf("px"));
-  var height = canvas.style.height.substring(0, canvas.style.height.indexOf("px"));
-  var radius = width / 3.1;
-  var endingPos = (percentage * 2 * Math.PI) - (0.5 * Math.PI);
-  if(endingPos == startingPos){
-    endingPos = 3.5 * Math.PI;
+  if(showCircle == true){
+    var width = canvas.style.width.substring(0, canvas.style.width.indexOf("px"));
+    var height = canvas.style.height.substring(0, canvas.style.height.indexOf("px"));
+    var radius = width / 3.1;
+    var endingPos = (percentage * 2 * Math.PI) - (0.5 * Math.PI);
+    if(endingPos == startingPos){
+      endingPos = 3.5 * Math.PI;
+    }
+    if(landOrPort() == "portrait"){
+      radius = height / 2.1;
+    }
+    surface.beginPath();
+    surface.strokeStyle = bgColorCircle;
+    surface.lineWidth = 2;
+    surface.arc(width / 2, height / 2, radius, 0, 2 * Math.PI);
+    surface.stroke();
+    surface.beginPath();
+    surface.strokeStyle = fgColorCircle;
+    surface.lineWidth = 5;
+    surface.arc(width / 2, height / 2, radius, startingPos, endingPos);
+    surface.stroke();
   }
-  if(landOrPort() == "portrait"){
-    radius = height / 2.1;
+}
+
+function onLoadCheckCircle(){
+  if(storage.get("showCircle") == true){
+    document.getElementById("circleSlider").checked = true;
+  } else {
+    document.getElementById("circleSlider").checked = false;
   }
-  surface.beginPath();
-  surface.strokeStyle = bgColorCircle;
-  surface.lineWidth = 2;
-  surface.arc(width / 2, height / 2, radius, 0, 2 * Math.PI);
-  surface.stroke();
-  surface.beginPath();
-  surface.strokeStyle = fgColorCircle;
-  surface.lineWidth = 5;
-  surface.arc(width / 2, height / 2, radius, startingPos, endingPos);
-  surface.stroke();
+}
+
+function toggleCircle(){
+  if(showCircle == true){
+    showCircle = false;
+  } else {
+    showCircle = true;
+  }
+  storage.set("showCircle", showCircle);
 }
