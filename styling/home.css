@@ -16,9 +16,9 @@
      font-kerning: none;
      font-weight: lighter;
 }
- #currentWeek{
+ /* #currentWeek{
      padding: 10px;
-}
+} */
  canvas{
      position:absolute;
      display:block;
@@ -42,7 +42,7 @@
          display: flex;
          flex-wrap: nowrap;
          align-items: center;
-         height: calc(var(--vh, 1vh) * 81);
+         height: 81vh;
     }
      .homeContent > .mainElement{
          width: 100%;
@@ -71,17 +71,17 @@
          display: flex;
          flex-wrap: nowrap;
          flex-direction: column;
-         height: calc(var(--vh, 1vh) * 81);
+         /* height: 81vh; */
          justify-content: space-between;
          align-items: center;
-         padding-top: 3vh;
-         padding-bottom: 3vh;
+         /* padding-top: 2vh;
+         padding-bottom: 4vh; */
+         /* font-size: 2.5vh; */
     }
      .homeContent >.mainElement{
          width: 100%;
          text-align: center;
          vertical-align: middle;
-         font-size: 2.5vh;
          align-items: center;
     }
     #timeHeader{

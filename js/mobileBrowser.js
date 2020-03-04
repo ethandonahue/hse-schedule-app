@@ -1,11 +1,13 @@
-// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-vhSet();
-window.addEventListener('resize', () => {
-  // We execute the same script as before
-  vhSet();
-});
+var mobileWindow = document.getElementsByClassName("homeContent")[0];
 
-function vhSet(){
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
+changeHeight();
+
+function changeHeight(){
+  var innerSize = window.innerHeight;
+  mobileWindow.style.height = innerSize * .81 +  "px";
+  mobileWindow.style.paddingTop = innerSize * .02 + "px";
+  mobileWindow.style.paddingBottom = innerSize * .04 + "px";
+  mobileWindow.style.fontSize = innerSize * .025 + "px";
 }
+
+window.addEventListener("resize", changeHeight);
