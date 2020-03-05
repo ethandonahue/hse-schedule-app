@@ -19,9 +19,14 @@ function handleTouchMove(evt) {
 
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
-        alert("left");
+          if(getCurrentSection() < 6){
+            showSection(getCurrentSection() + 1);
+          }
+
         } else {
-        alert("right");
+          if(getCurrentSection() > -1){
+            showSection(getCurrentSection() - 1);
+          }
         }
     }
     /* reset values */
