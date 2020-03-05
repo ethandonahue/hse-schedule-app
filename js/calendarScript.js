@@ -52,5 +52,6 @@ function displaySelectedSchedule(day){
 	globalTime.setCustomDate(globalTime.getDate().month + 1 + "/" + day + "/" + globalTime.getDate().year);
 	globalTime.setCustomTime("12:00 a.m.");
 	globalTime.update();
+	createScheduleTable();
 	display(1);
 }
