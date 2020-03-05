@@ -2,6 +2,7 @@ var screens = ["ABOUT SCREEN", "BELLSCHEDULE SCREEN", "HOME SCREEN", "CALENDAR S
 var buttons = ["aboutButton", "bellButton", "homeButton", "calendarButton", "settingsButton"];
 var icons = ["about.png", "schedule.png", "home.png", "calendar.png", "settings.png"];
 var hashes = ["about", "bell", "home", "calendar", "settings"];
+var currentSection;
 
 function showSection(section){
   if(window.location.hash.contains("calendar")){
@@ -13,22 +14,27 @@ function showSection(section){
     case "about":
       display(0);
       highlightButton(0);
+      currentSection = "about";
       break;
     case "bell":
       display(1);
       highlightButton(1);
+      currentSection = "bell";
       break;
     case "home":
       display(2);
       highlightButton(2);
+      currentSection = "home";
       break;
     case "calendar":
       display(3);
       highlightButton(3);
+      currentSection = "calendar";
       break;
     case "settings":
       display(4);
       highlightButton(4);
+      currentSection = "settings";
       break;
     default:
       if(window.location.hash == ""){
@@ -43,6 +49,10 @@ function showSection(section){
   if(section != ""){
     window.location.hash = section;
   }
+}
+
+function getCurrentSection(){
+  return currentSection;
 }
 
 function display(screen){
