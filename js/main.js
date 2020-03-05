@@ -33,9 +33,9 @@ async function preupdate(){
     appleInstallPop.show();
   }
 
-  var recentUpdate = new PopUp("Update V. 1.0.2");
-  recentUpdate.setHeader("Version 1.0.2");
-  recentUpdate.setMessage("-Fixed iOS Rotation Glitch<br><br>-Performance Enhancements");
+  var recentUpdate = new PopUp("Update V. 1.0.3");
+  recentUpdate.setHeader("Version 1.0.3");
+  recentUpdate.setMessage("-Changed Font Back<br><br>-Styling Changes<br><br>-Toggle Completion Circle");
   recentUpdate.show();
 }
 
