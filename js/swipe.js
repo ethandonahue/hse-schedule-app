@@ -3,6 +3,8 @@ document.addEventListener('touchmove', handleTouchMove, false);
 var xDown = null;
 var yDown = null;
 
+var sliderOn = false;
+
 function handleTouchStart(evt) {
     xDown = evt.touches[0].clientX;
     yDown = evt.touches[0].clientY;
@@ -19,12 +21,12 @@ function handleTouchMove(evt) {
 
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
-          if(getCurrentSection() < 6){
+          if(getCurrentSection() < 5){
             showSection(getCurrentSection() + 1);
           }
 
         } else {
-          if(getCurrentSection() > -1){
+          if(getCurrentSection() > 0){
             showSection(getCurrentSection() - 1);
           }
         }
