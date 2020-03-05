@@ -10,6 +10,9 @@ function showSection(section){
     globalTime.removeCustomDate();
     globalTime.update();
   }
+  if(typeof(section) == "number"){
+    section = hashes[section];
+  }
   switch(section){
     case "about":
       display(0);
