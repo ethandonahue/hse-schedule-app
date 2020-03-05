@@ -18,6 +18,7 @@ function changeHeight(){
   //   document.getElementsByClassName("tg")[i].style.fontSize = 20 + "vh";
   // }
 } else {
+  document.getElementById("bellScheduleTable").style.lineHeight = window.innerHeight / 20 + "px";
     var innerSize = window.innerHeight;
   mobileWindow.style.height = innerSize * .81 +  "px";
 }
