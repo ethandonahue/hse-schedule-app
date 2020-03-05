@@ -21,7 +21,7 @@ function handleTouchMove(evt) {
 
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
-          if(getCurrentSection() < 5){
+          if(getCurrentSection() < 4){
             showSection(getCurrentSection() + 1);
           }
 
