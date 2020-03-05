@@ -14,27 +14,27 @@ function showSection(section){
     case "about":
       display(0);
       highlightButton(0);
-      currentSection = "about";
+      currentSection = 0;
       break;
     case "bell":
       display(1);
       highlightButton(1);
-      currentSection = "bell";
+      currentSection = 1;
       break;
     case "home":
       display(2);
       highlightButton(2);
-      currentSection = "home";
+      currentSection = 2;
       break;
     case "calendar":
       display(3);
       highlightButton(3);
-      currentSection = "calendar";
+      currentSection = 3;
       break;
     case "settings":
       display(4);
       highlightButton(4);
-      currentSection = "settings";
+      currentSection = 4;
       break;
     default:
       if(window.location.hash == ""){
