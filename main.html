@@ -46,16 +46,17 @@
         <p id="popup-message"></p>
         <h4 id="popup-exit-message"><i><u>Tap To Dismiss</u></i></h4>
       </div>
+
       <div id="ABOUT SCREEN" class="hideDIV">
         <div id="header">
           <h1 id="headerText">Info Board</h1>
         </div>
         <div id="about" class="pageContent">
-          <div id="twitter">
+          <div id="twitter" class="aboutElement">
           </div>
           <script src="/js/twitterFeed.js"></script>
           <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-          <div class="info">
+          <div class="info aboutElement">
             <div id="credits" class="pageContent">
               <div id="infoTitle">
                 <h2>Made by Ethan Donahue and Isaac Robbins</h2>
@@ -66,9 +67,6 @@
               </div>
             </div>
             <div id="links">
-              <div class="aboutLink">
-                <a href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
-              </div>
               <div class="aboutLink">
                 <a id="creditsButton" onclick="showCredits()">Credits</a>
               </div>
@@ -221,7 +219,11 @@
               </div>
             </div>
           </div>
+          <div class="aboutLink">
+            <a href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
+          </div>
         </div>
+
       </div>
     </div>
 
