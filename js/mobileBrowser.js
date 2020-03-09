@@ -1,21 +1,21 @@
 var mobileWindow = document.getElementsByClassName("homeContent")[0];
 
 changeHeight();
-function changeHeight(){
 
-  if(window.innerHeight > window.innerWidth){
+function changeHeight() {
 
+  if (window.innerHeight > window.innerWidth) {
     document.getElementById("bellScheduleTable").style.lineHeight = window.innerHeight / 20 + "px";
-  var innerSize = window.innerHeight;
-  mobileWindow.style.height = innerSize * .81 +  "px";
-  mobileWindow.style.paddingTop = innerSize * .02 + "px";
-  mobileWindow.style.paddingBottom = innerSize * .04 + "px";
-  mobileWindow.style.fontSize = innerSize * .025 + "px";
-} else {
-  document.getElementById("bellScheduleTable").style.lineHeight = window.innerHeight / 20 + "px";
     var innerSize = window.innerHeight;
-  mobileWindow.style.height = innerSize * .81 +  "px";
-}
+    mobileWindow.style.height = innerSize * .81 + "px";
+    mobileWindow.style.paddingTop = innerSize * .02 + "px";
+    mobileWindow.style.paddingBottom = innerSize * .04 + "px";
+    mobileWindow.style.fontSize = innerSize * .025 + "px";
+  } else {
+    document.getElementById("bellScheduleTable").style.lineHeight = window.innerHeight / 20 + "px";
+    var innerSize = window.innerHeight;
+    mobileWindow.style.height = innerSize * .81 + "px";
+  }
 }
 
 function orientationChanged() {
@@ -31,8 +31,8 @@ function orientationChanged() {
 }
 
 
-window.addEventListener('orientationchange', function () {
-    orientationChanged().then(function() {
-      changeHeight();
-    });
+window.addEventListener('orientationchange', function() {
+  orientationChanged().then(function() {
+    changeHeight();
+  });
 });
