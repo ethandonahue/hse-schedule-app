@@ -37,16 +37,29 @@
 }
 
 @media screen and (orientation:portrait) {
+  .pfpImages {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 20px;
+  }
+
+  #about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+  }
+
   .pfp {
-    margin-right: 20px;
-    margin-top: 20px;
     height: 30%;
     width: 30%;
   }
 
+  #infoTitle {
+    text-align: center;
+  }
+
   #twitter {
-    margin: 0 auto;
-    padding-top: 10px;
     width: 90%;
   }
 
@@ -55,10 +68,8 @@
     width: 100%;
   }
 
-
-  #credits {
-    padding-left: 20px;
-    padding-top: 10px;
+  #links {
+    padding-bottom: 20px;
   }
 }
 
