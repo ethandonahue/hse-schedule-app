@@ -222,45 +222,47 @@ function Schedule(name){
 
   this._parseRawData = function(data){
     var parsed = [];
-    data = data.eg;
-    if(data[0].c[1].v != "Message"){
-      for(var period = 1; period < data.length; period++){
-        var info = data[period].c;
-        var newPeriod = new Period();
-        newPeriod.setDisplayName(info[0].v);
-        newPeriod.setTimes(info[1].v, info[2].v);
-        if(info[0].v.indexOfNumber() > -1){
-          newPeriod.setPeriodNumber(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.indexOfNumber() + 1));
-          newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
-        } else {
-          newPeriod.setPeriodNumber(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
-          newPeriod.setTableDisplay(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
+    if(data){
+      data = data.eg;
+      if(data[0].c[1].v != "Message"){
+        for(var period = 1; period < data.length; period++){
+          var info = data[period].c;
+          var newPeriod = new Period();
+          newPeriod.setDisplayName(info[0].v);
+          newPeriod.setTimes(info[1].v, info[2].v);
+          if(info[0].v.indexOfNumber() > -1){
+            newPeriod.setPeriodNumber(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.indexOfNumber() + 1));
+            newPeriod.setTableDisplay(info[0].v.substring(info[0].v.indexOfNumber(), info[0].v.length));
+          } else {
+            newPeriod.setPeriodNumber(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
+            newPeriod.setTableDisplay(info[0].v.substring(0, info[0].v.indexOf("Period") - 1));
+          }
+          if(newPeriod.displayName.contains("Lunch")){
+            newPeriod.makeLunchPeriod(info[0].v);
+          }
+          parsed.push(newPeriod);
         }
-        if(newPeriod.displayName.contains("Lunch")){
-          newPeriod.makeLunchPeriod(info[0].v);
+        for(var period = 0; period < parsed.length - 1; period++){
+          if(parsed[period].endTime.getTimeInSeconds() != parsed[period + 1].startTime.getTimeInSeconds()){
+            var newPassing = new PassingPeriod();
+            newPassing.setDisplayName("Passing Period");
+            newPassing.setLowerDisplayName("(Go To " + parsed[period + 1].displayName + ")");
+            newPassing.setPeriodNumber(parsed[period + 1].periodNum);
+            newPassing.setTimes(parsed[period].endTime.getTimeAsString(), parsed[period + 1].startTime.getTimeAsString());
+            parsed.pushAt(period + 1, newPassing);
+          }
         }
-        parsed.push(newPeriod);
+      } else {
+        var info = data[1].c;
+        var specialDay = new Period();
+        specialDay.setDisplayName(info[0].v);
+        specialDay.setCustomPeriodTime(info[1].v);
+        specialDay.setPeriodNumber("Special Day");
+        specialDay.setTimes("12:00 a.m.", {hour:23,minute:59,second:59,millisecond:999});
+        parsed.push(specialDay);
       }
-      for(var period = 0; period < parsed.length - 1; period++){
-        if(parsed[period].endTime.getTimeInSeconds() != parsed[period + 1].startTime.getTimeInSeconds()){
-          var newPassing = new PassingPeriod();
-          newPassing.setDisplayName("Passing Period");
-          newPassing.setLowerDisplayName("(Go To " + parsed[period + 1].displayName + ")");
-          newPassing.setPeriodNumber(parsed[period + 1].periodNum);
-          newPassing.setTimes(parsed[period].endTime.getTimeAsString(), parsed[period + 1].startTime.getTimeAsString());
-          parsed.pushAt(period + 1, newPassing);
-        }
-      }
-    } else {
-      var info = data[1].c;
-      var specialDay = new Period();
-      specialDay.setDisplayName(info[0].v);
-      specialDay.setCustomPeriodTime(info[1].v);
-      specialDay.setPeriodNumber("Special Day");
-      specialDay.setTimes("12:00 a.m.", {hour:23,minute:59,second:59,millisecond:999});
-      parsed.push(specialDay);
+      return parsed;
     }
-    return parsed;
   }
 }
 
