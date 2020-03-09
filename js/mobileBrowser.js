@@ -15,6 +15,7 @@ function changeHeight() {
   } else {
     document.getElementById("bellScheduleTable").style.lineHeight = window.innerHeight / 20 + "px";
     var innerSize = window.innerHeight;
+    document.getElementById("about").style.height = innerSize * .81 + "px";
     mobileWindow.style.height = innerSize * .81 + "px";
   }
 }
