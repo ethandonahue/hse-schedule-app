@@ -20,13 +20,13 @@ var tickCount = 0;
 
 preupdate();
 
-async function preupdate(){
+async function preupdate() {
   await loadGoogleCharts();
   await refreshSchedules();
   update();
   generateCalendar();
   setTimeout(refreshSchedules, 10000);
-  if(isAppleDevice() && !inStandalone()){
+  if (isAppleDevice() && !inStandalone()) {
     var appleInstallPop = new PopUp("apple-installer");
     appleInstallPop.setHeader("Install On iOS");
     appleInstallPop.setMessage("1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'");
@@ -38,9 +38,9 @@ async function preupdate(){
   recentUpdate.show();
 }
 
-function update(){
+function update() {
   globalTime.update();
-  try{
+  try {
     currentSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
     personalSchedule = schedulesRequired[monthlyLayout[globalTime.getDate().dayOfMonth - 1]].clone();
     currentSchedule.updateTimes();
@@ -58,49 +58,49 @@ function update(){
   periodTimeLeft = getPeriodTimeLeft();
   getCanvas();
   updateDisplays();
-  try{
+  try {
     completeCircle(1 - globalTime._toSeconds(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)) / globalTime._toSeconds(personalSchedule.layout[personalSchedule.currentPeriod].startTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime)));
   } catch {
     clearCircle();
   }
   resizeTwitter();
-  if(tickCount == 0){
+  if (tickCount == 0) {
     createScheduleTable();
   }
   tickCount = (tickCount + 1) % 60;
   window.requestAnimationFrame(update);
 }
 
-async function refreshSchedules(){
+async function refreshSchedules() {
   await monthlyRawData.getRawData();
   await schedules.setSchedules(googleSheetURL, monthlyRawData.rawData);
   monthlyLayout = schedules.getScheduleLayout();
   schedulesRequired = schedules.getRequiredSchedules();
-  if(firstLoadedSchedules == undefined){
+  if (firstLoadedSchedules == undefined) {
     firstLoadedSchedules = schedules.clone();
   }
-  if(!(schedules.isEqualTo(firstLoadedSchedules))){
+  if (!(schedules.isEqualTo(firstLoadedSchedules))) {
     window.location.reload();
   }
   setTimeout(refreshSchedules, 10000);
 }
 
-function personalizeSchedule(){
+function personalizeSchedule() {
   var lunchIndexes = [];
-  for(var p = 0; p < personalSchedule.layout.length; p++){
-    if(personalSchedule.layout[p].isLunch){
+  for (var p = 0; p < personalSchedule.layout.length; p++) {
+    if (personalSchedule.layout[p].isLunch) {
       lunchIndexes.push(p);
     }
   }
-  if(lunchIndexes.length > 0){
+  if (lunchIndexes.length > 0) {
     var start = personalSchedule.layout[lunchIndexes[0]];
     var middle = personalSchedule.layout[lunchIndexes[1]];
     var end = personalSchedule.layout[lunchIndexes[2]];
     var pass = new PassingPeriod();
     var pass2 = new PassingPeriod();
-    for(var l = 0; l < lunchIndexes.length; l++){
-      if(personalSchedule.layout[lunchIndexes[l]].lunchName != undefined && personalSchedule.layout[lunchIndexes[l]].lunchName.contains(localStorage.selectedLunch)){
-        switch(l){
+    for (var l = 0; l < lunchIndexes.length; l++) {
+      if (personalSchedule.layout[lunchIndexes[l]].lunchName != undefined && personalSchedule.layout[lunchIndexes[l]].lunchName.contains(localStorage.selectedLunch)) {
+        switch (l) {
           case 0:
             start.setDisplayName(start.lunchName);
             middle.startTime.addMinutes(7);
@@ -149,13 +149,13 @@ function personalizeSchedule(){
             break;
         }
         return;
-      } else if(localStorage.selectedLunch == "NONE"){
+      } else if (localStorage.selectedLunch == "NONE") {
         start.setDisplayName(start.notLunchName);
         start.setTimes(start.startTime.getTimeAsString(), end.endTime.getTimeAsString());
         personalSchedule.layout.splice(lunchIndexes[1], 2);
         personalSchedule.lunchPeriod = "NONE";
         return;
-      } else if(localStorage.selectedLunch == "ALL"){
+      } else if (localStorage.selectedLunch == "ALL") {
         start.setDisplayName(start.lunchName);
         middle.setDisplayName(middle.lunchName);
         end.setDisplayName(end.lunchName);
@@ -166,31 +166,31 @@ function personalizeSchedule(){
   }
 }
 
-function setCurrentPeriod(schedule){
+function setCurrentPeriod(schedule) {
   periodShowLower = true;
   showLunch = true;
-  if(globalTime.getTimeInSeconds() <= schedule.schoolStartTime.getTimeInSeconds()){
+  if (globalTime.getTimeInSeconds() <= schedule.schoolStartTime.getTimeInSeconds()) {
     schedule.currentPeriod = "Before School";
     periodShowLower = false;
     showLunch = true;
     return;
   }
-  if(globalTime.getTimeInSeconds() >= schedule.schoolEndTime.getTimeInSeconds()){
+  if (globalTime.getTimeInSeconds() >= schedule.schoolEndTime.getTimeInSeconds()) {
     schedule.currentPeriod = "After School";
     periodShowLower = false;
     showLunch = false;
     return;
   }
-  for(var p = 0; p < schedule.layout.length; p++){
-    if(globalTime.isBetween(schedule.layout[p].startTime, schedule.layout[p].endTime)){
+  for (var p = 0; p < schedule.layout.length; p++) {
+    if (globalTime.isBetween(schedule.layout[p].startTime, schedule.layout[p].endTime)) {
       schedule.currentPeriod = p;
       return;
     }
   }
-  if(schedule.layout[0].periodNum == "Special Day"){
+  if (schedule.layout[0].periodNum == "Special Day") {
     schedule.currentPeriod = 0;
     showLunch = false;
-    if(schedule.layout[0].lowerDisplayName == false){
+    if (schedule.layout[0].lowerDisplayName == false) {
       periodShowLower = false;
     } else {
       periodShowLower = true;
@@ -200,42 +200,42 @@ function setCurrentPeriod(schedule){
   return;
 }
 
-function getPeriodHeader(){
-  if(personalSchedule.currentPeriod == undefined){
+function getPeriodHeader() {
+  if (personalSchedule.currentPeriod == undefined) {
     return "Header";
-  } else if(personalSchedule.currentPeriod == "Before School"){
+  } else if (personalSchedule.currentPeriod == "Before School") {
     return "School Starts In";
-  } else if(personalSchedule.currentPeriod == "After School"){
+  } else if (personalSchedule.currentPeriod == "After School") {
     return "School Has Ended";
   } else {
     return personalSchedule.layout[personalSchedule.currentPeriod].displayName;
   }
 }
 
-function getPeriodTimeLeft(){
-  if(personalSchedule.currentPeriod == undefined){
+function getPeriodTimeLeft() {
+  if (personalSchedule.currentPeriod == undefined) {
     return "Time";
-  } else if(personalSchedule.currentPeriod == "Before School"){
+  } else if (personalSchedule.currentPeriod == "Before School") {
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.schoolStartTime));
-  } else if(personalSchedule.currentPeriod == "After School"){
+  } else if (personalSchedule.currentPeriod == "After School") {
     return "No Time Available";
-  } else if(personalSchedule.layout[0].periodNum == "Special Day"){
+  } else if (personalSchedule.layout[0].periodNum == "Special Day") {
     return personalSchedule.layout[0].customPeriodTime;
   } else {
     return formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.currentPeriod].endTime));
   }
 }
 
-function formatTimeLeft(obj){
+function formatTimeLeft(obj) {
   var string = "";
-  if(obj.hour != 0){
+  if (obj.hour != 0) {
     string += obj.hour + ":";
-    if(obj.minute < 10){
+    if (obj.minute < 10) {
       string += "0";
     }
   }
   string += obj.minute + ":";
-  if(obj.second < 10){
+  if (obj.second < 10) {
     string += "0" + obj.second;
   } else {
     string += obj.second;
@@ -243,20 +243,20 @@ function formatTimeLeft(obj){
   return string;
 }
 
-function updateDisplays(){
+function updateDisplays() {
   document.getElementById("currentDayText").textContent = globalTime.getDate().dayName;
   document.getElementById("currentWeekText").textContent = globalTime.getDateAsString();
   document.getElementById("currentTimeText").textContent = globalTime.getTimeAsString();
   document.getElementById("timeHeader").textContent = periodHeader;
   document.getElementById("timeText").textContent = periodTimeLeft;
-  if(periodShowLower && personalSchedule.layout[personalSchedule.currentPeriod] != undefined && personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName != false){
+  if (periodShowLower && personalSchedule.layout[personalSchedule.currentPeriod] != undefined && personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName != false) {
     document.getElementById("timeSecondaryHeader").textContent = personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName;
     document.getElementById("timeSecondaryHeader").style.display = "block";
   } else {
     document.getElementById("timeSecondaryHeader").style.display = "none";
   }
-  try{
-    if(showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()){
+  try {
+    if (showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()) {
       document.getElementById("lunchText").textContent = "Time Until " + personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
       document.getElementById("lunchTime").textContent = formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.lunchPeriod].startTime));
       document.getElementById("lunch").style.display = "table-cell";
