@@ -54,5 +54,12 @@ function displaySelectedSchedule(day) {
   globalTime.update();
   createScheduleTable();
   display(1);
-
 }
+var start = moment("2020-4-1");
+var end = moment("2020-4-3");
+var days = end.diff(start, "days");
+if (days > 0) {
+  document.getElementById("daysUntiVal").innerHTML = days + (days == 1 ? " day " : " days ") + "until spring break!";
+}
+
+console.log(end.diff(start, "days"));

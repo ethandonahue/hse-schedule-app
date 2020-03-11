@@ -8,11 +8,13 @@ function changeHeight() {
     var innerSize = window.innerHeight;
     document.getElementById("bellScheduleTable").style.lineHeight = innerSize / 20 + "px";
     document.getElementById("about").style.height = innerSize * .81 + "px";
+    document.getElementsByClassName("calContent")[0].style.height = innerSize * .81 + "px";
     mobileWindow.style.height = innerSize * .81 + "px";
     mobileWindow.style.paddingTop = innerSize * .02 + "px";
     mobileWindow.style.paddingBottom = innerSize * .04 + "px";
     mobileWindow.style.fontSize = innerSize * .025 + "px";
   } else {
+    document.getElementsByClassName("calContent")[0].style.height = innerSize * .81 + "px";
     document.getElementById("bellScheduleTable").style.lineHeight = window.innerHeight / 20 + "px";
     var innerSize = window.innerHeight;
     document.getElementById("about").style.height = innerSize * .81 + "px";
