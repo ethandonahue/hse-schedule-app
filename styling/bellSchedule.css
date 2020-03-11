@@ -11,6 +11,10 @@
 }
 
 #bellDayVal {
+  font-size: 4vh;
+}
+
+#bellDayVal {
   text-align: center;
   padding-top: 10px;
 }

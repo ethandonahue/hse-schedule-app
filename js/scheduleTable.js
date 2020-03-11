@@ -1,6 +1,6 @@
 function createScheduleTable() {
 
-  document.getElementById("bellDayVal").innerHTML = monthlyLayout[globalTime.getDate().dayOfMonth];
+  document.getElementById("bellDayVal").innerHTML = monthlyLayout[globalTime.getDate().dayOfMonth - 1];
 
   deleteTable();
   if (currentSchedule.layout[0].periodNum == "Special Day") {
@@ -18,11 +18,6 @@ function createScheduleTable() {
   timeHeader.appendChild(timeText);
   timeHeader.setAttribute("class", "bellRow");
   tableHeader.appendChild(timeHeader);
-  var highlighted = false;
-
-
-
-
 
   for (var i = 0; i < currentSchedule.layout.length; i++) {
     if (currentSchedule.layout[i].isPassing == false) {
