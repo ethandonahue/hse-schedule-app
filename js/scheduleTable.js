@@ -18,6 +18,8 @@ function createScheduleTable() {
   timeHeader.appendChild(timeText);
   timeHeader.setAttribute("class", "bellRow");
   tableHeader.appendChild(timeHeader);
+  var highlighted = false
+
 
   for (var i = 0; i < currentSchedule.layout.length; i++) {
     if (currentSchedule.layout[i].isPassing == false) {
