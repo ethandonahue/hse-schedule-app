@@ -38,6 +38,10 @@
     /* position: absolute;
     bottom: 0; */
   }
+
+  #calTables {
+    display: flex;
+  }
 }
 
 @media screen and (orientation:portrait) {
