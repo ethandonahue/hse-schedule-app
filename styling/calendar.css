@@ -19,18 +19,24 @@
     border-collapse: collapse;
   }
 
-  #calAndKey {
+  .calContent {
     padding-top: 2vh;
     padding-bottom: 4vh;
-    display: flex;
+    /* display: flex;
+    flex: wrap;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: center; */
   }
 
-  #calAndKey>.calElement {
+  .calElement {
     text-align: center;
     vertical-align: middle;
     font-size: 2.5vh;
+  }
+
+  #daysUntil {
+    /* position: absolute;
+    bottom: 0; */
   }
 }
 
@@ -51,7 +57,7 @@
     width: 60%;
   }
 
-  #calAndKey {
+  .calContent {
     padding-top: 2vh;
     padding-bottom: 4vh;
     display: flex;
@@ -60,13 +66,11 @@
     align-items: center;
   }
 
-  #calAndKey>.calElement {
+  .calContent>.calElement {
     text-align: center;
     vertical-align: middle;
     font-size: 2.5vh;
   }
-
-  .calHeader {}
 
   #daysUntil {
     padding-bottom: 2vh;
