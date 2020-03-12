@@ -32,9 +32,9 @@ async function preupdate() {
     appleInstallPop.setMessage("1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'");
     appleInstallPop.show();
   }
-  var recentUpdate = new PopUp("Update V. 1.0.4");
-  recentUpdate.setHeader("Version 1.0.4");
-  recentUpdate.setMessage("-Swipe Between Pages<br><br>-Styling Changes<br><br>-Toggle Completion Circle");
+  var recentUpdate = new PopUp("Update V. 1.1.0");
+  recentUpdate.setHeader("Version 1.1.0");
+  recentUpdate.setMessage("-Added Table Header<br><br>-Spring Break Countdown<br><br>-Minor Bug Fixes");
   recentUpdate.show();
 }
 
