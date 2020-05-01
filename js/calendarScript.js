@@ -5,7 +5,7 @@ function generateCalendar() {
   calTime.removeCustomDate();
   calTime.update();
   document.getElementById("cal-month").innerHTML = calTime.getDate().monthName + "<br>" + calTime.getDate().year;
-  for (var w = 0; w < 5; w++) {
+  for (var w = 0; w < 6; w++) {
     for (var d = 0; d < 7; d++) {
       var wk = document.getElementById("cal-week-" + (w + 1));
       var dy = document.createElement("td");
@@ -35,7 +35,7 @@ function generateCalendar() {
 }
 
 function deleteCalendar() {
-  for (var w = 0; w < 5; w++) {
+  for (var w = 0; w < 6; w++) {
     var wk = document.getElementById("cal-week-" + (w + 1));
     for (var d = 0; d < 7; d++) {
       try {
