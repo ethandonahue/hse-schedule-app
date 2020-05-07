@@ -56,8 +56,8 @@ function displaySelectedSchedule(day) {
   display(1);
 }
 var start = moment();
-var end = moment("2020-4-3");
+var end = moment("2020-5-21");
 var days = end.diff(start, "days");
 if (days > 0) {
-  document.getElementById("daysUntiVal").innerHTML = days + (days == 1 ? " day " : " days ") + "until spring break!";
+  document.getElementById("daysUntiVal").innerHTML = days + (days == 1 ? " day " : " days ") + "until summer break!";
 }
