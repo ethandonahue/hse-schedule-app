@@ -82,10 +82,10 @@ function Schedules(month){
 
   this._parseRequiredSchedules = function(data){
     var parsed = [];
-    data = data.eg;
-    for(var week = 1; week < data.length; week++){
+    var weekData = data.hg;
+    for(var week = 1; week < weekData.length; week++){
       for(var day = 0; day < 7; day++){
-        var info = data[week].c[day];
+        var info = weekData[week].c[day];
         if(info != null && parsed.occurs(info.v) == 0){
           parsed.push(info.v);
         }
@@ -96,10 +96,10 @@ function Schedules(month){
 
   this._parseScheduleLayout = function(data){
     var parsed = [];
-    data = data.eg;
-    for(var week = 1; week < data.length; week++){
+    var weekData = data.hg;
+    for(var week = 1; week < weekData.length; week++){
       for(var day = 0; day < 7; day++){
-        var info = data[week].c[day];
+        var info = weekData[week].c[day];
         if(info != null){
           parsed.push(info.v);
         }
@@ -223,10 +223,10 @@ function Schedule(name){
   this._parseRawData = function(data){
     var parsed = [];
     if(data){
-      data = data.eg;
-      if(data[0].c[1].v != "Message"){
-        for(var period = 1; period < data.length; period++){
-          var info = data[period].c;
+      var weekData = data.hg;
+      if(weekData[0].c[1].v != "Message"){
+        for(var period = 1; period < weekData.length; period++){
+          var info = weekData[period].c;
           var newPeriod = new Period();
           newPeriod.setDisplayName(info[0].v);
           newPeriod.setTimes(info[1].v, info[2].v);
@@ -253,7 +253,7 @@ function Schedule(name){
           }
         }
       } else {
-        var info = data[1].c;
+        var info = weekData[1].c;
         var specialDay = new Period();
         specialDay.setDisplayName(info[0].v);
         specialDay.setCustomPeriodTime(info[1].v);
