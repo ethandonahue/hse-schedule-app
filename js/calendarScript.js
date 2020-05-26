@@ -5,7 +5,7 @@ function generateCalendar() {
   calTime.removeCustomDate();
   calTime.update();
   document.getElementById("cal-month").innerHTML = calTime.getDate().monthName + "<br>" + calTime.getDate().year;
-  for (var w = 0; w < 5; w++) {
+  for (var w = 0; w < 6; w++) {
     for (var d = 0; d < 7; d++) {
       var wk = document.getElementById("cal-week-" + (w + 1));
       var dy = document.createElement("td");
@@ -35,7 +35,7 @@ function generateCalendar() {
 }
 
 function deleteCalendar() {
-  for (var w = 0; w < 5; w++) {
+  for (var w = 0; w < 6; w++) {
     var wk = document.getElementById("cal-week-" + (w + 1));
     for (var d = 0; d < 7; d++) {
       try {
@@ -56,8 +56,8 @@ function displaySelectedSchedule(day) {
   display(1);
 }
 var start = moment();
-var end = moment("2020-4-3");
+var end = moment("2020-5-21");
 var days = end.diff(start, "days");
 if (days > 0) {
-  document.getElementById("daysUntiVal").innerHTML = days + (days == 1 ? " day " : " days ") + "until spring break!";
+  document.getElementById("daysUntiVal").innerHTML = days + (days == 1 ? " day " : " days ") + "until summer break!";
 }
