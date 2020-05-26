@@ -29,8 +29,6 @@ function generateCalendar() {
         }
         calendarDayToPrint++;
       }
-      console.log(wk);
-      // console.log(dy);
       wk.appendChild(dy);
     }
   }
