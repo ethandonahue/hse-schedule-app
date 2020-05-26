@@ -32,16 +32,10 @@ async function preupdate() {
     appleInstallPop.setMessage("1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'");
     appleInstallPop.show();
   }
-
   var recentUpdate = new PopUp("Update V. 1.1.0");
   recentUpdate.setHeader("Version 1.1.0");
   recentUpdate.setMessage("-Added Table Header<br><br>-Spring Break Countdown<br><br>-Minor Bug Fixes");
   recentUpdate.show();
-
-  var coronaInfo = new PopUp("coronavirus info");
-  coronaInfo.setHeader("Get The Facts");
-  coronaInfo.setMessage("Want to learn more about the Coronavirus?<br>Click on the link below<br><br><a href='https://www.cdc.gov/coronavirus/2019-ncov/index.html'>https://www.cdc.gov/coronavirus/2019-ncov/index.html</a>");
-  coronaInfo.show();
 }
 
 function update() {
