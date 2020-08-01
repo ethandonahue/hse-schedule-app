@@ -12,6 +12,7 @@ const port = process.env.PORT || 51000;
 //Custom Requires
 
 const _ = require("underscore");
+var Datastore = require('nedb');
 const Network = require("./server/classes/Network.js");
 
 //Server Setup & Initiation
@@ -32,6 +33,14 @@ if(port != process.env.PORT){
 	console.clear();
 	console.log("--> Webpage Started On } " + __ConnectTo__);
 }
+
+//Database Initiation
+
+const db = {
+	admins:new Datastore({filename:"/server/databases/admins.db", autoload: true}),
+	schedules:new Datastore({filename:"/server/databases/schedules.db", autoload: true}),
+	usage:new Datastore({filename:"/server/databases/usage.db", autoload: true})
+};
 
 //Connection & Message Handling
 
