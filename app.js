@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
 			var u = new Network.user();
 			id = u.getId();
 			u.updateConnection(Network.connections.getConnection(socket.id));
-			u.setData("lunch", "NONE");
+			u.setData("lunch", "");
 			u.setData("loginDates", []);
 			u.setData("logoutDates", []);
 			db.users.insert(u.getAsJSON());
@@ -93,8 +93,20 @@ io.on("connection", (socket) => {
 //Emit Interval
 
 setInterval(() => {
+	var now = moment();
+	var then = moment().set({'hour': 15, 'minute': 10, 'second':0, 'millisecond':0});
+	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds").subtract(now.get("date"), "days");
+	var period = {
+		years:difference.add(1, "year").get("year"),
+		months:difference.add(1, "month").get("month"),
+		days:difference.add(1, "day").get("date") - difference.daysInMonth(),
+		hours:difference.get("hour"),
+		minutes:difference.get("minute"),
+		seconds:difference.get("second"),
+		milliseconds:difference.get("millisecond")
+	}
 	var timer = {
-		period:moment(),
+		period:period,
 		lunch:moment()
 	};
   io.emit("TIMER_DATA", timer);

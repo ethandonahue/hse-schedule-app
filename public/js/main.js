@@ -1,15 +1,28 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
-var timer = undefined;
-
 function setup(){
   document.getElementById("timeHeader").textContent = "Connected";
   document.getElementById("timeText").textContent = "Loading";
 }
 
-function runner(){
-  socket.emit("LUNCH_CHANGE", "A");
+function updateTimers(timer){
+  document.getElementById("timeHeader").textContent = "Period";
+  var timeLeft = "";
+  if(timer.period.hours != 0){
+    timeLeft += timer.period.hours + ":";
+  }
+  if(timer.period.minutes < 10 && timer.period.hours != 0){
+    timeLeft += "0" + timer.period.minutes + ":";
+  } else {
+    timeLeft += timer.period.minutes + ":";
+  }
+  if(timer.period.seconds < 10){
+    timeLeft += "0" + timer.period.seconds;
+  } else {
+    timeLeft += timer.period.seconds;
+  }
+  document.getElementById("timeText").textContent = timeLeft;
 }
 
 async function preupdate() {
@@ -274,12 +287,16 @@ function bindSocketEvents(){
   });
 
   socket.on("SERVER_READY", () => {
-    runner();
+
+    socket.emit("LUNCH_CHANGE", storage.get("selectedLunch"));
+
+    socket.on("TIMER_DATA", (timerData) => {
+      timer = timerData;
+      updateTimers(timerData);
+    });
+
   });
 
-  socket.on("TIMER_DATA", (timerData) => {
-    timer = timerData;
-  });
 }
 
 window.onload = function(){
