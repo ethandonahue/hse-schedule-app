@@ -59,23 +59,32 @@ io.on("connection", (socket) => {
 	socket.on("USER_ID", (id) => {
 		if(id == undefined || Network.users.getUser(id) == false){
 			var u = new Network.user();
+			id = u.getId();
 			u.updateConnection(Network.connections.getConnection(socket.id));
+			u.setData("lunch", "NONE");
+			u.setData("loginDates", []);
+			u.setData("logoutDates", []);
 			db.users.insert(u.getAsJSON());
-			socket.emit("SET_USER_ID", u.getId());
+			db.users.loadDatabase();
+			socket.emit("SET_USER_ID", id);
 		} else {
 			Network.users.getUser(id).updateConnection(Network.connections.getConnection(socket.id));
 		}
+		db.users.update({id:id}, {$push:{"data.loginDates":moment().toJSON()}});
+		db.users.loadDatabase();
 		socket.emit("SERVER_READY");
 	});
 
 	socket.on("LUNCH_CHANGE", (lunch) => {
 		var id = Network.connections.getConnection(socket.id).getUserId();
-		Network.users.getUser(id).setData("lunch", lunch);
-		db.users.update({id:id}, {$set:{data:{lunch:lunch}}});
+		db.users.update({id:id}, {$set:{"data.lunch":lunch}});
 		db.users.loadDatabase();
 	});
 
 	socket.on("disconnect", () => {
+		var id = Network.connections.getConnection(socket.id).getUserId();
+		db.users.update({id:id}, {$push:{"data.logoutDates":moment().toJSON()}});
+		db.users.loadDatabase();
 		Network.connections.getConnection(socket.id).terminate();
 	});
 

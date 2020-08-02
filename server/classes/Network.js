@@ -92,6 +92,9 @@ class User{
   setData(key, value){
     this.data[key] = value;
   }
+  pushToData(key, value){
+    this.data[key].push(value);
+  }
   getId(){//Returns Id
 		return this.id;
 	}
