@@ -3,6 +3,7 @@
 
 var timer = undefined;
 var schedule = undefined;
+var period = undefined;
 
 function setup(){
   document.getElementById("timeHeader").textContent = "Connected";
@@ -307,7 +308,14 @@ function bindSocketEvents(){
   socket.on("SERVER_READY", () => {
 
     //socket.emit("LUNCH_CHANGE", storage.get("selectedLunch"));
-    socket.emit("REQUEST_SCHEDULE");
+    //socket.emit("REQUEST_SCHEDULE");
+    socket.emit("REQUEST_ALL");
+
+    socket.on("ALL_DATA", (data) => {
+      schedule = data.schedule;
+      period = data.period;
+      handleScheduleData(data.schedule);
+    });
 
     socket.on("SCHEDULE_DATA", (scheduleData) => {
       schedule = scheduleData;
@@ -321,7 +329,7 @@ function bindSocketEvents(){
 
     socket.on("disconnect", () => {
       document.getElementById("timeHeader").textContent = "Server Offline";
-      document.getElementById("timeText").textContent = "Reconnecting";
+      document.getElementById("timeText").textContent = "Retrying";
     })
 
   });
