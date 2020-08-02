@@ -5,11 +5,6 @@ var hashes = ["about", "bell", "home", "calendar", "settings"];
 var currentSection;
 
 function showSection(section){
-  if(window.location.hash.contains("calendar")){
-    globalTime.removeCustomTime();
-    globalTime.removeCustomDate();
-    globalTime.update();
-  }
   if(typeof(section) == "number"){
     section = hashes[section];
   }

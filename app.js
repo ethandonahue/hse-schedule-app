@@ -13,6 +13,7 @@ const port = process.env.PORT || 51000;
 
 const _ = require("underscore");
 const moment = require("moment");
+const bcrypt = require("bcrypt");
 const Datastore = require('nedb');
 const Network = require("./server/classes/Network.js");
 
@@ -49,6 +50,47 @@ db.users.find({}, (err, us) => {
 	}
 });
 
+//Schedule Setup
+
+var schedules = undefined;
+var scheduleDays = {
+
+};
+db.schedules.find({}, (err, sched) => {
+	schedules = {};
+	for(var s = 0; s < sched.length; s++){
+		schedules[sched[s].metadata.name] = sched[s];
+	}
+});
+
+/*db.admins.findOne({username:"test"}, async (err, admin) =>{
+	var right = await bcrypt.compare("test", admin.password);
+	console.log(right);
+});*/
+
+/*db.schedules.insert({
+	metadata:{
+		name:"Regular School Day",
+		type:"school day",
+		schoolStartTime:{
+			hour:7,
+			minute:35
+		},
+		schoolEndTime:{
+			hour:2,
+			minute:55
+		},
+		defaultDays:[1, 2, 3, 4, 5]
+	}
+});
+db.schedules.insert({
+	metadata:{
+		name:"Weekend",
+		type:"break",
+		defaultDays:[0, 6]
+	}
+});*/
+
 //Connection & Message Handling
 
 io.on("connection", (socket) => {
@@ -75,6 +117,10 @@ io.on("connection", (socket) => {
 		socket.emit("SERVER_READY");
 	});
 
+	socket.on("REQUEST_SCHEDULE", () => {
+		socket.emit("SCHEDULE_DATA", getTodaysSchedule());
+	});
+
 	socket.on("LUNCH_CHANGE", (lunch) => {
 		var id = Network.connections.getConnection(socket.id).getUserId();
 		db.users.update({id:id}, {$set:{"data.lunch":lunch}});
@@ -90,24 +136,46 @@ io.on("connection", (socket) => {
 
 });
 
+//Schedule Finder
+
+function getTodaysSchedule(){
+	var todaysSchedule = undefined;
+	var m = moment();
+	if(m.date() in scheduleDays){
+		todaysSchedule = schedules[scheduleDays[m.date()]];
+	} else {
+		for(schedule in schedules){
+			for(var d = 0; d < schedules[schedule].metadata.defaultDays.length; d++){
+				if(m.day() == schedules[schedule].metadata.defaultDays[d]){
+					todaysSchedule = schedules[schedule];
+				}
+			}
+		}
+	}
+	return todaysSchedule;
+}
+
 //Emit Interval
 
 setInterval(() => {
 	var now = moment();
-	var then = moment().set({'hour': 15, 'minute': 10, 'second':0, 'millisecond':0});
-	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds").subtract(now.get("date"), "days");
-	var period = {
-		years:difference.add(1, "year").get("year"),
-		months:difference.add(1, "month").get("month"),
-		days:difference.add(1, "day").get("date") - difference.daysInMonth(),
-		hours:difference.get("hour"),
-		minutes:difference.get("minute"),
-		seconds:difference.get("second"),
-		milliseconds:difference.get("millisecond")
+	var schedule = getTodaysSchedule();
+	if(schedule != undefined && schedule.metadata.type == "school day"){
+		var then = moment().set({'hour': 15, 'minute': 10, 'second':0, 'millisecond':0});
+		var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds").subtract(now.get("date"), "days");
+		var period = {
+			years:difference.add(1, "year").get("year"),
+			months:difference.add(1, "month").get("month"),
+			days:difference.add(1, "day").get("date") - difference.daysInMonth(),
+			hours:difference.get("hour"),
+			minutes:difference.get("minute"),
+			seconds:difference.get("second"),
+			milliseconds:difference.get("millisecond")
+		}
+		var timer = {
+			period:period,
+			lunch:moment()
+		};
+	  io.emit("TIMER_DATA", timer);
 	}
-	var timer = {
-		period:period,
-		lunch:moment()
-	};
-  io.emit("TIMER_DATA", timer);
 }, 100);

@@ -1,0 +1,2 @@
+{"metadata":{"name":"Regular School Day","type":"school day","schoolStartTime":{"hour":7,"minute":35},"schoolEndTime":{"hour":2,"minute":55},"defaultDays":[1,2,3,4,5]},"_id":"4XiOvxF7ShiKdsVu"}
+{"metadata":{"name":"Weekend","type":"weekend","defaultDays":[0,6]},"_id":"ZmAW0HNnKUkyEB2s"}

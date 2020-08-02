@@ -1,28 +1,46 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
+var timer = undefined;
+var schedule = undefined;
+
 function setup(){
   document.getElementById("timeHeader").textContent = "Connected";
   document.getElementById("timeText").textContent = "Loading";
 }
 
-function updateTimers(timer){
+function updateTimers(t){
   document.getElementById("timeHeader").textContent = "Period";
   var timeLeft = "";
-  if(timer.period.hours != 0){
-    timeLeft += timer.period.hours + ":";
+  if(t.period.hours != 0){
+    timeLeft += t.period.hours + ":";
   }
-  if(timer.period.minutes < 10 && timer.period.hours != 0){
-    timeLeft += "0" + timer.period.minutes + ":";
+  if(t.period.minutes < 10 && t.period.hours != 0){
+    timeLeft += "0" + t.period.minutes + ":";
   } else {
-    timeLeft += timer.period.minutes + ":";
+    timeLeft += t.period.minutes + ":";
   }
-  if(timer.period.seconds < 10){
-    timeLeft += "0" + timer.period.seconds;
+  if(t.period.seconds < 10){
+    timeLeft += "0" + t.period.seconds;
   } else {
-    timeLeft += timer.period.seconds;
+    timeLeft += t.period.seconds;
   }
   document.getElementById("timeText").textContent = timeLeft;
+}
+
+function handleScheduleData(s){
+  switch(s.metadata.type){
+    case "school day":
+      break;
+    case "weekend":
+      document.getElementById("timeHeader").textContent = "It's The Weekend";
+      document.getElementById("timeText").textContent = "No School Today";
+      break;
+    default:
+      document.getElementById("timeHeader").textContent = "An Error Occured";
+      document.getElementById("timeText").textContent = "Unavailable";
+      break;
+  }
 }
 
 async function preupdate() {
@@ -288,7 +306,13 @@ function bindSocketEvents(){
 
   socket.on("SERVER_READY", () => {
 
-    socket.emit("LUNCH_CHANGE", storage.get("selectedLunch"));
+    //socket.emit("LUNCH_CHANGE", storage.get("selectedLunch"));
+    socket.emit("REQUEST_SCHEDULE");
+
+    socket.on("SCHEDULE_DATA", (scheduleData) => {
+      schedule = scheduleData;
+      handleScheduleData(scheduleData);
+    })
 
     socket.on("TIMER_DATA", (timerData) => {
       timer = timerData;
