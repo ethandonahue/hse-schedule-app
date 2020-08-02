@@ -36,37 +36,41 @@ var scheduleDays = {
 
 readDatabases();
 
-async function readDatabases(){
-	await db.users.find({}, (err, us) => {
+function readDatabases(){
+	db.users.find({}, (err, us) => {
 		for(var u = 0; u < us.length; u++){
 			Network.users.transformJSONToUser(us[u]);
 		}
-	});
-	await db.schedules.find({}, (err, sched) => {
-		schedules = {};
-		for(var s = 0; s < sched.length; s++){
-			schedules[sched[s].metadata.name] = sched[s];
-		}
+		db.schedules.find({}, (err, sched) => {
+			schedules = {};
+			for(var s = 0; s < sched.length; s++){
+				schedules[sched[s].metadata.name] = sched[s];
+			}
+			createServer();
+		});
 	});
 }
 
 //Server Setup & Initiation
 
-app.get("/", (req, res) => {
-	res.sendFile(__dirname + "/public/index.html");
-});
-app.use("/public", express.static(__dirname + "/public"));
-serv.listen(port);
+function createServer(){
+	app.get("/", (req, res) => {
+		res.sendFile(__dirname + "/public/index.html");
+	});
+	app.use("/public", express.static(__dirname + "/public"));
+	serv.listen(port);
 
-if(port != process.env.PORT){
-	var __ConnectTo__;
-	try{
-		__ConnectTo__ = os.networkInterfaces()["Wi-Fi"][1].address + ":" + port;
-	} catch {
-		__ConnectTo__ = os.networkInterfaces()["Ethernet"][1].address + ":" + port;
+	if(port != process.env.PORT){
+		var __ConnectTo__;
+		try{
+			__ConnectTo__ = os.networkInterfaces()["Wi-Fi"][1].address + ":" + port;
+		} catch {
+			__ConnectTo__ = os.networkInterfaces()["Ethernet"][1].address + ":" + port;
+		}
+		console.clear();
+		console.log("--> Webpage Started On } " + __ConnectTo__);
 	}
-	console.clear();
-	console.log("--> Webpage Started On } " + __ConnectTo__);
+	listenForSockets();
 }
 
 
@@ -178,7 +182,9 @@ db.schedules.insert({
 		{
 			type:"lunches",
 			period:5,
-			periodName:"Lunch",
+			lunches:["A", "B", "C"],
+			periodName:"Period 5",
+			lunchName:"Lunch",
 			startTime:{
 				hour:11,
 				minute:23
@@ -225,69 +231,222 @@ db.schedules.insert({
 						minute:53
 					}
 				}
-			]
+			],
+			bSchedule:[
+				{
+					type:"passing",
+					startTime:{
+						hour:11,
+						minute:23
+					},
+					endTime:{
+						hour:11,
+						minute:30
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:11,
+						minute:30
+					},
+					endTime:{
+						hour:11,
+						minute:53
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"B",
+					lunchName:"B Lunch",
+					startTime:{
+						hour:11,
+						minute:53
+					},
+					endTime:{
+						hour:12,
+						minute:23
+					}
+				},
+				{
+					type:"passing",
+					startTime:{
+						hour:12,
+						minute:23
+					},
+					endTime:{
+						hour:12,
+						minute:28
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:12,
+						minute:28
+					},
+					endTime:{
+						hour:12,
+						minute:53
+					}
+				}
+			],
+			cSchedule:[
+				{
+					type:"passing",
+					startTime:{
+						hour:11,
+						minute:23
+					},
+					endTime:{
+						hour:11,
+						minute:30
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:11,
+						minute:30
+					},
+					endTime:{
+						hour:12,
+						minute:23
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"C",
+					lunchName:"C Lunch",
+					startTime:{
+						hour:12,
+						minute:23
+					},
+					endTime:{
+						hour:12,
+						minute:53
+					}
+				}
+			],
+		},
+		{
+			type:"passing",
+			startTime:{
+				hour:12,
+				minute:53
+			},
+			endTime:{
+				hour:13,
+				minute:0
+			}
+		},
+		{
+			type:"class",
+			period:6,
+			periodName:"Period 6",
+			startTime:{
+				hour:13,
+				minute:0
+			},
+			endTime:{
+				hour:13,
+				minute:57
+			}
+		},
+		{
+			type:"passing",
+			startTime:{
+				hour:13,
+				minute:57
+			},
+			endTime:{
+				hour:14,
+				minute:4
+			}
+		},
+		{
+			type:"class",
+			period:7,
+			periodName:"Period 7",
+			startTime:{
+				hour:14,
+				minute:4
+			},
+			endTime:{
+				hour:14,
+				minute:55
+			}
 		}
 	]
 });
 db.schedules.insert({
 	metadata:{
 		name:"Weekend",
-		type:"break",
+		type:"weekend",
 		defaultDays:[0, 6]
 	}
 });
 
 //Connection & Message Handling
 
-io.on("connection", (socket) => {
+function listenForSockets(){
+	io.on("connection", (socket) => {
 
-	new Network.connection(socket);
-	socket.emit("GET_USER_ID");
+		new Network.connection(socket);
+		socket.emit("GET_USER_ID");
 
-	socket.on("USER_ID", (id) => {
-		if(id == undefined || Network.users.getUser(id) == false){
-			var u = new Network.user();
-			id = u.getId();
-			u.updateConnection(Network.connections.getConnection(socket.id));
-			u.setData("lunch", "");
-			u.setData("loginDates", []);
-			u.setData("logoutDates", []);
-			db.users.insert(u.getAsJSON());
+		socket.on("USER_ID", (id) => {
+			if(id == undefined || Network.users.getUser(id) == false){
+				var u = new Network.user();
+				id = u.getId();
+				u.updateConnection(Network.connections.getConnection(socket.id));
+				u.setData("lunch", "");
+				u.setData("loginDates", []);
+				u.setData("logoutDates", []);
+				db.users.insert(u.getAsJSON());
+				db.users.loadDatabase();
+				socket.emit("SET_USER_ID", id);
+			} else {
+				Network.users.getUser(id).updateConnection(Network.connections.getConnection(socket.id));
+			}
+			db.users.update({id:id}, {$push:{"data.loginDates":moment().toJSON()}});
 			db.users.loadDatabase();
-			socket.emit("SET_USER_ID", id);
-		} else {
-			Network.users.getUser(id).updateConnection(Network.connections.getConnection(socket.id));
-		}
-		db.users.update({id:id}, {$push:{"data.loginDates":moment().toJSON()}});
-		db.users.loadDatabase();
-		socket.emit("SERVER_READY");
-	});
-
-	socket.on("REQUEST_ALL", () => {
-		socket.emit("ALL_DATA", {
-			schedule:getTodaysSchedule(),
-			period:getCurrentPeriod()
+			socket.emit("SERVER_READY");
 		});
-	});
 
-	socket.on("REQUEST_SCHEDULE", () => {
-		socket.emit("SCHEDULE_DATA", getTodaysSchedule());
-	});
+		socket.on("REQUEST_ALL", () => {
+			var schedule = getTodaysSchedule();
+			socket.emit("ALL_DATA", {
+				schedule:schedule,
+				period:getCurrentPeriod(schedule)
+			});
+		});
 
-	socket.on("LUNCH_CHANGE", (lunch) => {
-		var id = Network.connections.getConnection(socket.id).getUserId();
-		db.users.update({id:id}, {$set:{"data.lunch":lunch}});
-		db.users.loadDatabase();
-	});
+		socket.on("REQUEST_SCHEDULE", () => {
+			socket.emit("SCHEDULE_DATA", getTodaysSchedule());
+		});
 
-	socket.on("disconnect", () => {
-		var id = Network.connections.getConnection(socket.id).getUserId();
-		db.users.update({id:id}, {$push:{"data.logoutDates":moment().toJSON()}});
-		db.users.loadDatabase();
-		Network.connections.getConnection(socket.id).terminate();
-	});
+		socket.on("LUNCH_CHANGE", (lunch) => {
+			var id = Network.connections.getConnection(socket.id).getUserId();
+			db.users.update({id:id}, {$set:{"data.lunch":lunch}});
+			db.users.loadDatabase();
+		});
 
-});
+		socket.on("disconnect", () => {
+			var id = Network.connections.getConnection(socket.id).getUserId();
+			db.users.update({id:id}, {$push:{"data.logoutDates":moment().toJSON()}});
+			db.users.loadDatabase();
+			Network.connections.getConnection(socket.id).terminate();
+		});
+
+	});
+}
 
 //Schedule Finder
 
@@ -302,6 +461,7 @@ function getTodaysSchedule(){
 				for(var d = 0; d < schedules[schedule].metadata.defaultDays.length; d++){
 					if(m.day() == schedules[schedule].metadata.defaultDays[d]){
 						todaysSchedule = schedules[schedule];
+						return todaysSchedule;
 					}
 				}
 			}
@@ -312,17 +472,21 @@ function getTodaysSchedule(){
 
 //Period Finder
 
-function getCurrentPeriod(){
+function getCurrentPeriod(schedule){
 	var currentPeriod = undefined;
 	var m = moment();
-	if(schedules != undefined){
-		if(m.date() in scheduleDays){
-			todaysSchedule = schedules[scheduleDays[m.date()]];
+	if(schedule != undefined){
+		var sched = schedule.schedule;
+		if(m.hour() <= schedule.metadata.schoolStartTime.hour || (m.hour() == schedule.metadata.schoolStartTime.hour && m.minute() <= schedule.metadata.schoolStartTime.minute)){
+			currentPeriod = "Before School";
+		} else if(m.hour() >= schedule.metadata.schoolEndTime.hour  || (m.hour() == schedule.metadata.schoolEndTime.hour && m.minute() >= schedule.metadata.schoolEndTime.minute)){
+			currentPeriod = "After School";
 		} else {
-			for(schedule in schedules){
-				for(var d = 0; d < schedules[schedule].metadata.defaultDays.length; d++){
-					if(m.day() == schedules[schedule].metadata.defaultDays[d]){
-						todaysSchedule = schedules[schedule];
+			for(var p = 0; p < sched.length; p++){
+				if(m.hour() >= sched[p].startTime.hour && m.hour() <= sched[p].endTime.hour){
+					if(m.minute() >= sched[p].startTime.minute && m.minute() <= sched[p].endTime.minute){
+						currentPeriod = p;
+						return currentPeriod;
 					}
 				}
 			}
@@ -335,7 +499,7 @@ function getCurrentPeriod(){
 
 function standardCountdownJSON(h, m){
 	var now = moment();
-	var then = moment().set({'hour': h, 'minute': m, 'second':0, 'millisecond':0});
+	var then = moment().set({"hour": h, "minute": m, "second":0, "millisecond":0});
 	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds").subtract(now.get("date"), "days");
 	var remaining = {
 		years:difference.add(1, "year").get("year"),
@@ -353,11 +517,20 @@ function standardCountdownJSON(h, m){
 
 setInterval(() => {
 	var schedule = getTodaysSchedule();
-	if(schedule != undefined && schedule.metadata.type == "school day"){
-		var timer = {
-			period:standardCountdownJSON(18, 0),
-			lunch:moment()
-		};
+	var period = getCurrentPeriod(schedule);
+	if(schedule != undefined && schedule.metadata.type == "school day" && period != "After School"){
+		var timer;
+		if(period == "Before School"){
+			timer = {
+				period:standardCountdownJSON(schedule.metadata.schoolStartTime.hour, schedule.metadata.schoolStartTime.minute),
+				lunch:moment()
+			};
+		} else {
+			timer = {
+				period:standardCountdownJSON(period.endTime.hour, period.endTime.minute),
+				lunch:moment()
+			};
+		}
 	  io.emit("TIMER_DATA", timer);
 	}
 }, 100);
