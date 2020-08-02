@@ -23,11 +23,6 @@ function setStorageAttributes(){
   if(storage.get("showCircle") == undefined){
     storage.set("showCircle", true);
   }
-  storage.getAllNames().forEach((name) => {
-    if(name != "selectedLunch" && name != "theme" && name != "popups" && name != "animationState" && name != "showCircle"){
-      storage.remove(name);
-    }
-  });
 }
 
 function showLaunchScreen(){

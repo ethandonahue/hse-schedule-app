@@ -8,6 +8,10 @@ function setup(){
   document.getElementById("timeText").textContent = "Loading";
 }
 
+function runner(){
+  socket.emit("LUNCH_CHANGE", "A");
+}
+
 async function preupdate() {
   await loadGoogleCharts();
   await refreshSchedules();
@@ -259,6 +263,18 @@ function updateDisplays() {
 function bindSocketEvents(){
   socket.on("CONNETED_TO_SERVER", () => {
     setup();
+  });
+
+  socket.on("GET_USER_ID", () => {
+    socket.emit("USER_ID", storage.get("userId"));
+  });
+
+  socket.on("SET_USER_ID", (id) => {
+    storage.set("userId", id);
+  });
+
+  socket.on("SERVER_READY", () => {
+    runner();
   });
 
   socket.on("TIMER_DATA", (timerData) => {

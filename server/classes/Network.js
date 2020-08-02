@@ -7,6 +7,7 @@ class Connection{
     this.socket = socket;
   	this.id = socket.id;
   	this.room = undefined;
+    this.userId = undefined;
     connections.addConnection(this);
     socket.emit("CONNETED_TO_SERVER");
   }
@@ -21,6 +22,9 @@ class Connection{
   getRoom(){//Gets The Current Room
 		return this.room;
 	}
+  getUserId(){
+    return this.userId;
+  }
   terminate(){//Deletes The Connection
     this.leaveRoom();
     connections.removeConnection(this);
@@ -49,6 +53,74 @@ class Connections{
     if(this.connections[c.id] != undefined){
       delete this.connections[c.id];
     }
+  }
+}
+
+class User{
+  constructor(json){
+    this.connection = undefined;
+    if(json == undefined){
+      this.id = this.generateId(20, true);
+      this.data = {};
+    } else {
+      this.id = json.id;
+      this.data = json.data;
+    }
+    users.addUser(this);
+  }
+  generateId(length, numbers){//Generates The Unique Room Code
+  	var generatedId = "";
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    if(numbers){
+      characters += "0123456789";
+    }
+    for(var i = 0; i < length; i++){
+     	generatedId += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+  	for(var user in users.users){
+  		if(generatedId == users.users[user].getId()){
+  			generateId();
+  			return;
+  		}
+  	}
+    return generatedId;
+  }
+  updateConnection(c){
+    c.userId = this.id;
+    this.connection = c;
+  }
+  setData(key, value){
+    this.data[key] = value;
+  }
+  getId(){//Returns Id
+		return this.id;
+	}
+  getAsJSON(){
+    return {
+      id:this.id,
+      data:this.data
+    }
+  }
+}
+
+class Users{
+  constructor(){
+    this.users = {};
+  }
+  addUser(u){
+    this.users[u.id] = u;
+  }
+  getUser(id){
+    if(this.users[id] != undefined){
+      return this.users[id];
+    }
+    return false;
+  }
+  totalUsers(){
+    return _.size(this.users);
+  }
+  transformJSONToUser(json){
+    new User(json);
   }
 }
 
@@ -158,12 +230,15 @@ class Rooms{//Initialization
 
 const connections = new Connections();
 const rooms = new Rooms();
+const users = new Users();
 
 //Exports
 
 module.exports = {
   connection:Connection,
   connections:connections,
+  user:User,
+  users:users,
   room:Room,
   rooms:rooms
 }
