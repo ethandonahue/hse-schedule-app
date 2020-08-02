@@ -54,7 +54,7 @@ db.users.find({}, (err, us) => {
 
 var schedules = undefined;
 var scheduleDays = {
-
+	2:"Regular School Day"
 };
 db.schedules.find({}, (err, sched) => {
 	schedules = {};
@@ -141,13 +141,15 @@ io.on("connection", (socket) => {
 function getTodaysSchedule(){
 	var todaysSchedule = undefined;
 	var m = moment();
-	if(m.date() in scheduleDays){
-		todaysSchedule = schedules[scheduleDays[m.date()]];
-	} else {
-		for(schedule in schedules){
-			for(var d = 0; d < schedules[schedule].metadata.defaultDays.length; d++){
-				if(m.day() == schedules[schedule].metadata.defaultDays[d]){
-					todaysSchedule = schedules[schedule];
+	if(schedules != undefined){
+		if(m.date() in scheduleDays){
+			todaysSchedule = schedules[scheduleDays[m.date()]];
+		} else {
+			for(schedule in schedules){
+				for(var d = 0; d < schedules[schedule].metadata.defaultDays.length; d++){
+					if(m.day() == schedules[schedule].metadata.defaultDays[d]){
+						todaysSchedule = schedules[schedule];
+					}
 				}
 			}
 		}

@@ -319,6 +319,11 @@ function bindSocketEvents(){
       updateTimers(timerData);
     });
 
+    socket.on("disconnect", () => {
+      document.getElementById("timeHeader").textContent = "Server Offline";
+      document.getElementById("timeText").textContent = "Reconnecting";
+    })
+
   });
 
 }
