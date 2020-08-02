@@ -12,7 +12,8 @@ const port = process.env.PORT || 51000;
 //Custom Requires
 
 const _ = require("underscore");
-var Datastore = require('nedb');
+const moment = require("moment");
+const Datastore = require('nedb');
 const Network = require("./server/classes/Network.js");
 
 //Server Setup & Initiation
@@ -37,10 +38,62 @@ if(port != process.env.PORT){
 //Database Initiation
 
 const db = {
-	admins:new Datastore({filename:"/server/databases/admins.db", autoload: true}),
-	schedules:new Datastore({filename:"/server/databases/schedules.db", autoload: true}),
-	usage:new Datastore({filename:"/server/databases/usage.db", autoload: true})
+	admins:new Datastore({filename:"./server/databases/admins.db", autoload: true}),
+	schedules:new Datastore({filename:"./server/databases/schedules.db", autoload: true}),
+	usage:new Datastore({filename:"./server/databases/usage.db", autoload: true})
 };
+
+db.schedules.insert({
+	metadata:{
+		name:"test",
+		type:"school day",
+		schoolStartTime:"7:30",
+		schoolEndTime:"2:56",
+		defaultDays:["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+	},
+	schedule:[
+		{
+			type:"class",
+			period:1,
+			periodName:"Period 1",
+			startTime:"7:30",
+			endTime:"8:25"
+		},
+		{
+			type:"passing",
+			startTime:"8:25",
+			endTime:"8:32"
+		},
+		{
+			type:"lunches",
+			period:5,
+			periodName:"Lunch",
+			startTime:"11:30",
+			endTime:"1:00",
+			aSchedule:[
+				{
+					type:"lunch",
+					lunch:"A",
+					lunchName:"A Lunch",
+					startTime:"11:30",
+					endTime:"12:00"
+				},
+				{
+					type:"passing",
+					startTime:"12:00",
+					endTime:"12:07"
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:"12:07",
+					endTime:"1:00"
+				}
+			]
+		}
+	]
+});
 
 //Connection & Message Handling
 
@@ -78,3 +131,13 @@ io.on("connection", (socket) => {
 	});
 
 });
+
+//Emit Interval
+
+setInterval(() => {
+	var timer = {
+		period:moment(),
+		lunch:moment()
+	};
+  io.emit("TIMER_DATA", timer);
+}, 100);

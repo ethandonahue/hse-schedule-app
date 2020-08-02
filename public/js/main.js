@@ -1,24 +1,12 @@
 //Developed By: Isaac Robbins
 //For Use With: HSE Schedule App
 
-const googleSheetURL = "https://docs.google.com/spreadsheets/d/1QBUjDIa7H-UhTKOe7znd2h9XYn1uDeuZrXzuR0C7KYk/gviz/tq?sheet=";
+var timer = undefined;
 
-const globalTime = new DateTime();
-const calTime = new DateTime();
-const monthlyRawData = new Sheet(googleSheetURL);
-const schedules = new Schedules(globalTime.getDate().monthName);
-var firstLoadedSchedules = undefined;
-var monthlyLayout = undefined;
-var schedulesRequired = undefined;
-var currentSchedule = undefined;
-var personalSchedule = undefined;
-var periodTimeLeft = undefined;
-var periodHeader = undefined;
-var periodShowLower = undefined;
-var showLunch = undefined;
-var tickCount = 0;
-
-preupdate();
+function setup(){
+  document.getElementById("timeHeader").textContent = "Connected";
+  document.getElementById("timeText").textContent = "Loading";
+}
 
 async function preupdate() {
   await loadGoogleCharts();
@@ -266,4 +254,19 @@ function updateDisplays() {
   } catch {
     document.getElementById("lunch").style.display = "none";
   }
+}
+
+function bindSocketEvents(){
+  socket.on("CONNETED_TO_SERVER", () => {
+    setup();
+  });
+
+  socket.on("TIMER_DATA", (timerData) => {
+    timer = timerData;
+  });
+}
+
+window.onload = function(){
+  socket = io();
+  bindSocketEvents();
 }
