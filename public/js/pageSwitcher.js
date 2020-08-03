@@ -11,6 +11,9 @@ function showSection(section){
   if(section != undefined){
     window.location.hash = section;
   }
+  if(currentSection == 3){
+    createScheduleTable(schedule);
+  }
   switch(section){
     case "about":
       display(0);

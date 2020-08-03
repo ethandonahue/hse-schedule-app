@@ -12,9 +12,8 @@ function generateCalendar(ms) {
         dy.setAttribute("class", "calendarOtherMonth");
       } else {
         dy.innerHTML = calendarDayToPrint;
-        if(ms[calendarDayToPrint - 1].metadata.type == "school day") {
-          dy.setAttribute("onclick", "displaySelectedSchedule(" + calendarDayToPrint + ")");
-        } else {
+        dy.setAttribute("onclick", "displaySelectedSchedule(" + (calendarDayToPrint - 1) + ")");
+        if(ms[calendarDayToPrint - 1].metadata.type != "school day") {
           dy.setAttribute("class", "calendarNoSchool");
         }
         if(calendarDayToPrint == moment().date()) {
@@ -41,10 +40,7 @@ function deleteCalendar() {
   calendarDayToPrint = 1;
 }
 
-function displaySelectedSchedule(day) {
-  globalTime.setCustomDate(globalTime.getDate().month + 1 + "/" + day + "/" + globalTime.getDate().year);
-  globalTime.setCustomTime("12:00 a.m.");
-  globalTime.update();
-  createScheduleTable();
+function displaySelectedSchedule(day){
+  createScheduleTable(monthlySchedule[day]);
   display(1);
 }
