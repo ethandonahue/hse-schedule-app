@@ -29,7 +29,7 @@ const db = {
 
 var schedules = undefined;
 var scheduleDays = {
-	2:"Regular School Day"
+	
 };
 
 //Read From Databases

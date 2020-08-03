@@ -9,8 +9,10 @@ var lunchPart = undefined;
 var time = undefined;
 
 function setup(){
+  showSection();
   document.getElementById("timeHeader").textContent = "Connected";
   document.getElementById("timeText").textContent = "Loading";
+  document.getElementById("dateAndTime").style.display = "block";
   if(isAppleDevice() && !inStandalone()){
     var appleInstallPop = new PopUp("apple-installer");
     appleInstallPop.setHeader("Install On iOS");
@@ -176,6 +178,8 @@ function bindSocketEvents(){
     socket.on("disconnect", () => {
       document.getElementById("timeHeader").textContent = "Disconnected";
       document.getElementById("timeText").textContent = "Retrying";
+      document.getElementById("dateAndTime").style.display = "none";
+      document.getElementById("lunch").style.display = "none";
     })
 
   });

@@ -8,6 +8,9 @@ function showSection(section){
   if(typeof(section) == "number"){
     section = hashes[section];
   }
+  if(section != undefined){
+    window.location.hash = section;
+  }
   switch(section){
     case "about":
       display(0);
@@ -35,17 +38,12 @@ function showSection(section){
       currentSection = 4;
       break;
     default:
-      if(window.location.hash == ""){
-        showSection("home");
-      } else if(hashes.occurs(window.location.hash.replace("#", "")) > 0){
+      if(hashes.occurs(window.location.hash.replace("#", "")) > 0){
         showSection(window.location.hash.replace("#", ""));
       } else {
         showSection("home");
       }
       break;
-  }
-  if(section != ""){
-    window.location.hash = section;
   }
 }
 
