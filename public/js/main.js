@@ -20,6 +20,10 @@ function setup(){
     appleInstallPop.setMessage("1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'");
     appleInstallPop.show();
   }
+  var migrate = new PopUp("Heroku Migration");
+  migrate.setHeader("We've Moved!");
+  migrate.setMessage("Our new website is<br><br>hseschedule.herokuapp.com");
+  migrate.show();
   var recentUpdate = new PopUp("Update V. 1.2.0");
   recentUpdate.setHeader("Version 1.2.0");
   recentUpdate.setMessage("-Added Table Header<br><br>-Spring Break Countdown<br><br>-Minor Bug Fixes");
