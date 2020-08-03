@@ -1,6 +1,6 @@
 function createScheduleTable(s) {
-  document.getElementById("bellDayVal").innerHTML = s.metadata.name;
   deleteTable();
+  document.getElementById("bellDayVal").innerHTML = s.metadata.name;
   if(s.metadata.type != "school day") {
     noSchoolTable();
     return;
@@ -53,6 +53,7 @@ function noSchoolTable() {
 
 function deleteTable() {
   document.getElementById("tableToNotDelete").innerHTML = "";
+  document.getElementById("bellDayVal").innerHTML = "";
   while (document.getElementsByClassName("bell-schedule-table").length > 0) {
     document.getElementsByClassName("bell-schedule-table")[0].remove();
   }

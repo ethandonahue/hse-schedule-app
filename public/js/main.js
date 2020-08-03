@@ -187,7 +187,8 @@ function bindSocketEvents(){
       document.getElementById("timeText").textContent = "Retrying";
       document.getElementById("dateAndTime").style.display = "none";
       document.getElementById("lunch").style.display = "none";
-    })
+      deleteTable();
+    });
 
   });
 
