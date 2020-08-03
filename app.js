@@ -79,7 +79,7 @@ function createServer(){
 	console.log(right);
 });*/
 
-db.schedules.insert({
+/*db.schedules.insert({
 	metadata:{
 		name:"Regular School Day",
 		type:"school day",
@@ -415,7 +415,7 @@ db.schedules.insert({
 		type:"weekend",
 		defaultDays:[0, 6]
 	}
-});
+});*/
 
 //Connection & Message Handling
 
@@ -490,7 +490,7 @@ function getTodaysSchedule(){
 
 function getCurrentPeriod(schedule){
 	var currentPeriod = undefined;
-	var m = moment().subtract(9, "hours");
+	var m = moment();
 	if(schedule != undefined){
 		var sched = schedule.schedule;
 		var schoolStart = moment().set({"hour":schedule.metadata.schoolStartTime.hour, "minute":schedule.metadata.schoolStartTime.minute, "second":0, "millisecond":0});
@@ -518,7 +518,7 @@ function getCurrentPeriod(schedule){
 function getCurrentLunch(schedule){
 	var currentLunch = undefined;
 	var currentPeriod = getCurrentPeriod(schedule);
-	var m = moment().subtract(9, "hours");
+	var m = moment();
 	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
 		var aStart = moment().set({"hour":currentPeriod.startTime.a.hour, "minute":currentPeriod.startTime.a.minute, "second":0, "millisecond":0});
 		var aEnd = moment().set({"hour":currentPeriod.endTime.a.hour, "minute":currentPeriod.endTime.a.minute, "second":0, "millisecond":0});
@@ -542,7 +542,7 @@ function getCurrentLunch(schedule){
 function getCurrentLunchPart(schedule){
 	var currentLunchPart = undefined;
 	var currentPeriod = getCurrentPeriod(schedule);
-	var m = moment().subtract(9, "hours");
+	var m = moment();
 	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
 		currentLunchPart = {
 			a:undefined,
@@ -580,9 +580,9 @@ function getCurrentLunchPart(schedule){
 //Countdown JSON Maker
 
 function standardCountdownJSON(h, m){
-	var now = moment().subtract(9, "hours");
+	var now = moment();
 	var then = moment().set({"hour": h, "minute": m, "second":0, "millisecond":0});
-	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds").subtract(now.get("date"), "days");
+	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("date"), "days").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds");
 	var remaining = {
 		years:difference.add(1, "year").get("year"),
 		months:difference.add(1, "month").get("month"),
@@ -595,6 +595,53 @@ function standardCountdownJSON(h, m){
 	return remaining;
 }
 
+//Lunch Countdown JSON Maker
+
+function lunchCountdownJSON(schedule){
+	var remaining = undefined;
+	var m = moment();
+	if(schedule.metadata.hasLunches){
+		remaining = {
+			none:undefined,
+			a:undefined,
+			b:undefined,
+			c:undefined,
+			all:undefined
+		};
+		var lunchPosition;
+		var sched = schedule.schedule;
+		var allSet = false;
+		for(var p = 0; p < sched.length; p++){
+			if(sched[p].type == "lunches"){
+				lunchPosition = p;
+				p = sched.length;
+			}
+		}
+		var aStart = moment().set({"hour":sched[lunchPosition].startTime.a.hour, "minute":sched[lunchPosition].startTime.a.minute, "second":0, "millisecond":0});
+		var bStart = moment().set({"hour":sched[lunchPosition].startTime.b.hour, "minute":sched[lunchPosition].startTime.b.minute, "second":0, "millisecond":0});
+		var cStart = moment().set({"hour":sched[lunchPosition].startTime.c.hour, "minute":sched[lunchPosition].startTime.c.minute, "second":0, "millisecond":0});
+		if(m.isBefore(aStart)){
+			remaining.a = standardCountdownJSON(sched[lunchPosition].startTime.a.hour, sched[lunchPosition].startTime.a.minute);
+			remaining.all = standardCountdownJSON(sched[lunchPosition].startTime.a.hour, sched[lunchPosition].startTime.a.minute);
+			allSet = true;
+		}
+		if(m.isBefore(bStart)){
+			remaining.b = standardCountdownJSON(sched[lunchPosition].startTime.b.hour, sched[lunchPosition].startTime.b.minute);
+			if(!allSet){
+				remaining.all = standardCountdownJSON(sched[lunchPosition].startTime.b.hour, sched[lunchPosition].startTime.b.minute);
+				allSet = true;
+			}
+		}
+		if(m.isBefore(cStart)){
+			remaining.c = standardCountdownJSON(sched[lunchPosition].startTime.c.hour, sched[lunchPosition].startTime.c.minute);
+			if(!allSet){
+				remaining.all = standardCountdownJSON(sched[lunchPosition].startTime.c.hour, sched[lunchPosition].startTime.c.minute);
+			}
+		}
+	}
+	return remaining;
+}
+
 //Emit Interval
 
 setInterval(() => {
@@ -603,13 +650,13 @@ setInterval(() => {
 		var period = getCurrentPeriod(schedule);
 		var lunch = getCurrentLunch(schedule);
 		var lunchPart = getCurrentLunchPart(schedule);
-		var timer;
+		var timer = undefined;
 		if(period == "Before School"){
 			timer = {
 				period:standardCountdownJSON(schedule.metadata.schoolStartTime.hour, schedule.metadata.schoolStartTime.minute),
-				lunch:moment()
+				lunch:lunchCountdownJSON(schedule)
 			};
-		} else {
+		} else if(period != "After School"){
 			var a, b, c;
 			if(period.type == "lunches"){
 				timer = {
@@ -620,20 +667,25 @@ setInterval(() => {
 						c:standardCountdownJSON(lunchPart.c.endTime.hour, lunchPart.c.endTime.minute),
 						all:standardCountdownJSON(lunchPart[lunch.toLowerCase()].endTime.hour, lunchPart[lunch.toLowerCase()].endTime.minute)
 					},
-					lunch:moment()
+					lunch:lunchCountdownJSON(schedule)
 				};
 			} else {
 				timer = {
 					period:standardCountdownJSON(period.endTime.hour, period.endTime.minute),
-					lunch:moment()
+					lunch:lunchCountdownJSON(schedule)
 				};
 			}
 		}
-	  io.emit("PERIOD_DATA", {
+	  io.emit("TIME_DATA", {
 			timer:timer,
 			period:period,
 			lunch:lunch,
-			lunchPart:lunchPart
+			lunchPart:lunchPart,
+			time:{
+				day:moment().format("dddd"),
+				week:moment().format("MMM. Do, YYYY"),
+				time:moment().format("h:mm:ss A")
+			}
 		});
 	}
-}, 100);
+}, 200);

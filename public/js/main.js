@@ -6,6 +6,7 @@ var schedule = undefined;
 var period = undefined;
 var lunch = undefined;
 var lunchPart = undefined;
+var time = undefined;
 
 function setup(){
   document.getElementById("timeHeader").textContent = "Connected";
@@ -44,6 +45,28 @@ function updateTimers(t){
     timeLeft += time.seconds;
   }
   document.getElementById("timeText").textContent = timeLeft;
+  if(t.lunch != undefined && storage.get("selectedLunch") != "NONE"){
+    var timeLeft = "";
+    var time = t.lunch[storage.get("selectedLunch").toLowerCase()];
+    if(time.hours != 0){
+      timeLeft += time.hours + ":";
+    }
+    if(time.minutes < 10 && time.hours != 0){
+      timeLeft += "0" + time.minutes + ":";
+    } else {
+      timeLeft += time.minutes + ":";
+    }
+    if(time.seconds < 10){
+      timeLeft += "0" + time.seconds;
+    } else {
+      timeLeft += time.seconds;
+    }
+    document.getElementById("lunchText").textContent = "Time Until Lunch";
+    document.getElementById("lunchTime").textContent = timeLeft;
+    document.getElementById("lunch").style.display = "table-cell";
+  } else {
+    document.getElementById("lunch").style.display = "none";
+  }
 }
 
 function handleScheduleData(s, p){
@@ -81,6 +104,12 @@ function handleScheduleData(s, p){
         break;
     }
   }
+}
+
+function updateClock(dayName, week, time){
+  document.getElementById("currentDayText").textContent = dayName;
+  document.getElementById("currentWeekText").textContent = week;
+  document.getElementById("currentTimeText").textContent = time;
 }
 
 function updateDisplays() {
@@ -124,7 +153,6 @@ function bindSocketEvents(){
   socket.on("SERVER_READY", () => {
 
     //socket.emit("LUNCH_CHANGE", storage.get("selectedLunch"));
-    //socket.emit("REQUEST_SCHEDULE");
     socket.emit("REQUEST_SCHEDULE");
 
     socket.on("SCHEDULE_DATA", (data) => {
@@ -132,17 +160,21 @@ function bindSocketEvents(){
       handleScheduleData(schedule, period);
     });
 
-    socket.on("PERIOD_DATA", (data) => {
+    socket.on("TIME_DATA", (data) => {
       timer = data.timer;
       period = data.period;
       lunch = data.lunch;
       lunchPart = data.lunchPart;
-      updateTimers(timer);
+      time = data.time;
+      if(timer != undefined){
+        updateTimers(timer);
+      }
+      updateClock(time.day, time.week, time.time);
       handleScheduleData(schedule, period);
     });
 
     socket.on("disconnect", () => {
-      document.getElementById("timeHeader").textContent = "Server Offline";
+      document.getElementById("timeHeader").textContent = "Disconnected";
       document.getElementById("timeText").textContent = "Retrying";
     })
 
