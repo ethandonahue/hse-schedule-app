@@ -190,6 +190,15 @@ function bindSocketEvents(){
 window.onload = function(){
   socket = io();
   bindSocketEvents();
+  document.getElementById("popup").ontouchstart = function(event){
+    hidePopup();
+  }
+  document.getElementById("popup").onclick = function(event){
+    hidePopup();
+  }
+  document.getElementById("popup").ontouch = function(event){
+    hidePopup();
+  }
 }
 
 window.onfocus = function(){
