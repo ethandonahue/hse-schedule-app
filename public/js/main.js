@@ -150,6 +150,7 @@ function bindSocketEvents(){
       monthlySchedule = data.monthly
       handleScheduleData(schedule, period);
       createScheduleTable(schedule);
+      generateCalendar(monthlySchedule);
     });
 
     socket.on("TIME_DATA", (data) => {
@@ -174,6 +175,7 @@ function bindSocketEvents(){
       document.getElementById("dateAndTime").style.display = "none";
       document.getElementById("lunch").style.display = "none";
       deleteTable();
+      deleteCalendar();
     });
 
   });

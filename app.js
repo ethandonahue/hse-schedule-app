@@ -480,7 +480,12 @@ function listenForSockets(){
 
 function getTodaysSchedule(day){
 	var todaysSchedule = undefined;
-	var m = moment() || moment().date(day);
+	var m;
+	if(day == undefined){
+		m = moment();
+	} else {
+		m = moment().date(day);
+	}
 	if(schedules != undefined){
 		if(m.date() in scheduleDays){
 			todaysSchedule = schedules[scheduleDays[m.date()]];

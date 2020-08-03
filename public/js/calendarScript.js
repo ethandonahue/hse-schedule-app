@@ -1,30 +1,23 @@
-var calendarDayToPrint = 1;
-
-function generateCalendar() {
+function generateCalendar(ms) {
+  var calendarDayToPrint = 1;
   deleteCalendar();
-  calTime.removeCustomDate();
-  calTime.update();
-  document.getElementById("cal-month").innerHTML = calTime.getDate().monthName + "<br>" + calTime.getDate().year;
-  for (var w = 0; w < 5; w++) {
+  document.getElementById("cal-month").innerHTML = moment().format("MMMM") + "<br>" + moment().format("YYYY");
+  for (var w = 0; w < 6; w++) {
     for (var d = 0; d < 7; d++) {
       var wk = document.getElementById("cal-week-" + (w + 1));
       var dy = document.createElement("td");
       dy.setAttribute("class", "cal-days");
-      if (w == 0 && d < calTime.getDate().firstDayOfMonth || calendarDayToPrint > monthlyLayout.length) {
+      if ((w == 0 && d < moment().startOf("month").day()) || calendarDayToPrint > ms.length) {
         dy.innerHTML = "";
         dy.setAttribute("class", "calendarOtherMonth");
       } else {
         dy.innerHTML = calendarDayToPrint;
-        calTime.setCustomDate(calTime.getDate().month + 1 + "/" + calendarDayToPrint + "/" + calTime.getDate().year);
-        calTime.update();
-        var calSched = schedulesRequired[monthlyLayout[calTime.getDate().dayOfMonth - 1]].clone();
-        var scheduleAvail = calSched.layout[0].periodNum;
-        if (scheduleAvail != "Special Day") {
+        if(ms[calendarDayToPrint - 1].metadata.type == "school day") {
           dy.setAttribute("onclick", "displaySelectedSchedule(" + calendarDayToPrint + ")");
         } else {
           dy.setAttribute("class", "calendarNoSchool");
         }
-        if (calendarDayToPrint == globalTime.getDate().dayOfMonth) {
+        if(calendarDayToPrint == moment().date()) {
           dy.setAttribute("class", "calendarCurrentDay");
         }
         calendarDayToPrint++;
@@ -35,7 +28,7 @@ function generateCalendar() {
 }
 
 function deleteCalendar() {
-  for (var w = 0; w < 5; w++) {
+  for (var w = 0; w < 6; w++) {
     var wk = document.getElementById("cal-week-" + (w + 1));
     for (var d = 0; d < 7; d++) {
       try {
@@ -54,10 +47,4 @@ function displaySelectedSchedule(day) {
   globalTime.update();
   createScheduleTable();
   display(1);
-}
-var start = moment();
-var end = moment("2020-5-21");
-var days = end.diff(start, "days");
-if (days > 0) {
-  document.getElementById("daysUntiVal").innerHTML = days + (days == 1 ? " day " : " days ") + "until summer break!";
 }
