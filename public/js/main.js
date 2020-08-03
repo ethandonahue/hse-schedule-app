@@ -83,9 +83,11 @@ function handleScheduleData(s, p){
         if(p != undefined){
           if(p == "Before School"){
             document.getElementById("timeHeader").textContent = "School Starts In";
+            document.getElementById("timeSecondaryHeader").style.display = "none";
           } else if(p == "After School"){
             document.getElementById("timeHeader").textContent = "School Has Ended";
             document.getElementById("timeText").textContent = "School Day Over";
+            document.getElementById("timeSecondaryHeader").style.display = "none";
           } else {
             if(p.type == "class"){
               document.getElementById("timeHeader").textContent = p.periodName;
@@ -108,10 +110,12 @@ function handleScheduleData(s, p){
       case "weekend":
         document.getElementById("timeHeader").textContent = "It's The Weekend";
         document.getElementById("timeText").textContent = "No School Today";
+        document.getElementById("timeSecondaryHeader").style.display = "none";
         break;
       default:
         document.getElementById("timeHeader").textContent = "An Error Occured";
         document.getElementById("timeText").textContent = "Unavailable";
+        document.getElementById("timeSecondaryHeader").style.display = "none";
         break;
     }
   }
