@@ -24,9 +24,9 @@ function setup(){
   migrate.setHeader("We've Moved!");
   migrate.setMessage("Our new website is<br><br>hseschedule.herokuapp.com");
   migrate.show();
-  var recentUpdate = new PopUp("Update V. 1.2.0");
-  recentUpdate.setHeader("Version 1.2.0");
-  recentUpdate.setMessage("-Added Table Header<br><br>-Spring Break Countdown<br><br>-Minor Bug Fixes");
+  var recentUpdate = new PopUp("Update V. 2.0.0");
+  recentUpdate.setHeader("Version 2.0.0");
+  recentUpdate.setMessage("-Moved From Netlify To Heroku<br><br>-Times Synchronized Across All Devices<br><br>-Performance Improvements");
   recentUpdate.show();
 }
 
