@@ -22,11 +22,13 @@ function createScheduleTable(s) {
   var highlighted = false
   for (var i = 0; i < s.schedule.length; i++) {
     if(s.schedule[i].type != "passing"){
+      var startTime = moment().set({"hour":s.schedule[i].startTime.hour, "minute":s.schedule[i].startTime.minute}).format("h:mm");
+      var endTime = moment().set({"hour":s.schedule[i].endTime.hour, "minute":s.schedule[i].endTime.minute}).format("h:mm");
       var tableContainer = document.createElement("tr");
       var periodRow = document.createElement("td");
       var timeRow = document.createElement("td");
       var periodVal = document.createTextNode(s.schedule[i].period);
-      var timeVal = document.createTextNode(s.schedule[i].startTime.hour + ":" + s.schedule[i].startTime.minute + " - " + s.schedule[i].endTime.hour + ":" + s.schedule[i].endTime.minute);
+      var timeVal = document.createTextNode(startTime + " - " + endTime);
       periodRow.appendChild(periodVal);
       timeRow.appendChild(timeVal);
       if(period != undefined && s.schedule[i].period == period.period){
