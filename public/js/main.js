@@ -112,6 +112,11 @@ function handleScheduleData(s, p){
         document.getElementById("timeText").textContent = "No School Today";
         document.getElementById("timeSecondaryHeader").style.display = "none";
         break;
+      case "break":
+        document.getElementById("timeHeader").textContent = s.metadata.name;
+        document.getElementById("timeText").textContent = "No School Today";
+        document.getElementById("timeSecondaryHeader").style.display = "none";
+        break;
       default:
         document.getElementById("timeHeader").textContent = "An Error Occured";
         document.getElementById("timeText").textContent = "Unavailable";

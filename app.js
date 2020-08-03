@@ -29,7 +29,11 @@ const db = {
 
 var schedules = undefined;
 var scheduleDays = {
-
+	1:"Summer Break",
+	2:"Summer Break",
+	3:"Summer Break",
+	4:"Summer Break",
+	5:"Summer Break"
 };
 
 //Read From Databases
@@ -425,6 +429,13 @@ db.schedules.insert({
 		defaultDays:[0, 6]
 	}
 });*/
+/*db.schedules.insert({
+	metadata:{
+		name:"Summer Break",
+		type:"break",
+		defaultDays:[]
+	}
+});*/
 
 //Connection & Message Handling
 
@@ -668,6 +679,13 @@ function lunchCountdownJSON(schedule){
 var currentDay = moment().date();
 setInterval(() => {
 	var schedule = getTodaysSchedule();
+	if(moment().date() != currentDay){
+		io.emit("SCHEDULE_DATA", {
+			today:getTodaysSchedule(),
+			monthly:getMonthlySchedule()
+		});
+		currentDay = moment().date();
+	}
 	if(schedule != undefined && schedule.metadata.type == "school day" && period != "After School"){
 		var period = getCurrentPeriod(schedule);
 		var lunch = getCurrentLunch(schedule);
@@ -698,20 +716,16 @@ setInterval(() => {
 				};
 			}
 		}
-		if(moment().date() != currentDay){
-			io.emit("SCHEDULE_DATA", getTodaysSchedule());
-			currentDay = moment().date();
-		}
-	  io.emit("TIME_DATA", {
-			timer:timer,
-			period:period,
-			lunch:lunch,
-			lunchPart:lunchPart,
-			time:{
-				day:moment().format("dddd"),
-				week:moment().format("MMM. Do, YYYY"),
-				time:moment().format("h:mm:ss A")
-			}
-		});
 	}
+	io.emit("TIME_DATA", {
+		timer:timer,
+		period:period,
+		lunch:lunch,
+		lunchPart:lunchPart,
+		time:{
+			day:moment().format("dddd"),
+			week:moment().format("MMM. Do, YYYY"),
+			time:moment().format("h:mm:ss A")
+		}
+	});
 }, 200);

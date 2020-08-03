@@ -1,10 +1,10 @@
-function createScheduleTable(s) {
+function createScheduleTable(s){
   if(s == undefined){
     return;
   }
   deleteTable();
   document.getElementById("bellDayVal").innerHTML = s.metadata.name;
-  if(s.metadata.type != "school day") {
+  if(s.metadata.type != "school day"){
     noSchoolTable();
     return;
   }
@@ -19,8 +19,7 @@ function createScheduleTable(s) {
   timeHeader.appendChild(timeText);
   timeHeader.setAttribute("class", "bellRow");
   tableHeader.appendChild(timeHeader);
-  var highlighted = false
-  for (var i = 0; i < s.schedule.length; i++) {
+  for(var i = 0; i < s.schedule.length; i++){
     if(s.schedule[i].type != "passing"){
       var startTime = moment().set({"hour":s.schedule[i].startTime.hour, "minute":s.schedule[i].startTime.minute}).format("h:mm");
       var endTime = moment().set({"hour":s.schedule[i].endTime.hour, "minute":s.schedule[i].endTime.minute}).format("h:mm");
