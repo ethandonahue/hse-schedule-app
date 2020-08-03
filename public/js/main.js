@@ -106,7 +106,6 @@ function handleScheduleData(s, p){
         document.getElementById("timeText").textContent = "Unavailable";
         break;
     }
-    createScheduleTable(s);
   }
 }
 
@@ -163,6 +162,7 @@ function bindSocketEvents(){
       schedule = data.today;
       monthlySchedule = data.monthly
       handleScheduleData(schedule, period);
+      createScheduleTable(schedule);
     });
 
     socket.on("TIME_DATA", (data) => {
