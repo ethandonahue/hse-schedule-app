@@ -15,13 +15,9 @@
   <link rel="shortcut icon" href="/public/images/HSEScheduleAppLogo192.png">
   <link rel="manifest" href="/public/manifest.json">
   <link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">
-  <script src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="/public/serviceworker.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/classes/moment.js"></script>
-  <script src="/public/js/classes/DateTime.js"></script>
-  <script src="/public/js/classes/Sheets.js"></script>
-  <script src="/public/js/classes/Schedule.js"></script>
   <script src="/public/js/classes/PopUp.js"></script>
   <script src="/public/js/classes/Storage.js"></script>
   <script src="/public/js/addons.js"></script>
@@ -68,11 +64,11 @@
               </div>
             </div>
             <div id="links">
-              <a id="creditsButton" onclick="showCredits()">Credits</a>
+              <a class="dropbtn" id="creditsButton" onclick="showCredits()">Credits</a>
             </div>
           </div>
           <div id="backButton">
-            <a onclick="showTwitter()">Go Back</a>
+            <a class="dropbtn" onclick="showTwitter()">Go Back</a>
           </div>
         </div>
       </div>
@@ -229,7 +225,7 @@
             </div>
           </div>
           <div class="aboutLink">
-            <a href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
+            <a class="dropbtn" href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
           </div>
         </div>
 

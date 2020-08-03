@@ -190,6 +190,9 @@ function bindSocketEvents(){
 window.onload = function(){
   socket = io();
   bindSocketEvents();
+  onLoadCheckTheme();
+  onLoadCheckAnimation();
+  onLoadCheckCircle();
   document.getElementById("popup").ontouchstart = function(event){
     hidePopup();
   }
