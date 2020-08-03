@@ -33,7 +33,12 @@ var scheduleDays = {
 	2:"Summer Break",
 	3:"Summer Break",
 	4:"Summer Break",
-	5:"Summer Break"
+	5:"Summer Break",
+	6:"First 5 Student Days",
+	7:"First 5 Student Days",
+	10:"First 5 Student Days",
+	11:"First 5 Student Days",
+	12:"First 5 Student Days"
 };
 
 //Read From Databases
@@ -435,6 +440,212 @@ db.schedules.insert({
 		type:"break",
 		defaultDays:[]
 	}
+});*/
+/*db.schedules.insert({
+	metadata:{
+		name:"First 5 Student Days",
+		type:"school day",
+		schoolStartTime:{
+			hour:8,
+			minute:0
+		},
+		schoolEndTime:{
+			hour:12,
+			minute:30
+		},
+		defaultDays:[],
+		hasLunches:false
+	},
+	schedule:[
+		{
+			type:"class",
+			period:"SEL",
+			periodName:"SEL",
+			startTime:{
+				hour:8,
+				minute:0
+			},
+			endTime:{
+				hour:8,
+				minute:25
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 1",
+			startTime:{
+				hour:8,
+				minute:25
+			},
+			endTime:{
+				hour:8,
+				minute:35
+			}
+		},
+		{
+			type:"class",
+			period:1,
+			periodName:"Period 1",
+			startTime:{
+				hour:8,
+				minute:35
+			},
+			endTime:{
+				hour:9,
+				minute:0
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 2",
+			startTime:{
+				hour:9,
+				minute:0
+			},
+			endTime:{
+				hour:9,
+				minute:10
+			}
+		},
+		{
+			type:"class",
+			period:2,
+			periodName:"Period 2",
+			startTime:{
+				hour:9,
+				minute:10
+			},
+			endTime:{
+				hour:9,
+				minute:35
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 3",
+			startTime:{
+				hour:9,
+				minute:35
+			},
+			endTime:{
+				hour:9,
+				minute:45
+			}
+		},
+		{
+			type:"class",
+			period:3,
+			periodName:"Period 3",
+			startTime:{
+				hour:9,
+				minute:45
+			},
+			endTime:{
+				hour:10,
+				minute:10
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 4",
+			startTime:{
+				hour:10,
+				minute:10
+			},
+			endTime:{
+				hour:10,
+				minute:20
+			}
+		},
+		{
+			type:"class",
+			period:4,
+			periodName:"Period 4",
+			startTime:{
+				hour:10,
+				minute:20
+			},
+			endTime:{
+				hour:10,
+				minute:45
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 5",
+			startTime:{
+				hour:10,
+				minute:45
+			},
+			endTime:{
+				hour:10,
+				minute:55
+			}
+		},
+		{
+			type:"class",
+			period:5,
+			periodName:"Period 5",
+			startTime:{
+				hour:10,
+				minute:55
+			},
+			endTime:{
+				hour:11,
+				minute:20
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 6",
+			startTime:{
+				hour:11,
+				minute:20
+			},
+			endTime:{
+				hour:11,
+				minute:30
+			}
+		},
+		{
+			type:"class",
+			period:6,
+			periodName:"Period 6",
+			startTime:{
+				hour:11,
+				minute:30
+			},
+			endTime:{
+				hour:11,
+				minute:55
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 7",
+			startTime:{
+				hour:11,
+				minute:55
+			},
+			endTime:{
+				hour:12,
+				minute:5
+			}
+		},
+		{
+			type:"class",
+			period:7,
+			periodName:"Period 7",
+			startTime:{
+				hour:12,
+				minute:5
+			},
+			endTime:{
+				hour:12,
+				minute:30
+			}
+		}
+	]
 });*/
 
 //Connection & Message Handling
