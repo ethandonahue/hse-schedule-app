@@ -4,73 +4,83 @@
 var timer = undefined;
 var schedule = undefined;
 var period = undefined;
+var lunch = undefined;
+var lunchPart = undefined;
 
 function setup(){
   document.getElementById("timeHeader").textContent = "Connected";
   document.getElementById("timeText").textContent = "Loading";
-}
-
-function updateTimers(t){
-  var timeLeft = "";
-  if(t.period.hours != 0){
-    timeLeft += t.period.hours + ":";
-  }
-  if(t.period.minutes < 10 && t.period.hours != 0){
-    timeLeft += "0" + t.period.minutes + ":";
-  } else {
-    timeLeft += t.period.minutes + ":";
-  }
-  if(t.period.seconds < 10){
-    timeLeft += "0" + t.period.seconds;
-  } else {
-    timeLeft += t.period.seconds;
-  }
-  document.getElementById("timeText").textContent = timeLeft;
-}
-
-function handleScheduleData(s, p){
-  switch(s.metadata.type){
-    case "school day":
-      if(p == "Before School"){
-        document.getElementById("timeHeader").textContent = "School Starts In";
-      } else if(p == "After School"){
-        document.getElementById("timeHeader").textContent = "School Has Ended";
-        document.getElementById("timeText").textContent = "No School";
-      } else {
-        if(p.type == "class"){
-          document.getElementById("timeHeader").textContent = p.periodName;
-        } else if(p.type == "passing"){
-          document.getElementById("timeHeader").textContent = "Passing Period";
-        }
-      }
-      break;
-    case "weekend":
-      document.getElementById("timeHeader").textContent = "It's The Weekend";
-      document.getElementById("timeText").textContent = "No School Today";
-      break;
-    default:
-      document.getElementById("timeHeader").textContent = "An Error Occured";
-      document.getElementById("timeText").textContent = "Unavailable";
-      break;
-  }
-}
-
-async function preupdate() {
-  await loadGoogleCharts();
-  await refreshSchedules();
-  update();
-  generateCalendar();
-  setTimeout(refreshSchedules, 10000);
-  if (isAppleDevice() && !inStandalone()) {
+  if(isAppleDevice() && !inStandalone()){
     var appleInstallPop = new PopUp("apple-installer");
     appleInstallPop.setHeader("Install On iOS");
     appleInstallPop.setMessage("1. Click the 'share' icon at the bottom of the screen.<br><br>2. Click 'Add to Home Screen'<br><br>3. Click 'Add'");
     appleInstallPop.show();
   }
-  var recentUpdate = new PopUp("Update V. 1.1.0");
-  recentUpdate.setHeader("Version 1.1.0");
+  var recentUpdate = new PopUp("Update V. 1.2.0");
+  recentUpdate.setHeader("Version 1.2.0");
   recentUpdate.setMessage("-Added Table Header<br><br>-Spring Break Countdown<br><br>-Minor Bug Fixes");
   recentUpdate.show();
+}
+
+function updateTimers(t){
+  var timeLeft = "";
+  var time;
+  if(lunch != undefined){
+    time = t.period[storage.get("selectedLunch").toLowerCase()];
+  } else {
+    time = t.period;
+  }
+  if(time.hours != 0){
+    timeLeft += time.hours + ":";
+  }
+  if(time.minutes < 10 && time.hours != 0){
+    timeLeft += "0" + time.minutes + ":";
+  } else {
+    timeLeft += time.minutes + ":";
+  }
+  if(time.seconds < 10){
+    timeLeft += "0" + time.seconds;
+  } else {
+    timeLeft += time.seconds;
+  }
+  document.getElementById("timeText").textContent = timeLeft;
+}
+
+function handleScheduleData(s, p){
+  if(s != undefined){
+    switch(s.metadata.type){
+      case "school day":
+        if(p != undefined){
+          if(p == "Before School"){
+            document.getElementById("timeHeader").textContent = "School Starts In";
+          } else if(p == "After School"){
+            document.getElementById("timeHeader").textContent = "School Has Ended";
+            document.getElementById("timeText").textContent = "School Day Over";
+          } else {
+            if(p.type == "class"){
+              document.getElementById("timeHeader").textContent = p.periodName;
+            } else if(p.type == "passing"){
+              document.getElementById("timeHeader").textContent = "Passing Period";
+            } else if(p.type == "lunches"){
+              if(lunch == storage.get("selectedLunch")){
+                document.getElementById("timeHeader").textContent = lunchPart[storage.get("selectedLunch").toLowerCase()].lunchName;
+              } else {
+                document.getElementById("timeHeader").textContent = p.periodName;
+              }
+            }
+          }
+          break;
+        }
+      case "weekend":
+        document.getElementById("timeHeader").textContent = "It's The Weekend";
+        document.getElementById("timeText").textContent = "No School Today";
+        break;
+      default:
+        document.getElementById("timeHeader").textContent = "An Error Occured";
+        document.getElementById("timeText").textContent = "Unavailable";
+        break;
+    }
+  }
 }
 
 function updateDisplays() {
@@ -115,22 +125,20 @@ function bindSocketEvents(){
 
     //socket.emit("LUNCH_CHANGE", storage.get("selectedLunch"));
     //socket.emit("REQUEST_SCHEDULE");
-    socket.emit("REQUEST_ALL");
+    socket.emit("REQUEST_SCHEDULE");
 
-    socket.on("ALL_DATA", (data) => {
-      schedule = data.schedule;
-      period = data.period;
-      handleScheduleData(data.schedule, data.period);
+    socket.on("SCHEDULE_DATA", (data) => {
+      schedule = data;
+      handleScheduleData(schedule, period);
     });
 
-    socket.on("SCHEDULE_DATA", (scheduleData) => {
-      schedule = scheduleData;
-      handleScheduleData(scheduleData, period);
-    })
-
-    socket.on("TIMER_DATA", (timerData) => {
-      timer = timerData;
-      updateTimers(timerData);
+    socket.on("PERIOD_DATA", (data) => {
+      timer = data.timer;
+      period = data.period;
+      lunch = data.lunch;
+      lunchPart = data.lunchPart;
+      updateTimers(timer);
+      handleScheduleData(schedule, period);
     });
 
     socket.on("disconnect", () => {

@@ -88,10 +88,11 @@ db.schedules.insert({
 			minute:35
 		},
 		schoolEndTime:{
-			hour:2,
+			hour:14,
 			minute:55
 		},
-		defaultDays:[1, 2, 3, 4, 5]
+		defaultDays:[1, 2, 3, 4, 5],
+		hasLunches:true
 	},
 	schedule:[
 		{
@@ -182,18 +183,41 @@ db.schedules.insert({
 		{
 			type:"lunches",
 			period:5,
-			lunches:["A", "B", "C"],
 			periodName:"Period 5",
 			lunchName:"Lunch",
 			startTime:{
 				hour:11,
-				minute:23
+				minute:23,
+				a:{
+					hour:11,
+					minute:23
+				},
+				b:{
+					hour:11,
+					minute:53
+				},
+				c:{
+					hour:12,
+					minute:23
+				}
 			},
 			endTime:{
 				hour:12,
-				minute:53
+				minute:53,
+				a:{
+					hour:11,
+					minute:53
+				},
+				b:{
+					hour:12,
+					minute:23
+				},
+				c:{
+					hour:12,
+					minute:53
+				}
 			},
-			aSchedule:[
+			A:[
 				{
 					type:"lunch",
 					lunch:"A",
@@ -232,7 +256,7 @@ db.schedules.insert({
 					}
 				}
 			],
-			bSchedule:[
+			B:[
 				{
 					type:"passing",
 					startTime:{
@@ -295,7 +319,7 @@ db.schedules.insert({
 					}
 				}
 			],
-			cSchedule:[
+			C:[
 				{
 					type:"passing",
 					startTime:{
@@ -420,14 +444,6 @@ function listenForSockets(){
 			socket.emit("SERVER_READY");
 		});
 
-		socket.on("REQUEST_ALL", () => {
-			var schedule = getTodaysSchedule();
-			socket.emit("ALL_DATA", {
-				schedule:schedule,
-				period:getCurrentPeriod(schedule)
-			});
-		});
-
 		socket.on("REQUEST_SCHEDULE", () => {
 			socket.emit("SCHEDULE_DATA", getTodaysSchedule());
 		});
@@ -474,20 +490,22 @@ function getTodaysSchedule(){
 
 function getCurrentPeriod(schedule){
 	var currentPeriod = undefined;
-	var m = moment();
+	var m = moment().subtract(9, "hours");
 	if(schedule != undefined){
 		var sched = schedule.schedule;
-		if(m.hour() <= schedule.metadata.schoolStartTime.hour || (m.hour() == schedule.metadata.schoolStartTime.hour && m.minute() <= schedule.metadata.schoolStartTime.minute)){
+		var schoolStart = moment().set({"hour":schedule.metadata.schoolStartTime.hour, "minute":schedule.metadata.schoolStartTime.minute, "second":0, "millisecond":0});
+		var schoolEnd = moment().set({"hour":schedule.metadata.schoolEndTime.hour, "minute":schedule.metadata.schoolEndTime.minute, "second":0, "millisecond":0});
+		if(m.isBefore(schoolStart)){
 			currentPeriod = "Before School";
-		} else if(m.hour() >= schedule.metadata.schoolEndTime.hour  || (m.hour() == schedule.metadata.schoolEndTime.hour && m.minute() >= schedule.metadata.schoolEndTime.minute)){
+		} else if(m.isAfter(schoolEnd)){
 			currentPeriod = "After School";
 		} else {
 			for(var p = 0; p < sched.length; p++){
-				if(m.hour() >= sched[p].startTime.hour && m.hour() <= sched[p].endTime.hour){
-					if(m.minute() >= sched[p].startTime.minute && m.minute() <= sched[p].endTime.minute){
-						currentPeriod = p;
-						return currentPeriod;
-					}
+				var periodStart = moment().set({"hour":sched[p].startTime.hour, "minute":sched[p].startTime.minute, "second":0, "millisecond":0});
+				var periodEnd = moment().set({"hour":sched[p].endTime.hour, "minute":sched[p].endTime.minute, "second":0, "millisecond":0});
+				if(m.isBetween(periodStart, periodEnd)){
+					currentPeriod = sched[p];
+					return currentPeriod;
 				}
 			}
 		}
@@ -495,10 +513,74 @@ function getCurrentPeriod(schedule){
 	return currentPeriod;
 }
 
+//Lunch Finder
+
+function getCurrentLunch(schedule){
+	var currentLunch = undefined;
+	var currentPeriod = getCurrentPeriod(schedule);
+	var m = moment().subtract(9, "hours");
+	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
+		var aStart = moment().set({"hour":currentPeriod.startTime.a.hour, "minute":currentPeriod.startTime.a.minute, "second":0, "millisecond":0});
+		var aEnd = moment().set({"hour":currentPeriod.endTime.a.hour, "minute":currentPeriod.endTime.a.minute, "second":0, "millisecond":0});
+		var bStart = moment().set({"hour":currentPeriod.startTime.b.hour, "minute":currentPeriod.startTime.b.minute, "second":0, "millisecond":0});
+		var bEnd = moment().set({"hour":currentPeriod.endTime.b.hour, "minute":currentPeriod.endTime.b.minute, "second":0, "millisecond":0});
+		var cStart = moment().set({"hour":currentPeriod.startTime.c.hour, "minute":currentPeriod.startTime.c.minute, "second":0, "millisecond":0});
+		var cEnd = moment().set({"hour":currentPeriod.endTime.c.hour, "minute":currentPeriod.endTime.c.minute, "second":0, "millisecond":0});
+		if(m.isBetween(aStart, aEnd)){
+			currentLunch = "A";
+		} else if(m.isBetween(bStart, bEnd)){
+			currentLunch = "B";
+		} else if(m.isBetween(cStart, cEnd)){
+			currentLunch = "C";
+		}
+	}
+	return currentLunch;
+}
+
+//Lunch Part Finder
+
+function getCurrentLunchPart(schedule){
+	var currentLunchPart = undefined;
+	var currentPeriod = getCurrentPeriod(schedule);
+	var m = moment().subtract(9, "hours");
+	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
+		currentLunchPart = {
+			a:undefined,
+			b:undefined,
+			c:undefined
+		};
+		for(var i = 0; i < currentPeriod.A.length; i++){
+			var aStart = moment().set({"hour":currentPeriod.A[i].startTime.hour, "minute":currentPeriod.A[i].startTime.minute, "second":0, "millisecond":0});
+			var aEnd = moment().set({"hour":currentPeriod.A[i].endTime.hour, "minute":currentPeriod.A[i].endTime.minute, "second":0, "millisecond":0});
+			if(m.isBetween(aStart, aEnd)){
+				currentLunchPart.a = currentPeriod.A[i];
+				i = currentPeriod.A.length;
+			}
+		}
+		for(var i = 0; i < currentPeriod.B.length; i++){
+			var bStart = moment().set({"hour":currentPeriod.B[i].startTime.hour, "minute":currentPeriod.B[i].startTime.minute, "second":0, "millisecond":0});
+			var bEnd = moment().set({"hour":currentPeriod.B[i].endTime.hour, "minute":currentPeriod.B[i].endTime.minute, "second":0, "millisecond":0});
+			if(m.isBetween(bStart, bEnd)){
+				currentLunchPart.b = currentPeriod.B[i];
+				i = currentPeriod.B.length;
+			}
+		}
+		for(var i = 0; i < currentPeriod.C.length; i++){
+			var cStart = moment().set({"hour":currentPeriod.C[i].startTime.hour, "minute":currentPeriod.C[i].startTime.minute, "second":0, "millisecond":0});
+			var cEnd = moment().set({"hour":currentPeriod.C[i].endTime.hour, "minute":currentPeriod.C[i].endTime.minute, "second":0, "millisecond":0});
+			if(m.isBetween(cStart, cEnd)){
+				currentLunchPart.c = currentPeriod.C[i];
+				i = currentPeriod.C.length;
+			}
+		}
+	}
+	return currentLunchPart;
+}
+
 //Countdown JSON Maker
 
 function standardCountdownJSON(h, m){
-	var now = moment();
+	var now = moment().subtract(9, "hours");
 	var then = moment().set({"hour": h, "minute": m, "second":0, "millisecond":0});
 	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds").subtract(now.get("date"), "days");
 	var remaining = {
@@ -517,8 +599,10 @@ function standardCountdownJSON(h, m){
 
 setInterval(() => {
 	var schedule = getTodaysSchedule();
-	var period = getCurrentPeriod(schedule);
 	if(schedule != undefined && schedule.metadata.type == "school day" && period != "After School"){
+		var period = getCurrentPeriod(schedule);
+		var lunch = getCurrentLunch(schedule);
+		var lunchPart = getCurrentLunchPart(schedule);
 		var timer;
 		if(period == "Before School"){
 			timer = {
@@ -526,11 +610,30 @@ setInterval(() => {
 				lunch:moment()
 			};
 		} else {
-			timer = {
-				period:standardCountdownJSON(period.endTime.hour, period.endTime.minute),
-				lunch:moment()
-			};
+			var a, b, c;
+			if(period.type == "lunches"){
+				timer = {
+					period:{
+						none:standardCountdownJSON(period.endTime.hour, period.endTime.minute),
+						a:standardCountdownJSON(lunchPart.a.endTime.hour, lunchPart.a.endTime.minute),
+						b:standardCountdownJSON(lunchPart.b.endTime.hour, lunchPart.b.endTime.minute),
+						c:standardCountdownJSON(lunchPart.c.endTime.hour, lunchPart.c.endTime.minute),
+						all:standardCountdownJSON(lunchPart[lunch.toLowerCase()].endTime.hour, lunchPart[lunch.toLowerCase()].endTime.minute)
+					},
+					lunch:moment()
+				};
+			} else {
+				timer = {
+					period:standardCountdownJSON(period.endTime.hour, period.endTime.minute),
+					lunch:moment()
+				};
+			}
 		}
-	  io.emit("TIMER_DATA", timer);
+	  io.emit("PERIOD_DATA", {
+			timer:timer,
+			period:period,
+			lunch:lunch,
+			lunchPart:lunchPart
+		});
 	}
 }, 100);
