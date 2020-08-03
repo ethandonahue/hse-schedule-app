@@ -31,7 +31,6 @@ var schedules = undefined;
 var scheduleDays = {
 	1:"Summer Break",
 	2:"Summer Break",
-	3:"Summer Break",
 	4:"Summer Break",
 	5:"Summer Break",
 	6:"First 5 Student Days",
@@ -740,7 +739,7 @@ function getMonthlySchedule(){
 
 function getCurrentPeriod(schedule){
 	var currentPeriod = undefined;
-	var m = moment();
+	var m = moment().subtract(6, "hours");
 	if(schedule != undefined){
 		var sched = schedule.schedule;
 		var schoolStart = moment().set({"hour":schedule.metadata.schoolStartTime.hour, "minute":schedule.metadata.schoolStartTime.minute, "second":0, "millisecond":0});
@@ -768,7 +767,7 @@ function getCurrentPeriod(schedule){
 function getCurrentLunch(schedule){
 	var currentLunch = undefined;
 	var currentPeriod = getCurrentPeriod(schedule);
-	var m = moment();
+	var m = moment().subtract(6, "hours");
 	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
 		var aStart = moment().set({"hour":currentPeriod.startTime.a.hour, "minute":currentPeriod.startTime.a.minute, "second":0, "millisecond":0});
 		var aEnd = moment().set({"hour":currentPeriod.endTime.a.hour, "minute":currentPeriod.endTime.a.minute, "second":0, "millisecond":0});
@@ -792,7 +791,7 @@ function getCurrentLunch(schedule){
 function getCurrentLunchPart(schedule){
 	var currentLunchPart = undefined;
 	var currentPeriod = getCurrentPeriod(schedule);
-	var m = moment();
+	var m = moment().subtract(6, "hours");
 	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
 		currentLunchPart = {
 			a:undefined,
@@ -830,7 +829,7 @@ function getCurrentLunchPart(schedule){
 //Countdown JSON Maker
 
 function standardCountdownJSON(h, m){
-	var now = moment();
+	var now = moment().subtract(6, "hours");
 	var then = moment().set({"hour": h, "minute": m, "second":0, "millisecond":0});
 	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("date"), "days").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds");
 	var remaining = {
@@ -849,7 +848,7 @@ function standardCountdownJSON(h, m){
 
 function lunchCountdownJSON(schedule){
 	var remaining = undefined;
-	var m = moment();
+	var m = moment().subtract(6, "hours");
 	if(schedule.metadata.hasLunches){
 		var lunchPosition;
 		var sched = schedule.schedule;
@@ -860,6 +859,7 @@ function lunchCountdownJSON(schedule){
 				p = sched.length;
 			}
 		}
+		remaining = {};
 		var aStart = moment().set({"hour":sched[lunchPosition].startTime.a.hour, "minute":sched[lunchPosition].startTime.a.minute, "second":0, "millisecond":0});
 		var bStart = moment().set({"hour":sched[lunchPosition].startTime.b.hour, "minute":sched[lunchPosition].startTime.b.minute, "second":0, "millisecond":0});
 		var cStart = moment().set({"hour":sched[lunchPosition].startTime.c.hour, "minute":sched[lunchPosition].startTime.c.minute, "second":0, "millisecond":0});
@@ -884,6 +884,22 @@ function lunchCountdownJSON(schedule){
 	}
 	return remaining;
 }
+
+//Circle Percentage Finder
+
+/*function getCirclePercentage(timer, period, lunchPart){
+	var percentage = undefined;
+	if(timer.period.hasLunches){
+		percentage = {};
+		percentage.hasLunches = true;
+		var total = moment().set({"hour":lunchPart.a.endTime.hour, "minute":lunchPart.a.endTime.minute, "second":0, "millisecond":0}).valueOf() - moment().set({"hour":lunchPart.a.startTime.hour, "minute":lunchPart.a.startTime.minute, "second":0, "millisecond":0}).valueOf();
+		percentage.a = (moment().set({"hour":timer.period.a.hour, "minute":timer.period.a.minute}).valueOf() - moment().set({"hour":lunchPart.a.startTime.hour, "minute":lunchPart.a.startTime.minute, "second":0, "millisecond":0}).valueOf()) / total / 100;
+	} else {
+		var total = moment().set({"hour":period.endTime.hour, "minute":period.endTime.minute, "second":0, "millisecond":0}).valueOf();
+		percentage = moment().set({"hour":timer.period.hour, "minute":timer.period.minute}).valueOf();
+	}
+	return percentage;
+}*/
 
 //Emit Interval
 
@@ -912,6 +928,7 @@ setInterval(() => {
 			if(period.type == "lunches"){
 				timer = {
 					period:{
+						hasLunches:true,
 						none:standardCountdownJSON(period.endTime.hour, period.endTime.minute),
 						a:standardCountdownJSON(lunchPart.a.endTime.hour, lunchPart.a.endTime.minute),
 						b:standardCountdownJSON(lunchPart.b.endTime.hour, lunchPart.b.endTime.minute),
@@ -926,6 +943,7 @@ setInterval(() => {
 					lunch:lunchCountdownJSON(schedule)
 				};
 			}
+			//var percentage = getCirclePercentage(timer, period, lunchPart);
 		}
 	}
 	io.emit("TIME_DATA", {
@@ -938,5 +956,6 @@ setInterval(() => {
 			week:moment().format("MMM. Do, YYYY"),
 			time:moment().format("h:mm:ss A")
 		}
+		//percentage:percentage
 	});
 }, 200);

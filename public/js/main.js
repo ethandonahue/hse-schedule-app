@@ -8,6 +8,7 @@ var period = undefined;
 var lunch = undefined;
 var lunchPart = undefined;
 var time = undefined;
+var lunches = ["NONE", "A", "B", "C", "ALL"];
 
 function setup(){
   showSection();
@@ -52,7 +53,7 @@ function updateTimers(t){
     timeLeft += time.seconds;
   }
   document.getElementById("timeText").textContent = timeLeft;
-  if(t.lunch != undefined && storage.get("selectedLunch") != "NONE"){
+  if(t.lunch != undefined && storage.get("selectedLunch") != "NONE" && lunches.indexOf(lunch) < lunches.indexOf(storage.get("selectedLunch"))){
     var timeLeft = "";
     var time = t.lunch[storage.get("selectedLunch").toLowerCase()];
     if(time.hours != 0){
@@ -97,10 +98,15 @@ function handleScheduleData(s, p){
               document.getElementById("timeSecondaryHeader").textContent = "Go To " + period.to;
               document.getElementById("timeSecondaryHeader").style.display = "block";
             } else if(p.type == "lunches"){
-              if(lunch == storage.get("selectedLunch")){
+              if(lunchPart[storage.get("selectedLunch").toLowerCase()] != undefined && lunchPart[storage.get("selectedLunch").toLowerCase()].type == "lunch"){
                 document.getElementById("timeSecondaryHeader").style.display = "none";
                 document.getElementById("timeHeader").textContent = lunchPart[storage.get("selectedLunch").toLowerCase()].lunchName;
+              } else if(lunchPart[storage.get("selectedLunch").toLowerCase()] != undefined && lunchPart[storage.get("selectedLunch").toLowerCase()].type == "passing"){
+                document.getElementById("timeHeader").textContent = "Passing Period";
+                document.getElementById("timeSecondaryHeader").textContent = "Go To " + lunchPart[storage.get("selectedLunch").toLowerCase()].to;
+                document.getElementById("timeSecondaryHeader").style.display = "block";
               } else {
+                document.getElementById("timeSecondaryHeader").style.display = "none";
                 document.getElementById("timeHeader").textContent = p.periodName;
               }
             }
