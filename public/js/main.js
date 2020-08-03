@@ -123,31 +123,6 @@ function updateClock(dayName, week, time){
   document.getElementById("currentTimeText").textContent = time;
 }
 
-function updateDisplays() {
-  document.getElementById("currentDayText").textContent = globalTime.getDate().dayName;
-  document.getElementById("currentWeekText").textContent = globalTime.getDateAsString();
-  document.getElementById("currentTimeText").textContent = globalTime.getTimeAsString();
-  document.getElementById("timeHeader").textContent = periodHeader;
-  document.getElementById("timeText").textContent = periodTimeLeft;
-  if (periodShowLower && personalSchedule.layout[personalSchedule.currentPeriod] != undefined && personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName != false) {
-    document.getElementById("timeSecondaryHeader").textContent = personalSchedule.layout[personalSchedule.currentPeriod].lowerDisplayName;
-    document.getElementById("timeSecondaryHeader").style.display = "block";
-  } else {
-    document.getElementById("timeSecondaryHeader").style.display = "none";
-  }
-  try {
-    if (showLunch && globalTime.getTimeInSeconds() < personalSchedule.layout[personalSchedule.lunchPeriod].startTime.getTimeInSeconds()) {
-      document.getElementById("lunchText").textContent = "Time Until " + personalSchedule.layout[personalSchedule.lunchPeriod].lunchName;
-      document.getElementById("lunchTime").textContent = formatTimeLeft(globalTime.getTimeUntil(personalSchedule.layout[personalSchedule.lunchPeriod].startTime));
-      document.getElementById("lunch").style.display = "table-cell";
-    } else {
-      document.getElementById("lunch").style.display = "none";
-    }
-  } catch {
-    document.getElementById("lunch").style.display = "none";
-  }
-}
-
 function bindSocketEvents(){
   socket.on("CONNETED_TO_SERVER", () => {
     setup();
@@ -195,7 +170,6 @@ function bindSocketEvents(){
       document.getElementById("dateAndTime").style.display = "none";
       document.getElementById("lunch").style.display = "none";
       deleteTable();
-      socket.connect();
     });
 
   });
@@ -209,6 +183,7 @@ window.onload = function(){
 
 window.onfocus = function(){
   socket.connect();
+  socket.emit("REQUEST_SCHEDULE");
 }
 
 var hidden, visibilityChange;
@@ -228,6 +203,7 @@ function handleVisibilityChange(){
     socket.disconnect();
   } else {
     socket.connect();
+    socket.emit("REQUEST_SCHEDULE");
   }
 }
 

@@ -21,7 +21,7 @@ function createScheduleTable(s) {
   tableHeader.appendChild(timeHeader);
   var highlighted = false
   for (var i = 0; i < s.schedule.length; i++) {
-    if(s.schedule[i].type != "passing") {
+    if(s.schedule[i].type != "passing"){
       var tableContainer = document.createElement("tr");
       var periodRow = document.createElement("td");
       var timeRow = document.createElement("td");
