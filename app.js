@@ -110,6 +110,7 @@ function createServer(){
 		},
 		{
 			type:"passing",
+			to:"Period 2",
 			startTime:{
 				hour:8,
 				minute:27
@@ -134,6 +135,7 @@ function createServer(){
 		},
 		{
 			type:"passing",
+			to:"Period 3",
 			startTime:{
 				hour:9,
 				minute:26
@@ -158,6 +160,7 @@ function createServer(){
 		},
 		{
 			type:"passing",
+			to:"Period 4",
 			startTime:{
 				hour:10,
 				minute:25
@@ -233,6 +236,7 @@ function createServer(){
 				},
 				{
 					type:"passing",
+					to:"Period 5",
 					startTime:{
 						hour:11,
 						minute:53
@@ -259,6 +263,7 @@ function createServer(){
 			B:[
 				{
 					type:"passing",
+					to:"Period 5",
 					startTime:{
 						hour:11,
 						minute:23
@@ -296,6 +301,7 @@ function createServer(){
 				},
 				{
 					type:"passing",
+					to:"Period 5",
 					startTime:{
 						hour:12,
 						minute:23
@@ -322,6 +328,7 @@ function createServer(){
 			C:[
 				{
 					type:"passing",
+					to:"Period 5",
 					startTime:{
 						hour:11,
 						minute:23
@@ -361,6 +368,7 @@ function createServer(){
 		},
 		{
 			type:"passing",
+			to:"Period 6",
 			startTime:{
 				hour:12,
 				minute:53
@@ -385,6 +393,7 @@ function createServer(){
 		},
 		{
 			type:"passing",
+			to:"Period 7",
 			startTime:{
 				hour:13,
 				minute:57
@@ -615,13 +624,6 @@ function lunchCountdownJSON(schedule){
 	var remaining = undefined;
 	var m = moment();
 	if(schedule.metadata.hasLunches){
-		remaining = {
-			none:undefined,
-			a:undefined,
-			b:undefined,
-			c:undefined,
-			all:undefined
-		};
 		var lunchPosition;
 		var sched = schedule.schedule;
 		var allSet = false;

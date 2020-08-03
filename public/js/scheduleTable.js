@@ -1,4 +1,7 @@
 function createScheduleTable(s) {
+  if(s == undefined){
+    return;
+  }
   deleteTable();
   document.getElementById("bellDayVal").innerHTML = s.metadata.name;
   if(s.metadata.type != "school day") {

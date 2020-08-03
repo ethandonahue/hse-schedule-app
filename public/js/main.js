@@ -89,10 +89,14 @@ function handleScheduleData(s, p){
           } else {
             if(p.type == "class"){
               document.getElementById("timeHeader").textContent = p.periodName;
+              document.getElementById("timeSecondaryHeader").style.display = "none";
             } else if(p.type == "passing"){
               document.getElementById("timeHeader").textContent = "Passing Period";
+              document.getElementById("timeSecondaryHeader").textContent = "Go To " + period.to;
+              document.getElementById("timeSecondaryHeader").style.display = "block";
             } else if(p.type == "lunches"){
               if(lunch == storage.get("selectedLunch")){
+                document.getElementById("timeSecondaryHeader").style.display = "none";
                 document.getElementById("timeHeader").textContent = lunchPart[storage.get("selectedLunch").toLowerCase()].lunchName;
               } else {
                 document.getElementById("timeHeader").textContent = p.periodName;
@@ -171,6 +175,9 @@ function bindSocketEvents(){
 
     socket.on("TIME_DATA", (data) => {
       timer = data.timer;
+      if(data.period != period){
+        createScheduleTable(schedule);
+      }
       period = data.period;
       lunch = data.lunch;
       lunchPart = data.lunchPart;
@@ -188,6 +195,7 @@ function bindSocketEvents(){
       document.getElementById("dateAndTime").style.display = "none";
       document.getElementById("lunch").style.display = "none";
       deleteTable();
+      socket.connect();
     });
 
   });
@@ -197,4 +205,34 @@ function bindSocketEvents(){
 window.onload = function(){
   socket = io();
   bindSocketEvents();
+}
+
+window.onfocus = function(){
+  socket.connect();
+}
+
+var hidden, visibilityChange;
+if (typeof document.hidden !== "undefined") {
+  hidden = "hidden";
+  visibilityChange = "visibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+  hidden = "msHidden";
+  visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+  hidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+}
+
+function handleVisibilityChange(){
+  if(document[hidden]){
+    socket.disconnect();
+  } else {
+    socket.connect();
+  }
+}
+
+if(typeof document.addEventListener == "undefined" || hidden == undefined){
+  console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+} else {
+  document.addEventListener(visibilityChange, handleVisibilityChange, false);
 }
