@@ -180,7 +180,7 @@ function getMonthlySchedule(){
 
 function getCurrentPeriod(schedule){
 	var currentPeriod = undefined;
-	var m = moment().subtract(6, "hours");
+	var m = moment();
 	if(schedule != undefined){
 		var sched = schedule.schedule;
 		var schoolStart = moment().set({"hour":schedule.metadata.schoolStartTime.hour, "minute":schedule.metadata.schoolStartTime.minute, "second":0, "millisecond":0});
@@ -208,7 +208,7 @@ function getCurrentPeriod(schedule){
 function getCurrentLunch(schedule){
 	var currentLunch = undefined;
 	var currentPeriod = getCurrentPeriod(schedule);
-	var m = moment().subtract(6, "hours");
+	var m = moment();
 	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
 		var aStart = moment().set({"hour":currentPeriod.startTime.a.hour, "minute":currentPeriod.startTime.a.minute, "second":0, "millisecond":0});
 		var aEnd = moment().set({"hour":currentPeriod.endTime.a.hour, "minute":currentPeriod.endTime.a.minute, "second":0, "millisecond":0});
@@ -232,7 +232,7 @@ function getCurrentLunch(schedule){
 function getCurrentLunchPart(schedule){
 	var currentLunchPart = undefined;
 	var currentPeriod = getCurrentPeriod(schedule);
-	var m = moment().subtract(6, "hours");
+	var m = moment();
 	if(currentPeriod != undefined && currentPeriod.type == "lunches"){
 		currentLunchPart = {
 			a:undefined,
@@ -270,7 +270,7 @@ function getCurrentLunchPart(schedule){
 //Countdown JSON Maker
 
 function standardCountdownJSON(h, m){
-	var now = moment().subtract(6, "hours");
+	var now = moment();
 	var then = moment().set({"hour": h, "minute": m, "second":0, "millisecond":0});
 	var difference = then.subtract(now.get("year"), "years").subtract(now.get("month"), "months").subtract(now.get("date"), "days").subtract(now.get("hour"), "hours").subtract(now.get("minute"), "minutes").subtract(now.get("second"), "seconds").subtract(now.get("millisecond"), "milliseconds");
 	var remaining = {
@@ -289,7 +289,7 @@ function standardCountdownJSON(h, m){
 
 function lunchCountdownJSON(schedule){
 	var remaining = undefined;
-	var m = moment().subtract(6, "hours");
+	var m = moment();
 	if(schedule.metadata.hasLunches){
 		var lunchPosition;
 		var sched = schedule.schedule;
