@@ -1,9 +1,7 @@
-function createScheduleTable() {
-
-  document.getElementById("bellDayVal").innerHTML = monthlyLayout[globalTime.getDate().dayOfMonth - 1];
-
+function createScheduleTable(s) {
+  document.getElementById("bellDayVal").innerHTML = s.metadata.name;
   deleteTable();
-  if (currentSchedule.layout[0].periodNum == "Special Day") {
+  if(s.metadata.type != "school day") {
     noSchoolTable();
     return;
   }
@@ -19,29 +17,18 @@ function createScheduleTable() {
   timeHeader.setAttribute("class", "bellRow");
   tableHeader.appendChild(timeHeader);
   var highlighted = false
-
-
-  for (var i = 0; i < currentSchedule.layout.length; i++) {
-    if (currentSchedule.layout[i].isPassing == false) {
+  for (var i = 0; i < s.schedule.length; i++) {
+    if(s.schedule[i].type != "passing") {
       var tableContainer = document.createElement("tr");
       var periodRow = document.createElement("td");
       var timeRow = document.createElement("td");
-      var periodVal = document.createTextNode(currentSchedule.layout[i].tableDisplay.period);
-      var timeVal = document.createTextNode(currentSchedule.layout[i].tableDisplay.time);
+      var periodVal = document.createTextNode(s.schedule[i].period);
+      var timeVal = document.createTextNode(s.schedule[i].startTime.hour + ":" + s.schedule[i].startTime.minute + " - " + s.schedule[i].endTime.hour + ":" + s.schedule[i].endTime.minute);
       periodRow.appendChild(periodVal);
       timeRow.appendChild(timeVal);
-      var pass = false;
-      try {
-        if (currentSchedule.layout[currentSchedule.currentPeriod].isPassing) {
-          pass = currentSchedule.layout[currentSchedule.currentPeriod].periodNum;
-        }
-      } catch {
-
-      }
-      if ((i == currentSchedule.currentPeriod || currentSchedule.layout[i].periodNum == pass) && !highlighted) {
+      if(period != undefined && s.schedule[i].period == period.period){
         periodRow.setAttribute("class", "bellRow selected");
         timeRow.setAttribute("class", "bellRow selected");
-        highlighted = true;
       } else {
         periodRow.setAttribute("class", "bellRow");
         timeRow.setAttribute("class", "bellRow");

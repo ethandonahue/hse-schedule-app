@@ -29,7 +29,7 @@ const db = {
 
 var schedules = undefined;
 var scheduleDays = {
-	
+
 };
 
 //Read From Databases
@@ -445,7 +445,10 @@ function listenForSockets(){
 		});
 
 		socket.on("REQUEST_SCHEDULE", () => {
-			socket.emit("SCHEDULE_DATA", getTodaysSchedule());
+			socket.emit("SCHEDULE_DATA", {
+				today:getTodaysSchedule(),
+				monthly:getMonthlySchedule()
+			});
 		});
 
 		socket.on("LUNCH_CHANGE", (lunch) => {
@@ -466,9 +469,9 @@ function listenForSockets(){
 
 //Schedule Finder
 
-function getTodaysSchedule(){
+function getTodaysSchedule(day){
 	var todaysSchedule = undefined;
-	var m = moment();
+	var m = moment() || moment().date(day);
 	if(schedules != undefined){
 		if(m.date() in scheduleDays){
 			todaysSchedule = schedules[scheduleDays[m.date()]];
@@ -484,6 +487,17 @@ function getTodaysSchedule(){
 		}
 	}
 	return todaysSchedule;
+}
+
+//Monthly Schedule Finder
+
+function getMonthlySchedule(){
+	var schedule = [];
+	var m = moment();
+	for(var d = 1; d <= m.daysInMonth(); d++){
+		schedule.push(getTodaysSchedule(d));
+	}
+	return schedule;
 }
 
 //Period Finder
@@ -644,6 +658,7 @@ function lunchCountdownJSON(schedule){
 
 //Emit Interval
 
+var currentDay = moment().date();
 setInterval(() => {
 	var schedule = getTodaysSchedule();
 	if(schedule != undefined && schedule.metadata.type == "school day" && period != "After School"){
@@ -675,6 +690,10 @@ setInterval(() => {
 					lunch:lunchCountdownJSON(schedule)
 				};
 			}
+		}
+		if(moment().date() != currentDay){
+			io.emit("SCHEDULE_DATA", getTodaysSchedule());
+			currentDay = moment().date();
 		}
 	  io.emit("TIME_DATA", {
 			timer:timer,

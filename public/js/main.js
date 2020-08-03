@@ -3,6 +3,7 @@
 
 var timer = undefined;
 var schedule = undefined;
+var monthlySchedule = undefined;
 var period = undefined;
 var lunch = undefined;
 var lunchPart = undefined;
@@ -105,6 +106,7 @@ function handleScheduleData(s, p){
         document.getElementById("timeText").textContent = "Unavailable";
         break;
     }
+    createScheduleTable(s);
   }
 }
 
@@ -158,7 +160,8 @@ function bindSocketEvents(){
     socket.emit("REQUEST_SCHEDULE");
 
     socket.on("SCHEDULE_DATA", (data) => {
-      schedule = data;
+      schedule = data.today;
+      monthlySchedule = data.monthly
       handleScheduleData(schedule, period);
     });
 
