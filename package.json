@@ -1,5 +1,5 @@
 {
-  "name": "hse-schedule",
+  "name": "hseschedule",
   "version": "2.0.0",
   "main": "app.js",
   "dependencies": {
