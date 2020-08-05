@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "/"
-  to = "https://hseschedule.herokuapp.com"
-  status = 301
-  force = true
