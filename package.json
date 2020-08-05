@@ -1,0 +1,20 @@
+{
+  "name": "hseschedule",
+  "version": "2.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "moment-timezone": "^0.5.31",
+    "nedb": "^1.8.0",
+    "socket.io": "^2.3.0",
+    "underscore": "^1.10.2"
+  },
+  "engines": {
+    "node": "13.10.x"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Isaac Robbins",
+  "license": "MIT"
+}

@@ -1,0 +1,22 @@
+{
+    "name":"HSE Schedule App",
+    "short_name":"HSE Schedule",
+    "theme_color":"#004794",
+    "background_color":"#FFFFFF",
+    "display":"standalone",
+    "scope":"/public/",
+    "start_url":"/public/index.html",
+    "orientation":"portrait",
+    "icons":[
+        {
+          "src":"/public/images/HSEScheduleAppLogo192.png",
+          "type":"image/png",
+          "sizes":"192x192"
+        },
+      {
+          "src":"/public/images/HSEScheduleAppLogo512.png",
+          "type":"image/png",
+          "sizes":"512x512"
+      }
+    ]
+}
