@@ -4,8 +4,10 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
+    "http": "0.0.1-security",
     "moment-timezone": "^0.5.31",
     "nedb": "^1.8.0",
+    "os": "^0.1.1",
     "socket.io": "^2.3.0",
     "underscore": "^1.10.2",
     "websocket": "^1.0.31"
