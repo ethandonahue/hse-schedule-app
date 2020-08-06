@@ -74,9 +74,9 @@ function createServer(){
 	if(port != process.env.PORT){
 		var __ConnectTo__;
 		try{
-			__ConnectTo__ = os.networkInterfaces()["Wi-Fi"][0].address + ":" + port;
+			__ConnectTo__ = os.networkInterfaces()["Wi-Fi"][1].address + ":" + port;
 		} catch {
-			__ConnectTo__ = os.networkInterfaces()["Ethernet"][0].address + ":" + port;
+			__ConnectTo__ = os.networkInterfaces()["Ethernet"][1].address + ":" + port;
 		}
 		console.clear();
 		console.log("--> Webpage Started On } " + __ConnectTo__);
