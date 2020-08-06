@@ -80,3 +80,6 @@
 .aboutLink a {
   color: var(--font-color);
 }
+.dropbtn {
+  color: white !important;
+}
