@@ -72,14 +72,16 @@ function createServer(){
 	serv.listen(port);
 
 	if(port != process.env.PORT){
-		var __ConnectTo__;
-		try{
+		var __ConnectTo__ = undefined;
+		if(os.networkInterfaces()["Wi-Fi"] != undefined){
 			__ConnectTo__ = os.networkInterfaces()["Wi-Fi"][1].address + ":" + port;
-		} catch {
+		} else if(os.networkInterfaces()["Ethernet"] != undefined){
 			__ConnectTo__ = os.networkInterfaces()["Ethernet"][1].address + ":" + port;
 		}
-		console.clear();
-		console.log("--> Webpage Started On } " + __ConnectTo__);
+		if(__ConnectTo__ != undefined){
+			console.clear();
+			console.log("--> Webpage Started On } " + __ConnectTo__);
+		}
 	}
 	listenForSockets();
 }
