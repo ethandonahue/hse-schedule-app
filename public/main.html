@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
 
 <head>
   <title>HSE Schedule App</title>
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="stylesheet" type="text/css" href="/public/styling/about.css">
+  <!--<link rel="stylesheet" type="text/css" href="/public/styling/about.css">
   <link rel="stylesheet" type="text/css" href="/public/styling/bellSchedule.css">
   <link rel="stylesheet" type="text/css" href="/public/styling/home.css">
   <link rel="stylesheet" type="text/css" href="/public/styling/calendar.css">
   <link rel="stylesheet" type="text/css" href="/public/styling/settings.css">
-  <link rel="stylesheet" type="text/css" href="/public/styling/style.css">
+  <link rel="stylesheet" type="text/css" href="/public/styling/style.css">-->
   <link rel="apple-touch-icon" href="/public/images/HSEScheduleAppLogo192.png">
   <link rel="shortcut icon" href="/public/images/HSEScheduleAppLogo192.png">
+  <link rel="stylesheet" href="/public/styles/normal.css">
+  <!--<link rel="alternate stylesheet" href="/public/styles/dark.css">-->
   <link rel="manifest" href="/public/manifest.json">
-  <link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css?family=Rubik:300&display=swap" rel="stylesheet">-->
   <script src="/public/serviceworker.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/classes/moment.js"></script>
@@ -32,6 +34,51 @@
 </head>
 
 <body class="disable-selection">
+  <footer class="footer">
+  <nav class="navbar is-fixed-bottom">
+    <div class="navbar-menu is-active">
+        <div class="container is-fluid">
+          <div class="columns is-mobile is-gapless">
+            <div class="column is-one-fifth is-full-height">
+              <span class="vertically-centered-helper"></span>
+              <figure class="image is-32x32 is-vertically-centered container">
+                <img src="https://bulma.io/images/placeholders/256x256.png">
+              </figure>
+              <span class="vertically-centered-helper"></span>
+            </div>
+            <div class="column is-one-fifth is-full-height">
+              <span class="vertically-centered-helper"></span>
+              <figure class="image is-32x32 is-vertically-centered container">
+                <img src="https://bulma.io/images/placeholders/256x256.png">
+              </figure>
+              <span class="vertically-centered-helper"></span>
+            </div>
+            <div class="column is-one-fifth is-full-height">
+              <span class="vertically-centered-helper"></span>
+              <figure class="image is-32x32 is-vertically-centered container">
+                <img src="https://bulma.io/images/placeholders/256x256.png">
+              </figure>
+              <span class="vertically-centered-helper"></span>
+            </div>
+            <div class="column is-one-fifth is-full-height">
+              <span class="vertically-centered-helper"></span>
+              <figure class="image is-32x32 is-vertically-centered container">
+                <img src="https://bulma.io/images/placeholders/256x256.png">
+              </figure>
+              <span class="vertically-centered-helper"></span>
+            </div>
+            <div class="column is-one-fifth is-full-height">
+              <span class="vertically-centered-helper"></span>
+              <figure class="image is-32x32 is-vertically-centered container">
+                <img src="https://bulma.io/images/placeholders/256x256.png">
+              </figure>
+              <span class="vertically-centered-helper"></span>
+            </div>
+          </div>
+        </div>
+    </div>
+  </nav>
+</footer>
   <div id="rotationContainer">
     <h1 id="rotationText">Please Rotate Screen</h1>
   </div>
