@@ -29,10 +29,10 @@ const db = {
 
 var schedules = undefined;
 var scheduleDays = {
-	1:"Summer Break",
-	2:"Summer Break",
-	3:"Summer Break",
-	4:"Summer Break",
+	1:"Virtual Tuesdays/Thursdays",
+	2:"Virtual Wednesdays/Fridays",
+	3:"Virtual Tuesdays/Thursdays",
+	4:"Virtual Wednesdays/Fridays",
 	5:"Summer Break",
 	6:"First 5 Student Days",
 	7:"First 5 Student Days",
