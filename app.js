@@ -40,14 +40,14 @@ var scheduleDays = {
 	9:"Virtual Wednesdays/Fridays",
 	10:"Virtual Tuesdays/Thursdays",
 	11:"Virtual Wednesdays/Fridays",
-	12:"Weekend"
+	12:"Weekend",
 	13:"Weekend",
 	14:"Virtual Mondays",
 	15:"Virtual Tuesdays/Thursdays",
 	16:"Virtual Wednesdays/Fridays",
 	17:"Virtual Tuesdays/Thursdays",
 	18:"Virtual Wednesdays/Fridays",
-	19:"Weekend"
+	19:"Weekend",
 	20:"Weekend",
 	21:"Virtual Mondays",
 	22:"Virtual Tuesdays/Thursdays",
