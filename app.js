@@ -33,12 +33,32 @@ var scheduleDays = {
 	2:"Virtual Wednesdays/Fridays",
 	3:"Virtual Tuesdays/Thursdays",
 	4:"Virtual Wednesdays/Fridays",
-	5:"Summer Break",
-	6:"First 5 Student Days",
-	7:"First 5 Student Days",
-	10:"First 5 Student Days",
-	11:"First 5 Student Days",
-	12:"First 5 Student Days"
+	5:"Weekend",
+	6:"Weekend",
+	7:"Virtual Mondays",
+	8:"Virtual Tuesdays/Thursdays",
+	9:"Virtual Wednesdays/Fridays",
+	10:"Virtual Tuesdays/Thursdays",
+	11:"Virtual Wednesdays/Fridays",
+	12:"Weekend"
+	13:"Weekend",
+	14:"Virtual Mondays",
+	15:"Virtual Tuesdays/Thursdays",
+	16:"Virtual Wednesdays/Fridays",
+	17:"Virtual Tuesdays/Thursdays",
+	18:"Virtual Wednesdays/Fridays",
+	19:"Weekend"
+	20:"Weekend",
+	21:"Virtual Mondays",
+	22:"Virtual Tuesdays/Thursdays",
+	23:"Virtual Wednesdays/Fridays",
+	24:"Virtual Tuesdays/Thursdays",
+	25:"Virtual Wednesdays/Fridays",
+	26:"Weekend",
+	27:"Weekend",
+	28:"Virtual Mondays",
+	29:"Virtual Tuesdays/Thursdays",
+	30:"Virtual Wednesdays/Fridays",
 };
 
 //Read From Databases
