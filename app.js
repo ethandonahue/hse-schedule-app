@@ -35,7 +35,7 @@ var scheduleDays = {
 	4:"Virtual Wednesdays/Fridays",
 	5:"Weekend",
 	6:"Weekend",
-	7:"No School",
+	7:"Weekend",
 	8:"Virtual Tuesdays/Thursdays",
 	9:"Virtual Wednesdays/Fridays",
 	10:"Virtual Tuesdays/Thursdays",
