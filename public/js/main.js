@@ -193,6 +193,10 @@ function bindSocketEvents(){
 
 }
 
+(function () {
+  createScheduleTable(schedule);  // I will invoke myself
+})();
+
 window.onload = function(){
   // if(window.location.origin != "https://hseschedule.herokuapp.com"){
   //   window.location.href = "https://hseschedule.herokuapp.com";
