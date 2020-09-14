@@ -337,6 +337,7 @@ db.schedules.insert({
 		}
 	]
 });
+
 db.schedules.insert({
 	metadata:{
 		name:"Weekend",
@@ -946,6 +947,1836 @@ db.schedules.insert({
 			endTime:{
 				hour:11,
 				minute:50
+			}
+		}
+	]
+});
+
+db.schedules.insert({
+	metadata:{
+		name:"Monday - Red",
+		type:"school day",
+		schoolStartTime:{
+			hour:7,
+			minute:30
+		},
+		schoolEndTime:{
+			hour:14,
+			minute:0
+		},
+		defaultDays:[1],
+		hasLunches:true
+	},
+	schedule:[
+		{
+			type:"class",
+			period:1,
+			periodName:"Period 1",
+			startTime:{
+				hour:7,
+				minute:30
+			},
+			endTime:{
+				hour:8,
+				minute:55
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 2",
+			startTime:{
+				hour:8,
+				minute:55
+			},
+			endTime:{
+				hour:9,
+				minute:2
+			}
+		},
+		{
+			type:"class",
+			period:2,
+			periodName:"Period 2",
+			startTime:{
+				hour:9,
+				minute:2
+			},
+			endTime:{
+				hour:10,
+				minute:27
+			}
+		},
+
+
+
+
+
+
+
+		{
+			type:"lunches",
+			period:3,
+			periodName:"Period 3",
+			lunchName:"Lunch",
+			startTime:{
+				hour:10,
+				minute:27,
+				a:{
+					hour:10,
+					minute:27
+				},
+				b:{
+					hour:11,
+					minute:13
+				},
+				c:{
+					hour:11,
+					minute:59
+				}
+			},
+			endTime:{
+				hour:12,
+				minute:29,
+				a:{
+					hour:10,
+					minute:57
+				},
+				b:{
+					hour:11,
+					minute:43
+				},
+				c:{
+					hour:12,
+					minute:29
+				}
+			},
+			A:[
+				{
+					type:"lunch",
+					lunch:"A",
+					lunchName:"A Lunch",
+					startTime:{
+						hour:10,
+						minute:27
+					},
+					endTime:{
+						hour:10,
+						minute:57
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:10,
+						minute:57
+					},
+					endTime:{
+						hour:11,
+						minute:4
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:11,
+						minute:4
+					},
+					endTime:{
+						hour:12,
+						minute:29
+					}
+				}
+			],
+			B:[
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:10,
+						minute:27
+					},
+					endTime:{
+						hour:10,
+						minute:34
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:10,
+						minute:34
+					},
+					endTime:{
+						hour:11,
+						minute:13
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"B",
+					lunchName:"B Lunch",
+					startTime:{
+						hour:11,
+						minute:13
+					},
+					endTime:{
+						hour:11,
+						minute:43
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:11,
+						minute:43
+					},
+					endTime:{
+						hour:11,
+						minute:48
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:11,
+						minute:48
+					},
+					endTime:{
+						hour:12,
+						minute:29
+					}
+				}
+			],
+			C:[
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:10,
+						minute:27
+					},
+					endTime:{
+						hour:10,
+						minute:34
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:10,
+						minute:34
+					},
+					endTime:{
+						hour:11,
+						minute:59
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"C",
+					lunchName:"C Lunch",
+					startTime:{
+						hour:11,
+						minute:59
+					},
+					endTime:{
+						hour:12,
+						minute:29
+					}
+				}
+			],
+		},
+
+
+		{
+			type:"passing",
+			to:"Period 4",
+			startTime:{
+				hour:12,
+				minute:29
+			},
+			endTime:{
+				hour:12,
+				minute:36
+			}
+		},
+		{
+			type:"class",
+			period:4,
+			periodName:"Period 4",
+			startTime:{
+				hour:12,
+				minute:36
+			},
+			endTime:{
+				hour:14,
+				minute:0
+			}
+		}
+	]
+});
+
+
+
+db.schedules.insert({
+	metadata:{
+		name:"Tuesday - Red",
+		type:"school day",
+		schoolStartTime:{
+			hour:7,
+			minute:30
+		},
+		schoolEndTime:{
+			hour:14,
+			minute:0
+		},
+		defaultDays:[1],
+		hasLunches:true
+	},
+	schedule:[
+		{
+			type:"class",
+			period:5,
+			periodName:"Period 5",
+			startTime:{
+				hour:7,
+				minute:30
+			},
+			endTime:{
+				hour:8,
+				minute:55
+			}
+		},
+		{
+			type:"passing",
+			to:"SMaRT",
+			startTime:{
+				hour:8,
+				minute:55
+			},
+			endTime:{
+				hour:9,
+				minute:2
+			}
+		},
+		{
+			type:"class",
+			period:"SMaRT",
+			periodName:"SMaRT",
+			startTime:{
+				hour:9,
+				minute:2
+			},
+			endTime:{
+				hour:9,
+				minute:35
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 6",
+			startTime:{
+				hour:9,
+				minute:35
+			},
+			endTime:{
+				hour:9,
+				minute:42
+			}
+		},
+		{
+			type:"class",
+			period:6,
+			periodName:"Period 6",
+			startTime:{
+				hour:9,
+				minute:42
+			},
+			endTime:{
+				hour:11,
+				minute:7
+			}
+		},
+
+
+
+
+
+
+
+		{
+			type:"lunches",
+			period:7,
+			periodName:"Period 7",
+			lunchName:"Lunch",
+			startTime:{
+				hour:11,
+				minute:7,
+				a:{
+					hour:11,
+					minute:7
+				},
+				b:{
+					hour:11,
+					minute:53
+				},
+				c:{
+					hour:12,
+					minute:39
+				}
+			},
+			endTime:{
+				hour:13,
+				minute:9,
+				a:{
+					hour:11,
+					minute:37
+				},
+				b:{
+					hour:12,
+					minute:23
+				},
+				c:{
+					hour:13,
+					minute:9
+				}
+			},
+			A:[
+				{
+					type:"lunch",
+					lunch:"A",
+					lunchName:"A Lunch",
+					startTime:{
+						hour:11,
+						minute:7
+					},
+					endTime:{
+						hour:11,
+						minute:37
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 7",
+					startTime:{
+						hour:11,
+						minute:37
+					},
+					endTime:{
+						hour:11,
+						minute:44
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:11,
+						minute:44
+					},
+					endTime:{
+						hour:13,
+						minute:9
+					}
+				}
+			],
+			B:[
+				{
+					type:"passing",
+					to:"Period 7",
+					startTime:{
+						hour:11,
+						minute:7
+					},
+					endTime:{
+						hour:11,
+						minute:14
+					}
+				},
+				{
+					type:"class",
+					period:7,
+					periodName:"Period 7",
+					startTime:{
+						hour:11,
+						minute:14
+					},
+					endTime:{
+						hour:11,
+						minute:53
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"B",
+					lunchName:"B Lunch",
+					startTime:{
+						hour:11,
+						minute:53
+					},
+					endTime:{
+						hour:12,
+						minute:23
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:12,
+						minute:23
+					},
+					endTime:{
+						hour:12,
+						minute:30
+					}
+				},
+				{
+					type:"class",
+					period:7,
+					periodName:"Period 7",
+					startTime:{
+						hour:12,
+						minute:30
+					},
+					endTime:{
+						hour:13,
+						minute:9
+					}
+				}
+			],
+			C:[
+				{
+					type:"passing",
+					to:"Period 7",
+					startTime:{
+						hour:11,
+						minute:7
+					},
+					endTime:{
+						hour:11,
+						minute:14
+					}
+				},
+				{
+					type:"class",
+					period:7,
+					periodName:"Period 7",
+					startTime:{
+						hour:11,
+						minute:14
+					},
+					endTime:{
+						hour:12,
+						minute:39
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"C",
+					lunchName:"C Lunch",
+					startTime:{
+						hour:12,
+						minute:39
+					},
+					endTime:{
+						hour:13,
+						minute:9
+					}
+				}
+			],
+		},
+
+
+		{
+			type:"passing",
+			to:"Clubs",
+			startTime:{
+				hour:13,
+				minute:9
+			},
+			endTime:{
+				hour:13,
+				minute:16
+			}
+		},
+		{
+			type:"class",
+			period:"Clubs",
+			periodName:"Clubs",
+			startTime:{
+				hour:13,
+				minute:16
+			},
+			endTime:{
+				hour:14,
+				minute:0
+			}
+		}
+	]
+});
+
+db.schedules.insert({
+	metadata:{
+		name:"Thursday - Blue",
+		type:"school day",
+		schoolStartTime:{
+			hour:7,
+			minute:30
+		},
+		schoolEndTime:{
+			hour:14,
+			minute:0
+		},
+		defaultDays:[1],
+		hasLunches:true
+	},
+	schedule:[
+		{
+			type:"class",
+			period:1,
+			periodName:"Period 1",
+			startTime:{
+				hour:7,
+				minute:30
+			},
+			endTime:{
+				hour:8,
+				minute:55
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 2",
+			startTime:{
+				hour:8,
+				minute:55
+			},
+			endTime:{
+				hour:9,
+				minute:2
+			}
+		},
+		{
+			type:"class",
+			period:2,
+			periodName:"Period 2",
+			startTime:{
+				hour:9,
+				minute:2
+			},
+			endTime:{
+				hour:10,
+				minute:27
+			}
+		},
+
+
+
+
+
+
+
+		{
+			type:"lunches",
+			period:3,
+			periodName:"Period 3",
+			lunchName:"Lunch",
+			startTime:{
+				hour:10,
+				minute:27,
+				a:{
+					hour:10,
+					minute:27
+				},
+				b:{
+					hour:11,
+					minute:13
+				},
+				c:{
+					hour:11,
+					minute:59
+				}
+			},
+			endTime:{
+				hour:12,
+				minute:29,
+				a:{
+					hour:10,
+					minute:57
+				},
+				b:{
+					hour:11,
+					minute:43
+				},
+				c:{
+					hour:12,
+					minute:29
+				}
+			},
+			A:[
+				{
+					type:"lunch",
+					lunch:"A",
+					lunchName:"A Lunch",
+					startTime:{
+						hour:10,
+						minute:27
+					},
+					endTime:{
+						hour:10,
+						minute:57
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:10,
+						minute:57
+					},
+					endTime:{
+						hour:11,
+						minute:4
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:11,
+						minute:4
+					},
+					endTime:{
+						hour:12,
+						minute:29
+					}
+				}
+			],
+			B:[
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:10,
+						minute:27
+					},
+					endTime:{
+						hour:10,
+						minute:34
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:10,
+						minute:34
+					},
+					endTime:{
+						hour:11,
+						minute:13
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"B",
+					lunchName:"B Lunch",
+					startTime:{
+						hour:11,
+						minute:13
+					},
+					endTime:{
+						hour:11,
+						minute:43
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:11,
+						minute:43
+					},
+					endTime:{
+						hour:11,
+						minute:48
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:11,
+						minute:48
+					},
+					endTime:{
+						hour:12,
+						minute:29
+					}
+				}
+			],
+			C:[
+				{
+					type:"passing",
+					to:"Period 3",
+					startTime:{
+						hour:10,
+						minute:27
+					},
+					endTime:{
+						hour:10,
+						minute:34
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:10,
+						minute:34
+					},
+					endTime:{
+						hour:11,
+						minute:59
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"C",
+					lunchName:"C Lunch",
+					startTime:{
+						hour:11,
+						minute:59
+					},
+					endTime:{
+						hour:12,
+						minute:29
+					}
+				}
+			],
+		},
+
+
+		{
+			type:"passing",
+			to:"Period 4",
+			startTime:{
+				hour:12,
+				minute:29
+			},
+			endTime:{
+				hour:12,
+				minute:36
+			}
+		},
+		{
+			type:"class",
+			period:4,
+			periodName:"Period 4",
+			startTime:{
+				hour:12,
+				minute:36
+			},
+			endTime:{
+				hour:14,
+				minute:0
+			}
+		}
+	]
+});
+
+
+
+db.schedules.insert({
+	metadata:{
+		name:"Friday - Blue",
+		type:"school day",
+		schoolStartTime:{
+			hour:7,
+			minute:30
+		},
+		schoolEndTime:{
+			hour:14,
+			minute:0
+		},
+		defaultDays:[1],
+		hasLunches:true
+	},
+	schedule:[
+		{
+			type:"class",
+			period:5,
+			periodName:"Period 5",
+			startTime:{
+				hour:7,
+				minute:30
+			},
+			endTime:{
+				hour:8,
+				minute:55
+			}
+		},
+		{
+			type:"passing",
+			to:"SMaRT",
+			startTime:{
+				hour:8,
+				minute:55
+			},
+			endTime:{
+				hour:9,
+				minute:2
+			}
+		},
+		{
+			type:"class",
+			period:"SMaRT",
+			periodName:"SMaRT",
+			startTime:{
+				hour:9,
+				minute:2
+			},
+			endTime:{
+				hour:9,
+				minute:35
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 6",
+			startTime:{
+				hour:9,
+				minute:35
+			},
+			endTime:{
+				hour:9,
+				minute:42
+			}
+		},
+		{
+			type:"class",
+			period:6,
+			periodName:"Period 6",
+			startTime:{
+				hour:9,
+				minute:42
+			},
+			endTime:{
+				hour:11,
+				minute:7
+			}
+		},
+
+
+
+
+
+
+
+		{
+			type:"lunches",
+			period:7,
+			periodName:"Period 7",
+			lunchName:"Lunch",
+			startTime:{
+				hour:11,
+				minute:7,
+				a:{
+					hour:11,
+					minute:7
+				},
+				b:{
+					hour:11,
+					minute:53
+				},
+				c:{
+					hour:12,
+					minute:39
+				}
+			},
+			endTime:{
+				hour:13,
+				minute:9,
+				a:{
+					hour:11,
+					minute:37
+				},
+				b:{
+					hour:12,
+					minute:23
+				},
+				c:{
+					hour:13,
+					minute:9
+				}
+			},
+			A:[
+				{
+					type:"lunch",
+					lunch:"A",
+					lunchName:"A Lunch",
+					startTime:{
+						hour:11,
+						minute:7
+					},
+					endTime:{
+						hour:11,
+						minute:37
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 7",
+					startTime:{
+						hour:11,
+						minute:37
+					},
+					endTime:{
+						hour:11,
+						minute:44
+					}
+				},
+				{
+					type:"class",
+					period:3,
+					periodName:"Period 3",
+					startTime:{
+						hour:11,
+						minute:44
+					},
+					endTime:{
+						hour:13,
+						minute:9
+					}
+				}
+			],
+			B:[
+				{
+					type:"passing",
+					to:"Period 7",
+					startTime:{
+						hour:11,
+						minute:7
+					},
+					endTime:{
+						hour:11,
+						minute:14
+					}
+				},
+				{
+					type:"class",
+					period:7,
+					periodName:"Period 7",
+					startTime:{
+						hour:11,
+						minute:14
+					},
+					endTime:{
+						hour:11,
+						minute:53
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"B",
+					lunchName:"B Lunch",
+					startTime:{
+						hour:11,
+						minute:53
+					},
+					endTime:{
+						hour:12,
+						minute:23
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:12,
+						minute:23
+					},
+					endTime:{
+						hour:12,
+						minute:30
+					}
+				},
+				{
+					type:"class",
+					period:7,
+					periodName:"Period 7",
+					startTime:{
+						hour:12,
+						minute:30
+					},
+					endTime:{
+						hour:13,
+						minute:9
+					}
+				}
+			],
+			C:[
+				{
+					type:"passing",
+					to:"Period 7",
+					startTime:{
+						hour:11,
+						minute:7
+					},
+					endTime:{
+						hour:11,
+						minute:14
+					}
+				},
+				{
+					type:"class",
+					period:7,
+					periodName:"Period 7",
+					startTime:{
+						hour:11,
+						minute:14
+					},
+					endTime:{
+						hour:12,
+						minute:39
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"C",
+					lunchName:"C Lunch",
+					startTime:{
+						hour:12,
+						minute:39
+					},
+					endTime:{
+						hour:13,
+						minute:9
+					}
+				}
+			],
+		},
+
+
+		{
+			type:"passing",
+			to:"Clubs",
+			startTime:{
+				hour:13,
+				minute:9
+			},
+			endTime:{
+				hour:13,
+				minute:16
+			}
+		},
+		{
+			type:"class",
+			period:"Clubs",
+			periodName:"Clubs",
+			startTime:{
+				hour:13,
+				minute:16
+			},
+			endTime:{
+				hour:14,
+				minute:0
+			}
+		}
+	]
+});
+
+db.schedules.insert({
+	metadata:{
+		name:"Wednesday - Blue",
+		type:"school day",
+		schoolStartTime:{
+			hour:7,
+			minute:30
+		},
+		schoolEndTime:{
+			hour:14,
+			minute:0
+		},
+		defaultDays:[],
+		hasLunches:true
+	},
+	schedule:[
+		{
+			type:"class",
+			period:1,
+			periodName:"Period 1",
+			startTime:{
+				hour:7,
+				minute:30
+			},
+			endTime:{
+				hour:8,
+				minute:13
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 2",
+			startTime:{
+				hour:8,
+				minute:13
+			},
+			endTime:{
+				hour:8,
+				minute:20
+			}
+		},
+		{
+			type:"class",
+			period:2,
+			periodName:"Period 2",
+			startTime:{
+				hour:8,
+				minute:20
+			},
+			endTime:{
+				hour:9,
+				minute:2
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 3",
+			startTime:{
+				hour:9,
+				minute:2
+			},
+			endTime:{
+				hour:9,
+				minute:9
+			}
+		},
+		{
+			type:"class",
+			period:3,
+			periodName:"Period 3",
+			startTime:{
+				hour:9,
+				minute:9
+			},
+			endTime:{
+				hour:9,
+				minute:51
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 4",
+			startTime:{
+				hour:9,
+				minute:51
+			},
+			endTime:{
+				hour:9,
+				minute:58
+			}
+		},
+		{
+			type:"class",
+			period:4,
+			periodName:"Period 4",
+			startTime:{
+				hour:9,
+				minute:58
+			},
+			endTime:{
+				hour:10,
+				minute:40
+			}
+		},
+		{
+			type:"lunches",
+			period:5,
+			periodName:"Period 5",
+			lunchName:"Lunch",
+			startTime:{
+				hour:10,
+				minute:40,
+				a:{
+					hour:10,
+					minute:40
+				},
+				b:{
+					hour:11,
+					minute:15
+				},
+				c:{
+					hour:11,
+					minute:50
+				}
+			},
+			endTime:{
+				hour:12,
+				minute:20,
+				a:{
+					hour:11,
+					minute:10
+				},
+				b:{
+					hour:11,
+					minute:45
+				},
+				c:{
+					hour:12,
+					minute:20
+				}
+			},
+			A:[
+				{
+					type:"lunch",
+					lunch:"A",
+					lunchName:"A Lunch",
+					startTime:{
+						hour:10,
+						minute:40
+					},
+					endTime:{
+						hour:11,
+						minute:10
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:11,
+						minute:10
+					},
+					endTime:{
+						hour:11,
+						minute:17
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:11,
+						minute:17
+					},
+					endTime:{
+						hour:12,
+						minute:20
+					}
+				}
+			],
+			B:[
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:10,
+						minute:40
+					},
+					endTime:{
+						hour:10,
+						minute:47
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:10,
+						minute:47
+					},
+					endTime:{
+						hour:11,
+						minute:15
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"B",
+					lunchName:"B Lunch",
+					startTime:{
+						hour:11,
+						minute:15
+					},
+					endTime:{
+						hour:11,
+						minute:45
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:11,
+						minute:45
+					},
+					endTime:{
+						hour:11,
+						minute:52
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:11,
+						minute:52
+					},
+					endTime:{
+						hour:12,
+						minute:20
+					}
+				}
+			],
+			C:[
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:10,
+						minute:40
+					},
+					endTime:{
+						hour:10,
+						minute:47
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:10,
+						minute:47
+					},
+					endTime:{
+						hour:11,
+						minute:50
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"C",
+					lunchName:"C Lunch",
+					startTime:{
+						hour:11,
+						minute:50
+					},
+					endTime:{
+						hour:12,
+						minute:20
+					}
+				}
+			],
+		},
+		{
+			type:"passing",
+			to:"Period 6",
+			startTime:{
+				hour:12,
+				minute:20
+			},
+			endTime:{
+				hour:12,
+				minute:27
+			}
+		},
+		{
+			type:"class",
+			period:6,
+			periodName:"Period 6",
+			startTime:{
+				hour:12,
+				minute:27
+			},
+			endTime:{
+				hour:13,
+				minute:9
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 7",
+			startTime:{
+				hour:13,
+				minute:9
+			},
+			endTime:{
+				hour:13,
+				minute:16
+			}
+		},
+		{
+			type:"class",
+			period:7,
+			periodName:"Period 7",
+			startTime:{
+				hour:13,
+				minute:16
+			},
+			endTime:{
+				hour:14,
+				minute:0
+			}
+		}
+	]
+});
+
+db.schedules.insert({
+	metadata:{
+		name:"Wednesday - Red",
+		type:"school day",
+		schoolStartTime:{
+			hour:7,
+			minute:30
+		},
+		schoolEndTime:{
+			hour:14,
+			minute:0
+		},
+		defaultDays:[],
+		hasLunches:true
+	},
+	schedule:[
+		{
+			type:"class",
+			period:1,
+			periodName:"Period 1",
+			startTime:{
+				hour:7,
+				minute:30
+			},
+			endTime:{
+				hour:8,
+				minute:13
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 2",
+			startTime:{
+				hour:8,
+				minute:13
+			},
+			endTime:{
+				hour:8,
+				minute:20
+			}
+		},
+		{
+			type:"class",
+			period:2,
+			periodName:"Period 2",
+			startTime:{
+				hour:8,
+				minute:20
+			},
+			endTime:{
+				hour:9,
+				minute:2
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 3",
+			startTime:{
+				hour:9,
+				minute:2
+			},
+			endTime:{
+				hour:9,
+				minute:9
+			}
+		},
+		{
+			type:"class",
+			period:3,
+			periodName:"Period 3",
+			startTime:{
+				hour:9,
+				minute:9
+			},
+			endTime:{
+				hour:9,
+				minute:51
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 4",
+			startTime:{
+				hour:9,
+				minute:51
+			},
+			endTime:{
+				hour:9,
+				minute:58
+			}
+		},
+		{
+			type:"class",
+			period:4,
+			periodName:"Period 4",
+			startTime:{
+				hour:9,
+				minute:58
+			},
+			endTime:{
+				hour:10,
+				minute:40
+			}
+		},
+		{
+			type:"lunches",
+			period:5,
+			periodName:"Period 5",
+			lunchName:"Lunch",
+			startTime:{
+				hour:10,
+				minute:40,
+				a:{
+					hour:10,
+					minute:40
+				},
+				b:{
+					hour:11,
+					minute:15
+				},
+				c:{
+					hour:11,
+					minute:50
+				}
+			},
+			endTime:{
+				hour:12,
+				minute:20,
+				a:{
+					hour:11,
+					minute:10
+				},
+				b:{
+					hour:11,
+					minute:45
+				},
+				c:{
+					hour:12,
+					minute:20
+				}
+			},
+			A:[
+				{
+					type:"lunch",
+					lunch:"A",
+					lunchName:"A Lunch",
+					startTime:{
+						hour:10,
+						minute:40
+					},
+					endTime:{
+						hour:11,
+						minute:10
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:11,
+						minute:10
+					},
+					endTime:{
+						hour:11,
+						minute:17
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:11,
+						minute:17
+					},
+					endTime:{
+						hour:12,
+						minute:20
+					}
+				}
+			],
+			B:[
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:10,
+						minute:40
+					},
+					endTime:{
+						hour:10,
+						minute:47
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:10,
+						minute:47
+					},
+					endTime:{
+						hour:11,
+						minute:15
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"B",
+					lunchName:"B Lunch",
+					startTime:{
+						hour:11,
+						minute:15
+					},
+					endTime:{
+						hour:11,
+						minute:45
+					}
+				},
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:11,
+						minute:45
+					},
+					endTime:{
+						hour:11,
+						minute:52
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:11,
+						minute:52
+					},
+					endTime:{
+						hour:12,
+						minute:20
+					}
+				}
+			],
+			C:[
+				{
+					type:"passing",
+					to:"Period 5",
+					startTime:{
+						hour:10,
+						minute:40
+					},
+					endTime:{
+						hour:10,
+						minute:47
+					}
+				},
+				{
+					type:"class",
+					period:5,
+					periodName:"Period 5",
+					startTime:{
+						hour:10,
+						minute:47
+					},
+					endTime:{
+						hour:11,
+						minute:50
+					}
+				},
+				{
+					type:"lunch",
+					lunch:"C",
+					lunchName:"C Lunch",
+					startTime:{
+						hour:11,
+						minute:50
+					},
+					endTime:{
+						hour:12,
+						minute:20
+					}
+				}
+			],
+		},
+		{
+			type:"passing",
+			to:"Period 6",
+			startTime:{
+				hour:12,
+				minute:20
+			},
+			endTime:{
+				hour:12,
+				minute:27
+			}
+		},
+		{
+			type:"class",
+			period:6,
+			periodName:"Period 6",
+			startTime:{
+				hour:12,
+				minute:27
+			},
+			endTime:{
+				hour:13,
+				minute:9
+			}
+		},
+		{
+			type:"passing",
+			to:"Period 7",
+			startTime:{
+				hour:13,
+				minute:9
+			},
+			endTime:{
+				hour:13,
+				minute:16
+			}
+		},
+		{
+			type:"class",
+			period:7,
+			periodName:"Period 7",
+			startTime:{
+				hour:13,
+				minute:16
+			},
+			endTime:{
+				hour:14,
+				minute:0
 			}
 		}
 	]
