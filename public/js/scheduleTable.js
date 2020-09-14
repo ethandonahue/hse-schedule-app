@@ -61,4 +61,5 @@ function deleteTable() {
   while (document.getElementsByClassName("bell-schedule-table").length > 0) {
     document.getElementsByClassName("bell-schedule-table")[0].remove();
   }
+
 }

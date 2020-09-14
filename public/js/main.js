@@ -160,14 +160,14 @@ function bindSocketEvents(){
       schedule = data.today;
       monthlySchedule = data.monthly
       handleScheduleData(schedule, period);
-      createScheduleTable(schedule);
+      // createScheduleTable(schedule);
       generateCalendar(monthlySchedule);
     });
 
     socket.on("TIME_DATA", (data) => {
       timer = data.timer;
       if(data.period != period){
-        createScheduleTable(schedule);
+        // createScheduleTable(schedule);
       }
       period = data.period;
       lunch = data.lunch;
@@ -194,9 +194,9 @@ function bindSocketEvents(){
 }
 
 window.onload = function(){
-  if(window.location.origin != "https://hseschedule.herokuapp.com"){
-    window.location.href = "https://hseschedule.herokuapp.com";
-  }
+  // if(window.location.origin != "https://hseschedule.herokuapp.com"){
+  //   window.location.href = "https://hseschedule.herokuapp.com";
+  // }
   socket = io();
   bindSocketEvents();
   onLoadCheckTheme();
