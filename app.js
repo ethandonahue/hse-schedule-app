@@ -200,6 +200,7 @@ function getMonthlySchedule(){
 	return schedule;
 }
 
+
 //Period Finder
 
 function getCurrentPeriod(schedule){

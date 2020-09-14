@@ -24,6 +24,7 @@ function generateCalendar(ms) {
       wk.appendChild(dy);
     }
   }
+  createScheduleTable(monthlySchedule[moment().date()-1]);
 }
 
 function deleteCalendar() {
