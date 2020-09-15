@@ -33,7 +33,7 @@ function generateCalendar(ms) {
           }
 
         }
-        console.log(ms[calendarDayToPrint-1].metadata.dayColor);
+
 
 
         calendarDayToPrint++;

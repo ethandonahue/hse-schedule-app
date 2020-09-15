@@ -46,7 +46,6 @@ function createScheduleTable(s){
       table.appendChild(tableContainer);
     }
   }
-    console.log("table made");
 }
 
 function noSchoolTable() {
@@ -64,6 +63,5 @@ function deleteTable() {
   while (document.getElementsByClassName("bell-schedule-table").length > 0) {
     document.getElementsByClassName("bell-schedule-table")[0].remove();
   }
-  console.log("table gone");
 
 }
