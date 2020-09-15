@@ -96,7 +96,11 @@ class User{
     this.data[key].push(value);
   }
   getId(){//Returns Id
+    try{
 		return this.id;
+  } catch {
+    console.log("Could not obtain user id");
+  }
 	}
   getAsJSON(){
     return {
