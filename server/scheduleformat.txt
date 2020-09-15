@@ -10,6 +10,7 @@ db.schedules.insert({
 			hour:14,
 			minute:55
 		},
+		dayColor: "none",
 		defaultDays:[],
 		hasLunches:true
 	},
@@ -342,14 +343,16 @@ db.schedules.insert({
 	metadata:{
 		name:"Weekend",
 		type:"weekend",
-		defaultDays:[0, 6]
+		defaultDays:[0, 6],
+		dayColor: "none"
 	}
 });
 db.schedules.insert({
 	metadata:{
 		name:"Summer Break",
 		type:"break",
-		defaultDays:[]
+		defaultDays:[],
+		dayColor: "none"
 	}
 });
 db.schedules.insert({
@@ -365,7 +368,8 @@ db.schedules.insert({
 			minute:30
 		},
 		defaultDays:[],
-		hasLunches:false
+		hasLunches:false,
+		dayColor: "none"
 	},
 	schedule:[
 		{
@@ -571,7 +575,8 @@ db.schedules.insert({
 			minute:55
 		},
 		defaultDays:[1],
-		hasLunches:false
+		hasLunches:false,
+		dayColor: "none"
 	},
 	schedule:[
 		{
@@ -752,7 +757,8 @@ db.schedules.insert({
 			minute:50
 		},
 		defaultDays:[2,4],
-		hasLunches:false
+		hasLunches:false,
+		dayColor: "none"
 	},
 	schedule:[
 		{
@@ -858,7 +864,8 @@ db.schedules.insert({
 			minute:50
 		},
 		defaultDays:[3,5],
-		hasLunches:false
+		hasLunches:false,
+		dayColor: "none"
 	},
 	schedule:[
 		{
@@ -964,6 +971,7 @@ db.schedules.insert({
 			hour:14,
 			minute:0
 		},
+		dayColor: "red",
 		defaultDays:[1],
 		hasLunches:true
 	},
@@ -1240,6 +1248,7 @@ db.schedules.insert({
 			hour:14,
 			minute:0
 		},
+		dayColor: "red",
 		defaultDays:[1],
 		hasLunches:true
 	},
@@ -1539,6 +1548,7 @@ db.schedules.insert({
 			hour:14,
 			minute:0
 		},
+		dayColor: "blue",
 		defaultDays:[1],
 		hasLunches:true
 	},
@@ -1815,6 +1825,7 @@ db.schedules.insert({
 			hour:14,
 			minute:0
 		},
+		dayColor: "blue",
 		defaultDays:[1],
 		hasLunches:true
 	},
@@ -2114,6 +2125,7 @@ db.schedules.insert({
 			hour:14,
 			minute:0
 		},
+		dayColor: "blue",
 		defaultDays:[],
 		hasLunches:true
 	},
@@ -2454,6 +2466,7 @@ db.schedules.insert({
 			hour:14,
 			minute:0
 		},
+		dayColor: "red",
 		defaultDays:[],
 		hasLunches:true
 	},

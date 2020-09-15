@@ -73,6 +73,14 @@
   }
 }
 
+.dayRed{
+ color: red;
+}
+
+.dayBlue{
+  color: blue;
+}
+
 .calHeader {
   text-align: center;
   font-size: 4vh;
@@ -154,6 +162,23 @@
   text-align: center;
   vertical-align: center;
 }
+
+.cal .calendarRedDay {
+  font-size: 24px;
+  background-color: red;
+  color: white !important;
+  text-align: center;
+  vertical-align: center;
+}
+
+.cal .calendarBlueDay {
+  font-size: 24px;
+  background-color: blue;
+  color: white !important;
+  text-align: center;
+  vertical-align: center;
+}
+
 
 .key {
   border-collapse: separate;
