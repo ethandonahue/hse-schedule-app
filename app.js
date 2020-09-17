@@ -399,7 +399,7 @@ setInterval(() => {
 						a:standardCountdownJSON(lunchPart.a.endTime.hour, lunchPart.a.endTime.minute),
 						b:standardCountdownJSON(lunchPart.b.endTime.hour, lunchPart.b.endTime.minute),
 						c:standardCountdownJSON(lunchPart.c.endTime.hour, lunchPart.c.endTime.minute),
-						// all:standardCountdownJSON(lunchPart[lunch.toLowerCase()].endTime.hour, lunchPart[lunch.toLowerCase()].endTime.minute)
+						all:standardCountdownJSON(lunchPart[lunch.toLowerCase()].endTime.hour, lunchPart[lunch.toLowerCase()].endTime.minute)
 					},
 					lunch:lunchCountdownJSON(schedule)
 				};
