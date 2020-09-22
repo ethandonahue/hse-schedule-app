@@ -257,5 +257,5 @@ a {
 }
 
 .lunchLink {
-  color: var(--select-color);
+  color: var(--header-text-color);
 }
