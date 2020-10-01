@@ -125,147 +125,148 @@
                 </div>
               </div>
             </div>
+            <a href="http://hselunch.herokuapp.com/" class="lunchLink" target="_blank">Need the lunch menu? Click Here!</a>
           </div>
           <div class="mainElement homeContent">
             <div id="lunch">
               <h3 id="lunchText"></h3>
               <h1 id="lunchTime"></h1>
             </div>
-            </div>
           </div>
         </div>
-      </div>
-
-      <div id="CALENDAR SCREEN" class="hideDIV">
-        <div id="header">
-          <h1 id="headerText">Calendar</h1>
-        </div>
-
-        <div class="pageContent calContent">
-          <h2 class="calHeader calElement">Click A Day To View Its Schedule</h2>
-          <div id="calTables">
-            <table class="cal calElement">
-              <tr>
-                <th class="cal-month" colspan="7" id="cal-month"><br></th>
-              </tr>
-              <tr>
-                <td class="cal-header">Su</td>
-                <td class="cal-header">Mo</td>
-                <td class="cal-header">Tu</td>
-                <td class="cal-header">We</td>
-                <td class="cal-header">Th</td>
-                <td class="cal-header">Fr</td>
-                <td class="cal-header">Sa</td>
-              </tr>
-              <tr id="cal-week-1"></tr>
-              <tr id="cal-week-2"></tr>
-              <tr id="cal-week-3"></tr>
-              <tr id="cal-week-4"></tr>
-              <tr id="cal-week-5"></tr>
-              <tr id="cal-week-6"></tr>
-            </table>
-            <table class="key">
-              <td class="key-today"></td>
-              <td class="key-row">Today</td>
-              </tr>
-              <tr>
-                <td class="key-noSchool"></td>
-                <td class="key-row">No School</td>
-              </tr>
-            </table>
-          </div>
-          <div id="daysUntil" class="calElement">
-            <div id="daysUntiVal"></div>
-          </div>
-
-        </div>
-
-
-      </div>
-
-      <div id="SETTINGS SCREEN" class="hideDIV">
-        <div id="header">
-          <h1 id="headerText">Settings</h1>
-        </div>
-        <div class="pageContent">
-          <div id="Version">
-            <h2>Version 2.0.0</h2>
-          </div>
-          <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="themeSlider">
-              <input type="checkbox" id="themeSlider" onchange="switchTheme()" />
-              <div class="slider round"></div>
-            </label>
-            <h3 class="buttonLabel">Dark Theme</h3>
-          </div>
-          <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="animationSlider">
-              <input type="checkbox" id="animationSlider" onchange="switchAnimations()" />
-              <div class="slider round"></div>
-            </label>
-            <h3 class="buttonLabel">Animations</h3>
-          </div>
-          <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="circleSlider">
-              <input type="checkbox" id="circleSlider" onchange="toggleCircle()" />
-              <div class="slider round"></div>
-            </label>
-            <h3 class="buttonLabel">Completion Circle (Currently Down)</h3>
-          </div>
-          <div class="lunchButtons">
-            <div class="dropdown">
-              <button class="dropbtn">Select Your Lunch</button>
-              <div class="dropdown-content">
-                <a id="aLunch" onclick="setLunch('A')">A</a>
-                <a id="bLunch" onclick="setLunch('B')">B</a>
-                <a id="cLunch" onclick="setLunch('C')">C</a>
-                <a id="noLunch" onclick="setLunch('NONE')">None</a>
-                <a id="allLunch" onclick="setLunch('ALL')">All</a>
-              </div>
-            </div>
-          </div>
-          <div class="aboutLink">
-            <a class="dropbtn" href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
-          </div>
-        </div>
-
       </div>
     </div>
 
-    <nav>
-      <div class="navbuttons">
-        <a onclick="showSection('about')" id="aboutButton">
-          <div class="navbutton">
-            <span class="centerHelper"></span>
-            <img alt="About" class="center" src="/public/images/unselected/about.png" id="aboutIcon">
-          </div>
-        </a>
-        <a onclick="showSection('bell')" id="bellButton">
-          <div class="navbutton">
-            <span class="centerHelper"></span>
-            <img alt="Schedule" class="center" src="/public/images/unselected/schedule.png" id="bellIcon">
-          </div>
-        </a>
-        <a onclick="showSection('home')" id="homeButton">
-          <div class="navbutton">
-            <span class="centerHelper"></span>
-            <img alt="Home" class="center" src="/public/images/unselected/home.png" id="homeIcon">
-          </div>
-        </a>
-        <a onclick="showSection('calendar')" id="calendarButton">
-          <div class="navbutton">
-            <span class="centerHelper"></span>
-            <img alt="Calendar" class="center" src="/public/images/unselected/calendar.png" id="calendarIcon">
-          </div>
-        </a>
-        <a onclick="showSection('settings')" id="settingsButton">
-          <div class="navbutton">
-            <span class="centerHelper"></span>
-            <img alt="Settings" class="center" src="/public/images/unselected/settings.png" id="settingsIcon">
-          </div>
-        </a>
+    <div id="CALENDAR SCREEN" class="hideDIV">
+      <div id="header">
+        <h1 id="headerText">Calendar</h1>
       </div>
-    </nav>
+
+      <div class="pageContent calContent">
+        <h2 class="calHeader calElement">Click A Day To View Its Schedule</h2>
+        <div id="calTables">
+          <table class="cal calElement">
+            <tr>
+              <th class="cal-month" colspan="7" id="cal-month"><br></th>
+            </tr>
+            <tr>
+              <td class="cal-header">Su</td>
+              <td class="cal-header">Mo</td>
+              <td class="cal-header">Tu</td>
+              <td class="cal-header">We</td>
+              <td class="cal-header">Th</td>
+              <td class="cal-header">Fr</td>
+              <td class="cal-header">Sa</td>
+            </tr>
+            <tr id="cal-week-1"></tr>
+            <tr id="cal-week-2"></tr>
+            <tr id="cal-week-3"></tr>
+            <tr id="cal-week-4"></tr>
+            <tr id="cal-week-5"></tr>
+            <tr id="cal-week-6"></tr>
+          </table>
+          <table class="key">
+            <td class="key-today"></td>
+            <td class="key-row">Today</td>
+            </tr>
+            <tr>
+              <td class="key-noSchool"></td>
+              <td class="key-row">No School</td>
+            </tr>
+          </table>
+        </div>
+        <div id="daysUntil" class="calElement">
+          <div id="daysUntiVal"></div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div id="SETTINGS SCREEN" class="hideDIV">
+      <div id="header">
+        <h1 id="headerText">Settings</h1>
+      </div>
+      <div class="pageContent">
+        <div id="Version">
+          <h2>Version 2.0.0</h2>
+        </div>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="themeSlider">
+            <input type="checkbox" id="themeSlider" onchange="switchTheme()" />
+            <div class="slider round"></div>
+          </label>
+          <h3 class="buttonLabel">Dark Theme</h3>
+        </div>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="animationSlider">
+            <input type="checkbox" id="animationSlider" onchange="switchAnimations()" />
+            <div class="slider round"></div>
+          </label>
+          <h3 class="buttonLabel">Animations</h3>
+        </div>
+        <div class="theme-switch-wrapper">
+          <label class="theme-switch" for="circleSlider">
+            <input type="checkbox" id="circleSlider" onchange="toggleCircle()" />
+            <div class="slider round"></div>
+          </label>
+          <h3 class="buttonLabel">Completion Circle (Currently Down)</h3>
+        </div>
+        <div class="lunchButtons">
+          <div class="dropdown">
+            <button class="dropbtn">Select Your Lunch</button>
+            <div class="dropdown-content">
+              <a id="aLunch" onclick="setLunch('A')">A</a>
+              <a id="bLunch" onclick="setLunch('B')">B</a>
+              <a id="cLunch" onclick="setLunch('C')">C</a>
+              <a id="noLunch" onclick="setLunch('NONE')">None</a>
+              <a id="allLunch" onclick="setLunch('ALL')">All</a>
+            </div>
+          </div>
+        </div>
+        <div class="aboutLink">
+          <a class="dropbtn" href="https://forms.gle/WdAiavnnCCVT7Eur9">Submit a problem / idea</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <nav>
+    <div class="navbuttons">
+      <a onclick="showSection('about')" id="aboutButton">
+        <div class="navbutton">
+          <span class="centerHelper"></span>
+          <img alt="About" class="center" src="/public/images/unselected/about.png" id="aboutIcon">
+        </div>
+      </a>
+      <a onclick="showSection('bell')" id="bellButton">
+        <div class="navbutton">
+          <span class="centerHelper"></span>
+          <img alt="Schedule" class="center" src="/public/images/unselected/schedule.png" id="bellIcon">
+        </div>
+      </a>
+      <a onclick="showSection('home')" id="homeButton">
+        <div class="navbutton">
+          <span class="centerHelper"></span>
+          <img alt="Home" class="center" src="/public/images/unselected/home.png" id="homeIcon">
+        </div>
+      </a>
+      <a onclick="showSection('calendar')" id="calendarButton">
+        <div class="navbutton">
+          <span class="centerHelper"></span>
+          <img alt="Calendar" class="center" src="/public/images/unselected/calendar.png" id="calendarIcon">
+        </div>
+      </a>
+      <a onclick="showSection('settings')" id="settingsButton">
+        <div class="navbutton">
+          <span class="centerHelper"></span>
+          <img alt="Settings" class="center" src="/public/images/unselected/settings.png" id="settingsIcon">
+        </div>
+      </a>
+    </div>
+  </nav>
   </div>
 
 </body>
