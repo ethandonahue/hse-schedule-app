@@ -29,7 +29,7 @@ const db = {
 
 var schedules = undefined;
 var scheduleDays = {
-	1:"Virtual Tuesdays/Thursdays",
+	1:"Thursday - Blue",
 	2:"Virtual Wednesdays/Fridays",
 	3:"Virtual Tuesdays/Thursdays",
 	4:"Virtual Wednesdays/Fridays",
